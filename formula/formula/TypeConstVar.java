@@ -15,6 +15,8 @@ public class TypeConstVar {
 
 
 	//MAURICE Wird das hier eigentlich benötigt?
+	// HEIKO: Sicher brauchst du den. Aber am besten schreibst du den so um, dass er als
+	// Parameter gleich einen value und name bekommt.
 	public TypeConstVar() {
 		value = new Object();
 		name = new String();

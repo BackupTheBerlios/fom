@@ -10,6 +10,7 @@ import gui.*;
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
+
 public class DialogVariables extends Container implements TextListener, ActionListener {
 
 	Dialog dialogVar;
@@ -26,6 +27,21 @@ public class DialogVariables extends Container implements TextListener, ActionLi
 	//sicher, ob es AppletPanel ist oder nicht, Eclipse erkennt aber AppletPanel
 	//noch nicht einmal, obwohl ich das so wie du gemacht habe (mit "import gui.*;")
 	//Was gehört dort hin?
+	
+	/* HEIKO:
+	 * Also 1. verschieb die Klasse ins Package gui (Refactor->Move), die hat 
+	 * nichts in formula zu suchen. (VariableDialog wär auch ein schönerer Name,
+	 * aber mir egal :))
+	 * 2. muss sie von Frame, Dialog oder Window (Dialog ist wahrscheinlich am besten)
+	 * abgeleitet werden und nicht von Container.
+	 * Den Constructor dementsprechend anpassen, ich ruf's mit
+	 * DialogVariables(AppletPanel); auf.
+	 * 3. da du mehrere Variablen darstellen willst, nimm BorderLayout und mach 
+	 * eine Tabelle draus. Zum Scrollen gibts ScrollPane in das du aber noch ein
+	 * zusätzliches Panel einfügen musst, um in dem Panel dann den BorderLayout
+	 * zu verwenden.
+	 * 4. super nicht vergessen (und zwar super(AppletPanel,true) damit's modal ist).
+	 */
 	public DialogVariables() {
 		TypeConstVar[] varArray = ConstVarFormula.getVarList();
 		Object value;
@@ -63,6 +79,10 @@ public class DialogVariables extends Container implements TextListener, ActionLi
 	 * @param findWhere Where to find.
 	 * @return Returns index of object, or -1 if not found.
 	 */
+	/* HEIKO: Das hier sieht mir sehr nach Design-Fehler/schlechter Programmierung aus :o
+	 * Also wenn ich das beim kurz überfliegen richtig verstehe, dann willst du
+	 * in textValueChanged rausfinden, welche Variable verändert wurde. 
+	 * Das geht ganz einfach, gib den TextFields Namen (setName). */
 	private final int getArrayPosition(Object findWhat, Object[] findWhere) {
 		for (int i=0; i < findWhere.length; i++) {
 			if (findWhat == findWhere[i]) {
@@ -76,16 +96,17 @@ public class DialogVariables extends Container implements TextListener, ActionLi
 	/**
 	 * Ersetzt alle Variablennamen durch neue, oder den Number-Wert von den Variablen
 	 */
-	public void textValueChanged(TextEvent arg0) {
-		int index = getArrayPosition(arg0.getSource(), varValueNumber);
+	public void textValueChanged(TextEvent txtEvent) {
+		int index = getArrayPosition(txtEvent.getSource(), varValueNumber);
 		String newInput;
 		if (index == -1) {
 			//Ersetzt den Variablennamen.
-			index = getArrayPosition(arg0.getSource(), varName);
+			index = getArrayPosition(txtEvent.getSource(), varName);
 			if (varName[index].getText().length() == 0) {
 				ConstVarFormula.setVarNameAll(oldVarName[index], "$$InternTempCounter" + tempCounter.toString() + "$$");
 				oldVarName[index] = "$$InternTempCounter" + tempCounter.toString() + "$$";
 				//MAURICE Dies gefällt mir nicht. Gibts da nicht was schöneres?
+				// HEIKO: siehe getArrayPosition
 				tempCounter = new Integer(tempCounter.intValue() + 1);
 			} else {
 				ConstVarFormula.setVarNameAll(oldVarName[index], varName[index].getText());
@@ -106,8 +127,8 @@ public class DialogVariables extends Container implements TextListener, ActionLi
 	/**
 	 * Ersetzt den Boolean-Wert der Variablen oder schliesst den Dialog.
 	 */
-	public void actionPerformed(ActionEvent arg0) {
-		int index = getArrayPosition(arg0.getSource(), varValueBoolean);
+	public void actionPerformed(ActionEvent txtEvent) {
+		int index = getArrayPosition(txtEvent.getSource(), varValueBoolean);
 		if (index == -1) {
 			//Schliesst den Dialog.
 			for (int i=0; i < varName.length; i++) {
@@ -122,6 +143,9 @@ public class DialogVariables extends Container implements TextListener, ActionLi
 			}
 			//MAURICE Bin zu blöd. Finde einfach nicht heraus, wie ich meinen Dialog
 			//wieder schliessen kann.
+			
+			// HEIKO: Dialog schließen geht über hide() oder dispose(). Nimm dispose(), der Dialog
+			// wird später nicht mehr benötigt, sondern neu erzeugt.
 			//TODO Dialog schliessen.
 		} else {
 			if (varValueBoolean[index].getLabel() == "false") {
