@@ -6,3 +6,4 @@ java.policy.applet
 doc
 .uml
 beta1
+*.jar
