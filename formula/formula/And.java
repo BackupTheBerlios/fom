@@ -20,15 +20,11 @@ public class And extends BooleanFormula {
 	}
 
 	public String toString() {
-		// TODO Auto-generated method stub
-		// Maurice: Muss hier irgendwas abgefangen werden?
 		return "(" + input[0].toString() + "&" + input[1].toString() + ")";
 	}
 
 	public And() {
 		input=new Formula[2];
-		//Maurice: Warum geht diese Zeile nicht? Nur bei Arrays benötigt?
-		//output=new Formula;
 		formulaName="&";
 		result=null;
 	}
