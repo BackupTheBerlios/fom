@@ -1,4 +1,4 @@
-/* $Id: CustomFormulaDialog.java,v 1.5 2004/09/07 13:54:02 shadowice Exp $
+/* $Id: CustomFormulaDialog.java,v 1.6 2004/09/11 17:29:58 shadowice Exp $
  * Created on 26.08.2004
  *
  */
@@ -14,18 +14,18 @@ import utils.*;
  * Dialog window for adding new CustomFormulas.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class CustomFormulaDialog extends Dialog implements ActionListener, WindowListener, TextListener {
 
 	GridBagLayout 	gbl					= new GridBagLayout();
-	CustomFormula currentFormula	= null;
-	String 			name					= "";
+	CustomFormula 	currentFormula		= null;
+	String 			name				= "";
 	Label 			lblEnterText;
 	TextField 		tfFormulaName;
 	Button 			btnOk;
 	Panel			borderedPanel;
-	List				lstVariables;
+	List			lstVariables;
 
 	/**
 	 * Creates a new CustomFormulaDialog (modal=true).

@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.22 2004/09/10 12:15:29 shadowice Exp $
+/* $Id: DialogVariables.java,v 1.23 2004/09/11 17:29:58 shadowice Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
@@ -34,13 +34,13 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	/**
 	 * Creates a window for setting and changing variables.
 	 */
-	public DialogVariables(AppletPanel parent) {
-		super((Frame)parent.getParent().getParent(), Messages.getString("DialogVariables.Title"), true);
+	public DialogVariables(Frame parent, AppletPanel ap) {
+		super(parent, Messages.getString("DialogVariables.Title"), true);
 
 		setLocation(300,100);
 
 		Object value;		
-		this.aPanel = parent;
+		this.aPanel = ap;
 
 		gblVariablePanel 	= new GridBagLayout();
 		variablesPanel 		= new Panel(gblVariablePanel);

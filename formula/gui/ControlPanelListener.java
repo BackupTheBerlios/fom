@@ -1,16 +1,17 @@
-/* $Id: ControlPanelListener.java,v 1.16 2004/09/08 13:05:42 shadowice Exp $
+/* $Id: ControlPanelListener.java,v 1.17 2004/09/11 17:29:58 shadowice Exp $
  * Created on 12.05.2004
  *
  */
 package gui;
 
+import java.awt.*;
 import java.awt.event.*;
 
 import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 public class ControlPanelListener implements ActionListener {
 	
@@ -31,7 +32,7 @@ public class ControlPanelListener implements ActionListener {
 		this.aPanel = ap;
 		this.cPanel = cp;
 		this.calcThread = new CalculatorThread(ap);
-		this.varDialog = new DialogVariables(ap);
+		this.varDialog = new DialogVariables(new Frame(), ap);
 		calcThread.start();
 	}
 	
