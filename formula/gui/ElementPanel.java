@@ -46,6 +46,8 @@ public class ElementPanel extends Panel {
 		//adding listeners:
 		chCategoryList.addItemListener(clListener);
 		btnAddFormula.addActionListener(clListener);
+		elementPanel.addMouseListener(dnd);
+		elementPanel.addMouseMotionListener(dnd);
 		//visible settings:
 		scpElementList.setBackground(SystemColor.text);
 		elementPanel.setBackground(SystemColor.text);

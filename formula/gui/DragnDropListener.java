@@ -16,18 +16,29 @@ import formula.*;
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
 
-	private static boolean dragInProgress	= false;
-	private static AppletPanel aPanel				= null;
-	private static Point dragStartPoint			= null;
-	private static Point dragRelativePoint		= null;
-	private static Formula dragComponent	= null;
+	private static boolean dragInProgress		= false;
+	private static AppletPanel aPanel					= null;
+	private static Point selectedStartPoint			= null;
+	private static Point selectedRelativePoint		= null;
+	private static Formula selectedComponent	= null;
 	
 	public DragnDropListener(AppletPanel ap) {
 		aPanel = ap;
 	}
 
 	public void mouseClicked(MouseEvent me) {
+		if (me.getComponent() instanceof ElementPanel) {
+			Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
+			if (targetComponent != null) {
+				if (targetComponent instanceof Formula) {
 
+				}
+			}
+		} else if (me.getComponent() instanceof FormulaPanel){
+			if (selectedComponent != null) {
+				((FormulaPanel)me.getComponent()).add(selectedComponent);						
+			}
+		}
 	}
 
 	public void mouseEntered(MouseEvent me) {
@@ -41,9 +52,9 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	public void mousePressed(MouseEvent me) {
 		if (me.getComponent().getComponentAt(me.getPoint()) instanceof Formula) {
 			dragInProgress = true;
-			dragComponent = (Formula)me.getComponent().getComponentAt(me.getPoint());
-			dragStartPoint = dragComponent.getLocation();
-			dragRelativePoint = new Point((int)(dragStartPoint.getX()-me.getPoint().getX()),(int)(dragStartPoint.getY()-me.getPoint().getY()));
+			selectedComponent = (Formula)me.getComponent().getComponentAt(me.getPoint());
+			selectedStartPoint = selectedComponent.getLocation();
+			selectedRelativePoint = new Point((int)(selectedStartPoint.getX()-me.getPoint().getX()),(int)(selectedStartPoint.getY()-me.getPoint().getY()));
 			aPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 	}
@@ -54,8 +65,10 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseDragged(MouseEvent me) {
-		if ((dragInProgress) && (dragComponent != null)) {
-			dragComponent.setLocation((int)(dragRelativePoint.getX()+me.getPoint().getX()),(int)(dragRelativePoint.getY()+me.getPoint().getY()));
+		if ((dragInProgress) && (selectedComponent != null)) {
+			if (me.getComponent() instanceof FormulaPanel) {
+				selectedComponent.setLocation((int)(selectedRelativePoint.getX()+me.getPoint().getX()),(int)(selectedRelativePoint.getY()+me.getPoint().getY()));
+			}
 		}
 	}
 	
