@@ -65,7 +65,7 @@ public class Categories {
 		categoryElements.put(categories[2], form);
 
 		//Category Trigonometrics:
-		form = new Formula[7];
+		form = new Formula[11];
 		form[0] = new Sin();
 		form[1] = new Cos();
 		form[2] = new Tan();
@@ -73,15 +73,11 @@ public class Categories {
 		form[4] = new Arcsin();
 		form[5] = new Arccos();
 		form[6] = new Arctan();
+		form[7] = new Sinh();
+		form[8] = new Cosh();
+		form[9] = new Tanh();
+		form[10] = new Coth();
 		categoryElements.put(categories[3], form);
-
-		//Category Hyperbola:
-		form = new Formula[4];
-		form[0] = new Sinh();
-		form[1] = new Cosh();
-		form[2] = new Tanh();
-		form[3] = new Coth();
-		categoryElements.put(categories[4], form);
 
 		//Category Comparison:
 		form = new Formula[8];
@@ -93,7 +89,7 @@ public class Categories {
 		form[5] = new GreaterEqual();		
 		form[6] = new Even();
 		form[7] = new Odd();		
-		categoryElements.put(categories[5], form);
+		categoryElements.put(categories[4], form);
 
 		//Category Logical Operators:
 		form = new Formula[6];
@@ -103,7 +99,7 @@ public class Categories {
 		form[3] = new Xor();
 		form[4] = new Eqv();
 		form[5] = new Impl();		
-		categoryElements.put(categories[6], form);
+		categoryElements.put(categories[5], form);
 
 		//Category Others:
 		form = new Formula[10];
@@ -117,7 +113,7 @@ public class Categories {
 		form[7] = new Grad2rad();
 		form[8] = new Rad2deg();
 		form[9] = new Rad2grad();	
-		categoryElements.put(categories[7], form);
+		categoryElements.put(categories[6], form);
 
 		//Category Custom:
 		form = new Formula[0];
