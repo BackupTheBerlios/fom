@@ -4,7 +4,8 @@
  */
 package formula;
 
-import java.lang.Boolean;
+import Messages;
+
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
@@ -13,7 +14,7 @@ public abstract class BooleanFormula extends Formula {
 
 	protected Boolean result;
 
-	public abstract Boolean calc() throws FormulaException;
+	public abstract void calc() throws FormulaException;
 
 	public boolean isValidInput(Object in, int index) {
 		return false;
@@ -23,16 +24,21 @@ public abstract class BooleanFormula extends Formula {
 		return false;
 	}
 
-	public long getLongResult() {
+/*	public long getLongResult() throws FormulaException {
 		return 0;
+	}*/
+
+	public boolean getBooleanResult() throws FormulaException {
+		if(result!=null)
+			return result.booleanValue();
+		else
+			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
+			
 	}
 
-	public boolean getBooleanResult() {
-		return false;
-	}
-
-	public double getDoubleResult() {
-		return 0;
+	public double getDoubleResult() throws FormulaException {
+		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
+//		return 0;
 	}
 
 	public final void clearResult() {

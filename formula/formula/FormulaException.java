@@ -10,6 +10,17 @@ package formula;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  * @version 0.1.1 (21.04.2004)
  */
-public class FormulaException extends Exception {
 
+import Messages;
+
+public class FormulaException extends Exception {
+	
+	public FormulaException() {
+		super(Messages.getString("Error.Unknown"));
+	}
+	
+	public FormulaException(String arg) {
+		super(arg);
+	}
+	
 }

@@ -10,8 +10,8 @@ package formula;
  */
 public class Sub extends NumberFormula {
 
-	public final Number calc() throws FormulaException {
-		return null;
+	public final void calc() throws FormulaException {
+
 	}
 
 	public String toString() {

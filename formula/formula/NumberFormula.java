@@ -4,7 +4,8 @@
  */
 package formula;
 
-import java.lang.Number;
+import Messages;
+
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
@@ -21,19 +22,24 @@ public abstract class NumberFormula extends Formula {
 		return false;
 	}
 
-	public long getLongResult() {
+/*	public long getLongResult() {
 		return 0;
+	}*/
+
+	public double getDoubleResult() throws FormulaException {
+		return 0.0;
 	}
 
-	public double getDoubleResult() {
-		return 0;
+	public boolean getBooleanResult() throws FormulaException {
+		throw new FormulaException(Messages.getString("Error.IllegalBforN"));
 	}
 
-	public boolean getBooleanResult() {
-		return false;
-	}
-
-	public abstract Number calc() throws FormulaException;
+	/**
+	 * Calculates this fomula-element by using the results from it's inputs.
+	 *
+	 * @throws FormulaException Is thrown, when the inputs have no results.
+	 */
+	public abstract void calc() throws FormulaException;
 
 	public final void clearResult() {
 		result = null;

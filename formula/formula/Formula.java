@@ -56,7 +56,7 @@ public abstract class Formula extends Canvas implements Cloneable {
 	 * @return The result of all calc-operations up to this formula-element.
 	 * @throws FormulaException Shouldn't happen. ;)
 	 */
-	public abstract long getLongResult() throws FormulaException;
+//	public abstract long getLongResult() throws FormulaException;
 
 
 	/**
@@ -73,7 +73,6 @@ public abstract class Formula extends Canvas implements Cloneable {
 	 * @param g Graphics object for painting.
 	 */
 	public void paint(Graphics g) {
-		// TODO: Scaling
 		//		((Graphics2D)g).scale(scaleX,scaleY);
 		//		setSize((int)(sizeX*scaleX+1),(int)(sizeY*scaleY+1));
 		//		g.setColor(Color.BLACK);

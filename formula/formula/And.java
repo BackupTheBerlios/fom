@@ -10,9 +10,8 @@ package formula;
  */
 public class And extends BooleanFormula {
 
-	public final Boolean calc() throws FormulaException {
+	public final void calc() throws FormulaException {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public String toString() {

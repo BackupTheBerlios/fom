@@ -13,26 +13,27 @@ package formula;
  */
 public class Add extends NumberFormula {
 
-	public final Number calc() throws FormulaException {
-		return null;
+	// braucht kein Javadoc
+	public final void calc() throws FormulaException {
+		result=new Double(input[0].getDoubleResult()+input[1].getDoubleResult());
 	}
+	
 
+	// braucht kein Javadoc
 	public String toString() {
-		return "("+input[0].toString()+"+"+input[1].toString()+")";
+		if(output!=null)
+			return "("+input[0].toString()+"+"+input[1].toString()+")";
+		else
+			return input[0].toString()+"+"+input[1].toString();
 	}
 
+
+	/**
+	 * Creates a "+" with 2 inputs.
+	 */
 	public Add() {
 		input=new Formula[2];
 		formulaName="+";
 	}
 	
-/*	public static void main(String[] args){
- *		Frame f=new Frame();
- *		f.setSize(300,200);
- *		f.setLayout(new FlowLayout());
- *		Add a=new Add();
- *		f.add(a);
- *		f.setVisible(true);
- *	}
- */
 }
