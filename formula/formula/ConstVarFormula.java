@@ -100,7 +100,7 @@ public abstract class ConstVarFormula extends Formula {
 		TypeConstVar content;
 		for (int i = 0; i < varList.size(); i++) {
 			content = (TypeConstVar)varList.get(i);
-			if (content != null) {
+			if (name != null) {
 				if (name.equals(content.getName())) {
 					return content;
 				}

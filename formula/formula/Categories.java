@@ -14,14 +14,13 @@ import utils.Messages;
  */
 public class Categories {
 
-	private static String[]		categories;
-	private static HashMap	categoryElements;
-	private static Categories	categoryObj			= new Categories();
+	private String[]		categories;
+	private HashMap		categoryElements;
 
 	/**
 	 * Private constructor because there'll be only one category-list.
 	 */
-	private Categories() {
+	public Categories() {
 		categories = new String[Integer.parseInt(Messages.getString("Elements.Categories"))];
 		categoryElements = new HashMap(16);
 		for(int i=0;i<categories.length;i++) {
@@ -117,13 +116,12 @@ public class Categories {
 
 		//Category Custom:
 		form = new Formula[0];
-
 	}
 
 	/**
 	 * @return all available categories
 	 */
-	public static final String[] getCategories() {
+	public final String[] getCategories() {
 		return categories;
 	}
 
@@ -131,7 +129,7 @@ public class Categories {
 	 * @param category The category you want elements from.
 	 * @return an array of all Formula-elements of the given category
 	 */
-	public static final Formula[] getCategoryElements(String category) {
+	public final Formula[] getCategoryElements(String category) {
 		return (Formula[])categoryElements.get(category);
 	}
 
@@ -140,7 +138,7 @@ public class Categories {
 	 * @param category the category to add the formula to
 	 * @param formula formula to add
 	 */
-	public static final void addCategoryElement(String category, Formula formula) {
+	public final void addCategoryElement(String category, Formula formula) {
 		Formula[] form		 = getCategoryElements(category);
 		Formula[] newForm;
 		if (form != null) {

@@ -25,6 +25,8 @@ public class ElementPanel extends Panel {
 	private DragnDropListener dnd;
 	private AppletPanel aPanel;
 	
+	private Categories categories;
+	
 	/**
 	 * Creates the panel for categories and element list.
 	 */
@@ -40,10 +42,12 @@ public class ElementPanel extends Panel {
 		btnAddFormula		= new Button(Messages.getString("ElementPanel.BtnAddFormula"));
 		epListener			= new ElementPanelListener(aPanel,this);
 		elementPanelLayout	= new GridLayout();
+		categories			= new Categories();
+		GridBagLayout gbl	= new GridBagLayout();
 		//adding categories:
-		String[] categories=Categories.getCategories();
-		for(int i=0;i<categories.length;i++) {
-			chCategoryList.add(categories[i]);
+		String[] strCategories=categories.getCategories();
+		for(int i=0;i<strCategories.length;i++) {
+			chCategoryList.add(strCategories[i]);
 		}
 		//adding listeners:
 		chCategoryList.addItemListener(epListener);
@@ -56,21 +60,16 @@ public class ElementPanel extends Panel {
 		elementPanel.setBackground(SystemColor.text);
 		setBackground(SystemColor.activeCaptionBorder);
 		//layouts:
-		setLayout(new BorderLayout());
+		setLayout(gbl);
 		elementPanel.setLayout(elementPanelLayout);
 		//adding all together:
 		scpElementList.add(elementPanel);
-		topPanel.add(btnClearFormulas);
-		topPanel.add(btnAddFormula);
-		topPanel.add(chCategoryList);
-		add(topPanel,BorderLayout.NORTH);
-		add(scpElementList,BorderLayout.CENTER);
-		//hardcoded size, because the default-size sux (it did, now it doesn't seem to matter) :)		
-		/*int epWidth = Formula.FORMULAWIDHT+20;
-		setSize(epWidth,getSize().height);
-		chCategoryList.setSize(epWidth,chCategoryList.getSize().height);
-		scpElementList.setSize(epWidth,scpElementList.getSize().height);*/
-		updateElementList(Categories.getCategoryElements(chCategoryList.getSelectedItem()));
+		GUIToolkit.addComponent(this,gbl,btnClearFormulas,0,0,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
+		GUIToolkit.addComponent(this,gbl,btnAddFormula,0,1,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
+		GUIToolkit.addComponent(this,gbl,chCategoryList,0,2,1,1,0.0,0.0,GridBagConstraints.NONE);
+		GUIToolkit.addComponent(this,gbl,scpElementList,0,3,1,1,1.0,1.0,GridBagConstraints.BOTH);
+
+		updateElementList(categories.getCategoryElements(chCategoryList.getSelectedItem()));
 	}
 
 	/**
@@ -99,6 +98,14 @@ public class ElementPanel extends Panel {
 	 * Refreshs the formula elements of the active category.
 	 */
 	public void refreshElementList() {
-		updateElementList(Categories.getCategoryElements(chCategoryList.getSelectedItem()));
+		updateElementList(categories.getCategoryElements(chCategoryList.getSelectedItem()));
+	}
+	
+	
+	/**
+	 * @return returns the categories
+	 */
+	public Categories getCategories() {
+		return categories;
 	}
 }

@@ -31,7 +31,7 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 
 	public void itemStateChanged(ItemEvent ievent) {
 		String category=(String)ievent.getItem();
-		Formula[] elements=Categories.getCategoryElements(category);
+		Formula[] elements=ePanel.getCategories().getCategoryElements(category);
 		ePanel.updateElementList(elements);
 	}
 
@@ -39,7 +39,7 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 	public void actionPerformed(ActionEvent aevent) {
 		if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnAddFormula"))) {
 			// TODO use the formula (CustomFormula) from FormulaPanel!
-			Categories.addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),new Add());
+			ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),new Add());
 			ePanel.refreshElementList();
 		} else if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
 			aPanel.getFormulaPanel().deleteAll();

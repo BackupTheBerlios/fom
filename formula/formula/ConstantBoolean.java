@@ -2,8 +2,10 @@
  * Created on 27.06.2004
  */
 package formula;
+
 import java.awt.*;
 import java.awt.event.*;
+import gui.*;
 
 /**
  * Class for constant booleans.
@@ -33,7 +35,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		inputBoolean.setFont(new Font("Arial", Font.PLAIN, 11));
 		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);
 		if (elementChooser) {
-			inputBoolean.enable(false);
+			inputBoolean.setEnabled(false);
 		} else {
 			inputBoolean.addActionListener(this);
 		}
@@ -52,6 +54,11 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 			inputBoolean.setLabel("false");
 			result = new Boolean (false);
 		}
+		
+		if (getParent() instanceof FormulaPanel) {
+				((AppletPanel)getParent().getParent().getParent()).getControlPanel().getFormulaTextField().updateControlPanelText();
+		}
+		
 		repaint();
 	}
 

@@ -2,8 +2,10 @@
  * Created on 27.06.2004
  */
 package formula;
+
 import java.awt.*;
 import java.awt.event.*;
+import gui.*;
 
 /**
  * Class for variable numbers.
@@ -36,7 +38,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		inputVarName.setText("number1");
 		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);		
 		if (elementChooser) {
-			inputVarName.enable(false);
+			inputVarName.setEnabled(false);
 		} else {
 			inputVarName.addTextListener(this);
 			addVarList(this);
@@ -74,6 +76,11 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 			inputVarName.setBackground(Color.RED);
 		}
 		oldName = newName;
+		
+		if (getParent() instanceof FormulaPanel) {
+			((AppletPanel)getParent().getParent().getParent()).getControlPanel().getFormulaTextField().updateControlPanelText();
+		}
+		
 		repaint();
 	}
 	

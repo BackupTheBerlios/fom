@@ -35,7 +35,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		inputNumber.setBackground(SystemColor.text);
 		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);		
 		if (elementChooser) {
-			inputNumber.enable(false);
+			inputNumber.setEnabled(false);
 		} else {
 			inputNumber.addTextListener(this);
 		}
@@ -73,6 +73,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		if (getParent() instanceof FormulaPanel) {
 			((AppletPanel)getParent().getParent().getParent()).getControlPanel().getFormulaTextField().updateControlPanelText();
 		}
+		
 	}
 
 	public void setVisible(boolean vis) {
