@@ -15,23 +15,22 @@ public class Factorial extends NumberFormula {
 	/**
 	 * Calculates the factorial.
 	 */
-	static int fact(int n) {
-		int e = 1;
+	private final static int fact(int n) {
+		int result = 1;
 
-		if (n == 0 || n == 1)
-		  return e;
+		for (int i = 2; i <= n; i++) {
+			result = result*i;
+		}
+	
+		return result;
+	}
 
-		if (n > 1)
-		  for (int i = 1; i <= n; i++)
-			e = e*i;
-		return e;
-	  }
 
 	public final void calc() throws FormulaException {	
 		if (input[0] == null)
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-			result = new Double (Factorial.fact((int)input[0].getDoubleResult()));
+			result = new Double (fact((int)input[0].getDoubleResult()));
 	}
 	
 	/**

@@ -3,14 +3,15 @@
  */
 package formula;
 import java.awt.TextField;
-//import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
-public class ConstantNumber extends ConstVarFormula {
+public class ConstantNumber extends ConstVarFormula implements ActionListener {
 
 //	TODO Mit Maurice besprechen
 
@@ -28,7 +29,9 @@ public class ConstantNumber extends ConstVarFormula {
 		formulaName = "ConstantNumber";
 		result = new Double (0);
 		inputNumber = new TextField();
+		inputNumber.addActionListener(this);
 		inputNumber.setBounds(2, RESULTHEIGHT+CONNECTHEIGHT+2, FORMULAWIDTH-2, FORMULAHEIGHT-CONNECTHEIGHT-2);
+		add(inputNumber); //Wichtig!!!!
 	}
 
 //	public void paint(Graphics g) {
@@ -83,5 +86,13 @@ public class ConstantNumber extends ConstVarFormula {
 //			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 //		}
 //	}
+
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+
+	public void actionPerformed(ActionEvent aevent) {
+
+	}
 
 }
