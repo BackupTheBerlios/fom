@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.16 2004/08/30 19:51:33 ot_piccolo Exp $
+/* $Id: DialogVariables.java,v 1.17 2004/08/31 12:43:12 br3001 Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -11,7 +11,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
@@ -26,6 +26,8 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	private String[] oldVarName;
 	
 	private AppletPanel aPanel;
+	
+	
 	/**
 	 * Creates a window for setting and changing variables.
 	 */
@@ -208,22 +210,17 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		}
 	}
 
-	
-	/* MAURICE: Wenn das Variablenfenster von einem anderen Fenster überdeckt wird,
-	 * und man dann dem Formula-O-Matic-Fenster über die Taskleiste den Fokus gibt,
-	 * wird das Variablenfenster nicht neu dargestellt.
-	 */
-	 // HEIKO: Behoben mit requestFocus?
-	 // Wenn nicht müsste ich einen WindowListener in AppletPanel einbauen.
-	  // MAURICE: Ja, hat sich erledigt.
+
 	// Methods from WindowListener:
 	public void windowClosing(WindowEvent arg0) {
 		dispose();
 	}
 
+
 	public void windowDeactivated(WindowEvent arg0) {
 		this.requestFocus();		
 	}
+
 
 	public void windowDeiconified(WindowEvent arg0) {  }
 	public void windowIconified(WindowEvent arg0) {	 }
