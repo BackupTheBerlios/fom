@@ -21,11 +21,17 @@ public abstract class Formula extends Container implements Cloneable {
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
 	public static final int FORMULAWIDTH = 120;
 
+	// Constants for paintStatus
+	public static final int PAINTSTATUS_STANDARD	= 0;
+	public static final int PAINTSTATUS_SELECTED	= 1;
+	public static final int PAINTSTATUS_INSERTING	= 2;
+	public static final int PAINTSTATUS_MOVING		= 3;
+
 	protected Dimension dimension = new Dimension(FORMULAWIDTH+1,FORMULAHEIGHT+1);
 	protected Formula[] input;
 	protected Formula output;
 	protected String formulaName;
-	protected int drawStatus;
+	protected int paintStatus = PAINTSTATUS_STANDARD;
 	protected static LinkedList treeList;
 
 	/**
@@ -34,7 +40,6 @@ public abstract class Formula extends Container implements Cloneable {
 	public Formula() {
 		super();
 		setSize(dimension);
-		drawStatus = 0;
 	}
 
 	/**
@@ -66,14 +71,6 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public abstract String getStringResult();
 	
-//	/**
-//	 * Will return a long-value as a result, if possible. If not, a FormulaException will be thrown.
-//	 * @return The result of all calc-operations up to this formula-element.
-//	 * @throws FormulaException Shouldn't happen. ;)
-//	 */
-//	public abstract long getLongResult() throws FormulaException;
-
-
 	/**
 	 * @return Name of the formula-element.
 	 */
@@ -94,7 +91,7 @@ public abstract class Formula extends Container implements Cloneable {
 		super.paint(g);
 		//((Graphics2D)g).scale(scaleX, scaleY);
 		//Standard Aussehen
-		if (drawStatus == 0) {
+		if (paintStatus == PAINTSTATUS_STANDARD) {
 			g.setColor(Color.BLACK);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
 			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
@@ -107,7 +104,7 @@ public abstract class Formula extends Container implements Cloneable {
 				g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
 			}
 		//Element markiert
-		} else if (drawStatus == 1) {
+		} else if (paintStatus == PAINTSTATUS_SELECTED) {
 			g.setColor(Color.BLUE);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
 			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
@@ -120,7 +117,7 @@ public abstract class Formula extends Container implements Cloneable {
 				g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
 			}
 		//Element bewegen
-		} else {
+		} else { //if ((paintStatus == PAINTSTATUS_MOVING) || (paintStauts == PAINTSTATUS_INSERTING)) {
 			g.setColor(Color.BLACK);
 			for (int i=0; i<FORMULAWIDTH/4; i++) {
 				g.drawLine(i*4, CONNECTHEIGHT, i*4+2, CONNECTHEIGHT);
@@ -228,7 +225,7 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public final boolean completeTree() {
 		boolean complete = true;
-		for (int i = 0; i < getInputCount() && complete; i++) {
+		for (int i = 0; (i < getInputCount()) && complete; i++) {
 			complete = complete && (input[i] == null);
 		}
 		return complete;
@@ -264,12 +261,12 @@ public abstract class Formula extends Container implements Cloneable {
 	}
 	//MAURICE Bis hier
 
-	public final void setDrawStatus(int status) {
-		drawStatus = status;
+	public final void setPaintStatus(int status) {
+		paintStatus = status;
 	}
 
-	public final int getDrawStatus() {
-		return drawStatus;
+	public final int getPaintStatus() {
+		return paintStatus;
 	}
 
 	//"Quick-fix" :)
@@ -295,6 +292,14 @@ public abstract class Formula extends Container implements Cloneable {
 	
 	public final void setSize(Dimension dim) {
 		dimension = dim;
+	}
+	
+	public final int getWidth() {
+		return dimension.width;
+	}
+	
+	public final int getHeight() {
+		return dimension.height;
 	}
 
 }
