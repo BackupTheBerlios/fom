@@ -3,7 +3,7 @@
  */
 package formula;
 
-import utils.Messages;
+import utils.*;
 
 /** TODO JavaDoc ergänzen
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
@@ -25,16 +25,20 @@ public abstract class NumberFormula extends Formula {
 		throw new FormulaException(Messages.getString("Error.IllegalBforN"));
 	}
 
+	
 	public final boolean isResultCalculated() {
 		return (result != null);
 	}
 
+	
 	public final String getStringResult() {
-		if (result != null)
+		if (result != null) {
 			return result.toString();
-		else
+		} else {
 			return null;
+		}
 	}
+	
 	
 	/**
 	 * Calculates this fomula-element by using the results from it's inputs.
@@ -42,6 +46,7 @@ public abstract class NumberFormula extends Formula {
 	 */
 	public abstract void calc() throws FormulaException;
 
+	
 	/**
 	 * @param index Number of the input (0=left...max-1=right)
 	 * @return Returns an array of all possible classes for the input.
@@ -51,11 +56,13 @@ public abstract class NumberFormula extends Formula {
 		return classArray; 
 	}
 
+	
 	public Class[] getOutputTypes() throws FormulaException {
 		Class[] classArray = {Number.class}; 
 		return classArray; 
 	}
 
+	
 	/**
 	 * Clears all results that have been saved by calc-operations.
 	 */
@@ -63,9 +70,11 @@ public abstract class NumberFormula extends Formula {
 		result = null;
 	}
 
+	
 	public boolean isValidOutput(Formula in, int whichInput) {
 		return false;
 	}
+	
 	
 	public boolean isValidInput(Formula in, int index) {
 		if (input[index] instanceof NumberFormula)

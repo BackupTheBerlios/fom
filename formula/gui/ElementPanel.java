@@ -64,10 +64,10 @@ public class ElementPanel extends Panel {
 		elementPanel.setLayout(elementPanelLayout);
 		//adding all together:
 		scpElementList.add(elementPanel);
-		GUIToolkit.addComponent(this,gbl,btnClearFormulas,0,0,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
-		GUIToolkit.addComponent(this,gbl,btnAddFormula,0,1,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
-		GUIToolkit.addComponent(this,gbl,chCategoryList,0,2,1,1,0.0,0.0,GridBagConstraints.NONE);
-		GUIToolkit.addComponent(this,gbl,scpElementList,0,3,1,1,1.0,1.0,GridBagConstraints.BOTH);
+		FOMToolkit.addComponent(this,gbl,btnClearFormulas,0,0,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
+		FOMToolkit.addComponent(this,gbl,btnAddFormula,0,1,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
+		FOMToolkit.addComponent(this,gbl,chCategoryList,0,2,1,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,scpElementList,0,3,1,1,1.0,1.0,GridBagConstraints.BOTH);
 
 		updateElementList(categories.getCategoryElements(chCategoryList.getSelectedItem()));
 	}

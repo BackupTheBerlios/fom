@@ -23,11 +23,11 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	private Button[] varValueBoolean;
 	private String[] oldVarName;
 
-	//TODO Dialog öffnen
 
 	/**
 	 * Creates a window for setting and changing variables.
 	 */
+	// TODO umschreiben auf GridBagLayout, dann gibts auch keine Schwierigkeiten wegen der Größe
 	public DialogVariables(AppletPanel parent) {
 		super(new Frame(), Messages.getString("DialogVariables.Title"), true);
 		TypeConstVar[] varArray = ConstVarFormula.getVarList();
@@ -80,8 +80,10 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		show();
 	}
 
+
 	/**
 	 * Searches in an array for a specific object. 
+	 * 
 	 * @param findWhat What to find.
 	 * @param findWhere Where to find.
 	 * @return Returns index of object, or -1 if not found.
@@ -95,19 +97,18 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		return -1;
 	}
 
+
 	/**
 	 * Validates a variable name. Valid names have at least one non-space character and
 	 * don't use an already existing name.
+	 * 
 	 * @param isValid To be checked.
 	 * @return Returns, if variable name is valid.
 	 */
 	private final boolean isValidName(String isValid) {
 		boolean valid = true;
 		int count = 0;
-		//name must have at least one non-space character.
-		/*if (isValid.matches(" *")) {
-			valid = false;
-		}*/
+		//name must have at least one non-whitespace character.
 		if (isValid.trim().equals("")) {
 			valid = false;
 		}
@@ -126,8 +127,10 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		return valid;
 	}
 
-	/**
-	 * Ersetzt alle Variablennamen durch neue, oder den Number-Wert von den Variablen
+	
+	/*
+	 * Method implemented from TestListener:
+	 * Used to change a variable name or it's value if it's a number.
 	 */
 	public void textValueChanged(TextEvent txtEvent) {
 		int index = getArrayPosition(txtEvent.getSource(), varValueNumber);
@@ -169,9 +172,11 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 			}
 		}
 	}
+	
 
-	/**
-	 * Ersetzt den Boolean-Wert der Variablen oder schliesst den Dialog.
+	/*
+	 * Method implemented from ActionListener for buttons:
+	 * Used to change the state of boolean variables or to clode the dialog.
 	 */
 	public void actionPerformed(ActionEvent txtEvent) {
 		int index = getArrayPosition(txtEvent.getSource(), varValueBoolean);
@@ -192,16 +197,15 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		}
 	}
 
+	
 	/* MAURICE: Wenn das Variablenfenster von einem anderen Fenster überdeckt wird,
 	 * und man dann dem Formula-O-Matic-Fenster über die Taskleiste den Fokus gibt,
 	 * wird das Variablenfenster nicht neu dargestellt.
 	 */
 	 // HEIKO: Behoben mit requestFocus?
-	 // Wenn nicht müsste ich einen WindowListener in AppletPanel einbauen
+	 // Wenn nicht müsste ich einen WindowListener in AppletPanel einbauen.
 
-	// Quick-Fix, damit der WindowListener funktioner. Um die Variablen x-en zu können.
-
-
+	// Methods from WindowListener:
 	public void windowClosing(WindowEvent arg0) {
 		dispose();
 	}

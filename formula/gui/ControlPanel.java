@@ -4,10 +4,9 @@
  */
 package gui;
 
-import java.awt.Label;
 import java.awt.*;
 
-import utils.Messages;
+import utils.*;
 
 /**
  * The ControlPanel contains all buttons and other elements to control,
@@ -65,23 +64,23 @@ public class ControlPanel extends Panel {
 
 		//adding the components (in sub-panels) to this panel:
 		Panel plTexts=new Panel(gblt);
-		GUIToolkit.addComponent(plTexts,gblt,tfFormula,0,0,1,1,1.0,0.0,GridBagConstraints.BOTH);
-		GUIToolkit.addComponent(plTexts,gblt,lblEqualsign,1,0,1,1,0.0,0.0,GridBagConstraints.NONE);
-		GUIToolkit.addComponent(plTexts,gblt,tfResult,2,0,1,1,0.1,0.0,GridBagConstraints.BOTH);
+		FOMToolkit.addComponent(plTexts,gblt,tfFormula,0,0,1,1,1.0,0.0,GridBagConstraints.BOTH);
+		FOMToolkit.addComponent(plTexts,gblt,lblEqualsign,1,0,1,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(plTexts,gblt,tfResult,2,0,1,1,0.1,0.0,GridBagConstraints.BOTH);
 		
-		GUIToolkit.addComponent(this,gbl,plTexts,0,0,6,1,1.0,0.0,GridBagConstraints.BOTH);
+		FOMToolkit.addComponent(this,gbl,plTexts,0,0,6,1,1.0,0.0,GridBagConstraints.BOTH);
 		
-		GUIToolkit.addComponent(this,gbl,btnVariables,0,1,1,1,0.0,0.0,GridBagConstraints.NONE);
-		GUIToolkit.addComponent(this,gbl,btnCalcStep,1,1,1,1,0.0,0.0,GridBagConstraints.NONE);
-		GUIToolkit.addComponent(this,gbl,btnCalcAll,2,1,1,1,0.0,0.0,GridBagConstraints.NONE);
-		GUIToolkit.addComponent(this,gbl,btnCalcAni,3,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,btnVariables,0,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,btnCalcStep,1,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,btnCalcAll,2,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,btnCalcAni,3,1,1,1,0.0,0.0,GridBagConstraints.NONE);
 				
 		Panel plSpeeds=new Panel(new BorderLayout(8,8));
 		plSpeeds.add(lblSpeed,BorderLayout.WEST);
 		plSpeeds.add(sbSpeed,BorderLayout.CENTER);
 		
-		GUIToolkit.addComponent(this,gbl,plSpeeds,4,1,1,1,1.0,0.0,GridBagConstraints.BOTH);
-		GUIToolkit.addComponent(this,gbl,btnReset,5,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,plSpeeds,4,1,1,1,1.0,0.0,GridBagConstraints.BOTH);
+		FOMToolkit.addComponent(this,gbl,btnReset,5,1,1,1,0.0,0.0,GridBagConstraints.NONE);
 		
 		//adding the listeners:
 		btnCalcAll.addActionListener(cpListener);

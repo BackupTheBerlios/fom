@@ -9,6 +9,8 @@ import formula.*;
 import java.awt.*;
 import java.util.*;
 
+import utils.*;
+
 /**
  * The FormulaPanel displays the formula-trees, created by the user.
  *
@@ -24,8 +26,8 @@ public class FormulaPanel extends Panel {
 
 
 	// These lists store all input/output pins.
-	private Vector inputPinList 		= new Vector();
-	private Vector outputPinList 		= new Vector();
+	private Vector inputPinList 	= new Vector();
+	private Vector outputPinList 	= new Vector();
 	private Vector tempInPPList		= new Vector();
 	private Vector tempOutPPList	= new Vector();
 	
@@ -52,6 +54,7 @@ public class FormulaPanel extends Panel {
 		}
 	}
 	
+	
 	/**
 	 * Adds a list (Vector) of input pins to the appropriate pin list.
 	 * @param pPIn list of input pins
@@ -60,6 +63,7 @@ public class FormulaPanel extends Panel {
 		inputPinList.addAll(pPIn);
 	}
 
+	
 	/**
 	 * Adds an input pin to the appropriate pin list.
 	* @param pPIn input pin
@@ -71,6 +75,7 @@ public class FormulaPanel extends Panel {
 		inputPinList.add(pPIn);
 	}
 
+	
 	/**
 	 * Adds an array of output pins to the appropriate pin list.
 	 * @param pPOut list of output pins
@@ -81,6 +86,7 @@ public class FormulaPanel extends Panel {
 		}
 	}
 	
+	
 	/**
 	 * Adds a list (Vector) of output pins to the appropriate pin list.
 	 * @param pPOut list of output pins
@@ -89,6 +95,7 @@ public class FormulaPanel extends Panel {
 		outputPinList.addAll(pPOut);
 	}
 
+	
 	/**
 	 * Adds an output pin to the appropriate pin list.
 	 * @param pPOut output pin
@@ -100,6 +107,7 @@ public class FormulaPanel extends Panel {
 		outputPinList.add(pPOut);
 	}
 
+	
 	/**
 	 * Used to remove a list of input pins from the pinList.
 	 * @param pPIn list of input pins
@@ -109,6 +117,7 @@ public class FormulaPanel extends Panel {
 			inputPinList.remove(pPIn[i]);
 		}
 	}
+	
 	
 	/**
 	 * Used to remove a list of output pins from the pinList.
@@ -120,6 +129,7 @@ public class FormulaPanel extends Panel {
 		}
 	}
 
+	
 	/**
 	 * @return returns a vector of input pins from all formula elements in the panel
 	 */
@@ -127,6 +137,7 @@ public class FormulaPanel extends Panel {
 		return inputPinList;
 	}
 
+	
 	/**
 	 * @return returns a vector of output pins from all formula elements in the panel
 	 */
@@ -173,7 +184,22 @@ public class FormulaPanel extends Panel {
 
 
 	/**
-	 * Finds out if an input-pin is near the outPin and if they are compatible, have no target and are not from the same formula-object. 
+	 * Finds the nearest input pin to the outPin from the list and returns it if 
+	 * it is compatible, has no target and is not from the same formula object.
+	 * The PinPoint will also be returned if it was already found by
+	 * another call of getNearestInputPin but this outPin is nearer to it.
+	 * 
+	 * The distance of the outPin to the returned PinPoint will be saved in the
+	 * returned pin.bestDistance.
+	 * 
+	 * Note: PinPoint.bestCandidate must be set to != null, if another output pin wants
+	 * to connect to this pin from the list. PinPoint.bestDistance stores the distance.
+	 * If this distance is larger then to outPin, bestDistance is overwritten and the pin
+	 * will be returned nethertheless.
+	 * To check if getNearestInputPin returned a previously found input pin, you have to
+	 * check if bestCandidate is != null. You also have to set bestCandidate outside of
+	 * getNearestInputPin because it won't be set in it. 
+	 * 
 	 * @param outPin source output-pin
 	 * @return returns the nearest input-pin or null
 	 */
@@ -199,15 +225,7 @@ public class FormulaPanel extends Panel {
 						// check for compatibility:
 					 	if (tmpPP.getFormula().getInputCount() > 0) {
 						 	inTypes = tmpPP.getFormula().getInputTypes(tmpPP.getInputNumber());
-				 			boolean match = false;
-				 			for (int i_in=0;i_in<inTypes.length;i_in++) {
-				 				for (int i_out=0;i_out<outTypes.length;i_out++) {
-				 					if (inTypes[i_in] == outTypes[i_out]) {
-				 						match = true;				 			
-				 					}
-				 				}
-				 			}
-					 		if (match) {
+					 		if (FOMToolkit.hasPartialMatches(inTypes,outTypes)) {
 								if (tmpPP.getBestCandidate() != null) {
 									if (tmpPP.getBestDistance() > distance) {
 										nearestPP = tmpPP;									
@@ -232,10 +250,27 @@ public class FormulaPanel extends Panel {
 		}		
 	}
 
+	
 	/**
-	 * Finds out if an output-pin is near the inPin and if they are compatible, have no target and are not from the same formula-object.
-	 * @param inPin input-pin to test
-	 * @return returns the nearest output-pin or null
+	 * Finds the nearest output pin to the inPin from the list 
+	 * and if it is compatible, has no target and is not from
+	 * the same formula object it will be returned. 
+	 * The PinPoint will also be returned if it was already found by another
+	 * call of getNearestOutputPin but this inPin is nearer to it.
+	 * 
+	 * The distance of the inPin to the returned PinPoint will be saved in the
+	 * returned pin.
+	 * 
+	 * Note: PinPoint.bestCandidate must be set to != null, if another input pin wants
+	 * to connect to this pin from the list. PinPoint.bestDistance stores the distance.
+	 * If this distance is larger then to inPin, bestDistance is overwritten and the pin
+	 * will be returned nethertheless.
+	 * To check if getNearestOutputPin returned a previously found output pin, you have to
+	 * check if bestCandidate is != null. You also have to set bestCandidate outside of
+	 * getNearestInputPin because it won't be set in it. 
+	 * 
+	 * @param inPin input pin
+	 * @return returns the nearest output pin or null if nothing found
 	 */
 	public PinPoint getNearestOutputPin(PinPoint inPin) {
 		if (inPin.getFormula().getInputCount() == 0) {
@@ -261,15 +296,7 @@ public class FormulaPanel extends Panel {
 					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form)) {
 					// check for compatibility:
 						outTypes = tmpPP.getFormula().getOutputTypes();
-						boolean match = false;	
-						for (int i_in=0;i_in<inTypes.length;i_in++) {
-							for (int i_out=0;i_out<outTypes.length;i_out++) {
-								if (inTypes[i_in] == outTypes[i_out]) {
-									match = true;				 			
-								}
-							}
-						}
-						if (match) {
+						if (FOMToolkit.hasPartialMatches(inTypes,outTypes)) {
 							// check if already temp-connected, but distance is lower:
 							if (tmpPP.getBestCandidate() != null) {
 								if (tmpPP.getBestDistance() > distance) {
@@ -296,7 +323,9 @@ public class FormulaPanel extends Panel {
 	
 	
 	/**
-	 * Used only for graphical reasons. The two lists are possible connections.
+	 * Used only for graphical reasons. The two lists are possible connections and
+	 * are used in the paint method to draw red lines for these connections.
+	 * 
 	 * @param ppInList List of input PinPoints.
 	 * @param ppOutList List of output PinPoints.
 	 */
@@ -308,10 +337,12 @@ public class FormulaPanel extends Panel {
 
 	/**
 	 * Searches for the input PinPoint representing the inNumber-th input of form.
+	 * 
 	 * @param form formula to search for
 	 * @param inNumber number of the input (from(0) left to right(length-1))
 	 * @return returns the PinPoint if found, otherwise null.
 	 */
+	// TODO imho kann man die Methode durch eine einfachere Variante ohne Schleife ersetzen...
 	public PinPoint getInputPinForFormula(Formula form, int inNumber) {
 		PinPoint pin;
 		for (int i=0;i<inputPinList.size();i++) {
@@ -325,11 +356,14 @@ public class FormulaPanel extends Panel {
 		return null;  // shouldn't happen if everything's all right!
 	}
 
+
 	/**
 	 * Searches for the output PinPoint representing the output of form.
+	 * 
 	 * @param form formula to search for
 	 * @return the PinPoint if found, otherwise null.
 	 */
+	// TODO dito, einfachere Methode ohne Schleife
 	public PinPoint getOutputPinForFormula(Formula form) {
 		PinPoint pin;
 		for (int i=0;i<outputPinList.size();i++) {
@@ -343,6 +377,11 @@ public class FormulaPanel extends Panel {
 
 
 
+	/**
+	 * Detaches an input pin from it's target if it has one.
+	 * 
+	 * @param pin input pin to detach
+	 */
 	private void detachInput(PinPoint pin) {
 		if (pin.getTarget() != null) {
 			aPanel.getTreeList().add(pin.getTarget().getFormula());
@@ -355,6 +394,12 @@ public class FormulaPanel extends Panel {
 		pin.setBestCandidate(null);
 	}
 	
+	
+	/**
+	 * Detaches an output pin from it's target if it has one.
+	 * 
+	 * @param pin output pin to detach
+	 */
 	private void detachOutput(PinPoint pin) {
 		if (pin.getTarget() != null) {
 			pin.getTarget().getFormula().setInput(null,pin.getTarget().getInputNumber());
@@ -367,9 +412,11 @@ public class FormulaPanel extends Panel {
 		pin.setBestCandidate(null);
 	}
 
+
 	/**
 	 * Detaches an output of a formula (can also be root-formula of
 	 * a whole subtree, doesn't matter) from the rest.
+	 * 
 	 * @param form Formula object to detach.
 	 */
 	public void detach(Formula form) {
@@ -389,7 +436,7 @@ public class FormulaPanel extends Panel {
 	 * @param inPPList input pins
 	 * @param outPPList output pins
 	 */
-	// NOTE: Slow (if that matters) and not tested yet!
+	// NOTE Slow (if that matters) and not tested yet!!
 	public void detach(Vector inPPList, Vector outPPList) {
 		PinPoint pin;
 		PinPoint targetPin;
@@ -422,8 +469,11 @@ public class FormulaPanel extends Panel {
 		}
 	}
 	
+	
 	/**
-	 * Attaches a list of PinPoints. 
+	 * Attaches a list of PinPoints. The inputs/outputs will only be connected
+	 * if they are still compatible. 
+	 * 
 	 * @param ppInList
 	 * @param ppOutList
 	 */
@@ -431,26 +481,56 @@ public class FormulaPanel extends Panel {
 		PinPoint pin;
 		for (int i=0;i<ppInList.size();i++) {
 			pin = (PinPoint)ppInList.get(i);
-			pin.getFormula().setInput(pin.getTarget().getFormula(),pin.getInputNumber());
-			pin.getTarget().getFormula().setOutput(pin.getFormula());
-			pin.getTarget().setTarget(pin);
-			if (!inputPinList.contains(pin)) {
-				inputPinList.add(pin);
+			try {
+				if (FOMToolkit.hasPartialMatches(pin.getFormula().getInputTypes(pin.getInputNumber()),pin.getTarget().getFormula().getOutputTypes())) {
+					pin.getFormula().setInput(pin.getTarget().getFormula(),pin.getInputNumber());
+					pin.getTarget().getFormula().setOutput(pin.getFormula());
+					pin.getTarget().setTarget(pin);
+					if (!inputPinList.contains(pin)) {
+						inputPinList.add(pin);
+					}
+					aPanel.getTreeList().remove(pin.getTarget().getFormula());
+				} else {
+					pin.getTarget().getFormula().setOutput(null);
+					pin.getTarget().setTarget(null);
+					pin.getFormula().setInput(null,pin.getInputNumber());
+					pin.setTarget(null);
+				}
+			} catch (FormulaException fe) {
+				fe.printStackTrace(System.err);
 			}
-			aPanel.getTreeList().remove(pin.getTarget().getFormula());
 		}
 		for (int i=0;i<ppOutList.size();i++) {
 			pin = (PinPoint)ppOutList.get(i);
-			pin.getFormula().setOutput(pin.getTarget().getFormula());
-			pin.getTarget().getFormula().setInput(pin.getFormula(),pin.getTarget().getInputNumber());
-			pin.getTarget().setTarget(pin);
-			if (!outputPinList.contains(pin)){
-				outputPinList.add(pin);
+			try {
+				if (FOMToolkit.hasPartialMatches(pin.getFormula().getOutputTypes(),pin.getTarget().getFormula().getInputTypes(pin.getTarget().getInputNumber()))) {
+					pin.getFormula().setOutput(pin.getTarget().getFormula());
+					pin.getTarget().getFormula().setInput(pin.getFormula(),pin.getTarget().getInputNumber());
+					pin.getTarget().setTarget(pin);
+					if (!outputPinList.contains(pin)){
+						outputPinList.add(pin);
+					}
+					aPanel.getTreeList().remove(pin.getFormula());
+				} else {
+					pin.getTarget().getFormula().setInput(null,pin.getTarget().getInputNumber());
+					pin.getTarget().setTarget(null);
+					pin.getFormula().setOutput(null);
+					pin.setTarget(null);
+				}
+			} catch (FormulaException fe) {
+				fe.printStackTrace(System.err);
 			}
-			aPanel.getTreeList().remove(pin.getFormula());
 		}
+		tempInPPList.clear();
+		tempOutPPList.clear();
 	}
 	
+	
+	/**
+	 * Checks the bounds of the FormulaPanel if all components are inside of it.
+	 * If not it will be resized and all components will be moved if some are outside
+	 * the left or upper borders.
+	 */
 	public void checkBounds() {
 		Component comp;
 		int width = getWidth();
@@ -459,17 +539,19 @@ public class FormulaPanel extends Panel {
 		Rectangle newBounds = new Rectangle(0,0,0,0);
 		for (int i=0;i<getComponentCount();i++) {
 			comp = getComponent(i);
-			if ((comp.getX()+comp.getWidth()) > newBounds.width) {
-				newBounds.width = comp.getX() + comp.getWidth() + OVERSIZE_WIDTH;
-			}
-			if (comp.getX() < getX()) {
-				newBounds.x = comp.getX();
-			}
-			if ((comp.getY()+comp.getHeight()) > newBounds.height) {
-				newBounds.height = comp.getY() + comp.getHeight() + OVERSIZE_HEIGHT;
-			}
-			if (comp.getY() < getY()) {
-				newBounds.y = comp.getY();
+			if (comp.isVisible()) {
+				if ((comp.getX()+comp.getWidth()) > newBounds.width) {
+					newBounds.width = comp.getX() + comp.getWidth() + OVERSIZE_WIDTH;
+				}
+				if (comp.getX() < getX()) {
+					newBounds.x = comp.getX();
+				}
+				if ((comp.getY()+comp.getHeight()) > newBounds.height) {
+					newBounds.height = comp.getY() + comp.getHeight() + OVERSIZE_HEIGHT;
+				}
+				if (comp.getY() < getY()) {
+					newBounds.y = comp.getY();
+				}
 			}
 		}
 
@@ -486,8 +568,6 @@ public class FormulaPanel extends Panel {
 				form = (Formula)getComponent(i);
 				form.moveTo(form.getX()-newBounds.x+OVERSIZE_WIDTH,form.getY()-newBounds.y+OVERSIZE_HEIGHT);
 			}
-			//ScrollPane sPane = (ScrollPane)getParent();
-			//sPane.setScrollPosition(sPane.getScrollPosition().x,0);
 		}
 		
 		if ((newBounds.width > 0) && (newBounds.height > 0) && !oldSize.equals(newBounds.getSize())) {
@@ -496,6 +576,13 @@ public class FormulaPanel extends Panel {
 		}
 	}
 
+
+	/**
+	 * Detaches all inputs and outputs of a formula and removes it from the FormulaPanel
+	 * and all lists it can be in.
+	 * 
+	 * @param form formula object to remove
+	 */
 	public void delete(Formula form) {
 		PinPoint[] pinList = form.getInputPins();
 		for (int i=0;i<pinList.length;i++) {
