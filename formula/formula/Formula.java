@@ -11,7 +11,6 @@ import java.awt.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version 0.1.5 (21.04.2004)
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -97,20 +96,16 @@ public abstract class Formula extends Container implements Cloneable {
 
 
 	/**
-	 * Checks if the output of another formula-object is compatible with one of the inputs.
-	 * @param in Output of another formula.
-	 * @param index Index-number of input.
-	 * @return True: other formula-element can be attached to this input.
+	 * @param index Number of the input (0=left...max-1=right)
+	 * @return Returns an array of all possible classes for the input.
 	 */
-	public abstract boolean isValidInput(Formula in, int index);
-
-
+	public abstract Class[] getInputTypes(int index);
+	
+	
 	/**
-	 * Checks if the input of another formula-object is compatible with the output.
-	 * @param out Input of another formula.
-	 * @return True: other formula-element can be attached to this output.
+	 * @return Returns an array of all possible classes for the output.
 	 */
-	public abstract boolean isValidOutput(Formula out);
+	public abstract Class[] getOutputTypes();
 
 
 	/**
@@ -159,16 +154,18 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @return Returns the string-equvalent of this formula-object (if inputs not connected)
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
-	//Maurice: Warum kann ich das hier nicht hinzufügen?
-	public abstract String toString();// throws FormulaExeption;
+	public abstract String toString();
 
 	/**
 	 * @return Returns the maximal number of formula-objects in this subtree which are side by side.
 	 */
 	//TODO Funktioniert noch nicht, da Variablen/Konstanten nicht erkannt werden.
+	//Anmerkung: hab input.length durch getInputCount() ersetzt...
+	// Außerdem macht man Schleifen mit Längen nicht mit <= und -1 
+	// sondern mit < (nur so bevor du dir das angewöhnst :))
 	public final int getWidthOfTree() {
 		int WidthOfTree = 0;
-		for (int i = 0; i <= input.length-1; i++) {
+		for (int i = 0; i < getInputCount(); i++) {
 			if (input[i] != null)
 				WidthOfTree += input[i].getWidthOfTree();
 		}
