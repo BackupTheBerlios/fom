@@ -15,7 +15,7 @@ import formula.*;
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
 
 	private Panel spaceForInputs;
-	//private ScrollPane scrollForInputs;
+	private ScrollPane scrollForInputs;
 	private Button okButton;
 	private TextField[] varName;
 	private TextField[] varValueNumber;
@@ -24,24 +24,19 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 
 	//TODO Dialog öffnen
 
-	/* HEIKO:
-	 * 3. da du mehrere Variablen darstellen willst, nimm BorderLayout und mach 
-	 * eine Tabelle draus. Zum Scrollen gibts ScrollPane in das du aber noch ein
-	 * zusätzliches Panel einfügen musst, um in dem Panel dann den BorderLayout
-	 * zu verwenden.
+	/**
+	 * Creates a window for setting and changing variables.
 	 */
 	public DialogVariables(AppletPanel parent) {
 		super(new Frame(), "Variables' Dialog", true);
 		TypeConstVar[] varArray = ConstVarFormula.getVarList();
-		this.setBounds(50, 50, 300, 300);
 		Object value;
 		varName = new TextField[varArray.length];
 		varValueNumber = new TextField[varArray.length];
 		varValueBoolean = new Button[varArray.length];
 		oldVarName = new String[varArray.length];
-		spaceForInputs = new Panel(new GridLayout(varArray.length, 2));
-		//scrollForInputs = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-		//scrollForInputs.setLayout(new GridLayout(varArray.length, 2));
+		spaceForInputs = new Panel(new GridLayout(varArray.length, 2,4,4));
+		scrollForInputs = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
 		for (int i=0; i < varArray.length; i++) {
 			//Reading all variables and creating their input fields.
 			varName[i] = new TextField(varArray[i].getName());
@@ -67,15 +62,17 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		okButton = new Button("OK");
 		okButton.addActionListener(this);
 		add(okButton, BorderLayout.SOUTH);
-		add(spaceForInputs, BorderLayout.NORTH);
-//		scrollForInputs.add(spaceForInputs);
-//		add(scrollForInputs, BorderLayout.NORTH);
-//		scrollForInputs.setSize(150,scrollForInputs.getSize().height);
-//		scrollForInputs.setBackground(SystemColor.text);
-//		scrollForInputs.validate();
-//		scrollForInputs.doLayout();
-//		scrollForInputs.repaint();
-		this.addWindowListener(this);
+		scrollForInputs.add(spaceForInputs);
+		add(scrollForInputs, BorderLayout.CENTER);
+		pack();  //Needed for calculating proper height of dialog.
+		if (varArray.length == 0) {
+			setSize(300, okButton.getHeight() + getInsets().top+getInsets().bottom);
+		} else if (varArray.length > 10) {
+			setSize(300, 10*varName[0].getPreferredSize().height + okButton.getHeight() + scrollForInputs.getInsets().top+scrollForInputs.getInsets().bottom + getInsets().top+getInsets().bottom);
+		} else {
+			setSize(300, varArray.length*varName[0].getPreferredSize().height + okButton.getHeight() + scrollForInputs.getInsets().top+scrollForInputs.getInsets().bottom + getInsets().top+getInsets().bottom);
+		}
+		addWindowListener(this);
 		show();
 	}
 
@@ -85,35 +82,6 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 * @param findWhere Where to find.
 	 * @return Returns index of object, or -1 if not found.
 	 */
-	/* HEIKO: Das hier sieht mir sehr nach Design-Fehler/schlechter Programmierung aus :o
-	 * Also wenn ich das beim kurz überfliegen richtig verstehe, dann willst du
-	 * in textValueChanged rausfinden, welche Variable verändert wurde. 
-	 * Das geht ganz einfach, gib den TextFields Namen (setName). */
-	/* MAURICE: Ich muss den Index des geänderten Feldes rausfind, da ich die Arrays
-	 * immer gepaart habe. Es reicht also nicht nur das geänderte Array zu haben, sondern
-	 * ich muss auch noch das dazu passende Array rausfinden. Zugegeben, ist vieleicht ein
-	 * bisschen unsauber, aber es funktioniert. Wenn ich nämlich denen Namen geben würde,
-	 * müsste ich dort auch den Index reincoden, was das auslesen dann auch unschön macht. */ 
-	/* HEIKO: Wenn du meinst, der Code hier ist mir sowieso zu unsauber, um mir den genauer anzuschaun.
-	 * Aber imho solltest du dafür keine Arrays sondern Hashtabellen verwenden, bzw.
-	 * so Zeug der Klasse ConstVarFormula überlassen. Also wenn du irgendeine Variable änderst, dann übergibst du
-	 * das einer Methode mit VarName und neuem Wert in ConstVarFormula und machst das nicht hier irgendwie umständlich.
-	 * Also ich hab mir das so gedacht (hast du teilweise auch so gemacht):
-	 * - TypeConstVar:
-	 *     	- enthält Liste der Formula-Objekte, die mit der Variablen belegt sind.
-	 * 		- enthält Wert und Name der Variablen.
-	 * 		- außerdem Methoden, um diese Werte sinnvoll zu ändern.
-	 * - ConstVarFormula:
-	 * 		- enthält eine Hashtabelle mit den Namen der Variablen als Key
-	 * 		  (falls der Name geändert wird, wird die TypeConstVar in der Hashtabelle gelöscht und neu eingetragen)
-	 * 		- Methoden zum Löschen/Hinzufügen/Ändern einer Variablen.
-	 * 		- Methode zur Ausgabe des Wertes einer Variablen, diese wird dann von den VariableBoolean und VariableNumber verwendet, wenn getResult aufgerufen wird.
-	 * 		- ODER: in TypeConstVar eine Methode, die ihre Formula-Elemente updatet (wäre wahrscheinlich einfacher).
-	 *  - DialogVariables:
-	 * 		- gibt alles an ConstVarFormula weiter, d.h. hier sollten keine 100 Zeilen code stehen.
-	 * 		- Variablennamen und Werte über Methoden in ConstVarFormula abfragen
-	 * 		  (die z.B. die Hashtabelle als String[] (Name) und String[] (Wert) zurückgeben).
-	 */ 
 	private final int getArrayPosition(Object findWhat, Object[] findWhere) {
 		for (int i=0; i < findWhere.length; i++) {
 			if (findWhat == findWhere[i]) {
@@ -221,7 +189,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 */
 	public void windowActivated(WindowEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/* (non-Javadoc)
