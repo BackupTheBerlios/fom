@@ -2,9 +2,8 @@
  * Created on 27.06.2004
  */
 package formula;
-import java.awt.TextField;
-import java.awt.event.TextEvent;
-import java.awt.event.TextListener;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Class for constant numbers.
@@ -19,6 +18,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 	 * Creates a constant number.
 	 */
 	public ConstantNumber() {
+		super();
 		formulaName = "                     Constant";
 		result = new Double (0);
 		inputNumber = new TextField();
@@ -27,9 +27,6 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		add(inputNumber);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
 
 	/**
 	 * After each keypress, result has to be updated, if textfield contains
@@ -42,9 +39,15 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 			newInput = "0";
 		}
 		if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
-			result = new Double(newInput);
+			result = new Double(newInput.replace(',','.'));
 			repaint();
 		}
+	}
+	
+	
+	public void setVisible(boolean vis) {
+		super.setVisible(vis);
+		inputNumber.setVisible(vis);
 	}
 
 }
