@@ -18,12 +18,31 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 	 * Creates a constant boolean.
 	 */
 	public ConstantBoolean() {
+		super();
 		formulaName = "                     Constant";
 		result = new Boolean (false);
 		inputBoolean = new Button("False");
 		inputBoolean.addActionListener(this);
 		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);
 		add(inputBoolean);
+	}
+
+	/**
+	 * Creates a constant boolean.
+	 * @param enabled Enables inputBoolean for input.
+	 */
+	public ConstantBoolean(boolean enabled) {
+		super();
+		formulaName = "                     Constant";
+		result = new Boolean (false);
+		inputBoolean = new Button("False");
+		if (! enabled) {
+			inputBoolean.enable(false);
+		} else {
+			inputBoolean.addActionListener(this);
+		}
+		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);
+		add(inputBoolean);		
 	}
 
 	/**

@@ -27,6 +27,27 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		add(inputNumber);
 	}
 
+	/**
+	 * Creates a constant number.
+	 * @param enabled Enables inputNumber for input.
+	 */
+	public ConstantNumber(boolean enabled) {
+		super();
+		formulaName = "                     Constant";
+		result = new Double (0);
+		inputNumber = new TextField();
+		if (! enabled) {
+			inputNumber.enable(false);
+		} else {
+			inputNumber.addTextListener(this);
+		}
+		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
+		add(inputNumber);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 
 	/**
 	 * After each keypress, result has to be updated, if textfield contains
@@ -43,8 +64,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 			repaint();
 		}
 	}
-	
-	
+
 	public void setVisible(boolean vis) {
 		super.setVisible(vis);
 		inputNumber.setVisible(vis);
