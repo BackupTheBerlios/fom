@@ -221,7 +221,6 @@ public abstract class Formula extends Container implements Cloneable {
 	}
 	/**
 	 * @return Validates, that tree is complete and isn't missing some inputs.
-	 * MAURICE Darf ich dieses Abbruchbedingung benutzen (for-Schleife)?
 	 */
 	public final boolean completeTree() {
 		boolean complete = true;
@@ -247,7 +246,7 @@ public abstract class Formula extends Container implements Cloneable {
 		return index;
 	}
 
-	//MAURICE Brauchst du das hier irgendwie anders? 
+
 	public final static Object[] getTreeList() {
 		return treeList.toArray();
 	}
@@ -259,7 +258,6 @@ public abstract class Formula extends Container implements Cloneable {
 	public final static void deleteTreeList(Formula wurzel) {
 		treeList.remove(wurzel);
 	}
-	//MAURICE Bis hier
 
 	public final void setPaintStatus(int status) {
 		paintStatus = status;

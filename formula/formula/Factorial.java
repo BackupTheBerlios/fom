@@ -17,6 +17,9 @@ public class Factorial extends NumberFormula {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
 		//MAURICE: Kann ich aus Double eine Int hinkriegen?
+		// mit Typecast: (int)1.5D = 1
+		// mit Math.round: Math.round(1.5D) = 2L
+		// FRAGE: Wozu ist denn "factorial" da?
 //			result = new Double (Factorial.fact((input[0].getDoubleResult())));
 			result = new Double (1234567890);
 	}
