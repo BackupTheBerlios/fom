@@ -120,4 +120,14 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		inputVarName.setEnabled(enabled);
 	}
 
+
+	public boolean hasBooleanResult() {
+		return false;
+	}
+
+
+	public boolean hasDoubleResult() {
+		return true;
+	}
+
 }

@@ -5,6 +5,7 @@ package formula;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import gui.*;
 
 /**
@@ -16,7 +17,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 
 	private Button inputBoolean;
 
-	
+
 	/**
 	 * Creates a constant boolean.
 	 */
@@ -24,7 +25,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		this(false);
 	}
 
-	
+
 	/**
 	 * Creates a constant boolean.
 	 * @param elementChooser Disables inputBoolean for input.
@@ -44,7 +45,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		add(inputBoolean);		
 	}
 
-	
+
 	/**
 	 * Toggles result between true and false.
 	 * @param arg import Method needs argument, but isn't used.
@@ -59,26 +60,37 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		}
 		
 		if (getParent() instanceof FormulaPanel) {
-				((AppletPanel)getParent().getParent().getParent()).getControlPanel().getFormulaTextField().updateControlPanelText();
+			((AppletPanel)getParent().getParent().getParent()).getControlPanel().getFormulaTextField().updateControlPanelText();
 		}
 		
 		repaint();
 	}
 
-	
+
 	public void setVisible(boolean vis) {
 		super.setVisible(vis);
 		inputBoolean.setVisible(vis);
 	}
-	
-	
+
+
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		inputBoolean.setEnabled(enabled);
 	}
-	
+
+
 	public String getInputVarName() {
 		return null;
+	}
+
+
+	public boolean hasBooleanResult() {
+		return true;
+	}
+
+
+	public boolean hasDoubleResult() {
+		return false;
 	}
 
 }

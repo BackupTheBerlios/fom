@@ -89,5 +89,37 @@ public class IfThenElse extends MixedFormula {
 			return input[2].getOutputTypes();
 		}
 	}
+	
+	
+	public boolean hasBooleanResult() {
+		try {
+			boolean bool = false;
+			Class[] outTypes = getOutputTypes();
+			for (int i=0;i<outTypes.length;i++) {
+				if (outTypes[i].equals(Boolean.class)) {
+					return true;
+				}
+			}
+		} catch (FormulaException fe) {
+			fe.printStackTrace(System.err);
+		}
+		return false;
+	}
+
+
+	public boolean hasDoubleResult() {
+		try {
+			boolean bool = false;
+			Class[] outTypes = getOutputTypes();
+			for (int i=0;i<outTypes.length;i++) {
+				if (outTypes[i].equals(Double.class)) {
+					return true;
+				}
+			}
+		} catch (FormulaException fe) {
+			fe.printStackTrace(System.err);
+		}
+		return false;
+	}
 
 }

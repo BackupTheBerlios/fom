@@ -5,7 +5,9 @@
 package formula;
 
 import java.awt.*;
+
 import gui.*;
+import utils.*;
 
 /**
  * This is the top-level class for all formula-elements. It's not usable in itself as it is abstract.
@@ -18,7 +20,7 @@ public abstract class Formula extends Container implements Cloneable {
 	// Constants for drawing Formula Elements. (BOXHEIGHT + RESULTHEIGHT) and FORMULAWIDHT should be devideable by 4.
 	public static final int BOXHEIGHT = 23; //28
 	public static final int CONNECTHEIGHT = 4;
-	public static final int RESULTHEIGHT = 17; //20
+	public static final int RESULTHEIGHT = 16; //20
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
 	public static final int FORMULAWIDTH = 108; //120
 
@@ -44,9 +46,6 @@ public abstract class Formula extends Container implements Cloneable {
 	// Name of Fromula Element
 	protected String formulaName;
 
-	// Stores all unlinked Formula Elements
-	//protected AppletPanel aPanel;
-	
 	// Input and output pins:
 	protected PinPoint[] inputPins;
 	protected PinPoint outputPin;
@@ -68,8 +67,6 @@ public abstract class Formula extends Container implements Cloneable {
 	public Formula(AppletPanel ap) {
 		super();
 		setSize(dimension);
-		//this.aPanel = ap;
-		//this.treeList = aPanel.getTreeList();
 	}
 
 
@@ -104,6 +101,18 @@ public abstract class Formula extends Container implements Cloneable {
 
 
 	/**
+	 * @return returns true if the formula object has a boolean result
+	 */
+	public abstract boolean hasBooleanResult();
+	
+	
+	/**
+	 * @return returns true if the formula object has a double result
+	 */
+	public abstract boolean hasDoubleResult();
+	
+	
+	/**
 	 * Will return a string-value as a result, if possible. If not, a FormulaException
 	 * will be thrown.
 	 * @return The result of all calc-operations up to this formula-element, casted into a string.
@@ -119,6 +128,9 @@ public abstract class Formula extends Container implements Cloneable {
 	}
 
 	
+	/* (non-Javadoc)
+	 * @see java.awt.Component#isDoubleBuffered()
+	 */
 	public boolean isDoubleBuffered() {
 		return true;
 	}
@@ -144,7 +156,17 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param g Graphics object for painting.
 	 */
 	public void paint(Graphics g) {
-		String resultString = getStringResult();
+		String resultString = "";
+		if (hasBooleanResult()) {
+			resultString = getStringResult();
+		} else if(hasDoubleResult()) {
+			try {
+				resultString = FOMToolkit.getFormatedString(getDoubleResult(),15);
+			} catch (FormulaException fe) {
+				fe.printStackTrace(System.err);
+			}
+		}
+		
 		super.paint(g);
 
 		// during calculation draw strings bold!
@@ -155,7 +177,7 @@ public abstract class Formula extends Container implements Cloneable {
 		}
 
 		if (resultString != null) {
-			g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
+			g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2-2); // Ergebnis der Rechnung
 		}
 
 		//Standard

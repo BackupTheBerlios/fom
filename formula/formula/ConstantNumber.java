@@ -1,4 +1,4 @@
-/* $Id: ConstantNumber.java,v 1.25 2004/08/26 16:54:38 shadowice Exp $
+/* $Id: ConstantNumber.java,v 1.26 2004/08/27 16:53:04 shadowice Exp $
  * Created on 27.06.2004
  */
 package formula;
@@ -10,7 +10,7 @@ import gui.*;
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 public class ConstantNumber extends ConstVarFormula implements TextListener {
 
@@ -79,21 +79,31 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		
 	}
 
-	
+
 	public void setVisible(boolean vis) {
 		super.setVisible(vis);
 		inputNumber.setVisible(vis);
 	}
-	
-	
+
+
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		inputNumber.setEditable(enabled);		// if inputNumber would be disabled, the Mouse(Motion)Listeners would not work!
 	}
-	
+
+
 	public String getInputVarName() {
 		return "";
 	}
 
+
+	public boolean hasBooleanResult() {
+		return false;
+	}
+
+
+	public boolean hasDoubleResult() {
+		return true;
+	}
 
 }

@@ -5,6 +5,7 @@
 package utils;
 
 import java.awt.*;
+import java.text.*;
 
 import formula.*;
 import gui.*;
@@ -22,10 +23,12 @@ public final class FOMToolkit {
 
 	private static float zoomFactor = 1.0f;
 
+
 	/**
 	 * Hidden constructor for tool class.
 	 */
 	private FOMToolkit() { }
+
 
 	/**
 	 * @return Returns the global zoom-factor for formula elements.
@@ -33,6 +36,7 @@ public final class FOMToolkit {
 	public static float getZoomFactor() {
 		return zoomFactor;
 	}
+
 
 	/**
 	 * @param form The Formula object that need's a zoom-factor.
@@ -46,6 +50,7 @@ public final class FOMToolkit {
 			return 1.0f;
 		}
 	}
+
 
 	/**
 	 * Sets the global zoom-factor.
@@ -101,6 +106,42 @@ public final class FOMToolkit {
 			}
 		}
 		return false;
+	}
+	
+	
+	/**
+	 * getFormatedString returns a string representing a double value.
+	 * If the string is longer then the maxStrLength value, then it'll
+	 * return it in scientific notation.
+	 * 
+	 * @param value double value to convert
+	 * @param maxStrLength maximal string length
+	 * @return a formated string of the double value
+	 * @see java.text.DecimalFormat
+	 */
+	public static String getFormatedString(double value,int maxStrLength) {
+		DecimalFormat dFormat = new DecimalFormat();
+		dFormat.applyPattern("0.0");
+		String resultStr = dFormat.format(value);
+		String formatStr = "0.";
+		if (resultStr.length() > maxStrLength) {
+			int eSpace;										// how long will the E.. number be			
+			if ((value < 1.0) && (value > -1.0)) {
+				eSpace = (int)(-(Math.log(Math.log(value)/Math.log(10))/Math.log(10)))+2;
+			} else {
+				eSpace = (int)(Math.log(Math.log(value)/Math.log(10))/Math.log(10))+1;
+			}
+
+			int signSpace = (value < 0.0) ? 1 : 0;			// Space for - sign
+			formatStr = "0.#";
+			for (int i=0;i<maxStrLength-3-eSpace-signSpace;i++) {
+				formatStr += '#';
+			}
+			formatStr += "E0";
+			dFormat.applyPattern(formatStr);
+			resultStr = dFormat.format(value);
+		}
+		return resultStr;
 	}
 
 }

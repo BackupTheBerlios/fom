@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.9 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: Selection.java,v 1.10 2004/08/27 16:53:04 shadowice Exp $
  * Created on 12.08.2004
  *
  */
@@ -10,29 +10,29 @@ import java.awt.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class Selection {
 
 
 	public static final int MOUSE_POINT_DISTANCE = 15;
 
-	private AppletPanel aPanel				= null;				// root panel of everything
-	//private FormulaPanel fPanel			= null;				// formula panel
+	private AppletPanel aPanel				= null;			// root panel of everything
+	//private FormulaPanel fPanel			= null;			// formula panel
 	
-	private boolean dragInProgress			= false;			// true if something is dragged
-	private boolean insertInProgress		= false;			// true if element is selected from the ElementPanel
-	private Point selectedStartPoint		= null;				// the starting point of DnD actions
-	private Point selectedRelativePoint		= null;				// the relative point within the dragged element
-	private Formula selectedComponentRoot	= null;				// component that is dragged or selected (or root of a component)
-	private Vector selectedComponents	= new Vector(); // list of all selected formula-objects
-	private Formula newComponentInstance 	= null;				// new instance of a selected component
-	private Vector pPInputs				= new Vector();	// list of input PinPoints of the selected element(s)
+	private boolean dragInProgress			= false;		// true if something is dragged
+	private boolean insertInProgress		= false;		// true if element is selected from the ElementPanel
+	private Point selectedStartPoint		= null;			// the starting point of DnD actions
+	private Point selectedRelativePoint		= null;			// the relative point within the dragged element
+	private Formula selectedComponentRoot	= null;			// component that is dragged or selected (or root of a component)
+	private Vector selectedComponents		= new Vector(); // list of all selected formula-objects
+	private Formula newComponentInstance 	= null;			// new instance of a selected component
+	private Vector pPInputs					= new Vector();	// list of input PinPoints of the selected element(s)
 	private Vector pPOutputs				= new Vector();	// list of output PinPoints of the selected element(s)
-	private Vector tempPPInputs			= new Vector(); // list of temporary connections between input and output
-	private Vector tempPPOutputs		= new Vector(); // list of temporary connections between output and input
-	private Vector inactivePPInputs		= new Vector(); // list of input pins, already connected to the selection (only move around)
-	private Vector inactivePPOutputs	= new Vector(); // list of output pins, already connected to the selection (only move around)
+	private Vector tempPPInputs				= new Vector(); // list of temporary connections between input and output
+	private Vector tempPPOutputs			= new Vector(); // list of temporary connections between output and input
+	private Vector inactivePPInputs			= new Vector(); // list of input pins, already connected to the selection (only move around)
+	private Vector inactivePPOutputs		= new Vector(); // list of output pins, already connected to the selection (only move around)
 
 
 	/**

@@ -1,4 +1,4 @@
-/* $Id: HotkeyListener.java,v 1.7 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: HotkeyListener.java,v 1.8 2004/08/27 16:53:04 shadowice Exp $
  * Created on 13.08.2004
  *
  */
@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class HotkeyListener implements KeyListener {
 
@@ -20,7 +20,7 @@ public class HotkeyListener implements KeyListener {
 	 */
 	public HotkeyListener(AppletPanel ap) {
 		super();
-		aPanel = ap;
+		this.aPanel = ap;
 	}
 
 	public void keyTyped(KeyEvent kEvent) {

@@ -15,12 +15,14 @@ public abstract class ComparisonFormula extends Formula {
 
 	protected Boolean result;
 
+
 	public boolean getBooleanResult() throws FormulaException {
 		if (result != null)
 			return result.booleanValue();
 		else
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
+
 
 	public String getStringResult() {
 		if (result != null)
@@ -29,9 +31,11 @@ public abstract class ComparisonFormula extends Formula {
 			return null;
 	}
 
+
 	public final boolean isResultCalculated() {
 		return (result != null);
 	}
+
 
 	/**
 	 * Clears all results that have been saved by calc-operations.
@@ -40,18 +44,32 @@ public abstract class ComparisonFormula extends Formula {
 		result = null;
 		repaint();
 	}
+
+
 	public Class[] getInputTypes(int index) throws FormulaException {
 		Class[] classArray = {Number.class};
 		return classArray;
 	}
+
 
 	public Class[] getOutputTypes() throws FormulaException {
 		Class[] classArray = {Boolean.class};
 		return classArray;
 	}
 
+
 	public double getDoubleResult() throws FormulaException {
 		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
+	}
+	
+	
+	public boolean hasBooleanResult() {
+		return result != null;
+	}
+	
+	
+	public boolean hasDoubleResult() {
+		return false;
 	}
 
 }

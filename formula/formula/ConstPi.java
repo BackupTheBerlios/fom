@@ -21,6 +21,7 @@ public class ConstPi extends ConstVarFormula {
 		result = new Double (Math.PI);
 	}
 	
+
 	/**
 	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
 	 * or the resulting formula as string for a (sub)tree with this object as root.
@@ -29,8 +30,19 @@ public class ConstPi extends ConstVarFormula {
 		return "Pi";
 	}
 
+
 	public String getInputVarName() {
 		return null;
+	}
+
+
+	public boolean hasBooleanResult() {
+		return false;
+	}
+
+
+	public boolean hasDoubleResult() {
+		return true;
 	}
 
 }

@@ -82,5 +82,14 @@ public abstract class NumberFormula extends Formula {
 		else
 			return false;
 	}
+	
+	
+	public boolean hasBooleanResult() {
+		return false;
+	}
 
+
+	public boolean hasDoubleResult() {
+		return result != null;
+	}
 }

@@ -34,4 +34,13 @@ public class ConstE extends ConstVarFormula {
 	}
 
 
+	public boolean hasBooleanResult() {
+		return false;
+	}
+
+
+	public boolean hasDoubleResult() {
+		return true;
+	}
+
 }
