@@ -46,7 +46,14 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 		oldName = new String("boolean1");
 		add(inputVarName);
 	}
-
+	
+	/**
+	 * @return Returns the variable's name
+	 */
+	public final String toString() {
+		return inputVarName.getText();
+	}
+	
 	/**
 	 * @return Returns textFields' text.
 	 */
