@@ -93,4 +93,12 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		return false;
 	}
 
+
+	public Object clone() {
+		ConstantBoolean clonedCB = (ConstantBoolean)super.clone();
+		clonedCB.inputBoolean.setLabel(inputBoolean.getLabel());
+		clonedCB.result = new Boolean(((Boolean)result).booleanValue());
+		return clonedCB;
+	}
+
 }

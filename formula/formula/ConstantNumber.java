@@ -1,4 +1,4 @@
-/* $Id: ConstantNumber.java,v 1.27 2004/09/01 15:08:32 shadowice Exp $
+/* $Id: ConstantNumber.java,v 1.28 2004/09/02 09:47:28 shadowice Exp $
  * Created on 27.06.2004
  */
 package formula;
@@ -10,7 +10,7 @@ import gui.*;
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  */
 public class ConstantNumber extends ConstVarFormula implements TextListener {
 
@@ -109,16 +109,8 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 	
 	public Object clone() {
 		ConstantNumber clonedCN = (ConstantNumber)super.clone();
-		clonedCN.removeAll();
-		clonedCN.inputNumber = new TextField(inputNumber.getText());
-		clonedCN.inputNumber.setFont(inputNumber.getFont());
-		clonedCN.inputNumber.setBackground(inputNumber.getBackground());
-		clonedCN.inputNumber.setBounds((Rectangle)inputNumber.getBounds().clone());
-		clonedCN.mfListener = new MouseForwardListener();
-		clonedCN.inputNumber.addMouseListener(mfListener);
-		clonedCN.inputNumber.addMouseMotionListener(mfListener);
-		clonedCN.inputNumber.addTextListener(clonedCN);
-		clonedCN.add(clonedCN.inputNumber);
+		clonedCN.inputNumber.setText(inputNumber.getText());
+		clonedCN.result = new Double(((Double)result).doubleValue());
 		return clonedCN;
 	}
 
