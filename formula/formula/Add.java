@@ -4,22 +4,21 @@
  */
 package formula;
 
-//import java.awt.*;
+import Messages;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @since 07.04.2004
  *
  */
 public class Add extends NumberFormula {
 
-	// braucht kein Javadoc
 	public final void calc() throws FormulaException {
-		result=new Double(input[0].getDoubleResult()+input[1].getDoubleResult());
+		if ((input[0] == null) || (input[1] == null))
+			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
+		else
+			result = new Double(input[0].getDoubleResult() + input[1].getDoubleResult());
 	}
 	
-
-	// braucht kein Javadoc
 	public String toString() {
 		if(output!=null)
 			return "("+input[0].toString()+"+"+input[1].toString()+")";
