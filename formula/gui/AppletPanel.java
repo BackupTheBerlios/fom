@@ -1,4 +1,4 @@
-/* $Id: AppletPanel.java,v 1.26 2004/09/02 13:49:08 shadowice Exp $
+/* $Id: AppletPanel.java,v 1.27 2004/09/02 14:35:42 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 
@@ -143,13 +143,16 @@ public class AppletPanel extends Applet implements WindowListener {
 		MenuItem miCut = new MenuItem(Messages.getString("PopupMenu.Cut"),new MenuShortcut(KeyEvent.VK_X));
 		MenuItem miCopy = new MenuItem(Messages.getString("PopupMenu.Copy"),new MenuShortcut(KeyEvent.VK_C));
 		MenuItem miPaste = new MenuItem(Messages.getString("PopupMenu.Paste"),new MenuShortcut(KeyEvent.VK_V));
-		MenuItem miDelete = new MenuItem(Messages.getString("Popup.Delete"));
+		MenuItem miDelete = new MenuItem(Messages.getString("PopupMenu.Delete"));
+		miCut.addActionListener(hotkey);
+		miCopy.addActionListener(hotkey);
+		miPaste.addActionListener(hotkey);
+		miDelete.addActionListener(hotkey);
 		popupMenu.add(miCut);
 		popupMenu.add(miCopy);
 		popupMenu.add(miPaste);
 		popupMenu.addSeparator();
 		popupMenu.add(miDelete);
-		popupMenu.addActionListener(getHotkeyListener());
 
 		pnlFormula.add(popupMenu);
 
@@ -197,24 +200,11 @@ public class AppletPanel extends Applet implements WindowListener {
 		System.exit(0);
 	}
 
-	public void windowDeiconified(WindowEvent wEvent) {
-		System.out.println("applet deiconified");
-	}
-	public void windowIconified(WindowEvent wEvent) {
-		this.requestFocus();
-		System.out.println("applet iconified");
-	 }
-	public void windowOpened(WindowEvent wEvent) {
-		System.out.println("applet opened");
-	}
-	public void windowActivated(WindowEvent wEvent) {
-		System.out.println("applet activated");
-	}
-	public void windowClosed(WindowEvent wEvent) {
-		System.out.println("applet closed");
-	}
-	public void windowDeactivated(WindowEvent wEvent) {
-		System.out.println("applet deactivated");
-	}
+	public void windowDeiconified(WindowEvent wEvent) { }
+	public void windowIconified(WindowEvent wEvent) { }
+	public void windowOpened(WindowEvent wEvent) { }
+	public void windowActivated(WindowEvent wEvent) { }
+	public void windowClosed(WindowEvent wEvent) { }
+	public void windowDeactivated(WindowEvent wEvent) { }
 
 }
