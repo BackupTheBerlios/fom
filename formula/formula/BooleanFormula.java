@@ -30,6 +30,10 @@ public abstract class BooleanFormula extends Formula {
 		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
 	}
 
+	public final boolean isResultCalculated() {
+		return (result != null);
+	}
+
 	public final String getStringResult() {
 		if (result != null)
 			return result.toString();
@@ -42,6 +46,7 @@ public abstract class BooleanFormula extends Formula {
 	 */
 	public void clearResult() {
 		result = null;
+		repaint();
 	}
 
 	/**

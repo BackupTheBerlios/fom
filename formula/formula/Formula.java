@@ -62,6 +62,11 @@ public abstract class Formula extends Container implements Cloneable {
 	public abstract void calc() throws FormulaException;
 
 	/**
+	 * @return Returns, if Formula is already calculated.
+	 */
+	public abstract boolean isResultCalculated();
+
+	/**
 	 * Will return a boolean-value as a result, if possible. If not, a FormulaException will be thrown.
 	 * @return The result of all calc-operations up to this formula-element.
 	 * @throws FormulaException Shouldn't happen.
@@ -295,6 +300,7 @@ public abstract class Formula extends Container implements Cloneable {
 	public final static void removeTree(Formula root) {
 		treeList.remove(root);
 	}
+
 
 	public final void setPaintStatus(int status) {
 		paintStatus = status;

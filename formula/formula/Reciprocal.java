@@ -13,10 +13,11 @@ import utils.Messages;
 public class Reciprocal extends NumberFormula {
 
 	public final void calc() throws FormulaException {
-		if (input[0] == null)
+		if (input[0] == null) {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
-		else
+		} else {
 			result = new Double (1 / input[0].getDoubleResult());
+		}
 	}
 
 	/**

@@ -22,18 +22,21 @@ public class IfThenElse extends MixedFormula {
 	}
 
 	public final void calc() throws FormulaException {
-		if ((input[0] == null) || (input[1] == null) || (input[2] == null))
+		if ((input[0] == null) || (input[1] == null) || (input[2] == null)) {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
-		else if (getOutputTypes()[0] == Boolean.class) {
+		} else if (getOutputTypes()[0] == Boolean.class) {
 			if (input[0].getBooleanResult())
 				result = new Boolean (input[1].getBooleanResult());
 			else
-				result = new Boolean (input[2].getBooleanResult()); }
-		else {
-			if (input[0].getBooleanResult())
+				result = new Boolean (input[2].getBooleanResult());
+		} else {
+			if (input[0].getBooleanResult()) {
 				result = new Double (input[1].getDoubleResult());
-			else
-				result = new Double (input[2].getDoubleResult()); }
+			} else {
+				result = new Double (input[2].getDoubleResult());
+			}
+		}
+		repaint();
 	}
 
 	public final String toString() {
@@ -53,10 +56,10 @@ public class IfThenElse extends MixedFormula {
 	public final Class[] getInputTypes(int index) throws FormulaException {
 		switch (index) {
 			case 0: 
-				return new Class[]{Boolean.class};
+				return new Class[] {Boolean.class};
 			case 1:
 				if (input[2] == null && output == null) {
-					return new Class[]{Boolean.class,Number.class};
+					return new Class[] {Boolean.class, Number.class};
 				} else if (input[2] != null) {
 					return input[2].getOutputTypes();
 				} else {
@@ -64,7 +67,7 @@ public class IfThenElse extends MixedFormula {
 				}
 			case 2:
 				if (input[1] == null && output == null) {
-					return new Class[]{Boolean.class,Number.class};	
+					return new Class[] {Boolean.class, Number.class};	
 				} else if (input[1] != null) {
 					return input[1].getOutputTypes();
 				} else {

@@ -25,6 +25,10 @@ public abstract class NumberFormula extends Formula {
 		throw new FormulaException(Messages.getString("Error.IllegalBforN"));
 	}
 
+	public final boolean isResultCalculated() {
+		return (result != null);
+	}
+
 	public final String getStringResult() {
 		if (result != null)
 			return result.toString();
@@ -57,6 +61,7 @@ public abstract class NumberFormula extends Formula {
 	 */
 	public final void clearResult() {
 		result = null;
+		repaint();
 	}
 
 	public boolean isValidOutput(Formula in, int whichInput) {

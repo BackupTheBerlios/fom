@@ -20,6 +20,7 @@ public abstract class MixedFormula extends Formula {
 	 */
 	public void clearResult() {
 		result = null;
+		repaint();
 	}
 
 	public final double getDoubleResult() throws FormulaException {
@@ -36,7 +37,11 @@ public abstract class MixedFormula extends Formula {
 		else
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
-	
+
+	public final boolean isResultCalculated() {
+		return (result != null);
+	}
+
 	public final String getStringResult() {
 		if (result != null) {
 			if (result instanceof Boolean)

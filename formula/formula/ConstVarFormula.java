@@ -32,7 +32,7 @@ public abstract class ConstVarFormula extends Formula {
 	public final void calc() throws FormulaException {		
 	}
 
-	public final String toString() {
+	public String toString() {
 		return result.toString();
 	}
 
@@ -50,7 +50,11 @@ public abstract class ConstVarFormula extends Formula {
 		else
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
-	
+
+	public final boolean isResultCalculated() {
+		return true;
+	}
+
 	public final String getStringResult() {
 		if (result != null) {
 			if (result instanceof Boolean)

@@ -28,12 +28,17 @@ public abstract class ComparisonFormula extends Formula {
 		else
 			return null;
 	}
-	
+
+	public final boolean isResultCalculated() {
+		return (result != null);
+	}
+
 	/**
 	 * Clears all results that have been saved by calc-operations.
 	 */
 	public void clearResult() {
 		result = null;
+		repaint();
 	}
 	public Class[] getInputTypes(int index) throws FormulaException {
 		Class[] classArray = {Number.class};

@@ -10,11 +10,8 @@ package formula;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
-public class ConstPi extends NumberFormula {
+public class ConstPi extends ConstVarFormula {
 
-	public final void calc() throws FormulaException {
-	}
-	
 	/**
 	 * Creates a "Pi".
 	 */

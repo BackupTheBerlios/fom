@@ -10,11 +10,8 @@ package formula;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
-public class ConstE extends NumberFormula {
+public class ConstE extends ConstVarFormula {
 
-	public final void calc() throws FormulaException {
-	}
-	
 	/**
 	 * Creates an "e".
 	 */

@@ -29,6 +29,13 @@ public class Random extends NumberFormula {
 	 */	
 	public final String toString() {
 		String outString = "(RANDOM)";
+		if (result != null) {
+			try {
+				outString = "(" + getDoubleResult() + ")";
+			} catch (FormulaException e) {
+				System.err.println(e.getMessage());
+			}
+		}
 		return outString;
 	}
 
