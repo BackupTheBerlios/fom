@@ -1,6 +1,5 @@
-/*
+/* $Id: Formula.java,v 1.45 2004/08/29 15:16:15 shadowice Exp $
  * Created on 05.04.2004
- *
  */
 package formula;
 
@@ -14,6 +13,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
+ * @version $Revision: 1.45 $
  */
 public abstract class Formula extends Container implements Cloneable {
 

@@ -1,6 +1,5 @@
-/* $Id: Selection.java,v 1.10 2004/08/27 16:53:04 shadowice Exp $
+/* $Id: Selection.java,v 1.11 2004/08/29 15:15:41 shadowice Exp $
  * Created on 12.08.2004
- *
  */
 package gui;
 
@@ -9,8 +8,13 @@ import formula.*;
 import java.awt.*;
 
 /**
+ * A selection object stores all information regarding selected elements in
+ * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
+ * It also contains methods to handle an application-clipboard (no real clipboard, but
+ * it might work over 2 instances of the applet).
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class Selection {
 
@@ -34,14 +38,15 @@ public class Selection {
 	private Vector inactivePPInputs			= new Vector(); // list of input pins, already connected to the selection (only move around)
 	private Vector inactivePPOutputs		= new Vector(); // list of output pins, already connected to the selection (only move around)
 
+	private static Object clipboard;
 
+	
 	/**
-	 * 
+	 * Creates a new Selection object. You only need one selection object per applet. 
 	 */
 	public Selection(AppletPanel ap) {
 		super();
 		aPanel = ap;
-		//fPanel = aPanel.getFormulaPanel();
 	}
 	
 	
@@ -68,11 +73,12 @@ public class Selection {
 			newComponentInstance.moveTo(location.x,location.y);
 		}
 	}
-	
+
+
 	/**
 	 * Refreshs the list of connections to other formula elements.
 	 */
-	// NOTE: would probably be better in a thread
+	// NOTE: would probably be better in a thread (seem's like the speed is ok without one)
 	public void refreshPinPointList() {
 		PinPoint targetPP;
 		PinPoint pin;
@@ -126,8 +132,8 @@ public class Selection {
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * Selects a whole subtree with form as the root.
 	 * @param form root formula
@@ -142,14 +148,13 @@ public class Selection {
 		recursiveSelectRec(form);
 		aPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
-		
-	
+
+
 	/**
 	 * Recursive method for recursiveSelect.
 	 * @param form formula to select
 	 */
 	private void recursiveSelectRec(Formula form) {
-				
 		selectedComponents.addElement(form);
 		// get input PinPoints:
 		Vector ppList = aPanel.getFormulaPanel().getInputPins();
@@ -186,8 +191,8 @@ public class Selection {
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * Updates all selected elements to a new paintStatus.
 	 * @param status paintStatus from Formula
@@ -199,7 +204,8 @@ public class Selection {
 			form.setPaintStatus(status);
 		}
 	}
-	
+
+
 	/**
 	 * Resets everything to it's init-state. 
 	 */
@@ -231,7 +237,8 @@ public class Selection {
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 		aPanel.requestFocus();
 	}
-	
+
+
 	/**
 	 * Selects a formula element in the ElementPanel, creates a new instance of it
 	 * and adds it to the FormulaPanel (invisible until mouse enters FormulaPanel).
@@ -288,6 +295,11 @@ public class Selection {
 	}
 
 
+	/**
+	 * Places a formerly selected element from the ElementPanel to the FormulaPanel.
+	 *
+	 * @param point coordinates where to place the element
+	 */
 	public void placeElement(Point point) {
 		insertInProgress = false;
 		newComponentInstance.moveTo((int)point.getX()-newComponentInstance.getWidth()/2,(int)point.getY()-newComponentInstance.getHeight()/2);
@@ -313,6 +325,7 @@ public class Selection {
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();		
 	}
 
+
 	/**
 	 * Check if the user is inserting an element.
 	 * @return true if inserting
@@ -320,7 +333,8 @@ public class Selection {
 	public boolean isInsertInProgress() {
 		return insertInProgress;
 	}
-	
+
+
 	/**
 	 * Check if the user is dragging something.
 	 * @return true if dragging
@@ -328,7 +342,8 @@ public class Selection {
 	public boolean isDragInProgress() {
 		return dragInProgress;
 	}
-	
+
+
 	/**
 	 * Sets the visibility of an element.
 	 * @param b true=visible
@@ -336,6 +351,7 @@ public class Selection {
 	public void setElementVisible(boolean b) {
 		newComponentInstance.setVisible(b);
 	}
+
 
 	/**
 	 * Called at the end of a drag&drop operation.
@@ -350,7 +366,7 @@ public class Selection {
 		aPanel.getFormulaPanel().repaint();
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 	}
-	
+
 
 	/**
 	 * Moves an element/tree around if dragInProgress or insertInProgress.
@@ -373,7 +389,11 @@ public class Selection {
 			//aPanel.getFormulaPanel().checkBounds();
 		}
 	}
-	
+
+
+	/**
+	 * Deletes all selected elements.
+	 */
 	public void delete() {
 		if (selectedComponents.size() > 0) {
 			Formula form;
