@@ -35,7 +35,7 @@ public class Odd extends ComparisonFormula {
 	 */
 	public final String toString() {
 		String outString = "(ODD? ";
-		if (input[1] != null)
+		if (input[0] != null)
 			outString += input[0].toString();
 		outString += ")";
 		return outString;

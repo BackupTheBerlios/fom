@@ -35,7 +35,7 @@ public class Even extends ComparisonFormula {
 	 */
 	public final String toString() {
 		String outString = "(EVEN? ";
-		if (input[1] != null)
+		if (input[0] != null)
 			outString += input[0].toString();
 		outString += ")";
 		return outString;
