@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.21 2004/10/19 21:26:05 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.22 2004/10/20 18:43:58 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -51,10 +51,11 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 					clonedVarList.sort();
 					CustomFormula custForm = new CustomFormula(clonedTree,clonedVarList);
 					custForm.setFormulaName(cfDialog.showDialog(custForm,clonedVarList));
-					ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),custForm);
+					ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),custForm);	// All
+					ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-2)),custForm);	// Custom Elements
 					ePanel.refreshElementList();
-					ePanel.getCategoryList().select(ePanel.getCategoryList().getItemCount()-1);
-					Formula[] elements=ePanel.getCategories().getCategoryElements(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)));
+					ePanel.getCategoryList().select(ePanel.getCategoryList().getItemCount()-2);
+					Formula[] elements=ePanel.getCategories().getCategoryElements(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-2)));
 					ePanel.updateElementList(elements);
 					aPanel.getSelection().deselect();
 				} catch (FormulaException fe) {

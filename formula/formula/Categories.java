@@ -121,6 +121,71 @@ public class Categories {
 
 		//Category Custom:
 		form = new Formula[0];
+		
+		//Category All:
+		form = new Formula[60];
+		form[0] = new Add();
+		form[1] = new Sub();
+		form[2] = new Mult();
+		form[3] = new Div();
+		form[4] = new Sign();
+		form[5] = new Square();
+		form[6] = new Reciprocal();
+		form[7] = new ConstantNumber(false);
+		form[8] = new ConstantBoolean(false);
+		form[9] = new VariableNumber(false);
+		form[10] = new VariableBoolean(false);
+		form[11] = new ConstE();
+		form[12] = new ConstPi();
+		form[13] = new Sqrt();
+		form[14] = new Pow();
+		form[15] = new Ln();
+		form[16] = new LogTen();
+		form[17] = new Ld();
+		form[18] = new LogBase();
+		form[19] = new Euler();
+		form[20] = new Factorial();
+		form[21] = new Modulo();
+		form[22] = new Abs();
+		form[23] = new Exp();				
+		form[24] = new Sin();
+		form[25] = new Cos();
+		form[26] = new Tan();
+		form[27] = new Cot();
+		form[28] = new Arcsin();
+		form[29] = new Arccos();
+		form[30] = new Arctan();
+		form[31] = new Sinh();
+		form[32] = new Cosh();
+		form[33] = new Tanh();
+		form[34] = new Coth();
+		form[35] = new Deg2grad();
+		form[36] = new Deg2rad();
+		form[37] = new Grad2deg();
+		form[38] = new Grad2rad();
+		form[39] = new Rad2deg();
+		form[40] = new Rad2grad();	
+		form[41] = new Equal();
+		form[42] = new Unequal();
+		form[43] = new Less();
+		form[44] = new LessEqual();
+		form[45] = new Greater();
+		form[46] = new GreaterEqual();		
+		form[47] = new Even();
+		form[48] = new Odd();
+		form[49] = new Eqv();
+		form[50] = new Not();
+		form[51] = new And();
+		form[52] = new Or();
+		form[53] = new Xor();
+		form[54] = new Eqv();
+		form[55] = new Impl();
+		form[56] = new IfThenElse();
+		form[57] = new Min();
+		form[58] = new Max();
+		form[59] = new Random();
+
+		categoryElements.put(categories[8], form);
 	}
 
 
