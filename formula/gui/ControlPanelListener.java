@@ -41,7 +41,7 @@ public class ControlPanelListener implements ActionListener, ItemListener, Adjus
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnReset"))) {
 
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnVariables"))) {
-			//DialogVariables dv = new DialogVariable(aPanel);
+			DialogVariables dv = new DialogVariables(aPanel);
 		}
 	}
 

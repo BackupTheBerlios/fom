@@ -103,7 +103,27 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 * immer gepaart habe. Es reicht also nicht nur das geänderte Array zu haben, sondern
 	 * ich muss auch noch das dazu passende Array rausfinden. Zugegeben, ist vieleicht ein
 	 * bisschen unsauber, aber es funktioniert. Wenn ich nämlich denen Namen geben würde,
-	 * müsste ich dort auch den Index reincoden, was das auslesen dann auch unschön macht. */ 
+	 * müsste ich dort auch den Index reincoden, was das auslesen dann auch unschön macht. */
+	/* HEIKO: Wenn du meinst, der Code hier ist mir sowieso zu unsauber, um mir den genauer anzuschaun.
+	 * Aber imho solltest du dafür keine Arrays sondern Hashtabellen verwenden, bzw.
+	 * so Zeug der Klasse ConstVarFormula überlassen. Also wenn du irgendeine Variable änderst, dann übergibst du
+	 * das einer Methode mit VarName und neuem Wert in ConstVarFormula und machst das nicht hier irgendwie umständlich.
+	 * Also ich hab mir das so gedacht (hast du teilweise auch so gemacht):
+	 * - TypeConstVar:
+	 *     	- enthält Liste der Formula-Objekte, die mit der Variablen belegt sind.
+	 * 		- enthält Wert und Name der Variablen.
+	 * 		- außerdem Methoden, um diese Werte sinnvoll zu ändern.
+	 * - ConstVarFormula:
+	 * 		- enthält eine Hashtabelle mit den Namen der Variablen als Key
+	 * 		  (falls der Name geändert wird, wird die TypeConstVar in der Hashtabelle gelöscht und neu eingetragen)
+	 * 		- Methoden zum Löschen/Hinzufügen/Ändern einer Variablen.
+	 * 		- Methode zur Ausgabe des Wertes einer Variablen, diese wird dann von den VariableBoolean und VariableNumber verwendet, wenn getResult aufgerufen wird.
+	 * 		- ODER: in TypeConstVar eine Methode, die ihre Formula-Elemente updatet (wäre wahrscheinlich einfacher).
+	 *  - DialogVariables:
+	 * 		- gibt alles an ConstVarFormula weiter, d.h. hier sollten keine 100 Zeilen code stehen.
+	 * 		- Variablennamen und Werte über Methoden in ConstVarFormula abfragen
+	 * 		  (die z.B. die Hashtabelle als String[] (Name) und String[] (Wert) zurückgeben).
+	 */ 
 	private final int getArrayPosition(Object findWhat, Object[] findWhere) {
 		for (int i=0; i < findWhere.length; i++) {
 			if (findWhat == findWhere[i]) {
@@ -126,9 +146,8 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 			if (varName[index].getText().length() == 0) {
 				ConstVarFormula.setVarNameAll(oldVarName[index], "$$InternTempCounter" + tempCounter.toString() + "$$");
 				oldVarName[index] = "$$InternTempCounter" + tempCounter.toString() + "$$";
-				//MAURICE Dies gefällt mir nicht. Gibts da nicht was schöneres?
-				// HEIKO: siehe getArrayPosition
 				//MAURICE: Nein, ich meine die Erhöhung des tempCounters.
+				// HEIKO: ähm, lol....verwend int (das solltest du sowieso immer machen, außer du brauchst das als Objekt)
 				tempCounter = new Integer(tempCounter.intValue() + 1);
 			} else {
 				ConstVarFormula.setVarNameAll(oldVarName[index], varName[index].getText());
