@@ -1,4 +1,4 @@
-/* $Id: HotkeyListener.java,v 1.11 2004/08/31 12:38:19 shadowice Exp $
+/* $Id: HotkeyListener.java,v 1.12 2004/09/01 15:08:32 shadowice Exp $
  * Created on 13.08.2004
  *
  */
@@ -10,13 +10,16 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class HotkeyListener implements KeyListener {
 
 	private AppletPanel aPanel;
 	
 	private boolean ctrlDown = false;
+	
+	private static final int PASTE_XDISPLACEMENT = 15;
+	private static final int PASTE_YDISPLACEMENT = 15;
 
 	/**
 	 * Creates a new HotkeyListener.
@@ -48,18 +51,21 @@ public class HotkeyListener implements KeyListener {
 			switch (keyCode) {
 				case KeyEvent.VK_C:
 					aPanel.getSelection().copyToClipboard();
-					System.out.println("copy");
 					break;
 				case KeyEvent.VK_X:
 					aPanel.getSelection().copyToClipboard();
 					aPanel.getSelection().delete();
-					System.out.println("cut");
+					aPanel.getFormulaPanel().requestFocus();
 					break;
 				case KeyEvent.VK_V:
 					// doesn't paste the clipboard content, pastes a copy of it instead
-					Formula pasteForm = (Formula)AppletPanel.getClipboard().clone();
+					Formula pasteForm = AppletPanel.getClipboard();
+					pasteForm.moveTo(pasteForm.getLocation().x+PASTE_XDISPLACEMENT,pasteForm.getLocation().y+PASTE_YDISPLACEMENT);
+					pasteForm = (Formula)pasteForm.clone();
 					aPanel.getFormulaPanel().addFormulaTree(pasteForm);
-					System.out.println("pasted: "+pasteForm);
+					aPanel.getFormulaPanel().requestFocus();
+					aPanel.getFormulaPanel().doLayout();
+					aPanel.getFormulaPanel().checkBounds();
 					aPanel.getFormulaPanel().repaint();
 					break;
 			}

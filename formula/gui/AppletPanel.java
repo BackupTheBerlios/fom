@@ -1,4 +1,4 @@
-/* $Id: AppletPanel.java,v 1.24 2004/08/30 19:30:52 shadowice Exp $
+/* $Id: AppletPanel.java,v 1.25 2004/09/01 15:08:32 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.24 $
+ * @version $Revision: 1.25 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 
@@ -133,6 +133,8 @@ public class AppletPanel extends Applet implements WindowListener {
 		hotkey = new HotkeyListener(this);
 		pnlFormula.addMouseListener(dnd);
 		pnlFormula.addMouseMotionListener(dnd);
+		pnlFormula.addKeyListener(hotkey);
+		this.addKeyListener(hotkey);
 		sPane.add(pnlFormula);
 
 		this.add(pnlElements, BorderLayout.WEST);

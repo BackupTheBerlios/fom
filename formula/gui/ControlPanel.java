@@ -1,4 +1,4 @@
-/* $Id: ControlPanel.java,v 1.20 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: ControlPanel.java,v 1.21 2004/09/01 15:08:32 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import utils.*;
  * how the formula-tree is calculated or what to do with it.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 public class ControlPanel extends Panel {
 
@@ -23,8 +23,8 @@ public class ControlPanel extends Panel {
 	private Button btnVariables;
 	private Button btnCalcAll;
 	private Scrollbar sbSpeed;
-	private FormulaTextField tfFormula;
-	private FormulaTextField tfResult;
+	private FormulaTextField ftfFormula;
+	private TextField tfResult;
 	private Label lblSpeed;
 	private Label lblEqualsign;
 	//private Choice chZoom;
@@ -38,19 +38,19 @@ public class ControlPanel extends Panel {
 	public ControlPanel(AppletPanel ap) {
 		this.aPanel 		= ap;
 		//creating all objects:
-		btnCalcAll			= new Button(Messages.getString("ControlPanel.BtnCalcAll"));
+		btnCalcAll				= new Button(Messages.getString("ControlPanel.BtnCalcAll"));
 		btnCalcAni			= new Button(Messages.getString("ControlPanel.BtnCalcAni"));
 		btnCalcStep			= new Button(Messages.getString("ControlPanel.BtnCalcStep"));
-		btnReset			= new Button(Messages.getString("ControlPanel.BtnReset"));
-		btnVariables		= new Button(Messages.getString("ControlPanel.BtnVariables"));
-		lblSpeed			= new Label(Messages.getString("ControlPanel.LblSpeed"),Label.RIGHT);
-		lblEqualsign		= new Label("=",Label.CENTER);
-		tfFormula			= new FormulaTextField(this,"");
-		tfResult			= new FormulaTextField(this,"");
+		btnReset				= new Button(Messages.getString("ControlPanel.BtnReset"));
+		btnVariables			= new Button(Messages.getString("ControlPanel.BtnVariables"));
+		lblSpeed				= new Label(Messages.getString("ControlPanel.LblSpeed"),Label.RIGHT);
+		lblEqualsign			= new Label("=",Label.CENTER);
+		ftfFormula				= new FormulaTextField(this,"");
+		tfResult					= new TextField(10);
 		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 50, 1, 10, 200);
 		//chZoom				= new Choice();
 		GridBagLayout gbl	= new GridBagLayout();
-		GridBagLayout gblt	= new GridBagLayout();
+		GridBagLayout gblt= new GridBagLayout();
 		ControlPanelListener cpListener = new ControlPanelListener(aPanel,this);
 
 		//chZoom.add("25%");
@@ -60,13 +60,14 @@ public class ControlPanel extends Panel {
 		//chZoom.add("150%");
 		//chZoom.add("200%");
 		
+		tfResult.setEditable(false);
 		setLayout(gbl);
 
 		//adding the components (in sub-panels) to this panel:
 		Panel plTexts=new Panel(gblt);
-		FOMToolkit.addComponent(plTexts,gblt,tfFormula,0,0,1,1,1.0,0.0,GridBagConstraints.BOTH);
+		FOMToolkit.addComponent(plTexts,gblt,ftfFormula,0,0,1,1,1.0,0.0,GridBagConstraints.BOTH);
 		FOMToolkit.addComponent(plTexts,gblt,lblEqualsign,1,0,1,1,0.0,0.0,GridBagConstraints.NONE);
-		FOMToolkit.addComponent(plTexts,gblt,tfResult,2,0,1,1,0.1,0.0,GridBagConstraints.BOTH);
+		FOMToolkit.addComponent(plTexts,gblt,tfResult,2,0,1,1,0.0,0.0,GridBagConstraints.BOTH);
 		
 		FOMToolkit.addComponent(this,gbl,plTexts,0,0,6,1,1.0,0.0,GridBagConstraints.BOTH);
 		
@@ -96,15 +97,15 @@ public class ControlPanel extends Panel {
 
 
 	public FormulaTextField getFormulaTextField() {
-		return tfFormula;
+		return ftfFormula;
 	}
 
 	public void setTfFormula(FormulaTextField tfFormula) {
-		this.tfFormula = tfFormula;
+		this.ftfFormula = tfFormula;
 	}
 	
 	public void updateTfFormula(String text) {
-		this.tfFormula.setText(text);
+		this.ftfFormula.setText(text);
 	}
 
 	public void updateTfResult(String text) {

@@ -99,7 +99,6 @@ public class IfThenElse extends MixedFormula {
 			boolean bool = false;
 			Class[] outTypes = getOutputTypes();
 			for (int i=0;i<outTypes.length;i++) {
-				System.out.println(outTypes[i]);
 				if (outTypes[i].equals(Boolean.class)) {
 					return true;
 				}

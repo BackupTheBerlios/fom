@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.27 2004/08/31 12:38:19 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.28 2004/09/01 15:08:32 shadowice Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -13,7 +13,7 @@ import utils.*;
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  */
 public class FormulaPanel extends Panel {
 
@@ -22,8 +22,8 @@ public class FormulaPanel extends Panel {
 	private static final int OVERSIZE_HEIGHT	= 5;
 
 	// These lists store all input/output pins.
-	private Vector inputPinList 	= new Vector();
-	private Vector outputPinList 	= new Vector();
+	private Vector inputPinList 		= new Vector();
+	private Vector outputPinList 		= new Vector();
 	private Vector tempInPPList		= new Vector();
 	private Vector tempOutPPList	= new Vector();
 	
@@ -643,9 +643,13 @@ public class FormulaPanel extends Panel {
 
 	public void addFormulaTree(Formula form) {
 		add(form);
+		if (form.getOutput() == null) {
+			aPanel.getTreeList().addElement(form);
+		}
 		outputPinList.add(form.getOutputPin());
-		inputPinList.add(form.getInputPins());
+		PinPoint[] ppList = form.getInputPins();
 		for (int i=0;i<form.getInputCount();i++) {
+			inputPinList.add(ppList[i]);
 			if (form.getInput(i) != null) {
 				addFormulaTree(form.getInput(i));	
 			}

@@ -1,4 +1,4 @@
-/* $Id: ConstantNumber.java,v 1.26 2004/08/27 16:53:04 shadowice Exp $
+/* $Id: ConstantNumber.java,v 1.27 2004/09/01 15:08:32 shadowice Exp $
  * Created on 27.06.2004
  */
 package formula;
@@ -10,11 +10,12 @@ import gui.*;
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  */
 public class ConstantNumber extends ConstVarFormula implements TextListener {
 
-	protected TextField inputNumber;
+	private TextField inputNumber;
+	private MouseForwardListener mfListener;
 
 	/**
 	 * Creates a constant number.
@@ -41,12 +42,11 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		inputNumber.setFont(DEFAULT_FONT);
 		inputNumber.setBackground(SystemColor.text);
 		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
-		MouseForwardListener mfl = new MouseForwardListener();
-		inputNumber.addMouseListener(mfl);
-		inputNumber.addMouseMotionListener(mfl);
+		mfListener = new MouseForwardListener();
+		inputNumber.addMouseListener(mfListener);
+		inputNumber.addMouseMotionListener(mfListener);
 		if (elementChooser) {
 			setEnabled(false);
-			//inputNumber.setEditable(false);
 		} else {
 			inputNumber.addTextListener(this);
 		}
@@ -104,6 +104,22 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 
 	public boolean hasDoubleResult() {
 		return true;
+	}
+	
+	
+	public Object clone() {
+		ConstantNumber clonedCN = (ConstantNumber)super.clone();
+		clonedCN.removeAll();
+		clonedCN.inputNumber = new TextField(inputNumber.getText());
+		clonedCN.inputNumber.setFont(inputNumber.getFont());
+		clonedCN.inputNumber.setBackground(inputNumber.getBackground());
+		clonedCN.inputNumber.setBounds((Rectangle)inputNumber.getBounds().clone());
+		clonedCN.mfListener = new MouseForwardListener();
+		clonedCN.inputNumber.addMouseListener(mfListener);
+		clonedCN.inputNumber.addMouseMotionListener(mfListener);
+		clonedCN.inputNumber.addTextListener(clonedCN);
+		clonedCN.add(clonedCN.inputNumber);
+		return clonedCN;
 	}
 
 }

@@ -1,9 +1,10 @@
-/* $Id: Formula.java,v 1.47 2004/08/31 12:38:19 shadowice Exp $
+/* $Id: Formula.java,v 1.48 2004/09/01 15:08:32 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
 
 import java.awt.*;
+import java.awt.event.*;
 
 import gui.*;
 import utils.*;
@@ -13,21 +14,21 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.47 $
+ * @version $Revision: 1.48 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
 	// Constants for drawing Formula Elements. (BOXHEIGHT + RESULTHEIGHT) and FORMULAWIDHT should be devideable by 4.
-	public static final int BOXHEIGHT = 23; //28
-	public static final int CONNECTHEIGHT = 4;
-	public static final int RESULTHEIGHT = 16; //20
-	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
-	public static final int FORMULAWIDTH = 108; //120
+	public static final int BOXHEIGHT 			= 23;
+	public static final int CONNECTHEIGHT 	= 4;
+	public static final int RESULTHEIGHT 		= 16;
+	public static final int FORMULAHEIGHT 	= BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
+	public static final int FORMULAWIDTH 		= 108;
 
 	// Constants for paintStatus
 	public static final int PAINTSTATUS_STANDARD	= 1;
-	public static final int PAINTSTATUS_SELECTED	= 2;
-	public static final int PAINTSTATUS_INSERTING	= 4;
+	public static final int PAINTSTATUS_SELECTED		= 2;
+	public static final int PAINTSTATUS_INSERTING		= 4;
 	public static final int PAINTSTATUS_MOVING		= 8;
 	public static final int PAINTSTATUS_CALCULATING = 16;
 
@@ -161,7 +162,7 @@ public abstract class Formula extends Container implements Cloneable {
 			resultString = getStringResult();
 		} else if(hasDoubleResult()) {
 			try {
-				resultString = FOMToolkit.getFormatedString(getDoubleResult(),15);
+				resultString = FOMToolkit.getFormatedString(getDoubleResult(),14);
 			} catch (FormulaException fe) {
 				fe.printStackTrace(System.err);
 			}
@@ -169,19 +170,10 @@ public abstract class Formula extends Container implements Cloneable {
 				
 		super.paint(g);
 
-		// during calculation draw strings bold!
-		if ((paintStatus & PAINTSTATUS_CALCULATING) != 0) {
-			g.setFont(CALC_FONT);
-		} else {
-			g.setFont(DEFAULT_FONT);
-		}
-
-		if (resultString != null) {
-			g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2-2); // Ergebnis der Rechnung
-		}
+		g.setFont(DEFAULT_FONT);
 
 		//Standard
-		if ((paintStatus & PAINTSTATUS_STANDARD) == PAINTSTATUS_STANDARD) {
+		if ((paintStatus & PAINTSTATUS_STANDARD) != 0) {
 			g.setColor(Color.BLACK);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
 			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
@@ -189,7 +181,6 @@ public abstract class Formula extends Container implements Cloneable {
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
 			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
-			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		//Selected Element
 		} else if ((paintStatus & PAINTSTATUS_SELECTED) != 0) {
 			g.setColor(Color.BLUE);
@@ -199,7 +190,6 @@ public abstract class Formula extends Container implements Cloneable {
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
 			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
-			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		//Move Element
 		} else if (((paintStatus & PAINTSTATUS_MOVING) != 0) || ((paintStatus & PAINTSTATUS_INSERTING) != 0)) {
 			g.setColor(Color.GRAY);
@@ -217,8 +207,15 @@ public abstract class Formula extends Container implements Cloneable {
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
 			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
-			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		}
+		g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2);
+		if (resultString != null) {
+			if ((paintStatus & PAINTSTATUS_CALCULATING) != 0) {
+				g.setFont(CALC_FONT);
+			}
+			g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2-2); // Ergebnis der Rechnung
+		}
+
 	}
 
 
@@ -433,19 +430,19 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public Object clone() {
 		try {
-	    	Formula clonedForm = (Formula)super.clone();
-	    	clonedForm.dimension = (Dimension)dimension.clone();
-	    	clonedForm.formulaName = new String(formulaName);
+			Formula clonedForm = (Formula)getClass().newInstance();		//(Formula)super.clone(); <--- doesn't work with container!
+	    	clonedForm.setLocation(getLocation());
+	    	//clonedForm.formulaName = new String(formulaName);
 	    	clonedForm.inputPins = (PinPoint[])inputPins.clone();
 	    	for (int i=0;i<clonedForm.inputPins.length;i++) {
-	    		//clonedForm.inputPins[i] = (PinPoint)inputPins[i].clone();
+	    		clonedForm.inputPins[i] = (PinPoint)inputPins[i].clone();
 	    		clonedForm.inputPins[i].setFormula(clonedForm);
 	    	}
 	    	clonedForm.outputPin = (PinPoint)outputPin.clone();
 	    	clonedForm.outputPin.setFormula(clonedForm);
-	    	clonedForm.bufferImage = null;
 	    	
 	    	// clone inputs:
+	    	clonedForm.input = (Formula[])input.clone();
 	    	for (int i=0;i<getInputCount();i++) {
 	    		if (getInput(i) != null) {
 		    		Formula form = (Formula)getInput(i).clone();
@@ -455,11 +452,36 @@ public abstract class Formula extends Container implements Cloneable {
 		    		form.getOutputPin().setTarget(clonedForm.inputPins[i]);
 	    		}
 	    	}
+	    	KeyListener[] kListener = getKeyListeners();
+	    	for (int i=0;i<kListener.length;i++) {
+				clonedForm.addKeyListener(kListener[i]);	
+	    	}
 	    	
-	    	return clonedForm;
-		} catch (CloneNotSupportedException e) {
-			throw new InternalError(e.toString());
+	    	
+			return clonedForm;
+//		} catch (CloneNotSupportedException e) {
+//			throw new InternalError(e.toString());
+		} catch (InstantiationException e) {
+			e.printStackTrace(System.err);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace(System.err);
 		}
+		return null;
+	}
+	
+	
+	public void debug() {
+		System.out.println("------------------------------");
+		System.out.println("Formula Debug Output:");
+		System.out.println("formulaName: " + formulaName);
+		System.out.println("InputCount: " + getInputCount());
+		for (int i=0;i<getInputCount();i++) {
+			System.out.println("Input "+i+": "+getInput(i));
+			inputPins[i].debug();
+		}
+		System.out.println("Output: "+getOutput());
+		outputPin.debug();
+		System.out.println("------------------------------");
 	}
 
 	//"Quick-fix" :)

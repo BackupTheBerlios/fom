@@ -1,4 +1,4 @@
-/* $Id: PinPoint.java,v 1.8 2004/08/30 19:30:52 shadowice Exp $
+/* $Id: PinPoint.java,v 1.9 2004/09/01 15:08:32 shadowice Exp $
  * Created on 02.07.2004
  */
 package gui;
@@ -10,7 +10,7 @@ import formula.*;
  * Class to store the points where a formula can be connected.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 /*
  * How to use this:
@@ -277,14 +277,28 @@ public class PinPoint implements Cloneable {
 		try {
 			PinPoint cpp = (PinPoint)super.clone();
 			cpp.bestCandidate = null;
+			//cpp.bestDistance = 0;
 			cpp.formula = null;
 			cpp.mouseTargetPoint = (Point)mouseTargetPoint.clone();
 			cpp.pinPoint = (Point)pinPoint.clone();
 			cpp.targetPoint = null;
+			//cpp.inputNumber = inputNumber;
 			return cpp;
 		} catch (CloneNotSupportedException e) {
 			throw new InternalError(e.toString());
 		}
+	}
+	
+	
+	public void debug() {
+		System.out.println("------------------------------");
+		System.out.println("PinPoint Debug Output:");
+		System.out.println("targetPoint: "+targetPoint);
+		System.out.println("inputNumber: "+inputNumber);
+		System.out.println("formula: "+formula);
+		System.out.println("pinPoint: "+pinPoint);
+		System.out.println("mouseTargetPoint: "+mouseTargetPoint);
+		System.out.println("------------------------------");
 	}
 
 }

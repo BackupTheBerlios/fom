@@ -1,4 +1,4 @@
-/* $Id: DragnDropListener.java,v 1.29 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: DragnDropListener.java,v 1.30 2004/09/01 15:08:32 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -14,7 +14,7 @@ import formula.*;
  * for (re)placing formula-elements or whole trees and connecting them.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.29 $
+ * @version $Revision: 1.30 $
  *
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
@@ -79,7 +79,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 
 	public void mousePressed(MouseEvent me) {
 		// mouse pressed over a Formula in the FormulaPanel:
-		if (me.getComponent() instanceof FormulaPanel) {
+		if ((me.getComponent() instanceof FormulaPanel) && !selection.isDragInProgress()) {
 			if (!selection.isInsertInProgress() && (me.getComponent().getComponentAt(me.getPoint()) instanceof Formula)) {
 				selection.deselect();
 				// initiate drag&drop:

@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.13 2004/08/31 12:38:19 shadowice Exp $
+/* $Id: Selection.java,v 1.14 2004/09/01 15:08:32 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class Selection {
 
@@ -156,7 +156,6 @@ public class Selection {
 		Vector ppList = aPanel.getFormulaPanel().getInputPins();
 		PinPoint pin;
 		for (int i=0; i<ppList.size();i++) {
-			System.out.println(ppList.get(i)+" " + (ppList.get(i) instanceof PinPoint));
 			pin = (PinPoint)ppList.get(i);
 			if (pin.getFormula() == form) {
 				if (pin.getTarget() != null) {

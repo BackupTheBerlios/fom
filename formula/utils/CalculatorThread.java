@@ -1,4 +1,4 @@
-/*
+/* $Id: CalculatorThread.java,v 1.5 2004/09/01 15:08:32 shadowice Exp $
  * Created on 16.08.2004
  *
  */
@@ -9,8 +9,10 @@ import formula.*;
 import java.util.*;
 
 /**
+ * Thread that handles (animated and non-animated) calculation of the formula tree.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.5 $
  */
 public class CalculatorThread extends Thread {
 

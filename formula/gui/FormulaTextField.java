@@ -1,4 +1,4 @@
-/* $Id: FormulaTextField.java,v 1.5 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: FormulaTextField.java,v 1.6 2004/09/01 15:08:32 shadowice Exp $
  * Created on 16.05.2004
  *
  */
@@ -10,14 +10,17 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class FormulaTextField extends TextField {
 
 	private ControlPanel cPanel = null;
 
+
 	/**
-	 * @param string
+	 * Creates a new FormulaTextField
+	 * @param cp ControlPanel this TextField is in
+	 * @param string text
 	 */
 	public FormulaTextField(ControlPanel cp,String string) {
 		super(string);
@@ -26,6 +29,10 @@ public class FormulaTextField extends TextField {
 		this.cPanel = cp;
 	}
 
+
+	/**
+	 * Updates the text in this TextField to the string representing the formula tree or an error message. 
+	 */
 	public void updateControlPanelText() {
 		Formula[] treeArray = cPanel.getAppletPanel().getTreeList().getTreeArray();
 		if (treeArray != null) {
@@ -44,6 +51,5 @@ public class FormulaTextField extends TextField {
 			setText(Messages.getString("Error.NoTrees"));
 		}
 	}
-
 
 }
