@@ -45,12 +45,13 @@ public class ControlPanel extends Panel {
 		btnReset			= new Button(Messages.getString("ControlPanel.BtnReset"));
 		btnVariables		= new Button(Messages.getString("ControlPanel.BtnVariables"));
 		lblSpeed			= new Label(Messages.getString("ControlPanel.LblSpeed"),Label.RIGHT);
-		lblEqualsign		= new Label(Messages.getString("ControlPanel.LblEqualsign"),Label.RIGHT);
+		lblEqualsign		= new Label(Messages.getString("ControlPanel.LblEqualsign"),Label.CENTER);
 		tfFormula			= new FormulaTextField(this,"");
 		tfResult			= new FormulaTextField(this,"");
 		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 50, 1, 10, 200);
 		//chZoom				= new Choice();
 		GridBagLayout gbl	= new GridBagLayout();
+		GridBagLayout gblt	= new GridBagLayout();
 		ControlPanelListener cpListener = new ControlPanelListener(aPanel,this);
 
 		//chZoom.add("25%");
@@ -61,13 +62,13 @@ public class ControlPanel extends Panel {
 		//chZoom.add("200%");
 		
 		setLayout(gbl);
-			
-		//adding the components (in sub-panels) to this panel:
-		Panel plTexts=new Panel(new GridLayout());	
-		plTexts.add(tfFormula);
-		plTexts.add(lblEqualsign);
-		plTexts.add(tfResult);
 
+		//adding the components (in sub-panels) to this panel:
+		Panel plTexts=new Panel(gblt);
+		GUIToolkit.addComponent(plTexts,gblt,tfFormula,0,0,1,1,1.0,0.0,GridBagConstraints.BOTH);
+		GUIToolkit.addComponent(plTexts,gblt,lblEqualsign,1,0,1,1,0.0,0.0,GridBagConstraints.NONE);
+		GUIToolkit.addComponent(plTexts,gblt,tfResult,2,0,1,1,0.1,0.0,GridBagConstraints.BOTH);
+		
 		GUIToolkit.addComponent(this,gbl,plTexts,0,0,6,1,1.0,0.0,GridBagConstraints.BOTH);
 		
 		GUIToolkit.addComponent(this,gbl,btnVariables,0,1,1,1,0.0,0.0,GridBagConstraints.NONE);
@@ -99,14 +100,17 @@ public class ControlPanel extends Panel {
 		return tfFormula;
 	}
 
-	public void setLblFormula(FormulaTextField tfFormula) {
+	public void setTfFormula(FormulaTextField tfFormula) {
 		this.tfFormula = tfFormula;
 	}
 	
-	public void updateLblFormula(String text) {
+	public void updateTfFormula(String text) {
 		this.tfFormula.setText(text);
 	}
 
+	public void updateTfResult(String text) {
+		this.tfResult.setText(text);
+	}
 
 	public int getSpeed() {
 		return sbSpeed.getValue()*SPEED_MULTIPLIER;		

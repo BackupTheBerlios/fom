@@ -94,7 +94,7 @@ public class CalculatorThread extends Thread {
 				form.calc();
 			} catch (FormulaException fe) {
 				fe.printStackTrace(System.err);
-				aPanel.getControlPanel().updateLblFormula(fe.getMessage());
+				aPanel.getControlPanel().updateTfFormula(fe.getMessage());
 			}
 			if (lastFormula != null) {
 				lastFormula.setPaintStatus(lastPaintStatus);
@@ -102,6 +102,9 @@ public class CalculatorThread extends Thread {
 			lastPaintStatus = form.getPaintStatus();
 			form.setPaintStatus(Formula.PAINTSTATUS_CALCULATING | form.getPaintStatus());
 			lastFormula = form;
+			if (calcStack.isEmpty()) {
+				aPanel.getControlPanel().updateTfResult(form.getStringResult());
+			}
 		} else {
 			animating = false;
 		}
