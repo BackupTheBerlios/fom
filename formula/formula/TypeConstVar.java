@@ -4,7 +4,8 @@
 package formula;
 
 import java.util.LinkedList;
-/**
+
+/** TODO JavaDoc ergänzen
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
 public class TypeConstVar {

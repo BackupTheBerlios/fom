@@ -1,15 +1,13 @@
 /*
  * Created on 05.04.2004
- *
  */
 package formula;
 
 import java.lang.Object;
 import utils.Messages;
 
-/**
+/** TODO JavaDoc ergänzen
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public abstract class MixedFormula extends Formula {
 

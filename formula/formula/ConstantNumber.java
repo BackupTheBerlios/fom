@@ -52,6 +52,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		if (newInput.length() == 0) {
 			newInput = "0";
 		}
+// TODO Auch noch was auskommentiertes.		
 		/*if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
 			result = new Double(newInput.replace(',','.'));
 			inputNumber.setBackground(SystemColor.text);

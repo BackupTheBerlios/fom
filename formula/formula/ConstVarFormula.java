@@ -7,7 +7,7 @@ import utils.Messages;
 import java.util.LinkedList;
 
 /**
- * Abstract Class for all constants and variables
+ * Abstract class for all constants and variables.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
@@ -241,6 +241,7 @@ public abstract class ConstVarFormula extends Formula {
 		boolean valid = true;
 		TypeConstVar content;
 		//name must have at least one non-whitespace character.
+// TODO Auch noch ne auskommentierte Kleinigkeit		
 		/*if (isValid.matches(" *")) {	// matches benötigt Java 1.4
 			valid = false;
 		}*/
