@@ -2,11 +2,8 @@
  * Created on 02.06.2004
  */
 package formula;
-// TODO Einige auskommentierte Sachen!
-//import gui.DragnDropListener;
+
 import java.util.*;
-//import java.awt.event.*;
-import gui.*;
 import utils.Messages;
 
 /**
@@ -31,7 +28,6 @@ public class Categories {
 			categories[i] = Messages.getString("Elements.Category_"+Integer.toString(i));
 		}
 
-		//TODO Liste am Ende auf Vollständigkeit und Sinn (!) kontrollieren.
 		//Category Default:
 		Formula[] form = new Formula[8];
 		form[0] = new Add();
@@ -145,8 +141,8 @@ public class Categories {
 
 	/**
 	 * Adds a Formula-object to a category.
-	 * @param category
-	 * @param formula
+	 * @param category the category to add the formula to
+	 * @param formula formula to add
 	 */
 	public static final void addCategoryElement(String category, Formula formula) {
 		Formula[] form		 = getCategoryElements(category);
@@ -162,16 +158,4 @@ public class Categories {
 		categoryElements.put(category,newForm);
 	}
 	
-	public static void initMouseListener(AppletPanel ap) {
-/*		for(int i=0;i<categories.length;i++) {
-			Formula[] form = (Formula[])categoryElements.get(categories[i]);
-			if (form!=null) {
-				for(int j=0;j<form.length;j++) {
-					DragnDropListener dnd = new DragnDropListener(ap);
-					form[j].addMouseListener(dnd);
-					form[j].addMouseMotionListener(dnd);
-				}
-			}
-		}*/
-	}
 }

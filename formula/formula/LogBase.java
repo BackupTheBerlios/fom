@@ -24,7 +24,7 @@ public class LogBase extends NumberFormula {
 	 */
 	public LogBase() {
 		super();
-		input = new Formula[1];
+		input = new Formula[2];
 		formulaName = "log_b(x)";
 	}
 	

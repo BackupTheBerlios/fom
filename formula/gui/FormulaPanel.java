@@ -337,6 +337,7 @@ public class FormulaPanel extends Panel {
 			pin.getTarget().setTarget(null);
 			pin.getTarget().setBestCandidate(null);
 			pin.setTarget(null);
+			Formula.addTree(pin.getTarget().getFormula());
 		}
 		pin.setBestCandidate(null);
 	}
@@ -375,7 +376,7 @@ public class FormulaPanel extends Panel {
 	 * @param inPPList input pins
 	 * @param outPPList output pins
 	 */
-	// NOTE: Slow (if that matters) and not tested yet.
+	// NOTE: Slow (if that matters) and not tested yet!
 	public void detach(LinkedList inPPList, LinkedList outPPList) {
 		PinPoint pin;
 		PinPoint targetPin;
@@ -422,7 +423,8 @@ public class FormulaPanel extends Panel {
 			pin.getTarget().setTarget(pin);
 			if (!inputPinList.contains(pin)) {
 				inputPinList.add(pin);
-			} 
+			}
+			Formula.removeTree(pin.getTarget().getFormula());
 		}
 		for (int i=0;i<ppOutList.size();i++) {
 			pin = (PinPoint)ppOutList.get(i);

@@ -17,6 +17,7 @@ public class ElementPanel extends Panel {
 	private Choice chCategoryList;
 	private ScrollPane scpElementList;
 	private Panel elementPanel;
+	private Button btnClearFormulas;
 	private Button btnAddFormula;
 	private CategoryListListener clListener;
 	
@@ -30,11 +31,12 @@ public class ElementPanel extends Panel {
 	public ElementPanel(AppletPanel parent) {
 		this.aPanel = (AppletPanel)parent;
 		//create objects for element panel:
-		Panel topPanel		= new Panel(new GridLayout(2,1));
+		Panel topPanel		= new Panel(new GridLayout(3,1));
 		chCategoryList		= new Choice();
 		scpElementList		= new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
 		elementPanel		= new Panel();
 		dnd					= new DragnDropListener(this.aPanel);
+		btnClearFormulas	= new Button(Messages.getString("ElementPanel.BtnClearFormulas"));
 		btnAddFormula		= new Button(Messages.getString("ElementPanel.BtnAddFormula"));
 		clListener			= new CategoryListListener(this);
 		elementPanelLayout	= new GridLayout();
@@ -57,14 +59,16 @@ public class ElementPanel extends Panel {
 		elementPanel.setLayout(elementPanelLayout);
 		//adding all together:
 		scpElementList.add(elementPanel);
+		topPanel.add(btnClearFormulas);
 		topPanel.add(btnAddFormula);
 		topPanel.add(chCategoryList);
 		add(topPanel,BorderLayout.NORTH);
 		add(scpElementList,BorderLayout.CENTER);
-		//hardcoded size, because the default-size sux :)		
-		setSize(150,getSize().height);
-		chCategoryList.setSize(150,chCategoryList.getSize().height);
-		scpElementList.setSize(150,scpElementList.getSize().height);		
+		//hardcoded size, because the default-size sux (it did, now it doesn't seem to matter) :)		
+		int epWidth = Formula.FORMULAWIDHT+20;
+		setSize(epWidth,getSize().height);
+		chCategoryList.setSize(epWidth,chCategoryList.getSize().height);
+		scpElementList.setSize(epWidth,scpElementList.getSize().height);
 		updateElementList(Categories.getCategoryElements(chCategoryList.getSelectedItem()));
 	}
 
@@ -86,8 +90,7 @@ public class ElementPanel extends Panel {
 			}
 		}
 		scpElementList.validate();
-//		scpElementList.doLayout();
-//		scpElementList.repaint();
+		elementPanel.repaint();
 	}
 	
 	
@@ -96,6 +99,5 @@ public class ElementPanel extends Panel {
 	 */
 	public void refreshElementList() {
 		updateElementList(Categories.getCategoryElements(chCategoryList.getSelectedItem()));
-		
 	}
 }
