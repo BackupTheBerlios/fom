@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.18 2004/09/09 15:09:17 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.19 2004/09/09 16:23:02 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -61,22 +61,13 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 				// TODO Fehlerdialog
 			}
 		} else if (aEvent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
-			/*aPanel.getFormulaPanel().deleteAll();
+			aPanel.getFormulaPanel().deleteAll();
 			aPanel.getControlPanel().updateTfResult("");
-			aPanel.getFormulaPanel().validate();
-			aPanel.getFormulaPanel().doLayout();
+			aPanel.getFormulaPanel().invalidate();
+			aPanel.getFormulaPanel().getParent().validate();
 			aPanel.getFormulaPanel().repaint();
 			aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
-			System.gc();*/
-			System.out.println("before:\n "+((ScrollPane)aPanel.getFormulaPanel().getParent()).getScrollPosition());
-			if (aPanel.getTreeList().elementAt(0) != null)
-				System.out.println(((Component)aPanel.getTreeList().elementAt(0)).getLocation());
-			System.out.flush();
-			aPanel.getFormulaPanel().getParent().validate();
-			System.out.println("after:\n "+((ScrollPane)aPanel.getFormulaPanel().getParent()).getScrollPosition());
-			if (aPanel.getTreeList().elementAt(0) != null)
-				System.out.println(((Component)aPanel.getTreeList().elementAt(0)).getLocation());
-			System.out.flush();
+			System.gc();
 		}
 	}
 

@@ -1,4 +1,4 @@
-/* $Id: TreeLayout.java,v 1.13 2004/09/09 15:09:17 shadowice Exp $
+/* $Id: TreeLayout.java,v 1.14 2004/09/09 16:23:02 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -10,7 +10,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class TreeLayout implements LayoutManager {
 
@@ -43,22 +43,16 @@ public class TreeLayout implements LayoutManager {
 		checkBounds(container);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String, java.awt.Component)
-	 */
+
 	public void addLayoutComponent(String str, Component component) {
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
-	 */
+
 	public Dimension minimumLayoutSize(Container container) {
 		return container.getSize();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
-	 */
+
 	public Dimension preferredLayoutSize(Container container) {
 		return container.getSize();
 	}
@@ -86,8 +80,8 @@ public class TreeLayout implements LayoutManager {
 			}
 		}		
 	}
-	
-	
+
+
 	/**
 	 * Checks the bounds of a container if all components are inside of it.
 	 * If not it will be resized and all components will be moved if some are outside
@@ -117,7 +111,7 @@ public class TreeLayout implements LayoutManager {
 				max_y = comp.getSize().height + comp.getLocation().y;
 			}
 		}
-		
+
 		// move elements if min-size is below 0
 		if (min_x < 0) {
 			max_x = max_x - min_x;
@@ -133,7 +127,7 @@ public class TreeLayout implements LayoutManager {
 				((Formula)comp).moveTo(comp.getLocation().x,comp.getLocation().y-min_y);
 			}
 		}
-		
+
 		// set new container size if it's bigger:
 		ScrollPane sp = (ScrollPane)container.getParent();
 		if ((container.getSize().width < max_x) && (max_x != 0)) {

@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.20 2004/09/07 19:14:31 shadowice Exp $
+/* $Id: Selection.java,v 1.21 2004/09/09 16:23:02 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,16 +12,15 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 public class Selection {
-
 
 	public static final int MOUSE_POINT_DISTANCE = 15;
 
 	private AppletPanel aPanel				= null;			// root panel of everything
 	//private FormulaPanel fPanel			= null;			// formula panel
-	
+
 	private boolean dragInProgress			= false;		// true if something is dragged
 	private boolean insertInProgress		= false;		// true if element is selected from the ElementPanel
 	private Point selectedStartPoint		= null;			// the starting point of DnD actions
@@ -44,8 +43,8 @@ public class Selection {
 		super();
 		aPanel = ap;
 	}
-	
-	
+
+
 	/**
 	 * Moves a formula, all its sub-formulas and all pPInputs and pPOutputs (relative) to a given point.
 	 * This point will be the top left corner of the formula. 
@@ -296,7 +295,7 @@ public class Selection {
 		newComponentInstance.setOutputPin(pp);
 		newComponentInstance.setLocation(xPos,yPos); // bugfix, newComponentInstance may be at another position
 		aPanel.getFormulaPanel().setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-		aPanel.getFormulaPanel().validate();
+		doFormulaPanelLayout();
 	}
 
 
@@ -324,8 +323,7 @@ public class Selection {
 		}
 		aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 		deselect();
-		aPanel.getFormulaPanel().doLayout();
-		aPanel.getFormulaPanel().repaint();
+		doFormulaPanelLayout();
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();		
 	}
 
@@ -365,8 +363,7 @@ public class Selection {
 		aPanel.setCursor(Cursor.getDefaultCursor());
 		updatePaintStatus(Formula.PAINTSTATUS_SELECTED);
 		aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
-		aPanel.getFormulaPanel().doLayout();
-		aPanel.getFormulaPanel().repaint();
+		doFormulaPanelLayout();
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 	}
 
@@ -407,9 +404,7 @@ public class Selection {
 				}
 				aPanel.getFormulaPanel().delete(form);
 			}
-			aPanel.getFormulaPanel().validate();
-			aPanel.getFormulaPanel().doLayout();
-			aPanel.getFormulaPanel().repaint();
+			doFormulaPanelLayout();
 		}
 		System.gc();
 	}
@@ -422,6 +417,16 @@ public class Selection {
 		if (selectedComponents.size() > 0) {
 			AppletPanel.setClipboard((Formula)selectedComponentRoot.clone());
 		}
+	}
+
+
+	// NOTE this works under windows with Sun-JDK 1.4.2_05
+	private void doFormulaPanelLayout() {
+		aPanel.getFormulaPanel().invalidate();
+		aPanel.getFormulaPanel().getParent().validate();
+		aPanel.getFormulaPanel().invalidate();
+		aPanel.getFormulaPanel().getParent().validate();
+		aPanel.getFormulaPanel().repaint();
 	}
 
 }

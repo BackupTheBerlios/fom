@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.39 2004/09/08 14:36:50 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.40 2004/09/09 16:23:02 shadowice Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -13,7 +13,7 @@ import utils.*;
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.39 $
+ * @version $Revision: 1.40 $
  */
 public class FormulaPanel extends Panel {
 
@@ -41,7 +41,7 @@ public class FormulaPanel extends Panel {
 		this.aPanel = ap;
 		setLayout(new TreeLayout());
 		setBackground(Color.white);
-		setSize(1500,1200);
+		//setSize(1500,1200);
 	}
 
 
@@ -579,12 +579,13 @@ public class FormulaPanel extends Panel {
 			}
 		}
 	}
-	
+
+
 	/*
 	 * doLayout with backing up scroll position of the parent ScrollPane.
 	 */
-	public void doLayout() {
-		super.doLayout();
-	}
+//	public void doLayout() {
+//		super.doLayout();
+//	}
 
 }
