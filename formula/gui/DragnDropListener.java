@@ -1,4 +1,4 @@
-/* $Id: DragnDropListener.java,v 1.37 2004/09/09 20:14:55 shadowice Exp $
+/* $Id: DragnDropListener.java,v 1.38 2004/09/10 12:55:23 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -14,7 +14,7 @@ import formula.*;
  * for (re)placing formula-elements or whole trees and connecting them.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.37 $
+ * @version $Revision: 1.38 $
  *
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
@@ -22,7 +22,6 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	private AppletPanel aPanel		= null;				// root panel of everything
 	
 	private Selection selection		= null;
-	
 
 	/**
 	 * Creates a new Drag&Drop-Listener.
@@ -41,14 +40,6 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		if (me.isPopupTrigger()) {
 			aPanel.getPopupMenu().show(me.getComponent(),me.getPoint().x,me.getPoint().y);
 		} else {
-			// if event happened in the ElementPanel:
-			/*if (me.getComponent().getParent().getParent() instanceof ElementPanel) {
-				Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
-				if (targetComponent instanceof Formula) { // if clicked on a Formula-object
-					selection.selectNewElement((Formula)targetComponent);
-				}*/
-			// if event happened in the FormulaPanel:
-			//} else
 			if (me.getComponent() instanceof FormulaPanel){
 				// if a component is selected from the ElementPanel (newComponentInstance != null),
 				// a mouseClicked event within the FormulaPanel will place it there.
@@ -84,15 +75,15 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	public void mousePressed(MouseEvent me) {
 		if (me.isPopupTrigger() && (me.getComponent() instanceof FormulaPanel)) {
 			aPanel.getPopupMenu().show(me.getComponent(),me.getPoint().x,me.getPoint().y);
-		} else {
-			// mouse pressed over a Formula in the FormulaPanel:
-			if ((me.getComponent() instanceof FormulaPanel) && !selection.isDragInProgress()) {
-				if (!selection.isInsertInProgress() && (me.getComponent().getComponentAt(me.getPoint()) instanceof Formula)) {
-					selection.deselect();
-					// initiate drag&drop:
-					selection.recursiveSelect((Formula)me.getComponent().getComponentAt(me.getPoint()),me.getPoint());
-					selection.updatePaintStatus(Formula.PAINTSTATUS_MOVING);
-				}
+		} else
+		// mouse pressed over a Formula in the FormulaPanel:
+		if ((me.getComponent() instanceof FormulaPanel) && !selection.isDragInProgress()) {
+			if (!selection.isInsertInProgress() && (me.getComponent().getComponentAt(me.getPoint()) instanceof Formula)) {
+				selection.deselect();
+				// initiate drag&drop:
+				selection.recursiveSelect((Formula)me.getComponent().getComponentAt(me.getPoint()),me.getPoint());
+				selection.setDragInProgress(true);
+				selection.updatePaintStatus(Formula.PAINTSTATUS_MOVING);
 			}
 		}
 	}

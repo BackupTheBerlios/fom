@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.19 2004/09/09 16:23:02 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.20 2004/09/10 12:55:23 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -54,6 +54,9 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 					ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),custForm);
 					ePanel.refreshElementList();
 					ePanel.getCategoryList().select(ePanel.getCategoryList().getItemCount()-1);
+					Formula[] elements=ePanel.getCategories().getCategoryElements(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)));
+					ePanel.updateElementList(elements);
+					aPanel.getSelection().deselect();
 				} catch (FormulaException fe) {
 					fe.printStackTrace(System.err);
 				}
