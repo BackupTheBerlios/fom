@@ -1,10 +1,11 @@
-/* $Id: Formula.java,v 1.54 2004/09/10 15:38:19 shadowice Exp $
+/* $Id: Formula.java,v 1.55 2004/10/15 10:01:29 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 import gui.*;
 import utils.*;
@@ -14,7 +15,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.54 $
+ * @version $Revision: 1.55 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -55,6 +56,8 @@ public abstract class Formula extends Container implements Cloneable {
 	private Image bufferImage;
 	private int lastBufferWidth = 0;
 	private int lastBufferHeight = 0;
+
+	private Vector keyListener = new Vector();
 
 
 	/**
@@ -500,6 +503,18 @@ public abstract class Formula extends Container implements Cloneable {
 		System.out.println("Output: "+getOutput());
 		outputPin.debug();
 		System.out.println("------------------------------");
+	}
+
+
+	//"Java 1.1/1.2 fix":
+	public final void addKeyListener(KeyListener listener) {
+		super.addKeyListener(listener);
+		keyListener.add(listener);		
+	}
+	
+	public KeyListener[] getKeyListener() {
+		KeyListener[] kl = new KeyListener[keyListener.size()];
+		return (KeyListener[])keyListener.toArray(kl);
 	}
 
 	//"Quick-fix" :)
