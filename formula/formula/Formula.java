@@ -303,6 +303,10 @@ public abstract class Formula extends Container implements Cloneable {
 		return treeListArray;
 	}
 
+	/** TODO Javadoc
+	 * 
+	 * @return
+	 */
 	public final static int getTreeListSize() {
 		return treeList.size();
 	}
@@ -315,29 +319,19 @@ public abstract class Formula extends Container implements Cloneable {
 		treeList.remove(root);
 	}
 
-
 	public final void setPaintStatus(int status) {
 		paintStatus = status;
 		repaint();
 	}
-
+	
+	/** TODO Javadoc
+	 * 
+	 * @return
+	 */
 	public final int getPaintStatus() {
 		return paintStatus;
 	}
 
-	//"Quick-fix" :)
-	public final Dimension preferredSize() {
-		return dimension;
-	}
-	
-	public final Dimension getPreferredSize() {
-		return dimension;
-	}
-	
-	public final Dimension getMinimumSize() {
-		return dimension;
-	}
-	
 	/**
 	 * @return returns the input-pins for this formula
 	 */
@@ -385,4 +379,17 @@ public abstract class Formula extends Container implements Cloneable {
 		setLocation(oldLocation.x+xOffset,oldLocation.y+yOffset);
 	}
 
+	//"Quick-fix" :)
+	public final Dimension preferredSize() {
+		return dimension;
+	}
+	
+	public final Dimension getPreferredSize() {
+		return dimension;
+	}
+	
+	public final Dimension getMinimumSize() {
+		return dimension;
+	}
+	
 }
