@@ -262,6 +262,7 @@ public abstract class Formula extends Container implements Cloneable {
 
 	public final void setPaintStatus(int status) {
 		paintStatus = status;
+		repaint();
 	}
 
 	public final int getPaintStatus() {
