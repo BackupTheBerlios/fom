@@ -47,7 +47,7 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 			aPanel.getFormulaPanel().doLayout();
 			aPanel.getFormulaPanel().repaint();
 		}
-		aPanel.getControlPanel().getLblFormula().updateControlPanelText();
+		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 	}
 	
 }

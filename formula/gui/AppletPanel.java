@@ -6,7 +6,7 @@ package gui;
 
 import java.applet.Applet;
 import java.awt.*;
-//import java.util.*;
+import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
@@ -36,7 +36,6 @@ public class AppletPanel extends Applet {
 		pnlFormula.setLayout(new TreeLayout());
 		dnd = new DragnDropListener(this);
 		hotkey = new HotkeyListener(this);
-		//this.addKeyListener(hotkey);
 		pnlFormula.addMouseListener(dnd);
 		pnlFormula.addMouseMotionListener(dnd);
 		sPane.add(pnlFormula);
@@ -67,26 +66,17 @@ public class AppletPanel extends Applet {
 	}
 
 	private void debug() {
-		/*Properties prop = System.getProperties();
-		Enumeration enum = prop.propertyNames();
-		String str;
-		System.out.println("\nDEBUG INFO Formula-o-Matic:");
-		System.out.println("------------------------------------------------------");
-		while (enum.hasMoreElements()) {
-			str = (String)enum.nextElement(); 
-			System.out.println(str + " \t" + prop.getProperty(str));
-		}
-		System.out.println("------------------------------------------------------");*/
 		System.out.println("DEBUG: Java Version: " + System.getProperty("java.version") + " from "+System.getProperty("java.vendor"));
 	}
 
-/*	public static void main(String[] args) {
-		Frame f=new Frame("Test");
+	// TODO: windowListener schreiben für Fenster schließen
+	public static void main(String[] args) {
 		AppletPanel ap=new AppletPanel();
-		//ap.init();
+		ap.init();
+		Frame f = new Frame(Messages.getString("AppletPanel.Title"));
 		f.add(ap);
-		f.setSize(800,600);
-		f.setVisible(true);
-	}*/
+		f.setSize(650,500);
+		f.setVisible(true);		
+	}
 
 }

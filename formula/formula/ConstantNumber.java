@@ -71,7 +71,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		}
 		
 		if (getParent() instanceof FormulaPanel) {
-			((AppletPanel)getParent().getParent().getParent()).getControlPanel().getLblFormula().updateControlPanelText();
+			((AppletPanel)getParent().getParent().getParent()).getControlPanel().getFormulaTextField().updateControlPanelText();
 		}
 	}
 

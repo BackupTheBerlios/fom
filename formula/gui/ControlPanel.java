@@ -86,12 +86,12 @@ public class ControlPanel extends Panel {
 	}
 
 
-	public FormulaTextField getLblFormula() {
+	public FormulaTextField getFormulaTextField() {
 		return tfFormula;
 	}
 
-	public void setLblFormula(FormulaTextField lblFormula) {
-		this.tfFormula = lblFormula;
+	public void setLblFormula(FormulaTextField tfFormula) {
+		this.tfFormula = tfFormula;
 	}
 	
 	public void updateLblFormula(String text) {

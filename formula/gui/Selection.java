@@ -228,7 +228,7 @@ public class Selection {
 			updatePaintStatus(Formula.PAINTSTATUS_STANDARD);
 			selectedComponents.clear();
 		}
-		aPanel.getControlPanel().getLblFormula().updateControlPanelText();
+		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 		aPanel.requestFocus();
 	}
 	
@@ -307,7 +307,7 @@ public class Selection {
 		deselect();
 		fPanel.doLayout();
 		fPanel.checkBounds();
-		aPanel.getControlPanel().getLblFormula().updateControlPanelText();		
+		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();		
 	}
 
 	/**
@@ -345,7 +345,7 @@ public class Selection {
 		fPanel.doLayout();
 		fPanel.checkBounds();
 		fPanel.repaint();
-		aPanel.getControlPanel().getLblFormula().updateControlPanelText();
+		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 	}
 	
 
