@@ -29,6 +29,10 @@ public class ElementPanel extends Panel {
 		add(scpElementList,BorderLayout.CENTER);
 		
 		setBackground(SystemColor.activeCaptionBorder);
+		DragnDropListener dnd=new DragnDropListener();
+		scpElementList.addMouseListener(dnd);
+		scpElementList.addMouseMotionListener(dnd);
+		
 	}
 
 	public ScrollPane getScpElementList() {

@@ -62,6 +62,10 @@ public class AppletPanel extends Applet {
 		this.pnlControls = pnlControls;
 	}
 
+	
+	/*
+	 * Constructor is needed if running as application.
+	 */
 	public AppletPanel() {
 		init();
 	}
