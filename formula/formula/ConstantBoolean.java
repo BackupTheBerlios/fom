@@ -33,7 +33,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		result = new Boolean(false);
 		inputBoolean = new Button("false");
 		inputBoolean.setFont(new Font("Arial", Font.PLAIN, 11));
-		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);
+		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
 		if (elementChooser) {
 			inputBoolean.setEnabled(false);
 		} else {

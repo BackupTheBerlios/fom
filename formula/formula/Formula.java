@@ -20,7 +20,7 @@ public abstract class Formula extends Container implements Cloneable {
 	public static final int CONNECTHEIGHT = 4;
 	public static final int RESULTHEIGHT = 17; //20
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
-	public static final int FORMULAWIDHT = 108; //120
+	public static final int FORMULAWIDTH = 125; //108
 
 	// Constants for paintStatus
 	public static final int PAINTSTATUS_STANDARD	= 1;
@@ -34,7 +34,7 @@ public abstract class Formula extends Container implements Cloneable {
 
 	protected int paintStatus = PAINTSTATUS_STANDARD;
 
-	protected Dimension dimension = new Dimension(FORMULAWIDHT,FORMULAHEIGHT);
+	protected Dimension dimension = new Dimension(FORMULAWIDTH,FORMULAHEIGHT);
 	//protected Vector treeList;
 
 	// Input/Output for Formula Elements
@@ -132,47 +132,47 @@ public abstract class Formula extends Container implements Cloneable {
 		}
 
 		if (resultString != null) {
-			g.drawString(resultString, (FORMULAWIDHT-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
+			g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
 		}
 
 		//Standard
 		if ((paintStatus & PAINTSTATUS_STANDARD) == PAINTSTATUS_STANDARD) {
 			g.setColor(Color.BLACK);
-			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDHT-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
-			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDHT-1, CONNECTHEIGHT+RESULTHEIGHT);
+			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
+			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
 			for (int i=0; i<getInputCount(); i++){
-				g.drawLine((i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT);
+				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
-			g.drawLine(FORMULAWIDHT/2, CONNECTHEIGHT, FORMULAWIDHT/2, 0);
-			g.drawString(formulaName, (FORMULAWIDHT-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
+			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
+			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		//Selected Element
 		} else if ((paintStatus & PAINTSTATUS_SELECTED) != 0) {
 			g.setColor(Color.BLUE);
-			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDHT-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
-			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDHT-1, CONNECTHEIGHT+RESULTHEIGHT);
+			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
+			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
 			for (int i=0; i<getInputCount(); i++){
-				g.drawLine((i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT);
+				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
-			g.drawLine(FORMULAWIDHT/2, CONNECTHEIGHT, FORMULAWIDHT/2, 0);
-			g.drawString(formulaName, (FORMULAWIDHT-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
+			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
+			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		//Move Element
 		} else if (((paintStatus & PAINTSTATUS_MOVING) != 0) || ((paintStatus & PAINTSTATUS_INSERTING) != 0)) {
 			g.setColor(Color.GRAY);
 			//Dotted Line
-			for (int i=0; i<FORMULAWIDHT/4; i++) {
+			for (int i=0; i<FORMULAWIDTH/4; i++) {
 				g.drawLine(i*4, CONNECTHEIGHT, i*4+2-1, CONNECTHEIGHT);
 				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2-1, CONNECTHEIGHT+RESULTHEIGHT);
 				g.drawLine(i*4, FORMULAHEIGHT-CONNECTHEIGHT, i*4+2-1, FORMULAHEIGHT-CONNECTHEIGHT);
 			}
 			for (int i=0; i<(BOXHEIGHT+RESULTHEIGHT)/4; i++) {
 				g.drawLine(0, i*4+CONNECTHEIGHT, 0, i*4+2+CONNECTHEIGHT);
-				g.drawLine(FORMULAWIDHT-1, i*4+CONNECTHEIGHT, FORMULAWIDHT-1, i*4+2+CONNECTHEIGHT);
+				g.drawLine(FORMULAWIDTH-1, i*4+CONNECTHEIGHT, FORMULAWIDTH-1, i*4+2+CONNECTHEIGHT);
 			}
 			for (int i=0; i<getInputCount(); i++){
-				g.drawLine((i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT);
+				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
-			g.drawLine(FORMULAWIDHT/2, CONNECTHEIGHT, FORMULAWIDHT/2, 0);
-			g.drawString(formulaName, (FORMULAWIDHT-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
+			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
+			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		}
 	}
 

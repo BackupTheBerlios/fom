@@ -36,7 +36,7 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 		inputVarName.setFont(new Font("Arial", Font.PLAIN, 11));
 		inputVarName.setBackground(SystemColor.text);
 		inputVarName.setText("boolean1");
-		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);		
+		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);		
 		if (elementChooser) {
 			inputVarName.setEnabled(false);
 		} else {
