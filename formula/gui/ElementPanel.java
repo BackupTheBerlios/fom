@@ -65,7 +65,6 @@ public class ElementPanel extends Panel {
 		setSize(150,getSize().height);
 		chCategoryList.setSize(150,chCategoryList.getSize().height);
 		scpElementList.setSize(150,scpElementList.getSize().height);		
-		Categories.initMouseListener(this.parent);
 		updateElementList(Categories.getCategoryElements(chCategoryList.getSelectedItem()));
 	}
 
@@ -75,10 +74,10 @@ public class ElementPanel extends Panel {
 	 */
 	public void updateElementList(Formula[] form) {
 		elementPanel.removeAll();
-		if(form == null) {					//no elements in category
+		if(form == null) {						//no elements in category
 			elementPanelLayout.setRows(1);
 			elementPanelLayout.setColumns(1);
-			elementPanel.add(new Label("ToDo: Kategorien :)"));
+			elementPanel.add(new Label(""));	// don't remove this!
 		} else {
 			elementPanelLayout.setColumns(1);
 			elementPanelLayout.setRows(form.length);
