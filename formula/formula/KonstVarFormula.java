@@ -31,11 +31,11 @@ public abstract class KonstVarFormula extends Formula {
 	public void setInput(Formula in, int index) {
 	}
 
-// TODO calc / getDoubleResult / getBooleanResult
+
 	public abstract void calc() throws FormulaException;
 
 	public double getDoubleResult() {
-		return 0;
+		return ((Double)result).doubleValue();
 	}
 
 //	public long getLongResult() {
@@ -43,18 +43,18 @@ public abstract class KonstVarFormula extends Formula {
 //	}
 
 	public boolean getBooleanResult() {
-		return false;
+		return ((Boolean)result).booleanValue();
 	}
 
 	/**
 	 * Clears all results that have been saved by calc-operations.
 	 */
 	public void clearResult() {
-		result = null;
 	}
-//TODO getInputTypes
+	
+
 	public Class[] getInputTypes(int index) throws FormulaException {
-		return new Class[0];
+		throw new FormulaException(Messages.getString("Error.KonstVarInput"));
 	}
 
 	public Class[] getOutputTypes() throws FormulaException {

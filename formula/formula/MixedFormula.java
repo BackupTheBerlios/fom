@@ -13,7 +13,7 @@ public abstract class MixedFormula extends Formula {
 
 	protected Object result;
 
-	public abstract Object calc() throws FormulaException;
+	public abstract void calc() throws FormulaException;
 
 	/**
 	 * Clears all results that have been saved by calc-operations.
