@@ -68,7 +68,10 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	public void mouseExited(MouseEvent me) {
 		if (me.getComponent() instanceof FormulaPanel) {
 			if (selection.isInsertInProgress()) {
-				selection.setElementVisible(false);
+				Component comp = me.getComponent();
+				if (comp.getComponentAt(me.getPoint()) == null) {
+					selection.setElementVisible(false);
+				}
 			}
 		}
 	}

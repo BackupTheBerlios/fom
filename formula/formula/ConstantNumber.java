@@ -10,6 +10,7 @@ import gui.*;
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
+ * @version $Id: ConstantNumber.java,v 1.22 2004/08/25 18:12:08 shadowice Exp $
  */
 public class ConstantNumber extends ConstVarFormula implements TextListener {
 
@@ -33,10 +34,13 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		inputNumber = new TextField();
 		inputNumber.setFont(DEFAULT_FONT);
 		inputNumber.setBackground(SystemColor.text);
-		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
-		inputNumber.addMouseListener(new MouseForwardListener());
+		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT-4, FORMULAWIDTH/2+10, BOXHEIGHT-6);
+		MouseForwardListener mfl = new MouseForwardListener();
+		inputNumber.addMouseListener(mfl);
+		inputNumber.addMouseMotionListener(mfl);
 		if (elementChooser) {
-			inputNumber.setEnabled(false);
+			setEnabled(false);
+			//inputNumber.setEditable(false);
 		} else {
 			inputNumber.addTextListener(this);
 		}
@@ -53,15 +57,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		if (newInput.length() == 0) {
 			newInput = "0";
 		}
-// TODO Auch noch was auskommentiertes.		
-		/*if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
-			result = new Double(newInput.replace(',','.'));
-			inputNumber.setBackground(SystemColor.text);
-			repaint();
-		} else {
-			inputNumber.setBackground(Color.RED);
-		}*/
-			
+
 		try {
 			result = new Double(newInput.replace(',','.'));
 			inputNumber.setBackground(SystemColor.text);
@@ -86,7 +82,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 	
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
-		inputNumber.setEnabled(enabled);
+		inputNumber.setEditable(enabled);		// if inputNumber would be disabled, the Mouse(Motion)Listeners would not work!
 	}
 	
 	public String getInputVarName() {
