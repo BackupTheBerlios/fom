@@ -14,9 +14,8 @@ public class TypeConstVar {
 	private LinkedList varInnerList;
 
 
-	//MAURIEC Wird das hier eigentlich benötigt?
+	//MAURICE Wird das hier eigentlich benötigt?
 	public TypeConstVar() {
-		super();
 		value = new Object();
 		name = new String();
 		varInnerList = new LinkedList();

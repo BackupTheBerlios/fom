@@ -7,7 +7,7 @@ package formula;
 //import gui.DragnDropListener;
 import java.util.*;
 //import java.awt.event.*;
-//import gui.*;
+import gui.*;
 import utils.Messages;
 /**
  * The class Categories is used to store the different categories of formula-elements
@@ -59,8 +59,8 @@ public class Categories {
 		form[0] = new Sqrt();
 		form[1] = new Pow();
 		form[2] = new Ln();
-		//form[3] = new LogTen();
-		//form[4] = new LogBase();
+//		form[3] = new LogTen();
+//		form[4] = new LogBase();
 		form[5] = new Euler();
 		form[6] = new Factorial();
 		form[7] = new Modulo();
@@ -123,6 +123,7 @@ public class Categories {
 		form[9] = new Rad2grad();	
 		categoryElements.put(categories[7], form);
 
+
 		//Category Custom:
 		form = new Formula[0];
 
@@ -162,4 +163,16 @@ public class Categories {
 		categoryElements.put(category,newForm);
 	}
 	
+	public static void initMouseListener(AppletPanel ap) {
+/*		for(int i=0;i<categories.length;i++) {
+			Formula[] form = (Formula[])categoryElements.get(categories[i]);
+			if (form!=null) {
+				for(int j=0;j<form.length;j++) {
+					DragnDropListener dnd = new DragnDropListener(ap);
+					form[j].addMouseListener(dnd);
+					form[j].addMouseMotionListener(dnd);
+				}
+			}
+		}*/
+	}
 }
