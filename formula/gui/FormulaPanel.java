@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.38 2004/09/08 14:18:48 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.39 2004/09/08 14:36:50 shadowice Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -13,7 +13,7 @@ import utils.*;
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.38 $
+ * @version $Revision: 1.39 $
  */
 public class FormulaPanel extends Panel {
 
@@ -147,13 +147,13 @@ public class FormulaPanel extends Panel {
 	}
 
 
-	public boolean isDoubleBuffered() {
+	/*public boolean isDoubleBuffered() {
 		return false;
-	}
+	}*/
 
 
 	// NOTE faster double buffer would work, but this version is too slow!
-	public void update(Graphics g) {
+	//public void update(Graphics g) {
 		/*if ((bufferImage == null) || (getWidth() > lastBufferWidth) || (getHeight() > lastBufferHeight)) {
 			lastBufferWidth = getWidth();
 			lastBufferHeight = getHeight();
@@ -171,13 +171,13 @@ public class FormulaPanel extends Panel {
 		g.setClip(clip_x,clip_y,width,height);
 		g.drawImage(bufferImage,0,0,this);
 		bufferGraphics.dispose();*/
-		paint(g);
-	}
+	//	paint(g);
+	//}
 
 
 	public void paint(Graphics g) {
 		// clear graphics:
-		g.clearRect(0,0,getWidth(),getHeight());
+		//g.clearRect(0,0,getWidth(),getHeight());
 		// paint components in this container:
 		super.paint(g);
 		// paint connections between pins:
@@ -584,10 +584,7 @@ public class FormulaPanel extends Panel {
 	 * doLayout with backing up scroll position of the parent ScrollPane.
 	 */
 	public void doLayout() {
-		ScrollPane spParent = (ScrollPane)getParent();
-		//spParent.invalidate();
 		super.doLayout();
-		//spParent.validate();
 	}
 
 }
