@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.11 2004/09/03 14:51:19 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.12 2004/09/06 13:02:06 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -40,9 +40,8 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 	}
 
 
-	public void actionPerformed(ActionEvent aevent) {
-		if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnAddFormula"))) {
-			// TODO CustomFormula statt Add verwenden.
+	public void actionPerformed(ActionEvent aEvent) {
+		if (aEvent.getActionCommand().equals(Messages.getString("ElementPanel.BtnAddFormula"))) {
 			if (aPanel.getTreeList().isCompleteGlobalTree()) {
 				try {
 					Formula clonedTree = (Formula)((Formula)aPanel.getTreeList().elementAt(0)).clone();
@@ -59,7 +58,7 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 			} else {
 				// TODO Fehlerdialog
 			}
-		} else if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
+		} else if (aEvent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
 			aPanel.getFormulaPanel().deleteAll();
 			aPanel.getControlPanel().updateTfResult("");
 			aPanel.getFormulaPanel().validate();
@@ -76,13 +75,14 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 	 * @param varList VariableList to write to
 	 * @param form current formula element
 	 */
-	// BUG NullPointerException :(
 	private void createVariableList(VariableList varList, Formula form) {
 		if (form instanceof VariableBoolean) {
 			varList.addVarList((VariableBoolean)form);
 		} else if (form instanceof VariableNumber) {
 			varList.addVarList((VariableNumber)form);
 		}
+		//System.out.print(" -> " + form + " ");
+		System.out.println(form.getInputCount());
 		for (int i=0;i<form.getInputCount();i++) {
 			createVariableList(varList,form.getInput(i));
 		}

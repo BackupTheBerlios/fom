@@ -1,4 +1,4 @@
-/* $Id: CustomFormula.java,v 1.4 2004/09/03 14:51:19 shadowice Exp $
+/* $Id: CustomFormula.java,v 1.5 2004/09/06 13:02:06 shadowice Exp $
  * Created on 26.08.2004
  */
  
@@ -10,7 +10,7 @@ import utils.*;
 
 /** TODO JavaDoc ergänzen
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class CustomFormula extends Formula {
 
@@ -176,6 +176,10 @@ public class CustomFormula extends Formula {
 	}
 
 
+	/**
+	 * Sets the variable list of a CustomFormula and creates a new array for inputs.
+	 * @param varList
+	 */
 	public void setVariables(VariableList varList) {
 		this.variables = varList;
 		input = new Formula[variables.size()];
@@ -195,8 +199,11 @@ public class CustomFormula extends Formula {
 	// TODO ausprogrammieren!
 	public Object clone() {
 		CustomFormula clonedCF = (CustomFormula)super.clone();
+		Formula[] inputBackup = clonedCF.input;
 		clonedCF.setVariables(variables);	// no clone of variables
 		clonedCF.setRoot(root);					// no clone of the tree
+		clonedCF.result = null;
+		clonedCF.input = inputBackup;
 		return clonedCF;
 	}
 

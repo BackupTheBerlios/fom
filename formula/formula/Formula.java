@@ -1,4 +1,4 @@
-/* $Id: Formula.java,v 1.49 2004/09/03 14:51:19 shadowice Exp $
+/* $Id: Formula.java,v 1.50 2004/09/06 13:02:06 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
@@ -14,7 +14,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.49 $
+ * @version $Revision: 1.50 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -217,7 +217,8 @@ public abstract class Formula extends Container implements Cloneable {
 			}
 			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
 		}
-		g.drawString(getFormulaName(), (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2);
+		String name = getFormulaName();
+		g.drawString(name, (FORMULAWIDTH-g.getFontMetrics().stringWidth(name))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2);
 		if (resultString != null) {
 			if ((paintStatus & PAINTSTATUS_CALCULATING) != 0) {
 				g.setFont(CALC_FONT);
@@ -441,6 +442,7 @@ public abstract class Formula extends Container implements Cloneable {
 		try {
 			Formula clonedForm = (Formula)getClass().newInstance();		//(Formula)super.clone(); <--- doesn't work with container!
 	    	clonedForm.setLocation(getLocation());
+	    	clonedForm.setFormulaName(new String(getFormulaName()));
 	    	//clonedForm.formulaName = new String(formulaName);
 	    	clonedForm.inputPins = (PinPoint[])inputPins.clone();
 	    	for (int i=0;i<clonedForm.inputPins.length;i++) {
