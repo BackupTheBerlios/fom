@@ -45,7 +45,7 @@ public class ControlPanel extends Panel {
 		btnReset			= new Button(Messages.getString("ControlPanel.BtnReset"));
 		btnVariables		= new Button(Messages.getString("ControlPanel.BtnVariables"));
 		lblSpeed			= new Label(Messages.getString("ControlPanel.LblSpeed"),Label.RIGHT);
-		lblEqualsign		= new Label(Messages.getString("ControlPanel.LblEqualsign"),Label.CENTER);
+		lblEqualsign		= new Label("=",Label.CENTER);
 		tfFormula			= new FormulaTextField(this,"");
 		tfResult			= new FormulaTextField(this,"");
 		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 50, 1, 10, 200);
