@@ -14,10 +14,6 @@ import utils.Messages;
 public abstract class BooleanFormula extends Formula {
 
 	protected Boolean result;
-//	TODO Einige auskommentierte Sachen!
-/*	public long getLongResult() throws FormulaException {
-		return 0;
-	}*/
 
 	public final boolean getBooleanResult() throws FormulaException {
 		if (result != null)

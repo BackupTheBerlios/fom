@@ -3,7 +3,6 @@
  */
 package formula;
 
-import java.lang.Object;
 import utils.Messages;
 
 /** TODO JavaDoc ergänzen
