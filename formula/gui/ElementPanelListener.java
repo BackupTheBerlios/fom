@@ -43,6 +43,7 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 			ePanel.refreshElementList();
 		} else if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
 			aPanel.getFormulaPanel().deleteAll();
+			aPanel.getControlPanel().updateTfResult("");
 			aPanel.getFormulaPanel().validate();
 			aPanel.getFormulaPanel().doLayout();
 			aPanel.getFormulaPanel().repaint();
