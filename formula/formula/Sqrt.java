@@ -16,28 +16,27 @@ public class Sqrt extends NumberFormula {
 		if (input[0] == null)
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-			result = new Double(input[0].getDoubleResult()); //Quadratwurzel muss hier noch her!
-	}
-	
-	public String toString() {
-		try { //Das ist Quickfix!
-			if (input[0].getDoubleResult() < 0)
-				return "("+input[0].toString()+")^1/2"; //Dieses Symbol ist doof.
-			else
-				throw new FormulaException(Messages.getString("Error.IncompleteFormula")); //Anderer Fehler?
-		} catch (FormulaException e) { //Das ist Quickfix!
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+			result = new Double(Math.sqrt(input[0].getDoubleResult()));
 	}
 
 	/**
-	 * Creates a "^1/2" with an input.
+	 * Creates a "SQRT" with an input.
 	 */
 	public Sqrt() {
 		input=new Formula[1];
-		formulaName="^1/2";
+		formulaName="SQRT";
+	}
+	
+	/**
+	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
+	 * or the resulting formula as string for a (sub)tree with this object as root.
+	 */	
+	public final String toString() {
+		String outString = "SQRT(";
+		if (input[0] != null)
+			outString += input[0].toString();
+		outString += ")";
+		return outString;
 	}
 
 }

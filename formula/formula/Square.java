@@ -19,16 +19,24 @@ public class Square extends NumberFormula {
 			result = new Double(input[0].getDoubleResult() * input[0].getDoubleResult());
 	}
 	
-	public String toString() {
-		return "("+input[0].toString()+")²";
-	}
-
 	/**
-	 * Creates a "²" with an input.
+	 * Creates a "x²" with 1 input.
 	 */
 	public Square() {
-		input=new Formula[1];
-		formulaName="²";
+		input = new Formula[1];
+		formulaName = "x²";
+	}
+	
+	/**
+	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
+	 * or the resulting formula as string for a (sub)tree with this object as root.
+	 */	
+	public final String toString() {
+		String outString = "(";
+		if (input[0] != null)
+			outString += input[0].toString();
+		outString += ")²";
+		return outString;
 	}
 
 }
