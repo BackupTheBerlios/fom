@@ -16,37 +16,25 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 
 	private Panel spaceForInputs;
 	//private ScrollPane scrollForInputs;
-	//private AppletPanel parent;
 	private Button okButton;
 	private TextField[] varName;
 	private TextField[] varValueNumber;
 	private Button[] varValueBoolean;
 	private String[] oldVarName;
-	private Integer tempCounter = new Integer(0);
 
 	//TODO Dialog öffnen
 
 	/* HEIKO:
-	 * Also 1. verschieb die Klasse ins Package gui (Refactor->Move), die hat 
-	 * nichts in formula zu suchen. (VariableDialog wär auch ein schönerer Name,
-	 * aber mir egal :))
-	 * 2. muss sie von Frame, Dialog oder Window (Dialog ist wahrscheinlich am besten)
-	 * abgeleitet werden und nicht von Container.
-	 * Den Constructor dementsprechend anpassen, ich ruf's mit
-	 * DialogVariables(AppletPanel); auf.
 	 * 3. da du mehrere Variablen darstellen willst, nimm BorderLayout und mach 
 	 * eine Tabelle draus. Zum Scrollen gibts ScrollPane in das du aber noch ein
 	 * zusätzliches Panel einfügen musst, um in dem Panel dann den BorderLayout
 	 * zu verwenden.
-	 * 4. super nicht vergessen (und zwar super(AppletPanel,true) damit's modal ist).
 	 */
 	public DialogVariables(AppletPanel parent) {
 		super(new Frame(), "Variables' Dialog", true);
-		//this.parent = parent;
 		TypeConstVar[] varArray = ConstVarFormula.getVarList();
 		this.setBounds(50, 50, 300, 300);
 		Object value;
-		//setLayout(new BorderLayout());
 		varName = new TextField[varArray.length];
 		varValueNumber = new TextField[varArray.length];
 		varValueBoolean = new Button[varArray.length];
@@ -177,13 +165,9 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 				varName[index].setBackground(SystemColor.text);
 			} else {
 				//Leere oder doppelete Variablennamen müssen verhindert werden.
-				ConstVarFormula.setVarNameAll(oldVarName[index], "$$InternTempCounter" + tempCounter.toString() + "$$");
-				oldVarName[index] = "$$InternTempCounter" + tempCounter.toString() + "$$";
+				ConstVarFormula.setVarNameAll(oldVarName[index], "$$InternTempCounter" + new Integer(index).toString() + "$$");
+				oldVarName[index] = "$$InternTempCounter" + new Integer(index).toString() + "$$";
 				varName[index].setBackground(Color.RED);
-				//MAURICE Dies gefällt mir nicht. Gibts da nicht was schöneres?
-				// HEIKO: siehe getArrayPosition
-				//MAURICE: Nein, ich meine die Erhöhung des tempCounters.
-				tempCounter = new Integer(tempCounter.intValue() + 1);
 			}
 		} else {
 			if (isValidName(varName[index].getText())) {
@@ -193,7 +177,10 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 					newInput = "0";
 				}
 				if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
+					varValueNumber[index].setBackground(SystemColor.text);
 					ConstVarFormula.setVarValueAll(varName[index].getText(), new Double(newInput.replace(',','.')));
+				} else {
+					varValueNumber[index].setBackground(Color.RED);
 				}
 			}
 		}

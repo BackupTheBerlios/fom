@@ -2,9 +2,8 @@
  * Created on 27.06.2004
  */
 package formula;
-import java.awt.TextField;
-import java.awt.event.TextEvent;
-import java.awt.event.TextListener;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Class for variable numbers.
@@ -40,6 +39,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 			inputVarName.addTextListener(this);
 			addVarList(this);
 		}
+		inputVarName.setBackground(SystemColor.text);
 		oldName = new String("number1");
 		add(inputVarName);
 	}
@@ -61,17 +61,19 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 
 	public void textValueChanged(TextEvent arg) {
 		String newName = inputVarName.getText();
-		if (newName.length() == 0) {
-			deleteVarList(this, oldName);
-			result = new Double(0);
-		} else {
-			if (oldName.length() != 0) {
+		if (isValidName(newName, result)) {
+			if (isValidName(oldName, result)) {
 				deleteVarList(this, oldName);
 			}
 			addVarList(this);
+			inputVarName.setBackground(SystemColor.text);
+		} else {
+			deleteVarList(this, oldName);
+			result = new Double(0);
+			inputVarName.setBackground(Color.RED);
 		}
 		oldName = newName;
-		this.repaint();
+		repaint();
 	}
 
 }

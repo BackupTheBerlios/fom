@@ -116,7 +116,7 @@ public abstract class ConstVarFormula extends Formula {
 		TypeConstVar newVariable;
 		if (content == null) {
 			//Variablenname existiert noch nicht.
-			newVariable = new TypeConstVar(new Boolean(false), toAdd.getInputVarName());
+			newVariable = new TypeConstVar((Boolean)toAdd.result, toAdd.getInputVarName());
 			newVariable.addVarInnerList(toAdd);
 			varList.addFirst(newVariable);
 		} else {
@@ -138,7 +138,7 @@ public abstract class ConstVarFormula extends Formula {
 		TypeConstVar newVariable;
 		if (content == null) {
 			//Variablenname existiert noch nicht.
-			newVariable = new TypeConstVar(new Double(0), toAdd.getInputVarName());
+			newVariable = new TypeConstVar((Double)toAdd.result, toAdd.getInputVarName());
 			newVariable.addVarInnerList(toAdd);
 			varList.addFirst(newVariable);
 		} else {
@@ -225,6 +225,29 @@ public abstract class ConstVarFormula extends Formula {
 		if (content != null) {
 			content.setValue(value);
 		}
+	}
+
+	/**
+	 * Validates a variable name. Valid names have at least one non-space character and
+	 * don't use an already existing name.
+	 * @param isValid To be checked.
+	 * @return Returns, if variable name is valid.
+	 */
+	protected static final boolean isValidName(String isValid, Object value) {
+		boolean valid = true;
+		TypeConstVar content;
+		//name must have at least one non-space character.
+		if (isValid.matches(" *")) {
+			valid = false;
+		}
+		//Double names of wrong data type is not valid.
+		for (int i=0; i < varList.size() && valid; i++) {
+			content = (TypeConstVar)(varList.get(i));
+			if ((isValid.equals(content.getName())) && (! value.getClass().equals(content.getValue().getClass()))) {
+				valid = false;
+			}
+		}
+		return valid;
 	}
 
 }

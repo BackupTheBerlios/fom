@@ -2,9 +2,8 @@
  * Created on 27.06.2004
  */
 package formula;
-import java.awt.TextField;
-import java.awt.event.TextEvent;
-import java.awt.event.TextListener;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Class for variable booleans.
@@ -32,6 +31,7 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 		formulaName = "                     Boolean";
 		result = new Boolean(false);
 		inputVarName = new TextField();
+		inputVarName.setBackground(SystemColor.text);
 		inputVarName.setText("boolean1");
 		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
 		if (elementChooser) {
@@ -61,17 +61,19 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 
 	public final void textValueChanged(TextEvent arg) {
 		String newName = inputVarName.getText();
-		if (newName.length() == 0) {
-			deleteVarList(this, oldName);
-			result = new Boolean(false);
-		} else {
-			if (oldName.length() != 0) {
+		if (isValidName(newName, result)) {
+			if (isValidName(oldName, result)) {
 				deleteVarList(this, oldName);
 			}
 			addVarList(this);
+			inputVarName.setBackground(SystemColor.text);
+		} else {
+			deleteVarList(this, oldName);
+			result = new Boolean(false);
+			inputVarName.setBackground(Color.RED);
 		}
 		oldName = newName;
-		this.repaint();
+		repaint();
 	}
 
 }

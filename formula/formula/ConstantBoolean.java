@@ -23,7 +23,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 
 	/**
 	 * Creates a constant boolean.
-	 * @param enabled Enables inputBoolean for input.
+	 * @param elementChooser Disables inputBoolean for input.
 	 */
 	public ConstantBoolean(boolean elementChooser) {
 		super();

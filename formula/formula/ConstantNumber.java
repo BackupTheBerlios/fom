@@ -23,7 +23,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 
 	/**
 	 * Creates a constant number.
-	 * @param enabled Enables inputNumber for input.
+	 * @param elementChooser Disables inputNumber for input.
 	 */
 	public ConstantNumber(boolean elementChooser) {
 		super();
@@ -35,6 +35,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		} else {
 			inputNumber.addTextListener(this);
 		}
+		inputNumber.setBackground(SystemColor.text);
 		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
 		add(inputNumber);
 	}
@@ -55,7 +56,10 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		}
 		if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
 			result = new Double(newInput.replace(',','.'));
+			inputNumber.setBackground(SystemColor.text);
 			repaint();
+		} else {
+			inputNumber.setBackground(Color.RED);
 		}
 	}
 
