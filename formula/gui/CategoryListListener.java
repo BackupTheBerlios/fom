@@ -4,8 +4,9 @@
  */
 package gui;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
+import java.awt.*;
+import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
@@ -14,9 +15,10 @@ import java.awt.event.ItemListener;
  */
 public class CategoryListListener implements ItemListener {
 
-	public void itemStateChanged(ItemEvent arg0) {
+	public void itemStateChanged(ItemEvent ievent) {
 		//TODO get new list
-
+		String category=(String)ievent.getItem();
+		Formula[] elements=Categories.getCategoryElements(category);
+		((ElementPanel)((Choice)ievent.getSource()).getParent()).updateElementList(elements);
 	}
-
 }

@@ -12,21 +12,55 @@ import utils.Messages;
  */
 public class Categories {
 
-	private String[] categories;
+	private static String[] categories;
 
-	private HashMap categoryElements;
+	private static HashMap categoryElements;
 
-	public Categories() {
+	private static Categories categoryObj=new Categories();
+
+	/**
+	 * Private constructor because there'll be only one category-list.
+	 */
+	private Categories() {
 		categories=new String[Integer.parseInt(Messages.getString("Elements.Categories"))];
-		for(int i=0;i<categories.length;i++);
+		categoryElements=new HashMap(16);
+		for(int i=0;i<categories.length;i++) {
+			categories[i]=Messages.getString("Elements.Category_"+Integer.toString(i));
+		}
+		
+		//TODO Liste fertig machen, wenn mal alle Operatoren fertig sind.
+		//Category Default:
+		Formula[] form=new Formula[4];
+		form[0]=new Add();
+		form[1]=new Sub();
+		form[2]=new Mult();
+		form[3]=new Div();
+		categoryElements.put(categories[0],form);
+		
+		//Category Constants:
+		form=new Formula[0];
+		
+		
+		//Category Trigonometrics:
+		
+		//Category Hyperbola:
+		
+		//Category Boolean:
+		
+		//Category Logical Operators:
+		
+		//Category Others:
+		
+		//Category Custom:
+		
 	}
 
-	public final String[] getCategories() {
-		return new String[0];
+	public static final String[] getCategories() {
+		return categories;
 	}
 
-	public final Formula[] getCategoryElements() {
-		return new Formula[0];
+	public static final Formula[] getCategoryElements(String category) {
+		return (Formula[])categoryElements.get(category);
 	}
 
 }

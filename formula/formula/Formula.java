@@ -173,8 +173,9 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public boolean completeTree() {
 		boolean complete = true;
-		for (int i = 0; i < getInputCount() && complete; i++)
+		for (int i = 0; i < getInputCount() && complete; i++) {
 			complete = complete && (input[i] == null);
+		}
 		return complete;
 	}
 	/**

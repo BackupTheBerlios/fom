@@ -12,15 +12,29 @@ import java.awt.*;
  *
  */
 
+import formula.Formula;
+
 public class GUIToolkit {
 
-	private static float ZoomFactor=1.0f;
+	private static float zoomFactor=1.0f;
 
 	/**
 	 * @return Returns the global zoom-factor for formula elements.
 	 */
 	public static float getZoomFactor() {
-		return ZoomFactor;
+		return zoomFactor;
+	}
+	
+	/**
+	 * @param form The Formula object that need's a zoom-factor.
+	 * @return Returns the object-dependand zoom-factor.
+	 */
+	public static float getZoomFactor(Formula form) {
+		//no zooming for elements outside of the FormulaPanel!
+		if(form.getParent() instanceof FormulaPanel)
+			return zoomFactor;
+		else
+			return 1.0f;
 	}
 	
 	/**
@@ -28,7 +42,7 @@ public class GUIToolkit {
 	 * @param zf zoom-factor (1.0 = 100%)
 	 */
 	public static void setZoomFactor(float zf) {
-		ZoomFactor=zf;
+		zoomFactor=zf;
 	}
 	
 	/**
