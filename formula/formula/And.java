@@ -4,7 +4,7 @@
  */
 package formula;
 
-import Messages;
+import utils.Messages;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle

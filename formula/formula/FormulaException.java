@@ -11,7 +11,7 @@ package formula;
  * @version 0.1.1 (21.04.2004)
  */
 
-import Messages;
+import utils.Messages;
 
 public class FormulaException extends Exception {
 	

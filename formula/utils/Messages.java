@@ -2,6 +2,7 @@
  * Created on 05.05.2004
  *
  */
+package utils;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 

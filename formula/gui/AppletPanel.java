@@ -15,9 +15,7 @@ import java.awt.*;
 public class AppletPanel extends Applet {
 
 	private FormulaPanel pnlFormula;
-
 	private ControlPanel pnlControls;
-
 	private ElementPanel pnlElements;
 
 	/**

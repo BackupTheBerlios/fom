@@ -7,7 +7,7 @@ package gui;
 import java.awt.Label;
 import java.awt.*;
 
-import Messages;
+import utils.Messages;
 
 /**
  * The ControlPanel contains all buttons and other elements to control,

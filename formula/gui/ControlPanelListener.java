@@ -6,7 +6,8 @@ package gui;
 
 import java.awt.event.*;
 import java.awt.*;
-import Messages;
+
+import utils.Messages;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
