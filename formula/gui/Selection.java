@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.22 2004/09/10 10:05:30 shadowice Exp $
+/* $Id: Selection.java,v 1.23 2004/09/10 10:49:13 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 public class Selection {
 
@@ -430,8 +430,24 @@ public class Selection {
 		aPanel.getFormulaPanel().getParent().validate();
 		*/
 		// NOTE best linux solution:
+		//aPanel.getFormulaPanel().doLayout();
+		
+		
+		ScrollPane sp = (ScrollPane)aPanel.getFormulaPanel().getParent();
+		Dimension oldSize = new Dimension(aPanel.getFormulaPanel().getSize());
 		aPanel.getFormulaPanel().doLayout();
+		if (!oldSize.equals(aPanel.getFormulaPanel().getSize())) {
+			aPanel.getFormulaPanel().getParent().doLayout();
+		}
+		
+		/*aPanel.getFormulaPanel().getParent().doLayout();
+		aPanel.getFormulaPanel().doLayout();
+		aPanel.getFormulaPanel().getParent().doLayout();*/
+		
 		aPanel.getFormulaPanel().repaint();
+		
+		
+		System.out.println(sp.getHAdjustable());
 	}
 
 }
