@@ -22,7 +22,6 @@ public class And extends BooleanFormula {
 	public And() {
 		input = new Formula[2];
 		formulaName = "&";
-		result = null;
 	}
 
 	/**

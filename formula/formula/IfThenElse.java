@@ -14,7 +14,6 @@ public class IfThenElse extends MixedFormula {
 
 
 	public IfThenElse() {
-		// TODO: hab nur kurz den Constructor erstellt, kA ob der so schon komplett ist.
 		formulaName = "if-then-else";
 		input = new Formula[3];
 	}
@@ -103,18 +102,18 @@ public class IfThenElse extends MixedFormula {
 		}
 	}
 
-	// TODO: Zum kurz mal testen, löschen wenn's nicht mehr gebraucht wird!	
-	public static void main(String[] args){
-		IfThenElse ite=new IfThenElse();
-		ite.setInput(ite,0);
-		try{
-			Class[] itypes=ite.getInputTypes(1);
-			for(int i=0;i<itypes.length;i++){
-				System.out.println(itypes[i].getName());
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+
+//	public static void main(String[] args){
+//		IfThenElse ite=new IfThenElse();
+//		ite.setInput(ite,0);
+//		try{
+//			Class[] itypes=ite.getInputTypes(1);
+//			for(int i=0;i<itypes.length;i++){
+//				System.out.println(itypes[i].getName());
+//			}
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//	}
 
 }

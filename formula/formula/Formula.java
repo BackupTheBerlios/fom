@@ -5,6 +5,7 @@
 package formula;
 
 import java.awt.*;
+import java.util.*;
 
 /**
  * This is the top-level class for all formula-elements. It's not usable in itself as it is abstract.
@@ -16,7 +17,8 @@ public abstract class Formula extends Container implements Cloneable {
 
 	public static final int BOXHEIGHT = 50;
 	public static final int RESULTHEIGHT = 25;
-	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT;
+	public static final int CONNECTHEIGHT = 5; 
+	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
 	public static final int FORMULAWIDTH = 120;
 
 	protected Dimension dimension = new Dimension(FORMULAWIDTH+1,FORMULAHEIGHT+1);
@@ -26,7 +28,7 @@ public abstract class Formula extends Container implements Cloneable {
 
 	protected String formulaName;
 
-	public static Formula[] treeList;
+	public static LinkedList treeList;
 
 	/**
 	 * Creates a new formula object.
@@ -78,16 +80,16 @@ public abstract class Formula extends Container implements Cloneable {
 	public void paint(Graphics g) {
 		super.paint(g);
 		//TODO Grafik verbessern
-		//((Graphics2D)g).scale(scaleX,scaleY);
+		//((Graphics2D)g).scale(scaleX, scaleY);
 		g.setColor(Color.BLACK);
-		g.drawRect(0,5,FORMULAWIDTH,30);
-		g.setFont(new Font("Arial",Font.PLAIN,10));
-		g.drawString(formulaName,(FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2,25); // Align: center
-		for(int i=0;i<getInputCount();i++){
+		g.drawRect(0, 5, FORMULAWIDTH, FORMULAHEIGHT);
+		g.setFont(new Font("Arial", Font.PLAIN, 10));
+		g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+(BOXHEIGHT-g.getFontMetrics().getHeight())/2); // Align: center
+		for (int i=0;i<getInputCount();i++){
 			g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1),35,(i+1)*FORMULAWIDTH/(getInputCount()+1),40);
 		}
-		g.drawLine(FORMULAWIDTH/2 +1,5,FORMULAWIDTH/2 +1,0);
-		setSize(FORMULAWIDTH+1,FORMULAHEIGHT+1);
+		g.drawLine(FORMULAWIDTH/2 +1, 5, FORMULAWIDTH/2 +1, 0);
+		setSize(FORMULAWIDTH+1, FORMULAHEIGHT+1);
 	}
 
 	/**
@@ -201,12 +203,8 @@ public abstract class Formula extends Container implements Cloneable {
 		return index;
 	}
 
-	public static Formula[] getTreeList() {
+	public static LinkedList getTreeList() {
 		return treeList;
-	}
-
-	public static void setTreeList(Formula[] treeListParameter) {
-		treeList = treeListParameter;
 	}
 
 	//"Quick-fix" :)
@@ -222,19 +220,11 @@ public abstract class Formula extends Container implements Cloneable {
 		return dimension;
 	}
 	
-	public Dimension getMaximumSize() {
-		return dimension;
-	}
-	
 	public void setSize(int x,int y) {
 		dimension = new Dimension(x,y);
 	}
 	
 	public void setSize(Dimension dim) {
 		dimension = dim;
-	}
-	
-	public Dimension preferredSize() {
-		return dimension;
 	}
 }

@@ -22,7 +22,6 @@ public class Equal extends ComparisonFormula {
 	public Equal() {
 		input = new Formula[2];
 		formulaName = "=";
-		result = null;
 	}
 
 	/**
