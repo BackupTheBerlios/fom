@@ -16,8 +16,8 @@ public abstract class Formula extends Container implements Cloneable {
 
 	public static final int BOXHEIGHT = 50;
 	public static final int RESULTHEIGHT = 25;
-	public static final int BOXWIDTH = 120;
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT;
+	public static final int FORMULAWIDTH = 120;
 
 	protected Formula[] input;
 	protected Formula output;
@@ -73,18 +73,17 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param g Graphics object for painting.
 	 */
 	public void paint(Graphics g) {
-		//		((Graphics2D)g).scale(scaleX,scaleY);
-		//		setSize((int)(sizeX*scaleX+1),(int)(sizeY*scaleY+1));
-		//		g.setColor(Color.BLACK);
-		//		g.drawRect(0,5,sizeX,30);
-		//		g.setFont(new Font("Arial",Font.PLAIN,10));
-		//		g.drawString(formulaName,(sizeX-g.getFontMetrics().stringWidth(formulaName))/2,25); // Align: center
-		//		for(int i=0;i<getInputCount();i++){
-		//			g.drawLine((i+1)*sizeX/(getInputCount()+1),35,(i+1)*sizeX/(getInputCount()+1),40);
-		//		}
-		//		for(int i=0;i<getOutputCount();i++){
-		//			g.drawLine((i+1)*sizeX/(getOutputCount()+1),5,(i+1)*sizeX/(getOutputCount()+1),0);
-		//		}
+		//TODO Grafik verbessern
+				//((Graphics2D)g).scale(scaleX,scaleY);
+				setSize((int)(FORMULAWIDTH+1),(int)(FORMULAHEIGHT+1));
+				g.setColor(Color.BLACK);
+				g.drawRect(0,5,FORMULAWIDTH,30);
+				g.setFont(new Font("Arial",Font.PLAIN,10));
+				g.drawString(formulaName,(FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2,25); // Align: center
+				for(int i=0;i<getInputCount();i++){
+					g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1),35,(i+1)*FORMULAWIDTH/(getInputCount()+1),40);
+				}
+				g.drawLine(FORMULAWIDTH/2 +1,5,FORMULAWIDTH/2 +1,0);
 	}
 
 	/**
@@ -96,16 +95,20 @@ public abstract class Formula extends Container implements Cloneable {
 
 // TODO getInputTypes / getOutputTypes
 	/**
-	 * @param index Number of the input (0=left...max-1=right)
-	 * @return Returns an array of all possible classes for the input.
+	 * @param index number of input (0=left...max-1=right).
+	 * @return Returns an array of all possible classes for input.
+	 * @throws FormulaException Shouldn't happen. ;)
+	 * If no Input is possible, Returns an array with content "Nothing".
 	 */
-	public abstract Class[] getInputTypes(int index);
+	public abstract Class[] getInputTypes(int index) throws FormulaException;
 	
 	
 	/**
-	 * @return Returns an array of all possible classes for the output.
+	 * @return Returns an array of all possible classes for output.
+	 * @throws FormulaException Shouldn't happen. ;)
+	 * If no Output is possible, Returns an array with content "Nothing".
 	 */
-	public abstract Class[] getOutputTypes();
+	public abstract Class[] getOutputTypes() throws FormulaException;
 
 
 	/**
@@ -121,7 +124,6 @@ public abstract class Formula extends Container implements Cloneable {
 	public Formula getInput(int index) {
 		return input[index];
 	}
-
 
 	/**
 	 * @return Returns the string-equvalent of this formula-object (if inputs not connected)
@@ -193,6 +195,22 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @return Is Formula-Object allowed to connect.
 	 */
 	public abstract boolean isValidOutput(Formula in, int whichInput);
+
+
+//	/**
+//	 * Checks, on which input a specific Formula-Object is.
+//	 * @param toFind Formula-Object, which is searched.
+//	 * @param whereToFind Formula-Object, whose inputs have to be checked.
+//	 * @return Returns value of input index, -1 if it isn't found.
+//	 */
+//	protected int indexOfInput(Formula toFind, Formula whereToFind) {
+//		int index = -1;
+//		for (int i = 0; i < whereToFind.getInputCount() && index != -1; i++) {
+//			if (toFind == whereToFind.input[i])
+//				index = i; 
+//		}
+//		return index;
+//	}
 
 	public static Formula[] getTreeList() {
 		return treeList;
