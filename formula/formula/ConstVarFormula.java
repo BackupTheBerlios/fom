@@ -14,21 +14,21 @@ public abstract class ConstVarFormula extends Formula {
 	/**
 	 * Overwrites function. Constants/Variables have no input.
 	 */
-	public int getInputCount() {
+	public final int getInputCount() {
 		return 0;
 	}
 
 	/**
 	 * Overwrites function. Constants/Variables have no input.
 	 */
-	public Formula getInput(int index) {
+	public final Formula getInput(int index) {
 		return null;
 	}
 
 	/**
 	 * Overwrites function. Constants/Variables have no input.
 	 */
-	public void setInput(Formula in, int index) {
+	public final void setInput(Formula in, int index) {
 	}
 
 
