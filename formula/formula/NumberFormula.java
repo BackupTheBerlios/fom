@@ -21,10 +21,6 @@ public abstract class NumberFormula extends Formula {
 			return false;
 	}
 
-	public boolean isValidOutput(Formula out) {
-		return false;
-	}
-
 	public double getDoubleResult() throws FormulaException {
 		return 0.0;
 	}
@@ -41,6 +37,21 @@ public abstract class NumberFormula extends Formula {
 
 	public final void clearResult() {
 		result = null;
+	}
+
+	public boolean isValidOutput(Formula in, int whichInput) {
+		return false;
+	}
+
+	/**
+	 * @return Returns an array of all possible classes for the output.
+	 */
+	public Class[] getInputTypes(int in) {
+		return null;
+	}
+
+	public Class[] getOutputTypes() {
+		return new Class[0];
 	}
 
 }
