@@ -1,14 +1,15 @@
 /*
  * Created on 27.06.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the OR-connection of two boolean values.
+ * f(a,b) = a OR b
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Or extends BooleanFormula {
 

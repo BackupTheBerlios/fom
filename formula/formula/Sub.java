@@ -1,14 +1,15 @@
 /*
  * Created on 17.05.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the difference of two numbers.
+ * f(x,y) = x - y
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Sub extends NumberFormula {
 

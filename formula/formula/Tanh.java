@@ -1,14 +1,15 @@
 /*
  * Created on 05.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the hyperbolic tangent of a number.
+ * f(x) = tanh (x)
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Tanh extends NumberFormula {
 
@@ -33,7 +34,7 @@ public class Tanh extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(tanh ";
+		String outString = "tanh(";
 		if (input[0] != null)
 			outString += input[0].toString();
 		outString += ")";

@@ -3,12 +3,13 @@
  */
 package formula;
 
-
 import utils.Messages;
 
 /**
+ * This class provides an element that checks whether a number is odd or not. 
+ * f(x) = TRUE for x is odd, FALSE for x is even
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Odd extends ComparisonFormula {
 
@@ -20,12 +21,12 @@ public class Odd extends ComparisonFormula {
 	}
 
 	/**
-	 * Creates an "Odd" with 1 input.
+	 * Creates an "ODD" with 1 input.
 	 */
 	public Odd() {
 		super();
 		input = new Formula[1];
-		formulaName = "Odd";
+		formulaName = "ODD";
 	}
 
 	/**
@@ -33,7 +34,7 @@ public class Odd extends ComparisonFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
 	public final String toString() {
-		String outString = "(Odd? ";
+		String outString = "(ODD? ";
 		if (input[1] != null)
 			outString += input[0].toString();
 		outString += ")";

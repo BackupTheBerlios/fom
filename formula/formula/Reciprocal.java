@@ -1,14 +1,15 @@
 /*
  * Created on 22.05.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the reciprocal of a number.
+ * f(x) = 1/x
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Reciprocal extends NumberFormula {
 

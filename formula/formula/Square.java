@@ -1,14 +1,15 @@
 /*
  * Created on 22.05.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the square of a number.
+ * f(x) = x²
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Square extends NumberFormula {
 

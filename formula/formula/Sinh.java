@@ -1,14 +1,15 @@
 /*
  * Created on 05.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the hyperbolic sine of a number.
+ * f(x) = sinh (x)
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Sinh extends NumberFormula {
 
@@ -33,7 +34,7 @@ public class Sinh extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(sinh ";
+		String outString = "sinh(";
 		if (input[0] != null)
 			outString += input[0].toString();
 		outString += ")";

@@ -1,14 +1,15 @@
 /*
  * Created on 06.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the modulo-function. 
+ * f(x,y) = x mod y
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Modulo extends NumberFormula {
 

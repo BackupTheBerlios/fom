@@ -1,14 +1,15 @@
 /*
  * Created on 07.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that checks which of the two numbers is the smaller one. 
+ * f(x,y) = x for x<=y, y for x>y
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Min extends NumberFormula {
 
@@ -33,10 +34,10 @@ public class Min extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(min ";
+		String outString = "min (";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += ", ";
+		outString += "; ";
 		if (input[1] != null)
 			outString += input[1].toString();
 		outString += ")";

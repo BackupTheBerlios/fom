@@ -1,12 +1,13 @@
 /*
  * Created on 08.07.2004
- *
  */
 package formula;
 
 /**
+ * This class provides an element that represents a radom number.
+ * f = RANDOM
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Random extends NumberFormula {
 

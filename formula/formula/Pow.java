@@ -1,14 +1,15 @@
 /*
  * Created on 05.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the any power of a number.
+ * f(x,y) = x^y
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Pow extends NumberFormula {
 
@@ -36,10 +37,10 @@ public class Pow extends NumberFormula {
 		String outString = "(";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += "^(";
+		outString += "^";
 		if (input[1] != null)
 			outString += input[1].toString();
-		outString += "))";
+		outString += ")";
 		return outString;
 	}
 

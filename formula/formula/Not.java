@@ -1,14 +1,15 @@
 /*
  * Created on 27.06.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that negates a boolean.
+ * f(a) = NOT a
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Not extends BooleanFormula {
 

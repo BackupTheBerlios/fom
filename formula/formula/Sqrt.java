@@ -1,14 +1,15 @@
 /*
  * Created on 22.05.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the square root of a number.
+ * f(x) = SQRT(x)
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Sqrt extends NumberFormula {
 
@@ -33,7 +34,7 @@ public class Sqrt extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(SQRT ";
+		String outString = "SQRT(";
 		if (input[0] != null)
 			outString += input[0].toString();
 		outString += ")";

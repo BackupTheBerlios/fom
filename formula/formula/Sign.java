@@ -1,14 +1,15 @@
 /*
  * Created on 22.05.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the negative value of a number.
+ * f(x) = -x
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Sign extends NumberFormula {
 

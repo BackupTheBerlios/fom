@@ -3,12 +3,13 @@
  */
 package formula;
 
-
 import utils.Messages;
 
 /**
+ * This class provides an element that compares the equality of two numbers. 
+ * f(x,y) = TRUE for x<>y, FALSE for x=y
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Unequal extends ComparisonFormula {
 

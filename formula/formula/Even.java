@@ -34,7 +34,7 @@ public class Even extends ComparisonFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
 	public final String toString() {
-		String outString = "EVEN? (";
+		String outString = "(EVEN? ";
 		if (input[1] != null)
 			outString += input[0].toString();
 		outString += ")";
