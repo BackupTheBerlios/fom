@@ -64,7 +64,6 @@ public class AppletPanel extends Applet {
 	 * Constructor is needed if running as application.
 	 */
 	public AppletPanel() {
-		init();
 	}
 
 /*	public static void main(String[] args) {

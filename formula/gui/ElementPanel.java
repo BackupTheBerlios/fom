@@ -18,6 +18,7 @@ public class ElementPanel extends Panel {
 	private Panel elementPanel;
 	
 	private GridLayout elementPanelLayout = new GridLayout();
+	DragnDropListener dnd;
 	
 	/**
 	 * Creates the panel for categories and element list.
@@ -28,6 +29,7 @@ public class ElementPanel extends Panel {
 		chCategoryList	= new Choice();
 		scpElementList	= new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
 		elementPanel	= new Panel();
+		dnd				= new DragnDropListener();
 		
 		String[] categories=Categories.getCategories();
 		for(int i=0;i<categories.length;i++) {
@@ -35,21 +37,22 @@ public class ElementPanel extends Panel {
 		}
 		
 		chCategoryList.addItemListener(new CategoryListListener());
+		
 		scpElementList.setBackground(SystemColor.text);
+		elementPanel.setBackground(SystemColor.text);
 		elementPanel.setLayout(elementPanelLayout);
 		scpElementList.add(elementPanel);
-		elementPanelLayout.setHgap(4);
-		elementPanelLayout.setVgap(4);
-		updateElementList(Categories.getCategoryElements(chCategoryList.getSelectedItem()));
 		
-		scpElementList.add(elementPanel);
 		add(chCategoryList,BorderLayout.NORTH);
 		add(scpElementList,BorderLayout.CENTER);
-		
+				
 		setBackground(SystemColor.activeCaptionBorder);
-		DragnDropListener dnd=new DragnDropListener();
-		scpElementList.addMouseListener(dnd);
-		scpElementList.addMouseMotionListener(dnd);
+		
+		setSize(150,getSize().height);
+		chCategoryList.setSize(150,chCategoryList.getSize().height);
+		scpElementList.setSize(150,scpElementList.getSize().height);		
+		
+		updateElementList(Categories.getCategoryElements(chCategoryList.getSelectedItem()));
 	}
 
 	/**
@@ -60,8 +63,10 @@ public class ElementPanel extends Panel {
 		elementPanel.removeAll();
 		if(form == null) {
 			elementPanelLayout.setRows(1);
+			elementPanelLayout.setColumns(1);
 			elementPanel.add(new Label("ToDo: Kategorien :)"));
 		} else {
+			elementPanelLayout.setColumns(1);
 			elementPanelLayout.setRows(form.length);
 			for(int i=0;i<form.length;i++) {
 				elementPanel.add(form[i]);

@@ -19,6 +19,8 @@ public abstract class Formula extends Container implements Cloneable {
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT;
 	public static final int FORMULAWIDTH = 120;
 
+	protected Dimension dimension = new Dimension(FORMULAWIDTH+1,FORMULAHEIGHT+1);
+
 	protected Formula[] input;
 	protected Formula output;
 
@@ -31,6 +33,7 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public Formula() {
 		super();
+		setSize(dimension);
 	}
 
 
@@ -75,16 +78,16 @@ public abstract class Formula extends Container implements Cloneable {
 	public void paint(Graphics g) {
 		super.paint(g);
 		//TODO Grafik verbessern
-				//((Graphics2D)g).scale(scaleX,scaleY);
-				setSize((int)(FORMULAWIDTH+1),(int)(FORMULAHEIGHT+1));
-				g.setColor(Color.BLACK);
-				g.drawRect(0,5,FORMULAWIDTH,30);
-				g.setFont(new Font("Arial",Font.PLAIN,10));
-				g.drawString(formulaName,(FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2,25); // Align: center
-				for(int i=0;i<getInputCount();i++){
-					g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1),35,(i+1)*FORMULAWIDTH/(getInputCount()+1),40);
-				}
-				g.drawLine(FORMULAWIDTH/2 +1,5,FORMULAWIDTH/2 +1,0);
+		//((Graphics2D)g).scale(scaleX,scaleY);
+		g.setColor(Color.BLACK);
+		g.drawRect(0,5,FORMULAWIDTH,30);
+		g.setFont(new Font("Arial",Font.PLAIN,10));
+		g.drawString(formulaName,(FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2,25); // Align: center
+		for(int i=0;i<getInputCount();i++){
+			g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1),35,(i+1)*FORMULAWIDTH/(getInputCount()+1),40);
+		}
+		g.drawLine(FORMULAWIDTH/2 +1,5,FORMULAWIDTH/2 +1,0);
+		setSize(FORMULAWIDTH+1,FORMULAHEIGHT+1);
 	}
 
 	/**
@@ -221,4 +224,32 @@ public abstract class Formula extends Container implements Cloneable {
 		treeList = treeListParameter;
 	}
 
+	//"Quick-fix" :)
+	public Dimension getSize() {
+		return dimension;
+	}
+	
+	public Dimension getPreferedSize() {
+		return dimension;
+	}
+	
+	public Dimension getMinimumSize() {
+		return dimension;
+	}
+	
+	public Dimension getMaximumSize() {
+		return dimension;
+	}
+	
+	public void setSize(int x,int y) {
+		dimension = new Dimension(x,y);
+	}
+	
+	public void setSize(Dimension dim) {
+		dimension = dim;
+	}
+	
+	public Dimension preferredSize() {
+		return dimension;
+	}
 }

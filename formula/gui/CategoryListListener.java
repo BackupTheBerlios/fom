@@ -20,6 +20,5 @@ public class CategoryListListener implements ItemListener {
 		String category=(String)ievent.getItem();
 		Formula[] elements=Categories.getCategoryElements(category);
 		((ElementPanel)((Choice)ievent.getSource()).getParent()).updateElementList(elements);
-		((ElementPanel)((Choice)ievent.getSource()).getParent()).repaint();
 	}
 }
