@@ -1,4 +1,4 @@
-/* $Revision: 1.23 $
+/* $Id: FormulaPanel.java,v 1.24 2004/08/25 18:21:54 shadowice Exp $
  * Created on 22.04.2004
  *
  */

@@ -1,4 +1,4 @@
-/* $Revision: 1.6 $
+/* $Id: PinPoint.java,v 1.7 2004/08/25 18:21:54 shadowice Exp $
  * Created on 02.07.2004
  *
  */
@@ -11,7 +11,7 @@ import formula.*;
  * Class to store the points where a formula can be connected.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 /*
  * How to use this:

@@ -1,4 +1,4 @@
-/* $Revision: 1.6 $
+/* $Id: HotkeyListener.java,v 1.7 2004/08/25 18:21:54 shadowice Exp $
  * Created on 13.08.2004
  *
  */
@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class HotkeyListener implements KeyListener {
 

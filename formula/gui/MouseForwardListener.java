@@ -1,4 +1,4 @@
-/* $Revision: 1.3 $
+/* $Id: MouseForwardListener.java,v 1.4 2004/08/25 18:21:54 shadowice Exp $
  * Created on 25.08.2004
  *
  */

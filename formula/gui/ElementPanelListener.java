@@ -1,4 +1,4 @@
-/* $Revision: 1.7 $
+/* $Id: ElementPanelListener.java,v 1.8 2004/08/25 18:21:54 shadowice Exp $
  * Created on 26.04.2004
  *
  */

@@ -1,4 +1,4 @@
-/* $Revision: 1.22 $
+/* $Id: AppletPanel.java,v 1.23 2004/08/25 18:21:54 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 

@@ -1,4 +1,4 @@
-/* $Revision: 1.13 $
+/* $Id: ControlPanelListener.java,v 1.14 2004/08/25 18:21:54 shadowice Exp $
  * Created on 12.05.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class ControlPanelListener implements ActionListener, ItemListener, AdjustmentListener {
 	

@@ -1,4 +1,4 @@
-/* $Revision: 1.9 $
+/* $Id: TreeLayout.java,v 1.10 2004/08/25 18:21:54 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -10,7 +10,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class TreeLayout implements LayoutManager {
 

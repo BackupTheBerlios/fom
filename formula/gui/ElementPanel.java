@@ -1,4 +1,4 @@
-/* $Revision: 1.21 $
+/* $Id: ElementPanel.java,v 1.22 2004/08/25 18:21:54 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.21 $
+ * @version $Revision: 1.22 $
  */
 public class ElementPanel extends Panel {
 

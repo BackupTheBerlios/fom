@@ -1,4 +1,4 @@
-/* $Revision: 1.8 $
+/* $Id: Selection.java,v 1.9 2004/08/25 18:21:54 shadowice Exp $
  * Created on 12.08.2004
  *
  */
@@ -10,7 +10,7 @@ import java.awt.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class Selection {
 

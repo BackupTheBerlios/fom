@@ -1,4 +1,4 @@
-/* $Revision: 1.4 $
+/* $Id: FormulaTextField.java,v 1.5 2004/08/25 18:21:54 shadowice Exp $
  * Created on 16.05.2004
  *
  */
@@ -10,7 +10,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class FormulaTextField extends TextField {
 

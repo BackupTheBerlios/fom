@@ -1,4 +1,4 @@
-/* $Revision: 1.12 $
+/* $Id: DialogVariables.java,v 1.13 2004/08/25 18:21:54 shadowice Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -11,7 +11,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
