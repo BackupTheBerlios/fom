@@ -33,30 +33,59 @@ public class Categories {
 
 		//TODO Liste fertig machen, wenn mal alle Operatoren fertig sind.
 		//Category Default:
-		Formula[] form = new Formula[5];
+		Formula[] form = new Formula[8];
 		form[0] = new Add();
 		form[1] = new Sub();
 		form[2] = new Mult();
 		form[3] = new Div();
 		form[4] = new ConstantNumber();
+		form[5] = new Sign();
+		form[6] = new Square();
+		form[7] = new Reciprocal();
 		categoryElements.put(categories[0], form);
 
 		//Category Variables:
-		form = new Formula[4];
+		form = new Formula[6];
 		form[0] = new ConstantNumber();
 		form[1] = new ConstantBoolean();
 		form[2] = new VariableNumber();
 		form[3] = new VariableBoolean();
+		form[4] = new ConstE();
+		form[5] = new ConstPi();
 		categoryElements.put(categories[1], form);
 
 		//Category Arithmetics
-		form = new Formula[0];
+		form = new Formula[10];
+		form[0] = new Sqrt();
+		form[1] = new Pow();
+		form[2] = new Ln();
+		form[3] = new LogTen();
+		form[4] = new LogBase();
+		form[5] = new Euler();
+		form[6] = new Factorial();
+		form[7] = new Modulo();
+		form[8] = new Abs();
+		form[9] = new Exp();				
+		categoryElements.put(categories[2], form);
 
 		//Category Trigonometrics:
-		form = new Formula[0];
+		form = new Formula[7];
+		form[0] = new Sin();
+		form[1] = new Cos();
+		form[2] = new Tan();
+		form[3] = new Cot();
+		form[4] = new Arcsin();
+		form[5] = new Arccos();
+		form[6] = new Arctan();
+		categoryElements.put(categories[3], form);
 
 		//Category Hyperbola:
-		form = new Formula[0];
+		form = new Formula[4];
+		form[0] = new Sinh();
+		form[1] = new Cosh();
+		form[2] = new Tanh();
+		form[3] = new Coth();
+		categoryElements.put(categories[4], form);
 
 		//Category Comparison:
 		form = new Formula[8];
@@ -81,8 +110,17 @@ public class Categories {
 		categoryElements.put(categories[6], form);
 
 		//Category Others:
-		form = new Formula[1];
+		form = new Formula[10];
 		form[0] = new IfThenElse();
+		form[1] = new Min();
+		form[2] = new Max();
+		form[3] = new Random();
+		form[4] = new Deg2grad();
+		form[5] = new Deg2rad();
+		form[6] = new Grad2deg();
+		form[7] = new Grad2rad();
+		form[8] = new Rad2deg();
+		form[9] = new Rad2grad();	
 		categoryElements.put(categories[7], form);
 
 
