@@ -1,4 +1,4 @@
-/* $Id: ControlPanel.java,v 1.25 2004/09/06 13:08:01 br3001 Exp $
+/* $Id: ControlPanel.java,v 1.26 2004/09/17 11:19:13 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import utils.*;
  * how the formula-tree is calculated or what to do with it.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 public class ControlPanel extends Panel {
 
@@ -61,7 +61,10 @@ public class ControlPanel extends Panel {
 		//chZoom.add("200%");
 		
 		tfResult.setEditable(false);
-		tfResult.setBackground(Color.white);
+		//tfResult.setBackground(Color.white);
+		//tfResult.setForeground(Color.black);
+		//ftfFormula.setBackground(Color.white);
+		//ftfFormula.setForeground(Color.black);
 		setLayout(gbl);
 
 		//adding the components (in sub-panels) to this panel:
