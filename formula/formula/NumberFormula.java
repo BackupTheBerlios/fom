@@ -15,16 +15,15 @@ public abstract class NumberFormula extends Formula {
 	protected Number result;
 
 	public boolean isValidInput(Object in, int index) {
-		return false;
+		if ((input[0] instanceof NumberFormula) && (input[1] instanceof NumberFormula))
+			return true;
+		else
+			return false;
 	}
 
 	public boolean isValidOutput(Object out) {
 		return false;
 	}
-
-/*	public long getLongResult() {
-		return 0;
-	}*/
 
 	public double getDoubleResult() throws FormulaException {
 		return 0.0;
@@ -36,8 +35,7 @@ public abstract class NumberFormula extends Formula {
 
 	/**
 	 * Calculates this fomula-element by using the results from it's inputs.
-	 *
-	 * @throws FormulaException Is thrown, when the inputs have no results.
+	 * @throws FormulaException when the inputs are empty.
 	 */
 	public abstract void calc() throws FormulaException;
 
