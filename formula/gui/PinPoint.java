@@ -30,7 +30,7 @@ public class PinPoint {
 	private Point pinPoint;				// coordinates of the input/output pin
 	private Point mouseTargetPoint;		// center coordinates used to connect other formulas
 	private PinPoint targetPoint;		// if this pin is connected to another pin, that's the target
-
+	private boolean mark = false;		// used to mark temporary connected pins
 
 // constructors:
 	/**
@@ -145,6 +145,23 @@ public class PinPoint {
 	 */
 	public int getInputNumber() {
 		return this.inputNumber;
+	}
+	
+	
+	/**
+	 * Sets a mark if the PinPoint is connected to another PinPoint while moving around.
+	 * @param m true = temporary connected
+	 */
+	public void setMark(boolean m) {
+		this.mark = m;
+	}
+	
+	
+	/**
+	 * @return true if pin is temporary connected, otherwise false
+	 */
+	public boolean getMark() {
+		return mark;
 	}
 	
 	/**

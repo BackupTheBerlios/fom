@@ -22,9 +22,9 @@ public class FormulaPanel extends Panel {
 	// These lists store all input/output pins.
 	private LinkedList inputPinList 	= new LinkedList();
 	private LinkedList outputPinList 	= new LinkedList();
-	private LinkedList tempPPList		= new LinkedList();
-	//private LinkedList tempInPPList		= new LinkedList();
-	//private LinkedList tempOutPPList		= new LinkedList();
+	private LinkedList tempInPPList		= new LinkedList();
+	private LinkedList tempOutPPList	= new LinkedList();
+	
 	private AppletPanel aPanel;
 
 	/**
@@ -108,6 +108,37 @@ public class FormulaPanel extends Panel {
 	}
 
 
+	public void paint(Graphics g) {
+		super.paint(g);
+		// paint connections between pins:
+		PinPoint pp;
+		g.setColor(Color.DARK_GRAY);
+		for (int i=0;i<outputPinList.size();i++) {
+			pp = (PinPoint)outputPinList.get(i);
+			g.drawOval(pp.getCoordinates().x,pp.getCoordinates().y,5,5); // debug!
+			if (pp.getTarget() != null) {
+				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
+			}
+		}
+		g.setColor(Color.RED);
+		for (int i=0;i<tempInPPList.size();i++) {
+			pp = (PinPoint)tempInPPList.get(i);
+			g.drawOval(pp.getCoordinates().x,pp.getCoordinates().y,5,5); // debug!
+			if (pp.getTarget() != null) {
+				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
+			}
+		}
+		for (int i=0;i<tempOutPPList.size();i++) {
+			pp = (PinPoint)tempOutPPList.get(i);
+			g.drawOval(pp.getCoordinates().x,pp.getCoordinates().y,5,5); // debug!
+			if (pp.getTarget() != null) {
+				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
+			}
+		}
+
+	}
+
+
 	/**
 	 * Finds out if an input-pin is near the outPin and if they are compatible, have no target and are not from the same formula-object. 
 	 * @param outPin source output-pin
@@ -131,7 +162,7 @@ public class FormulaPanel extends Panel {
 				distance = tmpPP.getDistance(x,y);
 				if (distance < minDistance) {  // if nearer then minDistance:
 				// and if it has no target so far and the pins are not from the same formula-object:
-					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form)) {  
+					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form) && (!tmpPP.getMark())) {  
 						// check for compatibility:
 					 	if (tmpPP.getFormula().getInputCount() > 0) {
 						 	inTypes = tmpPP.getFormula().getInputTypes(tmpPP.getInputNumber());
@@ -184,7 +215,7 @@ public class FormulaPanel extends Panel {
 				distance = tmpPP.getDistance(x,y);
 				if (distance < minDistance) {	// if nearer then minDistance:
 				// and if it has no target so far and the pins are not from the same formula-object:
-					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form)) {
+					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form) && (!tmpPP.getMark())) {
 					// check for compatibility:
 						outTypes = tmpPP.getFormula().getOutputTypes();	
 						int a=0,b=0;
@@ -209,57 +240,150 @@ public class FormulaPanel extends Panel {
 	}
 
 	
-	public void paint(Graphics g) {
-		super.paint(g);
-		// paint connections between pins:
-		PinPoint pp;
-		g.setColor(Color.DARK_GRAY);
+	
+	
+	/**
+	 * Used only for graphical reasons. The two lists are possible connections.
+	 * @param ppInList List of input PinPoints.
+	 * @param ppOutList List of output PinPoints.
+	 */
+	public void setTempPinPoints(LinkedList ppInList, LinkedList ppOutList) {
+		tempInPPList = ppInList;
+		tempOutPPList = ppOutList;
+	}
+
+
+	/**
+	 * Searches for the input PinPoint representing the inNumber-th input of form.
+	 * @param form formula to search for
+	 * @param inNumber number of the input (from(0) left to right(length-1))
+	 * @return returns the PinPoint if found, otherwise null.
+	 */
+	public PinPoint getInputPinForFormula(Formula form, int inNumber) {
+		PinPoint pin;
+		for (int i=0;i<inputPinList.size();i++) {
+			pin = (PinPoint)inputPinList.get(i);
+			if (pin.getFormula() == form) {
+				if (inNumber == pin.getInputNumber()) {
+					return pin;
+				}
+			}
+		}
+		return null;  // shouldn't happen if everything's all right!
+	}
+
+	/**
+	 * Searches for the output PinPoint representing the output of form.
+	 * @param form formula to search for
+	 * @return the PinPoint if found, otherwise null.
+	 */
+	public PinPoint getOutputPinForFormula(Formula form) {
+		PinPoint pin;
 		for (int i=0;i<outputPinList.size();i++) {
-			pp = (PinPoint)outputPinList.get(i);
-			g.drawOval(pp.getCoordinates().x,pp.getCoordinates().y,5,5); // debug!
-			if (pp.getTarget() != null) {
-				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
+			pin = (PinPoint)outputPinList.get(i);
+			if (pin.getFormula() == form) {
+				return pin;
 			}
 		}
-		g.setColor(Color.RED);
-		for (int i=0;i<tempPPList.size();i++) {
-			pp = (PinPoint)tempPPList.get(i);
-			g.drawOval(pp.getCoordinates().x,pp.getCoordinates().y,5,5); // debug!
-			if (pp.getTarget() != null) {
-				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
+		return null;  // shouldn't happen if everything's all right!
+	}
+
+
+
+	private void detachInput(PinPoint pin) {
+		if (pin.getTarget() != null) {
+			pin.getTarget().getFormula().setOutput(null);
+			pin.getFormula().setInput(null,pin.getInputNumber());
+			pin.getTarget().setTarget(null);
+			pin.setTarget(null);
+		}
+	}
+	
+	private void detachOutput(PinPoint pin) {
+		if (pin.getTarget() != null) {
+			pin.getTarget().getFormula().setInput(null,pin.getTarget().getInputNumber());
+			pin.getFormula().setOutput(null);
+			pin.getTarget().setTarget(null);
+			pin.setTarget(null);
+		}
+	}
+
+	/**
+	 * Detaches an output of a formula (can also be root-formula of
+	 * a whole subtree, doesn't matter) from the rest.
+	 * @param form Formula object to detach.
+	 */
+	public void detach(Formula form) {
+		if (form.getOutput() != null) {
+			PinPoint pin = getOutputPinForFormula(form);	// O(n)
+			if (pin != null) {
+				detachOutput(pin);
+				outputPinList.remove(pin);
 			}
 		}
 	}
 	
-	public void setTempPinPoints(LinkedList ppList) {
-		tempPPList = ppList;
-	}
-
-
-	public void detach(LinkedList ppList) {
-		
+	
+	/**
+	 * Detaches a list of formula elements. Elements that have a connection to
+	 * another element in the list don't loose their connection.
+	 * 
+	 * @param inPPList input pins
+	 * @param outPPList output pins
+	 */
+	public void detach(LinkedList inPPList, LinkedList outPPList) {
+		PinPoint pin;
+		PinPoint targetPin;
+		int j;
+		boolean notfound;
+		// detach all input-pins from inPPList, that are not connected to pins from outPPList
+		for (int i=0;i<inPPList.size();i++) {
+			pin = (PinPoint)inPPList.get(i);
+			targetPin = pin.getTarget();
+			if (targetPin != null) {
+				// is this pin in the outPPList?
+				j = 0;
+				notfound = true;
+				while ((j<outPPList.size()) && notfound) {
+					if ((PinPoint)outPPList.get(i) == targetPin) {
+						notfound = false;
+					}
+					j++;
+				}
+				if (notfound) {
+					detachInput(pin);				// detach pins not connected to outPPList
+				} else {
+					outPPList.remove(targetPin); 	// prevents double-check
+				}
+			}
+		}
+		// detach all output that remain in outPPList:
+		for (int i=0;i<outPPList.size();i++) {
+			detachOutput((PinPoint)outPPList.get(i));
+		}
 	}
 	
-	public void attach(LinkedList ppList) {
-		
+	/**
+	 * Attaches a list of PinPoints. 
+	 * @param ppInList
+	 * @param ppOutList
+	 */
+	public void attach(LinkedList ppInList, LinkedList ppOutList) {
+		PinPoint pin;
+		for (int i=0;i<ppInList.size();i++) {
+			pin = (PinPoint)ppInList.get(i);
+			pin.getFormula().setInput(pin.getTarget().getFormula(),pin.getInputNumber());
+			pin.getTarget().getFormula().setOutput(pin.getFormula());
+			pin.getTarget().setTarget(pin);
+			inputPinList.add(pin);
+		}
+		for (int i=0;i<ppOutList.size();i++) {
+			pin = (PinPoint)ppOutList.get(i);
+			pin.getFormula().setOutput(pin.getTarget().getFormula());
+			pin.getTarget().getFormula().setInput(pin.getFormula(),pin.getTarget().getInputNumber());
+			pin.getTarget().setTarget(pin);
+			outputPinList.add(pin);
+		}
 	}
-
-
-	/*public void setTempInputPinPoints(LinkedList ppList) {
-		tempInPPList = ppList;
-	}
-	
-	public void setTempOutputPinPoints(LinkedList ppList) {
-		tempOutPPList = ppList;
-	}
-	
-	public void clearTempPinPoints() {
-		tempInPPList.clear();
-		tempOutPPList.clear();
-	}
-	
-	public void connectTempPinPoints() {
-	
-	}*/
 
 }

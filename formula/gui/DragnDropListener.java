@@ -40,58 +40,10 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 
 	public void mouseClicked(MouseEvent me) {
 		// if event happened in the ElementPanel:
-		// select that component and create a pinpoint 
 		if (me.getComponent().getParent().getParent() instanceof ElementPanel) {
 			Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
 			if (targetComponent != null) { // if clicked on a Formula-object
-				// remove previously selected element if there is one:
-				if (insertInProgress) {
-					aPanel.getFormulaPanel().remove(newComponentInstance);
-					newComponentInstance = null;
-					selectedComponentRoot.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
-					selectedComponentRoot.repaint();
-				}
-				if (!selectedComponents.isEmpty()) {
-					updatePaintStatus(Formula.PAINTSTATUS_STANDARD);
-					selectedComponents.clear();	
-				}
-				dragInProgress = false;
-				insertInProgress = true;
-				selectedComponentRoot = (Formula)targetComponent;
-				selectedComponentRoot.setPaintStatus(Formula.PAINTSTATUS_SELECTED);
-				selectedComponentRoot.repaint();
-				//create new instance:
-				try {
-					newComponentInstance = (Formula)selectedComponentRoot.getClass().newInstance();
-					newComponentInstance.setVisible(false);	//not visible as long as mouse outside of formula-panel
-					aPanel.getFormulaPanel().add(newComponentInstance);
-					newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_INSERTING);
-					aPanel.getFormulaPanel().repaint();
-				} catch (IllegalAccessException iae) {
-					iae.printStackTrace();
-				} catch (InstantiationException ie) {
-					ie.printStackTrace();
-				}
-				//create PinPoint lists for inputs & output
-				//newComponentInstance may be null if newInstance was unsuccessful
-				int xPos = newComponentInstance.getX();
-				int yPos = newComponentInstance.getY();
-				int width = newComponentInstance.getWidth();
-				int height = newComponentInstance.getHeight();
-				int inCount = newComponentInstance.getInputCount();
-				pPInputs.clear();
-				pPOutputs.clear();
-				PinPoint pp;
-				for (int i=0;i<inCount;i++) {
-					pp = new PinPoint(newComponentInstance,xPos+(i+1)*width/(inCount+1),yPos+height,i);
-					pp.setMouseTargetPoint(xPos+(i+1)*2*width/(inCount+1)-width,yPos+height+MOUSE_POINT_DISTANCE);
-					pPInputs.add(pp);
-				}
-				pp = new PinPoint(newComponentInstance,xPos+width/2,yPos);
-				pp.setMouseTargetPoint(xPos+width/2,yPos-MOUSE_POINT_DISTANCE);
-				pPOutputs.add(pp);
-				aPanel.getFormulaPanel().setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-				aPanel.getFormulaPanel().validate();
+				selectNewElement((Formula)targetComponent);
 			}
 		// if event happened in the FormulaPanel:
 		} else if (me.getComponent() instanceof FormulaPanel){
@@ -141,28 +93,17 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		// mouse pressed over a Formula in the FormulaPanel:
 		if (me.getComponent() instanceof FormulaPanel) {
 			if (!insertInProgress && me.getComponent().getComponentAt(me.getPoint()) instanceof Formula) {
+				deselect();
 				dragInProgress = true;
-				// first, deselect all selected components:
-				if (selectedComponentRoot != null) {
-					selectedComponentRoot.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
-					selectedComponentRoot.repaint();
-					pPInputs.clear();
-					pPOutputs.clear();
-					if (newComponentInstance != null) {
-						aPanel.getFormulaPanel().remove(newComponentInstance);
-						newComponentInstance = null;
-					}
-				}
 				// initiate drag&drop:
 				selectedComponentRoot = (Formula)me.getComponent().getComponentAt(me.getPoint());
 				selectedStartPoint = selectedComponentRoot.getLocation();
 				selectedRelativePoint = new Point((int)(selectedStartPoint.getX()-me.getPoint().getX()),(int)(selectedStartPoint.getY()-me.getPoint().getY()));
-				selectedComponents.clear();
+				aPanel.getFormulaPanel().detach(selectedComponentRoot);
 				recursiveSelect(selectedComponentRoot);
 				updatePaintStatus(Formula.PAINTSTATUS_MOVING);
 				aPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				// get affected pinPoints without targets:
-				
+
 			}
 		}
 	}
@@ -185,7 +126,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				moveTo(selectedComponentRoot,new Point(selectedRelativePoint.x+p.x,selectedRelativePoint.y+p.y));
 				// update possible connections:
 				refreshPinPointList();
-				aPanel.getFormulaPanel().setTempPinPoints(tempInPPList);
+				aPanel.getFormulaPanel().setTempPinPoints(tempInPPList,tempOutPPList);
 				aPanel.getFormulaPanel().repaint();
 			}
 		}
@@ -206,7 +147,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				moveTo(newComponentInstance,point);
 				// update possible connections:
 				refreshPinPointList();
-				aPanel.getFormulaPanel().setTempPinPoints(tempInPPList);
+				aPanel.getFormulaPanel().setTempPinPoints(tempInPPList,tempOutPPList);
 				aPanel.getFormulaPanel().repaint();
 			}
 		}
@@ -229,7 +170,6 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		for (int i=0;i<pPOutputs.size();i++) {
 			((PinPoint)pPOutputs.get(i)).translate(xOffset,yOffset);
 		}
-		System.out.println();
 		Formula form;
 		for (int i=0; i<selectedComponents.size();i++) {
 			form = (Formula)selectedComponents.get(i);
@@ -242,29 +182,40 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		}
 	}
 	
+	/**
+	 * Refreshs the list of connections to other formula elements.
+	 */
 	// NOTE: would probably be better in a thread	
 	private void refreshPinPointList() {
 		FormulaPanel fp = aPanel.getFormulaPanel();
 		PinPoint targetPP;
+		PinPoint pin;
+		// clear marks:
+		for (int i=0;i<tempInPPList.size();i++) {
+			((PinPoint)tempInPPList.get(i)).getTarget().setMark(false);
+		}
 		tempInPPList.clear();
+		for (int i=0;i<tempOutPPList.size();i++) {
+			((PinPoint)tempOutPPList.get(i)).getTarget().setMark(false);
+		}
 		tempOutPPList.clear();
 		// Outputs:
 		for (int i=0;i<pPOutputs.size();i++) {
 			targetPP = fp.getNearestInputPin((PinPoint)pPOutputs.get(i));
 			if (targetPP != null) {
 				((PinPoint)pPOutputs.get(i)).setTarget(targetPP);
+				//targetPP.setMark(true);
 				tempOutPPList.add(pPOutputs.get(i));				
 			} else {
 				((PinPoint)pPOutputs.get(i)).setTarget(null);
 			}
 		}
-		
 		// Inputs:
 		for (int i=0;i<pPInputs.size();i++) {
 			targetPP = fp.getNearestOutputPin((PinPoint)pPInputs.get(i));
 			if (targetPP != null) {
 				((PinPoint)pPInputs.get(i)).setTarget(targetPP);
-				tempInPPList.add(pPInputs.get(i));				
+				tempInPPList.add(pPInputs.get(i));
 			} else {
 				((PinPoint)pPInputs.get(i)).setTarget(null);
 			}
@@ -272,6 +223,10 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	}
 	
 	
+	/**
+	 * Selects a whole subtree with form as the root.
+	 * @param form root formula
+	 */
 	private void recursiveSelect(Formula form) {
 		selectedComponents.add(form);
 		// get input PinPoints:
@@ -333,5 +288,53 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 			updatePaintStatus(Formula.PAINTSTATUS_STANDARD);
 			selectedComponents.clear();
 		}
+	}
+	
+	/**
+	 * Selects a formula element in the ElementPanel, creates a new instance of it
+	 * and adds it to the FormulaPanel (invisible until mouse enters FormulaPanel).
+	 * Also creates the PinPoints for this formula element.
+	 * 
+	 * @param targetComponent the target formula element
+	 */
+	private void selectNewElement(Formula targetFormula) {
+		// remove previously selected element if there is one:
+		deselect();
+		insertInProgress = true;
+		selectedComponentRoot = targetFormula;
+		selectedComponentRoot.setPaintStatus(Formula.PAINTSTATUS_SELECTED);
+		selectedComponentRoot.repaint();
+		//create new instance:
+		try {
+			newComponentInstance = (Formula)selectedComponentRoot.getClass().newInstance();
+			newComponentInstance.setVisible(false);	//not visible as long as mouse outside of formula-panel
+			aPanel.getFormulaPanel().add(newComponentInstance);
+			newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_INSERTING);
+			aPanel.getFormulaPanel().repaint();
+		} catch (IllegalAccessException iae) {
+			iae.printStackTrace();
+		} catch (InstantiationException ie) {
+			ie.printStackTrace();
+		}
+		//create PinPoint lists for inputs & output
+		//newComponentInstance may be null if newInstance was unsuccessful
+		int xPos = newComponentInstance.getX();
+		int yPos = newComponentInstance.getY();
+		int width = newComponentInstance.getWidth();
+		int height = newComponentInstance.getHeight();
+		int inCount = newComponentInstance.getInputCount();
+		pPInputs.clear();
+		pPOutputs.clear();
+		PinPoint pp;
+		for (int i=0;i<inCount;i++) {
+			pp = new PinPoint(newComponentInstance,xPos+(i+1)*width/(inCount+1),yPos+height,i);
+			pp.setMouseTargetPoint(xPos-width/2+(i+1)*width*2/(inCount+1),yPos+height+MOUSE_POINT_DISTANCE);
+			pPInputs.add(pp);
+		}
+		pp = new PinPoint(newComponentInstance,xPos+width/2,yPos);
+		pp.setMouseTargetPoint(xPos+width/2,yPos-MOUSE_POINT_DISTANCE);
+		pPOutputs.add(pp);
+		aPanel.getFormulaPanel().setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+		aPanel.getFormulaPanel().validate();
 	}
 }
