@@ -26,7 +26,7 @@ public class Cosh extends NumberFormula {
 	public Cosh() {
 		super();
 		input = new Formula[1];
-		formulaName = "cosh";
+		formulaName = "cosh (rad)";
 	}
 	
 	/**

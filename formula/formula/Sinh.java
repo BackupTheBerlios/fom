@@ -26,7 +26,7 @@ public class Sinh extends NumberFormula {
 	public Sinh() {
 		super();
 		input = new Formula[1];
-		formulaName = "sinh";
+		formulaName = "sinh (rad)";
 	}
 	
 	/**

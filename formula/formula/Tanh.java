@@ -26,7 +26,7 @@ public class Tanh extends NumberFormula {
 	public Tanh() {
 		super();
 		input = new Formula[1];
-		formulaName = "tanh";
+		formulaName = "tanh (rad)";
 	}
 	
 	/**

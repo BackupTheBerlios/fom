@@ -1,4 +1,4 @@
-/* $Id: ControlPanel.java,v 1.22 2004/09/02 09:47:28 shadowice Exp $
+/* $Id: ControlPanel.java,v 1.23 2004/09/02 13:20:40 br3001 Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import utils.*;
  * how the formula-tree is calculated or what to do with it.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 public class ControlPanel extends Panel {
 
@@ -46,7 +46,7 @@ public class ControlPanel extends Panel {
 		lblSpeed				= new Label(Messages.getString("ControlPanel.LblSpeed"),Label.RIGHT);
 		lblEqualsign			= new Label("=",Label.CENTER);
 		ftfFormula				= new FormulaTextField(this,"");
-		tfResult					= new TextField(10);
+		tfResult					= new TextField(19);
 		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 50, 1, 10, 200);
 		//chZoom				= new Choice();
 		GridBagLayout gbl	= new GridBagLayout();

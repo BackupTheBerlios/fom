@@ -27,7 +27,7 @@ public class Arccos extends NumberFormula {
 	public Arccos() {
 		super();
 		input = new Formula[1];
-		formulaName = "arccos (radiant)";
+		formulaName = "arccos (rad)";
 	}
 	
 	/**

@@ -26,7 +26,7 @@ public class Tan extends NumberFormula {
 	public Tan() {
 		super();
 		input = new Formula[1];
-		formulaName = "tan (radiant)";
+		formulaName = "tan (rad)";
 	}
 	
 	/**

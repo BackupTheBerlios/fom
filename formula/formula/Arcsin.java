@@ -27,7 +27,7 @@ public class Arcsin extends NumberFormula {
 	public Arcsin() {
 		super();
 		input = new Formula[1];
-		formulaName = "arcsin (radiant)";
+		formulaName = "arcsin (rad)";
 	}
 	
 	/**
