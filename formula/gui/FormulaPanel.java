@@ -5,6 +5,8 @@
 package gui;
 
 import java.awt.*;
+import java.util.*;
+import formula.*;
 
 /**
  * The FormulaPanel displays the formula-trees, created by the user.
@@ -14,6 +16,12 @@ import java.awt.*;
  *
  */
 public class FormulaPanel extends Panel {
+
+
+	// These lists store all input/output pins.
+	private LinkedList inputPointList = new LinkedList();
+	private LinkedList outputPointList = new LinkedList();
+	
 
 	/**
 	 * Creates a new FormulaPanel.

@@ -16,28 +16,33 @@ import formula.*;
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
 
-	private static boolean dragInProgress		= false;
-	private static AppletPanel aPanel			= null;
-	private static Point selectedStartPoint		= null;
-	private static Point selectedRelativePoint	= null;
-	private static Formula selectedComponent	= null;
+	private static boolean dragInProgress		= false;	// true if something is dragged
+	private static AppletPanel aPanel			= null;		// root panel of everything
+	private static Point selectedStartPoint		= null;		// the starting point of DnD actions
+	private static Point selectedRelativePoint	= null;		// the relative point within the dragged element
+	private static Formula selectedComponent	= null;		// component that is dragged or selected
 	
 	public DragnDropListener(AppletPanel ap) {
 		aPanel = ap;
 	}
 
 	public void mouseClicked(MouseEvent me) {
+		// if event happened in the ElementPanel:
 		if (me.getComponent().getParent().getParent() instanceof ElementPanel) {
 			Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
 			if (targetComponent != null) {
-				selectedComponent = (Formula)me.getComponent().getComponentAt(me.getPoint());
+				selectedComponent = (Formula)targetComponent;
 			}
+		// if event happened in the FormulaPanel:
 		} else if (me.getComponent() instanceof FormulaPanel){
+			// if a component is selected from the ElementPanel,
+			// a mouseClicked event within the FormulaPanel will place it there.
 			if (selectedComponent != null) {
 				try {
+					// TODO: rewrite to FormulaPanel.addFormula(Formula,Coordinates);
 					Formula newFormula = (Formula)(selectedComponent.getClass().newInstance());
 					((FormulaPanel)me.getComponent()).add(newFormula);
-					newFormula.setBounds((int)me.getPoint().getX()-newFormula.getWidth(),(int)me.getPoint().getY()+newFormula.getHeight(),newFormula.getWidth(),newFormula.getHeight());
+					newFormula.setBounds((int)me.getPoint().getX()-newFormula.getWidth()/2,(int)me.getPoint().getY()-newFormula.getHeight()/2,newFormula.getWidth(),newFormula.getHeight());
 					aPanel.getFormulaPanel().doLayout();
 				} catch (IllegalAccessException iae) {
 					iae.printStackTrace();
@@ -78,6 +83,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 
 	public void mouseDragged(MouseEvent me) {
 		if ((dragInProgress) && (selectedComponent != null)) {
+			// dragging only works in the FormulaPanel (atm)
 			if (me.getComponent() instanceof FormulaPanel) {
 				selectedComponent.setLocation((int)(selectedRelativePoint.getX()+me.getPoint().getX()),(int)(selectedRelativePoint.getY()+me.getPoint().getY()));
 			}
@@ -85,9 +91,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	}
 	
 	public void mouseMoved(MouseEvent me) {
-		if (dragInProgress) {
-			
-		}
+
 	}
 
 }
