@@ -10,7 +10,7 @@ import utils.Messages;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
-public class Recip extends NumberFormula {
+public class Reciprocal extends NumberFormula {
 
 	public final void calc() throws FormulaException {
 		if (input[0] == null)
@@ -22,7 +22,7 @@ public class Recip extends NumberFormula {
 	/**
 	 * Creates a "1/x" with 1 input.
 	 */
-	public Recip() {
+	public Reciprocal() {
 		input = new Formula[1];
 		formulaName = "1/x";
 	}
