@@ -24,13 +24,17 @@ import formula.*;
 
 public class PinPoint {
 
+// local attributes:
 	private Formula formula;			// formula of this point
 	private int inputNumber = -1;		// number of this input-pin (if it's an output, number is -1)
 	private Point pinPoint;				// coordinates of the input/output pin
 	private Point mouseTargetPoint;		// center coordinates used to connect other formulas
-	private Point targetPoint;			// if this pin is connected to another pin, that's the target
+	private PinPoint targetPoint;		// if this pin is connected to another pin, that's the target
 
+
+// constructors:
 	/**
+	 * Constructor for output-pins.
 	 * @param form Formula element of this pin
 	 * @param x x coordinates
 	 * @param y y coordinates
@@ -41,6 +45,7 @@ public class PinPoint {
 	}
 
 	/**
+	 * Constructor for output-pins.
 	 * @param form Formula element of this pin
 	 * @param p coordinates
 	 */
@@ -49,12 +54,145 @@ public class PinPoint {
 		this.pinPoint = p;
 	}
 	
+	/**
+	 * Constructor for output-pins.
+	 * @param form Formula element of this pin
+	 */
+	public PinPoint(Formula form) {
+		this.formula = form;
+		this.pinPoint = new Point();
+	}
+	
+	/**
+	 * Constructor for input-pins.
+	 * @param form Formula element of this pin
+	 * @param x x coordinates
+	 * @param y y coordinates
+	 * @param inNumber number of this input (0=1st, 1=2nd, 2=3rd,...)
+	 */
+	public PinPoint(Formula form, int x, int y, int inNumber) {
+		this.formula = form;
+		this.pinPoint = new Point(x,y);
+		this.inputNumber = inNumber;
+	}
+
+	/**
+	 * Constructor for input-pins.
+	 * @param form Formula element of this pin
+	 * @param p coordinates
+	 * @param inNumber number of this input (0=1st, 1=2nd, 2=3rd,...)
+	 */
+	public PinPoint(Formula form, Point p, int inNumber) {
+		this.formula = form;
+		this.pinPoint = p;
+		this.inputNumber = inNumber;
+	}
+
+	/**
+	 * Constructor for input-pins.
+	 * @param form Formula element of this pin
+	 * @param inNumber number of this input (0=1st, 1=2nd, 2=3rd,...)
+	 */
+	public PinPoint(Formula form, int inNumber) {
+		this.formula = form;
+		this.pinPoint = new Point();
+		this.inputNumber = inNumber;
+	}
+
+	
+// methods:
+	/**
+	 * Sets the x and y coordinates of this PinPoint.
+	 * @param x x coordinates
+	 * @param y y coordinates
+	 */
+	public void setCoordinates(int x, int y) {
+		this.pinPoint.setLocation(x,y);
+	}
+	
+	/**
+	 * @return Returns the x,y-coordinates of this PinPoint.
+	 */
+	public Point getCoordinates() {
+		return this.pinPoint;
+	}
+	
+	/**
+	 * Sets the target to another PinPoint.
+	 * @param pTarget target PinPoint
+	 */
+	public void setTarget(PinPoint pTarget) {
+		this.targetPoint = pTarget;
+	}
+	
+	/**
+	 * @return returns the target PinPoint
+	 */
+	public PinPoint getTarget() {
+		return this.targetPoint;
+	}
+	
+	/**
+	 * Sets the input-number of the formula for this PinPoint, only works for input-pins.
+	 * @param inNumber the number of this input-PinPoint (0 = first)
+	 */
+	public void setInputNumber(int inNumber) {
+		this.inputNumber = inNumber;
+	}
+	
+	/**
+	 * @return returns the number of this PinPoint
+	 */
+	public int getInputNumber() {
+		return this.inputNumber;
+	}
+	
+	/**
+	 * The mouseTargetPoint is used to determine if another Formula is within reach of this PinPoint.
+	 * @param mtp
+	 */
+	public void setMouseTargetPoint(Point mtp) {
+		this.mouseTargetPoint = mtp;
+	}
+	
+	/**
+	 * The mouseTargetPoint is used to determine if another Formula is within reach of this PinPoint. 
+	 * @param x x coordinates
+	 * @param y y coordinates
+	 */
+	public void setMouseTargetPoint(int x, int y) {
+		this.mouseTargetPoint = new Point(x,y);
+	}
+	
+	/**
+	 * @return
+	 */
+	public Point getMouseTargetPoint() {
+		return this.mouseTargetPoint;
+	}
+	
+	/**
+	 * @param p another point
+	 * @return returns the distance between this PinPoint's mouseTargetPoint and the point p.
+	 */
 	public int getDistance(Point p) {
-		return (int)pinPoint.distance(p);
+		return (int)this.mouseTargetPoint.distance(p);
 	}
 
+	/**
+	 * @param x x coordinates of another point
+	 * @param y y coordinates of another point
+	 * @return Returns the distance between this PinPoint and the point (x,y).
+	 */
 	public int getDistance(int x, int y) {
-		return (int)pinPoint.distance(x,y);
+		return (int)this.mouseTargetPoint.distance(x,y);
 	}
 
+	/**
+	 * @return returns the Formula this pin belongs to
+	 */
+	public Formula getFormula() {
+		return this.formula;
+	}
+	
 }

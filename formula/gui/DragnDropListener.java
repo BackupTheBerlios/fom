@@ -9,7 +9,8 @@ import java.awt.event.*;
 import formula.*;
 
 /**
- * Listener that handles drag&drop as well as point&click for (re)placing formula-elements or whole trees.
+ * Listener that handles drag&drop as well as point&click
+ * for (re)placing formula-elements or whole trees.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
@@ -21,6 +22,8 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	private static Point selectedStartPoint		= null;		// the starting point of DnD actions
 	private static Point selectedRelativePoint	= null;		// the relative point within the dragged element
 	private static Formula selectedComponent	= null;		// component that is dragged or selected
+	private static PinPoint[] pPInputs			= null;		// list of input PinPoints of the selected element(s)
+	private static PinPoint[] pPOutputs			= null;		// list of output PinPoints of the selected element(s)
 	
 	public DragnDropListener(AppletPanel ap) {
 		aPanel = ap;
@@ -30,8 +33,14 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		// if event happened in the ElementPanel:
 		if (me.getComponent().getParent().getParent() instanceof ElementPanel) {
 			Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
-			if (targetComponent != null) {
+			if (targetComponent != null) { // if clicked on a Formula-object
 				selectedComponent = (Formula)targetComponent;
+				int inCount = selectedComponent.getInputCount();
+				pPInputs = new PinPoint[inCount];
+				pPOutputs = new PinPoint[1];
+				for (int i=0;i<inCount;i++) {
+					pPInputs[i] = new PinPoint();
+				}
 			}
 		// if event happened in the FormulaPanel:
 		} else if (me.getComponent() instanceof FormulaPanel){
