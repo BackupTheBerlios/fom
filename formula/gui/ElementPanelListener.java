@@ -1,10 +1,12 @@
-/* $Id: ElementPanelListener.java,v 1.8 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.9 2004/08/26 16:54:38 shadowice Exp $
  * Created on 26.04.2004
  *
  */
 package gui;
 
+import java.awt.*;
 import java.awt.event.*;
+
 import formula.*;
 import utils.*;
 
@@ -18,6 +20,8 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 
 	private ElementPanel ePanel;
 	private AppletPanel aPanel;
+	
+	private CustomFormulaDialog cfDialog = new CustomFormulaDialog(new Frame());
 
 	/**
 	 * Creates the listener. This constructor is required, otherwise it won't work.
@@ -38,8 +42,10 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 
 	public void actionPerformed(ActionEvent aevent) {
 		if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnAddFormula"))) {
-			// TODO use the formula (CustomFormula) from FormulaPanel!
-			ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),new Add());
+			// TODO CustomFormula statt Add verwenden.
+			Add add=new Add();
+			add.setName(cfDialog.showDialog(add));	// TODO setFormulaName wenn mit CustomFormula
+			ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),add);
 			ePanel.refreshElementList();
 		} else if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
 			aPanel.getFormulaPanel().deleteAll();

@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.24 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.25 2004/08/26 16:54:38 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -34,6 +34,8 @@ public class FormulaPanel extends Panel {
 	private AppletPanel aPanel;
 
 	private Image bufferImage;
+	private int lastBufferWidth = 0;
+	private int lastBufferHeight = 0;
 	
 	/**
 	 * Creates a new FormulaPanel.
@@ -153,9 +155,12 @@ public class FormulaPanel extends Panel {
 	
 	
 	public void update(Graphics g) {
-		if (bufferImage == null) {
-			bufferImage = createImage(getWidth(),getHeight());
+		if ((bufferImage == null) || (getWidth() > lastBufferWidth) || (getHeight() > lastBufferHeight)) {
+			lastBufferWidth = getWidth();
+			lastBufferHeight = getHeight();
+			bufferImage = createImage(lastBufferWidth,lastBufferHeight);
 		}
+		
 		Graphics bufferGraphics = bufferImage.getGraphics();
 		
 		paint(bufferGraphics);
@@ -365,7 +370,7 @@ public class FormulaPanel extends Panel {
 	 * @param inNumber number of the input (from(0) left to right(length-1))
 	 * @return returns the PinPoint if found, otherwise null.
 	 */
-	// TODO imho kann man die Methode durch eine einfachere Variante ohne Schleife ersetzen...
+	// TODO IMHO kann man die Methode durch eine einfachere Variante ohne Schleife ersetzen...
 	public PinPoint getInputPinForFormula(Formula form, int inNumber) {
 		PinPoint pin;
 		for (int i=0;i<inputPinList.size();i++) {

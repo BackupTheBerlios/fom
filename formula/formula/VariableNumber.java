@@ -40,7 +40,10 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		inputVarName.setFont(DEFAULT_FONT);
 		inputVarName.setBackground(SystemColor.text);
 		inputVarName.setText("number1");
-		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);		
+		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
+		MouseForwardListener mfl = new MouseForwardListener();
+		inputVarName.addMouseListener(mfl);
+		inputVarName.addMouseMotionListener(mfl);		
 		if (elementChooser) {
 			inputVarName.setEnabled(false);
 		} else {

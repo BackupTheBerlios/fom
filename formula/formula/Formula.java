@@ -52,7 +52,9 @@ public abstract class Formula extends Container implements Cloneable {
 	protected PinPoint outputPin;
 
 	// Image for double buffering
-	protected Image bufferImage;
+	private Image bufferImage;
+	private int lastBufferWidth = 0;
+	private int lastBufferHeight = 0;
 
 	/**
 	 * Creates a new formula object.
@@ -123,15 +125,14 @@ public abstract class Formula extends Container implements Cloneable {
 	
 	
 	public void update(Graphics g) {
-		if (bufferImage == null) {
-			bufferImage = createImage(getWidth(),getHeight());
+		if ((bufferImage == null) || (getWidth() > lastBufferWidth) || (getHeight() > lastBufferHeight)) {
+			lastBufferWidth = getWidth();
+			lastBufferHeight = getHeight();
+			bufferImage = createImage(lastBufferWidth,lastBufferHeight);
 		}
 		Graphics bufferGraphics = bufferImage.getGraphics();
-		
 		paint(bufferGraphics);
-		
 		g.drawImage(bufferImage,0,0,this);
-		
 		bufferGraphics.dispose();
 	}
 

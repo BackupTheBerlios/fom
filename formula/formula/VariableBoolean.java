@@ -1,4 +1,4 @@
-/*
+/* $Id: VariableBoolean.java,v 1.15 2004/08/26 16:54:38 shadowice Exp $
  * Created on 27.06.2004
  */
 package formula;
@@ -11,6 +11,7 @@ import gui.*;
  * Class for variable booleans.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
+ * @version $Revision: 1.15 $
  */
 public class VariableBoolean extends ConstVarFormula implements TextListener {
 
@@ -39,7 +40,10 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 		inputVarName.setFont(new Font("Arial", Font.PLAIN, 11));
 		inputVarName.setBackground(SystemColor.text);
 		inputVarName.setText("boolean1");
-		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);		
+		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
+		MouseForwardListener mfl = new MouseForwardListener();
+		inputVarName.addMouseListener(mfl);
+		inputVarName.addMouseMotionListener(mfl);		
 		if (elementChooser) {
 			inputVarName.setEnabled(false);
 		} else {
