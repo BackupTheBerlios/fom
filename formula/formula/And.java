@@ -8,7 +8,8 @@ import utils.Messages;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * This class provides an element, calculating the AND-connection of two boolean values.
+ * f(a,b) = a AND b
  */
 public class And extends BooleanFormula {
 

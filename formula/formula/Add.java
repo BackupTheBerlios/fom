@@ -8,7 +8,8 @@ import utils.Messages;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * This class provides an element, calculating the sum of two numbers.
+ * f(x,y) = x + y
  */
 public class Add extends NumberFormula {
 

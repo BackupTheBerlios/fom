@@ -8,7 +8,8 @@ import utils.Messages;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * This class provides an element, calculating the absolute value of a number.
+ * f(x) = |x|
  */
 public class Abs extends NumberFormula {
 
