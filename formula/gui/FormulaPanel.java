@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.26 2004/08/30 19:30:52 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.27 2004/08/31 12:38:19 shadowice Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -13,7 +13,7 @@ import utils.*;
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  */
 public class FormulaPanel extends Panel {
 
@@ -641,8 +641,15 @@ public class FormulaPanel extends Panel {
 	}
 
 
-	public void addFormula(Formula form) {
-		
+	public void addFormulaTree(Formula form) {
+		add(form);
+		outputPinList.add(form.getOutputPin());
+		inputPinList.add(form.getInputPins());
+		for (int i=0;i<form.getInputCount();i++) {
+			if (form.getInput(i) != null) {
+				addFormulaTree(form.getInput(i));	
+			}
+		}
 	}
 
 }

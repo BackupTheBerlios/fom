@@ -1,4 +1,4 @@
-/* $Id: FOMToolkit.java,v 1.4 2004/08/29 15:15:03 shadowice Exp $
+/* $Id: FOMToolkit.java,v 1.5 2004/08/31 12:38:20 shadowice Exp $
  * Created on 16.05.2004
  */
 package utils;
@@ -10,7 +10,7 @@ import java.text.*;
  * Tool class for Formula-o-Matic.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 
@@ -81,14 +81,17 @@ public final class FOMToolkit {
 	 * @see java.text.DecimalFormat
 	 */
 	public static String getFormatedString(double value,int maxStrLength) {
+		if (Double.isNaN(value)) {
+			return "NaN";
+		}		
 		DecimalFormat dFormat = new DecimalFormat();
-		dFormat.applyPattern("0.0");
+		dFormat.applyPattern("0.##############################");
 		String resultStr = dFormat.format(value);
 		String formatStr = "0.";
 		if (resultStr.length() > maxStrLength) {
 			int eSpace;										// how long will the E.. number be			
 			if ((value < 1.0) && (value > -1.0)) {
-				eSpace = (int)(-(Math.log(Math.log(value)/Math.log(10))/Math.log(10)))+2;
+				eSpace = (int)((Math.log(Math.log(value)/Math.log(10))/Math.log(10)))+2;
 			} else {
 				eSpace = (int)(Math.log(Math.log(value)/Math.log(10))/Math.log(10))+1;
 			}

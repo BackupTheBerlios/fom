@@ -16,8 +16,6 @@ public class Div extends NumberFormula {
 	public final void calc() throws FormulaException {
 		if ((input[0] == null) || (input[1] == null)) {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
-		} else if (input[1].getDoubleResult() == 0.0) {
-			throw new FormulaException(Messages.getString("Error.ArithmeticError"));
 		} else{
 			result = new Double (input[0].getDoubleResult() / input[1].getDoubleResult());
 		}

@@ -28,7 +28,7 @@ public class Factorial extends NumberFormula {
 		if (input[0] == null) {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		} else if (input[0].getDoubleResult() < 0.0) {
-			throw new FormulaException(Messages.getString("Error.ArithmeticError"));
+			result = new Double (Double.NaN);
 		} else {
 			result = new Double (fact((int)input[0].getDoubleResult()));
 		}

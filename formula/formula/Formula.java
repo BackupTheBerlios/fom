@@ -1,4 +1,4 @@
-/* $Id: Formula.java,v 1.46 2004/08/30 19:30:52 shadowice Exp $
+/* $Id: Formula.java,v 1.47 2004/08/31 12:38:19 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
@@ -13,7 +13,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.46 $
+ * @version $Revision: 1.47 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -166,7 +166,7 @@ public abstract class Formula extends Container implements Cloneable {
 				fe.printStackTrace(System.err);
 			}
 		}
-		
+				
 		super.paint(g);
 
 		// during calculation draw strings bold!
@@ -204,12 +204,12 @@ public abstract class Formula extends Container implements Cloneable {
 		} else if (((paintStatus & PAINTSTATUS_MOVING) != 0) || ((paintStatus & PAINTSTATUS_INSERTING) != 0)) {
 			g.setColor(Color.GRAY);
 			//Dotted Line
-			for (int i=0; i<FORMULAWIDTH/4; i++) {
+			for (int i=0; i<FORMULAWIDTH/4+1; i++) {
 				g.drawLine(i*4, CONNECTHEIGHT, i*4+2-1, CONNECTHEIGHT);
 				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2-1, CONNECTHEIGHT+RESULTHEIGHT);
 				g.drawLine(i*4, FORMULAHEIGHT-CONNECTHEIGHT, i*4+2-1, FORMULAHEIGHT-CONNECTHEIGHT);
 			}
-			for (int i=0; i<(BOXHEIGHT+RESULTHEIGHT)/4; i++) {
+			for (int i=0; i<(BOXHEIGHT+RESULTHEIGHT)/4+1; i++) {
 				g.drawLine(0, i*4+CONNECTHEIGHT, 0, i*4+2+CONNECTHEIGHT);
 				g.drawLine(FORMULAWIDTH-1, i*4+CONNECTHEIGHT, FORMULAWIDTH-1, i*4+2+CONNECTHEIGHT);
 			}
@@ -438,6 +438,7 @@ public abstract class Formula extends Container implements Cloneable {
 	    	clonedForm.formulaName = new String(formulaName);
 	    	clonedForm.inputPins = (PinPoint[])inputPins.clone();
 	    	for (int i=0;i<clonedForm.inputPins.length;i++) {
+	    		//clonedForm.inputPins[i] = (PinPoint)inputPins[i].clone();
 	    		clonedForm.inputPins[i].setFormula(clonedForm);
 	    	}
 	    	clonedForm.outputPin = (PinPoint)outputPin.clone();
@@ -446,11 +447,13 @@ public abstract class Formula extends Container implements Cloneable {
 	    	
 	    	// clone inputs:
 	    	for (int i=0;i<getInputCount();i++) {
-	    		Formula form = (Formula)getInput(i).clone();
-	    		form.setOutput(clonedForm);
-	    		clonedForm.setInput(form,i);
-	    		clonedForm.inputPins[i].setTarget(form.getOutputPin());
-	    		form.getOutputPin().setTarget(clonedForm.inputPins[i]);
+	    		if (getInput(i) != null) {
+		    		Formula form = (Formula)getInput(i).clone();
+		    		form.setOutput(clonedForm);
+		    		clonedForm.setInput(form,i);
+		    		clonedForm.inputPins[i].setTarget(form.getOutputPin());
+		    		form.getOutputPin().setTarget(clonedForm.inputPins[i]);
+	    		}
 	    	}
 	    	
 	    	return clonedForm;

@@ -92,10 +92,14 @@ public class IfThenElse extends MixedFormula {
 	
 	
 	public boolean hasBooleanResult() {
+		if (result == null) {
+			return false;
+		}
 		try {
 			boolean bool = false;
 			Class[] outTypes = getOutputTypes();
 			for (int i=0;i<outTypes.length;i++) {
+				System.out.println(outTypes[i]);
 				if (outTypes[i].equals(Boolean.class)) {
 					return true;
 				}
@@ -108,11 +112,14 @@ public class IfThenElse extends MixedFormula {
 
 
 	public boolean hasDoubleResult() {
+		if (result == null) {
+			return false;
+		}
 		try {
 			boolean bool = false;
 			Class[] outTypes = getOutputTypes();
 			for (int i=0;i<outTypes.length;i++) {
-				if (outTypes[i].equals(Double.class)) {
+				if (outTypes[i].equals(Number.class)) {
 					return true;
 				}
 			}

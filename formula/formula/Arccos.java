@@ -16,8 +16,6 @@ public class Arccos extends NumberFormula {
 	public final void calc() throws FormulaException {
 		if (input[0] == null) {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
-		} else if (Math.abs(input[0].getDoubleResult()) > 1.0) {
-			throw new FormulaException(Messages.getString("Error.ArithmeticError"));
 		} else {
 			result = new Double (Math.acos(input[0].getDoubleResult()));
 		}
