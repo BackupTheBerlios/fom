@@ -14,14 +14,14 @@ public abstract class NumberFormula extends Formula {
 
 	protected Number result;
 
-	public boolean isValidInput(Object in, int index) {
+	public boolean isValidInput(Formula in, int index) {
 		if ((input[0] instanceof NumberFormula) && (input[1] instanceof NumberFormula))
 			return true;
 		else
 			return false;
 	}
 
-	public boolean isValidOutput(Object out) {
+	public boolean isValidOutput(Formula out) {
 		return false;
 	}
 

@@ -102,7 +102,7 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param index Index-number of input.
 	 * @return True: other formula-element can be attached to this input.
 	 */
-	public abstract boolean isValidInput(Object in, int index);
+	public abstract boolean isValidInput(Formula in, int index);
 
 
 	/**
@@ -110,7 +110,7 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param out Input of another formula.
 	 * @return True: other formula-element can be attached to this output.
 	 */
-	public abstract boolean isValidOutput(Object out);
+	public abstract boolean isValidOutput(Formula out);
 
 
 	/**
@@ -159,11 +159,13 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @return Returns the string-equvalent of this formula-object (if inputs not connected)
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
-	public abstract String toString();
+	//Maurice: Warum kann ich das hier nicht hinzufügen?
+	public abstract String toString();// throws FormulaExeption;
 
 	/**
 	 * @return Returns the maximal number of formula-objects in this subtree which are side by side.
 	 */
+	//TODO Funktioniert noch nicht, da Variablen/Konstanten nicht erkannt werden.
 	public final int getWidthOfTree() {
 		int WidthOfTree = 0;
 		for (int i = 0; i <= input.length-1; i++) {

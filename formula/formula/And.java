@@ -20,13 +20,14 @@ public class And extends BooleanFormula {
 	}
 
 	public String toString() {
+		// TODO Es muss noch Null-Pointer abgefangen werden.
 		return "(" + input[0].toString() + "&" + input[1].toString() + ")";
 	}
 
 	public And() {
-		input=new Formula[2];
-		formulaName="&";
-		result=null;
+		input = new Formula[2];
+		formulaName = "&";
+		result = null;
 	}
 
 }

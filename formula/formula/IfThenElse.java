@@ -30,7 +30,7 @@ public class IfThenElse extends MixedFormula {
 	/* (non-Javadoc)
 	 * @see formula.Formula#isValidInput(java.lang.Object, int)
 	 */
-	public boolean isValidInput(Object in, int index) {
+	public boolean isValidInput(Formula in, int index) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -38,7 +38,7 @@ public class IfThenElse extends MixedFormula {
 	/* (non-Javadoc)
 	 * @see formula.Formula#isValidOutput(java.lang.Object, int)
 	 */
-	public boolean isValidOutput(Object out) {
+	public boolean isValidOutput(Formula out) {
 		// TODO Auto-generated method stub
 		return false;
 	}

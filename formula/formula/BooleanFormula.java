@@ -7,6 +7,8 @@ package formula;
 import utils.Messages;
 
 /**
+ * This is an abstract class for all Formula-Object, which are accepting
+ * boolean values for input/output.
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
@@ -20,12 +22,18 @@ public abstract class BooleanFormula extends Formula {
 	 */
 	public abstract void calc() throws FormulaException;
 
-	//Maurice: Wie kann ich den verwendeten Datentyp erkennen?
-	public boolean isValidInput(Object in, int index) {
-		return false;
+	public boolean isValidInput(Formula in, int index) {
+		//TODO IsValidInput muss MixedFormula akzeptieren.
+		if ((in instanceof NumberFormula) || (in instanceof ComparisonFormula))
+			return true;
+		else if (in instanceof MixedFormula)
+		//Funktioniert noch nicht.
+			return false;
+		else
+			return false;
 	}
-
-	public boolean isValidOutput(Object out) {
+	//TODO Wenn isValidInput funktioniert, auch isValidOutput fertigstellen.
+	public boolean isValidOutput(Formula out) {
 		return false;
 	}
 
@@ -38,12 +46,10 @@ public abstract class BooleanFormula extends Formula {
 			return result.booleanValue();
 		else
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
-			
 	}
 
 	public double getDoubleResult() throws FormulaException {
 		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
-//		return 0;
 	}
 
 	public final void clearResult() {
