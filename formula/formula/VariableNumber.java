@@ -28,18 +28,19 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 	 */
 	public VariableNumber(boolean elementChooser) {
 		super();
-		formulaName = "                     Number";
+		formulaName = "                    Number";
 		result = new Double (0);
 		inputVarName = new TextField();
+		inputVarName.setFont(new Font("Arial", Font.PLAIN, 11));
+		inputVarName.setBackground(SystemColor.text);
 		inputVarName.setText("number1");
-		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
+		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);		
 		if (elementChooser) {
 			inputVarName.enable(false);
 		} else {
 			inputVarName.addTextListener(this);
 			addVarList(this);
 		}
-		inputVarName.setBackground(SystemColor.text);
 		oldName = new String("number1");
 		add(inputVarName);
 	}

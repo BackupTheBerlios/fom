@@ -16,12 +16,12 @@ import gui.*;
  */
 public abstract class Formula extends Container implements Cloneable {
 
-	// Constants for drawing Formula Elements
-	public static final int BOXHEIGHT = 28;
-	public static final int CONNECTHEIGHT = 5;
-	public static final int RESULTHEIGHT = 20;
+	// Constants for drawing Formula Elements. (BOXHEIGHT + RESULTHEIGHT) and FORMULAWIDHT should be devideable by 4.
+	public static final int BOXHEIGHT = 23; //28
+	public static final int CONNECTHEIGHT = 4;
+	public static final int RESULTHEIGHT = 17; //20
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
-	public static final int FORMULAWIDTH = 120;
+	public static final int FORMULAWIDHT = 108; //120
 
 	// Constants for paintStatus
 	public static final int PAINTSTATUS_STANDARD	= 0;
@@ -31,7 +31,7 @@ public abstract class Formula extends Container implements Cloneable {
 
 	protected int paintStatus = PAINTSTATUS_STANDARD;
 
-	protected Dimension dimension = new Dimension(FORMULAWIDTH,FORMULAHEIGHT);
+	protected Dimension dimension = new Dimension(FORMULAWIDHT,FORMULAHEIGHT);
 
 	// Input/Output for Formula Elements
 	protected Formula[] input;
@@ -100,50 +100,50 @@ public abstract class Formula extends Container implements Cloneable {
 	public void paint(Graphics g) {
 		String resultString;
 		resultString = getStringResult();
-		g.setFont(new Font("Arial", Font.PLAIN, 12));	
+		g.setFont(new Font("Arial", Font.PLAIN, 11));
 		super.paint(g);
 		if (resultString != null) {
-			g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
+			g.drawString(resultString, (FORMULAWIDHT-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
 		}
 		//((Graphics2D)g).scale(scaleX, scaleY);
 		//Standard
 		if (paintStatus == PAINTSTATUS_STANDARD) {
 			g.setColor(Color.BLACK);
-			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
-			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
+			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDHT-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
+			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDHT-1, CONNECTHEIGHT+RESULTHEIGHT);
 			for (int i=0; i<getInputCount(); i++){
-				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
+				g.drawLine((i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT);
 			}
-			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
-			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
+			g.drawLine(FORMULAWIDHT/2, CONNECTHEIGHT, FORMULAWIDHT/2, 0);
+			g.drawString(formulaName, (FORMULAWIDHT-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		//Selected Element
 		} else if (paintStatus == PAINTSTATUS_SELECTED) {
 			g.setColor(Color.BLUE);
-			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
-			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
+			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDHT-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
+			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDHT-1, CONNECTHEIGHT+RESULTHEIGHT);
 			for (int i=0; i<getInputCount(); i++){
-				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
+				g.drawLine((i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT);
 			}
-			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
-			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
+			g.drawLine(FORMULAWIDHT/2, CONNECTHEIGHT, FORMULAWIDHT/2, 0);
+			g.drawString(formulaName, (FORMULAWIDHT-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		//Move Element
 		} else { //if ((paintStatus == PAINTSTATUS_MOVING) || (paintStauts == PAINTSTATUS_INSERTING)) {
 			g.setColor(Color.GRAY);
 			//Dotted Line
-			for (int i=0; i<FORMULAWIDTH/4; i++) {
+			for (int i=0; i<FORMULAWIDHT/4; i++) {
 				g.drawLine(i*4, CONNECTHEIGHT, i*4+2-1, CONNECTHEIGHT);
 				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2-1, CONNECTHEIGHT+RESULTHEIGHT);
 				g.drawLine(i*4, FORMULAHEIGHT-CONNECTHEIGHT, i*4+2-1, FORMULAHEIGHT-CONNECTHEIGHT);
 			}
 			for (int i=0; i<(BOXHEIGHT+RESULTHEIGHT)/4; i++) {
 				g.drawLine(0, i*4+CONNECTHEIGHT, 0, i*4+2+CONNECTHEIGHT);
-				g.drawLine(FORMULAWIDTH-1, i*4+CONNECTHEIGHT, FORMULAWIDTH-1, i*4+2+CONNECTHEIGHT);
+				g.drawLine(FORMULAWIDHT-1, i*4+CONNECTHEIGHT, FORMULAWIDHT-1, i*4+2+CONNECTHEIGHT);
 			}
 			for (int i=0; i<getInputCount(); i++){
-				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
+				g.drawLine((i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDHT/(getInputCount()+1), FORMULAHEIGHT);
 			}
-			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
-			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
+			g.drawLine(FORMULAWIDHT/2, CONNECTHEIGHT, FORMULAWIDHT/2, 0);
+			g.drawString(formulaName, (FORMULAWIDHT-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		}
 	}
 
@@ -236,20 +236,30 @@ public abstract class Formula extends Container implements Cloneable {
 	}
 
 	/**
-	 * @return Validates, that tree is complete and isn't missing some inputs.
+	 * @return Validates, that subtree is complete and isn't missing some inputs.
 	 */
-	public final boolean completeTree() {
+	public final boolean completeSubTree() {
 		boolean complete = true;
 		for (int i = 0; complete && (i < getInputCount()); i++) {
 			if (input[i] == null) {
 				complete = false;
 			} else {
-				complete = input[i].completeTree();
+				complete = input[i].completeSubTree();
 			}
 		}
 		return complete;
 	}
 
+	/**
+	 * @return Validates, that only one tree exists and isn't missing some inputs.
+	 */
+	public final boolean completeGlobalTree() {
+		boolean complete = false;
+		if (getTreeListSize() != 1) {
+			complete = getTreeList()[0].completeSubTree();
+		}
+		return complete;
+	}
 
 	/**
 	 * Checks, on which input a specific Formula-Object is.
@@ -266,16 +276,24 @@ public abstract class Formula extends Container implements Cloneable {
 		return index;
 	}
 
-	public final static Object[] getTreeList() {
-		return treeList.toArray();
+	public final static Formula[] getTreeList() {
+		Formula[] treeListArray = new Formula[treeList.size()];
+		for (int i=0; i < treeListArray.length; i++) {
+			treeListArray[i] = (Formula)treeList.get(i);
+		}
+		return treeListArray;
 	}
 
-	public final static void insertTreeList(Formula wurzel) {
-		treeList.addFirst(wurzel);
+	public final static int getTreeListSize() {
+		return treeList.size();
 	}
 
-	public final static void deleteTreeList(Formula wurzel) {
-		treeList.remove(wurzel);
+	public final static void insertTreeList(Formula root) {
+		treeList.addFirst(root);
+	}
+
+	public final static void deleteTreeList(Formula root) {
+		treeList.remove(root);
 	}
 
 	public final void setPaintStatus(int status) {

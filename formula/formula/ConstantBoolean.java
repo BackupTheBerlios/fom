@@ -2,9 +2,8 @@
  * Created on 27.06.2004
  */
 package formula;
-import java.awt.Button;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Class for constant booleans.
@@ -28,15 +27,16 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 	 */
 	public ConstantBoolean(boolean elementChooser) {
 		super();
-		formulaName = "                     Constant";
+		formulaName = "                    Constant";
 		result = new Boolean(false);
 		inputBoolean = new Button("false");
+		inputBoolean.setFont(new Font("Arial", Font.PLAIN, 11));
+		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);
 		if (elementChooser) {
 			inputBoolean.enable(false);
 		} else {
 			inputBoolean.addActionListener(this);
 		}
-		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);
 		add(inputBoolean);		
 	}
 

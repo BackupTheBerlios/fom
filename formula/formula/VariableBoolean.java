@@ -28,12 +28,13 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 	 */
 	public VariableBoolean(boolean elementChooser) {
 		super();
-		formulaName = "                     Boolean";
+		formulaName = "                    Boolean";
 		result = new Boolean(false);
 		inputVarName = new TextField();
+		inputVarName.setFont(new Font("Arial", Font.PLAIN, 11));
 		inputVarName.setBackground(SystemColor.text);
 		inputVarName.setText("boolean1");
-		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
+		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);		
 		if (elementChooser) {
 			inputVarName.enable(false);
 		} else {

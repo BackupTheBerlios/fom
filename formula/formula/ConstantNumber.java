@@ -27,23 +27,19 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 	 */
 	public ConstantNumber(boolean elementChooser) {
 		super();
-		formulaName = "                     Constant";
+		formulaName = "                    Constant";
 		result = new Double(0);
 		inputNumber = new TextField();
+		inputNumber.setFont(new Font("Arial", Font.PLAIN, 11));
+		inputNumber.setBackground(SystemColor.text);
+		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);		
 		if (elementChooser) {
 			inputNumber.enable(false);
 		} else {
 			inputNumber.addTextListener(this);
 		}
-		inputNumber.setBackground(SystemColor.text);
-		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
 		add(inputNumber);
 	}
-
-// TODO Ist der non-Javadoc Kommentar hier gewollt?
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
 
 	/**
 	 * After each keypress the result has to be updated if the textfield contains

@@ -40,6 +40,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		for (int i=0; i < varArray.length; i++) {
 			//Reading all variables and creating their input fields.
 			varName[i] = new TextField(varArray[i].getName());
+			varName[i].setFont(new Font("Arial", Font.PLAIN, 11));
 			varName[i].setBackground(SystemColor.text);
 			varName[i].addTextListener(this);
 			spaceForInputs.add(varName[i]);
@@ -48,11 +49,13 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 			if (value instanceof Boolean) {
 				//Boolean variable.
 				varValueBoolean[i] = new Button(((Boolean)value).toString());
+				varValueBoolean[i].setFont(new Font("Arial", Font.PLAIN, 11));
 				varValueBoolean[i].addActionListener(this);
 				spaceForInputs.add(varValueBoolean[i]);
 			} else if (value instanceof Number) {
 				//Number variable.
 				varValueNumber[i] = new TextField(((Number)value).toString());
+				varValueNumber[i].setFont(new Font("Arial", Font.PLAIN, 11));
 				varValueNumber[i].setBackground(SystemColor.text);
 				varValueNumber[i].addTextListener(this);
 				spaceForInputs.add(varValueNumber[i]);
