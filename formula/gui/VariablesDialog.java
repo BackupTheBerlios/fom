@@ -4,7 +4,7 @@
  */
 package gui;
 
-import java.awt.Dialog;
+import java.awt.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
@@ -13,7 +13,8 @@ import java.awt.Dialog;
  */
 public class VariablesDialog extends Dialog {
 
-	public VariablesDialog() {
+	public VariablesDialog(Frame parent) {
+		super(parent);
 	}
 
 }

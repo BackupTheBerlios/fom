@@ -63,4 +63,12 @@ public class AppletPanel extends Applet {
 		init();
 	}
 
+	public static void main(String[] args) {
+		Frame f=new Frame("Test");
+		AppletPanel ap=new AppletPanel();
+		f.add(ap);
+		f.setSize(800,600);
+		f.setVisible(true);
+	}
+
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" size="1455,800" id="laptopbbFormulaOMatic1" metadata="nsuml-1.4" initialized="true" showWireOptions="1" scrolledY="29">
-  <children xsi:type="editmodel:ClassEditModel" location="316,-143" size="204,250" id="SumomoshadowiceFormulaOMatic5782" runTimeClassModel="SumomoshadowiceFormulaOMatic5826;SumomoshadowiceFormulaOMatic6352;SumomoshadowiceFormulaOMatic5804;SumomoshadowiceFormulaOMatic5809;SumomoshadowiceFormulaOMatic5802;SumomoshadowiceFormulaOMatic5813;SumomoshadowiceFormulaOMatic5815;SumomoshadowiceFormulaOMatic5828;SumomoshadowiceFormulaOMatic5820;SumomoshadowiceFormulaOMatic5785;SumomoshadowiceFormulaOMatic5800">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" size="1455,800" id="laptopbbFormulaOMatic1" metadata="nsuml-1.4" initialized="true" showWireOptions="1" scrolledY="-60">
+  <children xsi:type="editmodel:ClassEditModel" location="519,-193" size="204,268" id="SumomoshadowiceFormulaOMatic5782" runTimeClassModel="SumomoshadowiceFormulaOMatic5826;SumomoshadowiceFormulaOMatic6352;SumomoshadowiceFormulaOMatic6633;SumomoshadowiceFormulaOMatic5804;SumomoshadowiceFormulaOMatic5809;SumomoshadowiceFormulaOMatic5802;SumomoshadowiceFormulaOMatic5813;SumomoshadowiceFormulaOMatic5815;SumomoshadowiceFormulaOMatic5828;SumomoshadowiceFormulaOMatic5820;SumomoshadowiceFormulaOMatic5785;SumomoshadowiceFormulaOMatic5800">
     <children xsi:type="editmodel:CompartmentEditModel" size="181,54">
       <children xsi:type="editmodel:AttributeEditModel" id="SumomoshadowiceFormulaOMatic5800"/>
       <children xsi:type="editmodel:AttributeEditModel" id="SumomoshadowiceFormulaOMatic5809"/>
@@ -15,11 +15,12 @@
       <children xsi:type="editmodel:MethodEditModel" id="SumomoshadowiceFormulaOMatic5826"/>
       <children xsi:type="editmodel:MethodEditModel" id="SumomoshadowiceFormulaOMatic5828"/>
       <children xsi:type="editmodel:MethodEditModel" id="SumomoshadowiceFormulaOMatic6352"/>
+      <children xsi:type="editmodel:MethodEditModel" id="SumomoshadowiceFormulaOMatic6633"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" location="94,64" size="161,286" id="SumomoshadowiceFormulaOMatic5794" runTimeClassModel="SumomoshadowiceFormulaOMatic6092;SumomoshadowiceFormulaOMatic6088;SumomoshadowiceFormulaOMatic6103;SumomoshadowiceFormulaOMatic6517;SumomoshadowiceFormulaOMatic6106;SumomoshadowiceFormulaOMatic6082;SumomoshadowiceFormulaOMatic6087;SumomoshadowiceFormulaOMatic6111;SumomoshadowiceFormulaOMatic6086;SumomoshadowiceFormulaOMatic6085;SumomoshadowiceFormulaOMatic6101;SumomoshadowiceFormulaOMatic6078;SumomoshadowiceFormulaOMatic6109">
+  <children xsi:type="editmodel:ClassEditModel" location="94,64" size="161,286" id="SumomoshadowiceFormulaOMatic5794" runTimeClassModel="SumomoshadowiceFormulaOMatic6092;SumomoshadowiceFormulaOMatic6088;SumomoshadowiceFormulaOMatic6103;SumomoshadowiceFormulaOMatic6517;SumomoshadowiceFormulaOMatic6106;SumomoshadowiceFormulaOMatic6564;SumomoshadowiceFormulaOMatic6087;SumomoshadowiceFormulaOMatic6082;SumomoshadowiceFormulaOMatic6111;SumomoshadowiceFormulaOMatic6086;SumomoshadowiceFormulaOMatic6085;SumomoshadowiceFormulaOMatic6101;SumomoshadowiceFormulaOMatic6078;SumomoshadowiceFormulaOMatic6109">
     <children xsi:type="editmodel:CompartmentEditModel" size="138,144">
       <children xsi:type="editmodel:AttributeEditModel" id="SumomoshadowiceFormulaOMatic6082"/>
       <children xsi:type="editmodel:AttributeEditModel" id="SumomoshadowiceFormulaOMatic6085"/>
@@ -48,7 +49,7 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" location="312,119" size="204,124" id="SumomoshadowiceFormulaOMatic6191" runTimeClassModel="SumomoshadowiceFormulaOMatic6208;SumomoshadowiceFormulaOMatic6200;SumomoshadowiceFormulaOMatic6196;SumomoshadowiceFormulaOMatic6194">
+  <children xsi:type="editmodel:ClassEditModel" location="312,119" size="204,124" id="SumomoshadowiceFormulaOMatic6191" runTimeClassModel="SumomoshadowiceFormulaOMatic6208;SumomoshadowiceFormulaOMatic6196;SumomoshadowiceFormulaOMatic6200;SumomoshadowiceFormulaOMatic6194">
     <children xsi:type="editmodel:CompartmentEditModel" size="181,36">
       <children xsi:type="editmodel:AttributeEditModel" id="SumomoshadowiceFormulaOMatic6196"/>
       <children xsi:type="editmodel:AttributeEditModel" id="SumomoshadowiceFormulaOMatic6200"/>

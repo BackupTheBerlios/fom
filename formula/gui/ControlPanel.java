@@ -27,6 +27,7 @@ public class ControlPanel extends Panel {
 	private Scrollbar sbSpeed;
 	private Label lblFormula;
 	private Choice chZoom;
+	private Label lblSpeed;
 
 	public Label getLblFormula() {
 		return lblFormula;
@@ -45,7 +46,43 @@ public class ControlPanel extends Panel {
 	}
 
 	public ControlPanel() {
-		btnCalcAll=new Button(Messages.getString("BtnCalcAll"));
+		btnCalcAll	= new Button(Messages.getString("ControlPanel.BtnCalcAll"));
+		btnCalcAni	= new Button(Messages.getString("ControlPanel.BtnCalcAni"));
+		btnCalcStep	= new Button(Messages.getString("ControlPanel.BtnCalcStep"));
+		btnReset	= new Button(Messages.getString("ControlPanel.BtnReset"));
+		btnVariables= new Button(Messages.getString("ControlPanel.BtnVariables"));
+		lblSpeed	= new Label(Messages.getString("ControlPanel.LblSpeed"));
+		lblFormula	= new Label();
+		sbSpeed		= new Scrollbar(Scrollbar.HORIZONTAL, 50, 10, 0, 100);
+		chZoom		= new Choice();
+		chZoom.add("25%");
+		chZoom.add("50%");
+		chZoom.add("75%");
+		chZoom.add("100%");
+		chZoom.add("150%");
+		chZoom.add("200%");
+		
+		GridBagLayout gridbag=new GridBagLayout();
+		GridBagConstraints gbc=new GridBagConstraints();
+		setLayout(gridbag);
+		// lblFormula:
+		gbc.fill=GridBagConstraints.BOTH;
+		gbc.gridheight=2;
+		gridbag.setConstraints(lblFormula,gbc);
+		add(lblFormula);
+		// btnReset, btnCalcAll, btnCalcAni, btnCalcStep:
+		gbc.gridheight=1;
+		gridbag.setConstraints(btnReset,gbc);
+		add(btnReset);
+		gridbag.setConstraints(btnCalcAll,gbc);
+		add(btnCalcAll);
+		gridbag.setConstraints(btnCalcAni,gbc);
+		add(btnCalcAni);
+		gbc.gridwidth=GridBagConstraints.REMAINDER;
+		gridbag.setConstraints(btnCalcStep,gbc);
+		add(btnCalcStep);
+		gbc.weightx=0.0;
+		
 	}
 
 }
