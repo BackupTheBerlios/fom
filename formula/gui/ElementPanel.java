@@ -1,4 +1,4 @@
-/* $Id: ElementPanel.java,v 1.26 2004/09/06 13:08:01 br3001 Exp $
+/* $Id: ElementPanel.java,v 1.27 2004/09/06 15:15:24 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  */
 public class ElementPanel extends Panel {
 
@@ -21,7 +21,7 @@ public class ElementPanel extends Panel {
 	private Button btnAddFormula;
 	private ElementPanelListener epListener;
 	
-	private GridLayout elementPanelLayout;
+	private GridBagLayout elementPanelLayout;
 	private DragnDropListener dnd;
 	private AppletPanel aPanel;
 	
@@ -41,7 +41,7 @@ public class ElementPanel extends Panel {
 		btnClearFormulas	= new Button(Messages.getString("ElementPanel.BtnClearFormulas"));
 		btnAddFormula		= new Button(Messages.getString("ElementPanel.BtnAddFormula"));
 		epListener			= new ElementPanelListener(aPanel,this);
-		elementPanelLayout	= new GridLayout();
+		elementPanelLayout = new GridBagLayout();
 		categories			= new Categories();
 		GridBagLayout gbl	= new GridBagLayout();
 		//adding categories:
@@ -79,15 +79,14 @@ public class ElementPanel extends Panel {
 	public void updateElementList(Formula[] form) {
 		elementPanel.removeAll();
 		if(form == null) {						//no elements in category
-			elementPanelLayout.setRows(1);
-			elementPanelLayout.setColumns(1);
-			elementPanel.add(new Label(""));	// don't remove this!
+			//elementPanel.add(new Label(""));	// don't remove this!
 		} else {
-			elementPanelLayout.setColumns(1);
-			elementPanelLayout.setRows(form.length);
 			for(int i=0;i<form.length;i++) {
-				elementPanel.add(form[i]);
+				FOMToolkit.addComponent(elementPanel,elementPanelLayout,form[i],0,i,1,1,0.0,0.0,GridBagConstraints.NONE);
+				//elementPanel.add(form[i]);
 			}
+			Panel p = new Panel();
+			FOMToolkit.addComponent(elementPanel,elementPanelLayout,p,0,form.length,1,1,0.0,1.0,GridBagConstraints.VERTICAL);
 		}
 		scpElementList.validate();
 		elementPanel.repaint();

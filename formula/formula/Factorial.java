@@ -26,16 +26,25 @@ public class Factorial extends NumberFormula {
 		return result;
 	}
 
+
 	public final void calc() throws FormulaException {	
 		if (input[0] == null) {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		} else if (input[0].getDoubleResult() < 0.0) {
 			result = new Double (Double.NaN);
 		} else {
-			result = new Double (fact((long)input[0].getDoubleResult()).doubleValue());
+			double inputNumber = input[0].getDoubleResult();
+			if (Double.isNaN(inputNumber)) {
+				result = new Double(Double.NaN);
+			} else if (Double.isInfinite(inputNumber)) {
+				result = new Double(Double.POSITIVE_INFINITY);
+			} else {
+				result = new Double (fact((long)input[0].getDoubleResult()).doubleValue());				
+			}
 		}
 	}
 	
+
 	/**
 	 * Creates a "fact" with 1 input.
 	 */
@@ -45,6 +54,7 @@ public class Factorial extends NumberFormula {
 		formulaName = "fact";
 	}
 	
+
 	/**
 	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
 	 * or the resulting formula as string for a (sub)tree with this object as root.

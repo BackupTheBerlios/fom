@@ -16,6 +16,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 
 	private TextField inputVarName;
 	private String oldName;
+	private MouseForwardListener mfListener;
 
 	private AppletPanel aPanel;
 
@@ -41,6 +42,9 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		inputVarName.setBackground(Color.white);
 		inputVarName.setText("number1");
 		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
+		mfListener = new MouseForwardListener();
+		inputVarName.addMouseListener(mfListener);
+		inputVarName.addMouseMotionListener(mfListener);
 		if (elementChooser) {
 			inputVarName.addTextListener(this);			
 		} else {

@@ -1,4 +1,4 @@
-/* $Id: CustomFormulaDialog.java,v 1.2 2004/08/29 16:28:52 br3001 Exp $
+/* $Id: CustomFormulaDialog.java,v 1.3 2004/09/06 15:15:24 shadowice Exp $
  * Created on 26.08.2004
  *
  */
@@ -12,13 +12,13 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class CustomFormulaDialog extends Dialog implements ActionListener, WindowListener {
 
 	GridBagLayout 	gbl				= new GridBagLayout();
 	Formula 		currentFormula	= null;	// TODO Formula in CustomFormula ändern
-	String 			name			= "";
+	String 			name				= "";
 	Label 			lblEnterText;
 	TextField 		tfFormulaName;
 	Button 			btnOk;
@@ -61,6 +61,7 @@ public class CustomFormulaDialog extends Dialog implements ActionListener, Windo
 	 */
 	//	TODO Formula in CustomFormula ändern
 	public String showDialog(Formula form) {
+		name = form.getFormulaName();
 		if (currentFormula != null) {
 			borderedPanel.removeAll();
 		}

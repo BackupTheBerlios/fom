@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.13 2004/09/06 15:15:24 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.14 2004/09/06 15:17:52 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -83,8 +83,6 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 		} else if (form instanceof VariableNumber) {
 			varList.addVarList((VariableNumber)form);
 		}
-		//System.out.print(" -> " + form + " ");
-		System.out.println(form.getInputCount());
 		for (int i=0;i<form.getInputCount();i++) {
 			createVariableList(varList,form.getInput(i));
 		}

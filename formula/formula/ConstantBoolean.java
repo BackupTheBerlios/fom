@@ -16,6 +16,7 @@ import gui.*;
 public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 
 	private Button inputBoolean;
+	private MouseForwardListener mfListener;
 
 
 	/**
@@ -37,6 +38,9 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		inputBoolean = new Button("false");
 		inputBoolean.setFont(DEFAULT_FONT);
 		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
+		mfListener = new MouseForwardListener();
+		inputBoolean.addMouseListener(mfListener);
+		inputBoolean.addMouseMotionListener(mfListener);
 		if (elementChooser) {
 			inputBoolean.addActionListener(this);
 		} else {
@@ -75,7 +79,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
-		inputBoolean.setEnabled(enabled);
+		//inputBoolean.setEnabled(enabled);
 	}
 
 
