@@ -49,7 +49,7 @@ public class IfThenElse extends MixedFormula {
 			outString += input[1].toString();
 		outString += ")else(";
 		if (input[2] != null)
-			outString += input[1].toString();
+			outString += input[2].toString();
 		outString += ")";
 		return outString;
 	}
