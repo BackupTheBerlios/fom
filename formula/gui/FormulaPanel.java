@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.34 2004/09/07 14:15:19 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.35 2004/09/07 15:23:08 shadowice Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -13,7 +13,7 @@ import utils.*;
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.34 $
+ * @version $Revision: 1.35 $
  */
 public class FormulaPanel extends Panel {
 
@@ -573,14 +573,10 @@ public class FormulaPanel extends Panel {
 	 * doLayout with backing up scroll position of the parent ScrollPane.
 	 */
 	public void doLayout() {
-		System.out.println("doLayout");
 		ScrollPane spParent = (ScrollPane)getParent();
-		Point pos = spParent.getScrollPosition();
+		spParent.doLayout();
 		super.doLayout();
-		if ((spParent.getVScrollbarWidth() >= pos.x) && (spParent.getHScrollbarHeight() >= pos.y)) {
-			System.out.println("setting to old position "+pos);
-			spParent.setScrollPosition(pos);
-		}
+		spParent.doLayout();
 	}
 
 }
