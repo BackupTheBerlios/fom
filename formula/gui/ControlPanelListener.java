@@ -33,6 +33,7 @@ public class ControlPanelListener implements ActionListener, ItemListener, Adjus
 		String actionCommand=event.getActionCommand();
 		if (actionCommand.equals(Messages.getString("ControlPanel.BtnCalcAll"))) {
 			if (Formula.isCompleteGlobalTree()) {
+				clearResults();
 				calcThread.initCalculation(Formula.getTreeList()[0]);
 				calcThread.calcAll();
 			}
