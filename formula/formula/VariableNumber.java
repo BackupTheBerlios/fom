@@ -48,10 +48,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		if (elementChooser) {
 			inputVarName.addTextListener(this);			
 		} else {
-			inputVarName.setEnabled(false);
-			MouseForwardListener mfl = new MouseForwardListener();
-			inputVarName.addMouseListener(mfl);
-			inputVarName.addMouseMotionListener(mfl);	
+			setEnabled(false);
 		}
 		oldName = new String("number1");
 		add(inputVarName);
@@ -128,7 +125,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 	
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
-		inputVarName.setEnabled(enabled);
+		inputVarName.setEditable(enabled);
 	}
 
 

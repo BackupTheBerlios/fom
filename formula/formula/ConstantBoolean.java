@@ -44,7 +44,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		if (elementChooser) {
 			inputBoolean.addActionListener(this);
 		} else {
-			inputBoolean.setEnabled(false);
+			setEnabled(false);
 		}
 		add(inputBoolean);		
 	}

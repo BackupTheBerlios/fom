@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.20 2004/09/08 13:05:42 shadowice Exp $
+/* $Id: DialogVariables.java,v 1.21 2004/09/10 11:09:24 shadowice Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
@@ -29,6 +29,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	
 	private AppletPanel 		aPanel;
 	
+	private static final int MAX_HEIGHT = 400;
 	
 	/**
 	 * Creates a window for setting and changing variables.
@@ -51,6 +52,8 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		okButton.addActionListener(this);
 		add(okButton, BorderLayout.SOUTH);
 
+		scrollForVariables.getHAdjustable().setUnitIncrement(16);
+		scrollForVariables.getVAdjustable().setUnitIncrement(16);
 		scrollForVariables.add(variablesPanel);
 		add(scrollForVariables, BorderLayout.CENTER);
 		
@@ -97,8 +100,12 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 
 		variablesPanel.validate();
 		pack();
-		scrollForVariables.setSize(variablesPanel.getPreferredSize().width+scrollForVariables.getInsets().left + scrollForVariables.getInsets().right,
+		Dimension size = new Dimension(variablesPanel.getPreferredSize().width+scrollForVariables.getInsets().left + scrollForVariables.getInsets().right,
 											variablesPanel.getPreferredSize().height + scrollForVariables.getInsets().top + scrollForVariables.getInsets().bottom);
+		if (size.height > MAX_HEIGHT) {
+			size.height = MAX_HEIGHT;
+		}
+		scrollForVariables.setSize(size);
 		pack();
 		super.show();
 	}
