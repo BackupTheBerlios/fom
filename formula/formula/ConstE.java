@@ -11,7 +11,6 @@ package formula;
 public class ConstE extends NumberFormula {
 
 	public final void calc() throws FormulaException {
-		result = new Double (Math.E);
 	}
 	
 	/**
@@ -20,6 +19,7 @@ public class ConstE extends NumberFormula {
 	public ConstE() {
 		input = new Formula[0];
 		formulaName = "e";
+		result = new Double (Math.E);
 	}
 	
 	/**
@@ -27,8 +27,7 @@ public class ConstE extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(e)";
-		return outString;
+		return "e";
 	}
 
 }

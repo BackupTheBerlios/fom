@@ -2,27 +2,38 @@
  * Created on 27.06.2004
  */
 package formula;
+import java.awt.TextField;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 
 /**
  * Class for variable numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
-public class VariableNumber extends ConstVarFormula {
+public class VariableNumber extends ConstVarFormula implements TextListener {
 
-//TODO Mit Maurice besprechen
+//TODO Variablen interaktiv machen
 
-	public void setResult(Number result) {
-		this.result = result;
-	}
+	protected TextField inputVarName;
 
-	public final String toString() {
-		return result.toString();
-	}
-
+	/**
+	 * Creates a variable number.
+	 */
 	public VariableNumber() {
-		formulaName = "VariableNumber";
+		formulaName = "                      Number";
 		result = new Double (0);
+		inputVarName = new TextField();
+		inputVarName.addTextListener(this);
+		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
+		inputVarName.setText("number1");
+		add(inputVarName);
+	}
+
+	public void textValueChanged(TextEvent arg) {
+
+
+
 	}
 
 }

@@ -11,7 +11,6 @@ package formula;
 public class ConstPi extends NumberFormula {
 
 	public final void calc() throws FormulaException {
-		result = new Double (Math.PI);
 	}
 	
 	/**
@@ -19,7 +18,8 @@ public class ConstPi extends NumberFormula {
 	 */
 	public ConstPi() {
 		input = new Formula[0];
-		formulaName = "pi";
+		formulaName = "Pi";
+		result = new Double (Math.PI);
 	}
 	
 	/**
@@ -27,8 +27,7 @@ public class ConstPi extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(pi)";
-		return outString;
+		return "Pi";
 	}
 
 }

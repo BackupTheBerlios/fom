@@ -11,6 +11,8 @@ import utils.Messages;
  */
 public abstract class ConstVarFormula extends Formula {
 
+	//TODO Variablen interaktiv gestallten
+
 	protected Object result;
 
 	public ConstVarFormula() {
@@ -18,7 +20,14 @@ public abstract class ConstVarFormula extends Formula {
 		input = new Formula[0];
 	}
 
+	/**
+	 * No calculations need to be done for Constants/Variables
+	 */
 	public final void calc() throws FormulaException {		
+	}
+
+	public final String toString() {
+		return result.toString();
 	}
 
 	public final double getDoubleResult() throws FormulaException {
@@ -54,7 +63,7 @@ public abstract class ConstVarFormula extends Formula {
 //	}
 	
 	/**
-	 * Clears all results that have been saved by calc-operations.
+	 * Overwrites existing Method, because Constants/Variables aren't calculated
 	 */
 	public final void clearResult() {
 	}

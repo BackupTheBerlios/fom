@@ -3,96 +3,48 @@
  */
 package formula;
 import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 
 /**
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
-public class ConstantNumber extends ConstVarFormula implements ActionListener {
-
-//	TODO Mit Maurice besprechen
+public class ConstantNumber extends ConstVarFormula implements TextListener {
 
 	protected TextField inputNumber;
 
-	public void setResult(Number result) {
-		this.result = result;
-	}
-
-	public final String toString() {
-		return result.toString();
-	}
-
+	/**
+	 * Creates a constant number.
+	 */
 	public ConstantNumber() {
-		formulaName = "ConstantNumber";
+		formulaName = "                     Constant";
 		result = new Double (0);
 		inputNumber = new TextField();
-		inputNumber.addActionListener(this);
-		inputNumber.setBounds(2, RESULTHEIGHT+CONNECTHEIGHT+2, FORMULAWIDTH-2, FORMULAHEIGHT-CONNECTHEIGHT-2);
-		add(inputNumber); //Wichtig!!!!
+		inputNumber.addTextListener(this);
+		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
+		add(inputNumber);
 	}
-
-//	public void paint(Graphics g) {
-//		String resultString;
-//		resultString = getStringResult();
-//		g.setFont(new Font("Arial", Font.PLAIN, 10));	
-//		//inputNumber.setLocation(2, RESULTHEIGHT+CONNECTHEIGHT+2);
-//		//((Graphics2D)g).scale(scaleX, scaleY);
-//		super.paint(g);
-//		//Standard Aussehen
-//		if (paintStatus == PAINTSTATUS_STANDARD) {
-//			g.setColor(Color.BLACK);
-//			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
-//			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
-//			for (int i=0; i<getInputCount(); i++){
-//				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
-//			}
-//			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
-//			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
-//			if (resultString != null) {
-//				g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
-//			}
-//		//Element markiert
-//		} else if (paintStatus == PAINTSTATUS_SELECTED) {
-//			g.setColor(Color.BLUE);
-//			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
-//			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
-//			for (int i=0; i<getInputCount(); i++){
-//				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
-//			}
-//			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
-//			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
-//			if (resultString != null) {
-//				g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
-//			}
-//		//Element bewegen
-//		} else { //if ((paintStatus == PAINTSTATUS_MOVING) || (paintStauts == PAINTSTATUS_INSERTING)) {
-//			g.setColor(Color.BLACK);
-//			for (int i=0; i<FORMULAWIDTH/4; i++) {
-//				g.drawLine(i*4, CONNECTHEIGHT, i*4+2, CONNECTHEIGHT);
-//				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2, CONNECTHEIGHT+RESULTHEIGHT);
-//				g.drawLine(i*4, FORMULAHEIGHT-CONNECTHEIGHT, i*4+2, FORMULAHEIGHT-CONNECTHEIGHT);
-//			}
-//			for (int i=0; i<(BOXHEIGHT+RESULTHEIGHT)/4; i++) {
-//				g.drawLine(0, i*4+CONNECTHEIGHT, 0, i*4+2+CONNECTHEIGHT);
-//				g.drawLine(FORMULAWIDTH, i*4+CONNECTHEIGHT, FORMULAWIDTH, i*4+2+CONNECTHEIGHT);
-//			}
-//			for (int i=0; i<getInputCount(); i++){
-//				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
-//			}
-//			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
-//			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
-//		}
-//	}
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 
-	public void actionPerformed(ActionEvent aevent) {
-
+	/**
+	 * After each keypress, result has to be updated, if textfield contains
+	 * still a valid number.
+	 * @param arg import Method needs argument, but isn't used.
+	 */
+	public void textValueChanged(TextEvent arg) {
+		String newInput = inputNumber.getText();
+		if (newInput.length() == 0) {
+			newInput = "0";
+		}
+		if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
+			result = new Double(newInput);
+			repaint();
+		}
 	}
 
 }

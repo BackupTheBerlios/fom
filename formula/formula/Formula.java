@@ -87,8 +87,11 @@ public abstract class Formula extends Container implements Cloneable {
 	public void paint(Graphics g) {
 		String resultString;
 		resultString = getStringResult();
-		g.setFont(new Font("Arial", Font.PLAIN, 10));	
+		g.setFont(new Font("Arial", Font.PLAIN, 12));	
 		super.paint(g);
+		if (resultString != null) {
+			g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
+		}
 		//((Graphics2D)g).scale(scaleX, scaleY);
 		//Standard Aussehen
 		if (paintStatus == PAINTSTATUS_STANDARD) {
@@ -100,9 +103,6 @@ public abstract class Formula extends Container implements Cloneable {
 			}
 			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
 			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
-			if (resultString != null) {
-				g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
-			}
 		//Element markiert
 		} else if (paintStatus == PAINTSTATUS_SELECTED) {
 			g.setColor(Color.BLUE);
@@ -113,12 +113,9 @@ public abstract class Formula extends Container implements Cloneable {
 			}
 			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
 			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
-			if (resultString != null) {
-				g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
-			}
 		//Element bewegen
 		} else { //if ((paintStatus == PAINTSTATUS_MOVING) || (paintStauts == PAINTSTATUS_INSERTING)) {
-			g.setColor(Color.BLACK);
+			g.setColor(Color.GRAY);
 			for (int i=0; i<FORMULAWIDTH/4; i++) {
 				g.drawLine(i*4, CONNECTHEIGHT, i*4+2, CONNECTHEIGHT);
 				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2, CONNECTHEIGHT+RESULTHEIGHT);
