@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.14 2004/08/25 20:42:45 ot_piccolo Exp $
+/* $Id: DialogVariables.java,v 1.15 2004/08/29 20:33:21 ot_piccolo Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -11,7 +11,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
@@ -29,7 +29,6 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	/**
 	 * Creates a window for setting and changing variables.
 	 */
-	// TODO umschreiben auf GridBagLayout, dann gibts auch keine Schwierigkeiten wegen der Größe
 	public DialogVariables(AppletPanel parent) {
 		super(new Frame(), Messages.getString("DialogVariables.Title"), true);
 		Object value;		
