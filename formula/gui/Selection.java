@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.19 2004/09/07 15:23:08 shadowice Exp $
+/* $Id: Selection.java,v 1.20 2004/09/07 19:14:31 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 public class Selection {
 
@@ -361,13 +361,12 @@ public class Selection {
 	 * Called at the end of a drag&drop operation.
 	 */
 	public void dragEnd() {
-		System.out.println("dragEnd scroll position: "+((ScrollPane)aPanel.getFormulaPanel().getParent()).getScrollPosition());
 		dragInProgress = false;
 		aPanel.setCursor(Cursor.getDefaultCursor());
 		updatePaintStatus(Formula.PAINTSTATUS_SELECTED);
 		aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 		aPanel.getFormulaPanel().doLayout();
-		aPanel.getFormulaPanel().getParent().repaint();
+		aPanel.getFormulaPanel().repaint();
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 	}
 
