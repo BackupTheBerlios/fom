@@ -13,7 +13,7 @@ import formula.*;
  * @since 16.05.2004
  *
  */
-public class FormulaLabel extends Label {
+public class FormulaLabel extends TextField {
 
 	private ControlPanel cPanel = null;
 
@@ -22,6 +22,7 @@ public class FormulaLabel extends Label {
 	 */
 	public FormulaLabel(ControlPanel cp,String string) {
 		super(string);
+		setEditable(false);
 		setBackground(SystemColor.text);
 		this.cPanel = cp;
 	}
