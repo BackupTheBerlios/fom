@@ -15,6 +15,7 @@ import java.util.*;
  */
 public abstract class Formula extends Container implements Cloneable {
 
+	// Constants for drawing Formula Elements
 	public static final int BOXHEIGHT = 28;
 	public static final int CONNECTHEIGHT = 5;
 	public static final int RESULTHEIGHT = 20;
@@ -27,11 +28,18 @@ public abstract class Formula extends Container implements Cloneable {
 	public static final int PAINTSTATUS_INSERTING	= 2;
 	public static final int PAINTSTATUS_MOVING		= 3;
 
+	protected int paintStatus = PAINTSTATUS_STANDARD;
+
 	protected Dimension dimension = new Dimension(FORMULAWIDTH+1,FORMULAHEIGHT+1);
+
+	// Input/Output for Formula Elements
 	protected Formula[] input;
 	protected Formula output;
+
+	// Name of Fromula Element
 	protected String formulaName;
-	protected int paintStatus = PAINTSTATUS_STANDARD;
+
+	// Stores all unlinked Formula Elements
 	protected static LinkedList treeList;
 
 	/**
@@ -93,7 +101,7 @@ public abstract class Formula extends Container implements Cloneable {
 			g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
 		}
 		//((Graphics2D)g).scale(scaleX, scaleY);
-		//Standard Aussehen
+		//Standard
 		if (paintStatus == PAINTSTATUS_STANDARD) {
 			g.setColor(Color.BLACK);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
@@ -103,7 +111,7 @@ public abstract class Formula extends Container implements Cloneable {
 			}
 			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
 			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
-		//Element markiert
+		//Selected Element
 		} else if (paintStatus == PAINTSTATUS_SELECTED) {
 			g.setColor(Color.BLUE);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
@@ -113,9 +121,10 @@ public abstract class Formula extends Container implements Cloneable {
 			}
 			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
 			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
-		//Element bewegen
+		//Move Element
 		} else { //if ((paintStatus == PAINTSTATUS_MOVING) || (paintStauts == PAINTSTATUS_INSERTING)) {
 			g.setColor(Color.GRAY);
+			//Dotted Line
 			for (int i=0; i<FORMULAWIDTH/4; i++) {
 				g.drawLine(i*4, CONNECTHEIGHT, i*4+2, CONNECTHEIGHT);
 				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2, CONNECTHEIGHT+RESULTHEIGHT);

@@ -115,9 +115,8 @@ public abstract class ConstVarFormula extends Formula {
 		TypeConstVar content = getVarListName(toAdd.getInputVarName());
 		TypeConstVar newVariable;
 		if (content == null) {
-			newVariable = new TypeConstVar();
-			newVariable.setName(toAdd.getInputVarName());
-			newVariable.setValue(new Boolean(false));
+			//Variablenname existiert noch nicht.
+			newVariable = new TypeConstVar(new Boolean(false), toAdd.getInputVarName());
 			newVariable.addVarInnerList(toAdd);
 			varList.addFirst(newVariable);
 		} else {
@@ -138,9 +137,8 @@ public abstract class ConstVarFormula extends Formula {
 		TypeConstVar content = getVarListName(toAdd.getInputVarName());
 		TypeConstVar newVariable;
 		if (content == null) {
-			newVariable = new TypeConstVar();
-			newVariable.setName(toAdd.getInputVarName());
-			newVariable.setValue(new Double(0));
+			//Variablenname existiert noch nicht.
+			newVariable = new TypeConstVar(new Double(0), toAdd.getInputVarName());
 			newVariable.addVarInnerList(toAdd);
 			varList.addFirst(newVariable);
 		} else {
@@ -198,7 +196,15 @@ public abstract class ConstVarFormula extends Formula {
 	 * @return Returns contents of varList as an array.
 	 */
 	public static final TypeConstVar[] getVarList() {
-		return (TypeConstVar[])varList.toArray();
+		TypeConstVar[] resultArray = new TypeConstVar[varList.size()];
+		//TypeConstVar content;
+		for (int i=0; i < resultArray.length; i++) {
+			//content = (TypeConstVar)varList.get(i);
+			//resultArray[i] = new TypeConstVar(content.getName(), content.getValue());
+			//resultArray[i].setVarInnerList(content.getVarInnerList());
+			resultArray[i] = (TypeConstVar)varList.get(i);
+		}
+		return resultArray;
 	}
 
 	/**

@@ -48,12 +48,4 @@ public abstract class ComparisonFormula extends Formula {
 		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
 	}
 
-//	public boolean isValidInput(Formula in, int whichInput) {
-//		return false;
-//	}
-//
-//	public boolean isValidOutput(Formula in, int whichInput) {
-//		return false;
-//	}
-
 }

@@ -14,16 +14,17 @@ public class TypeConstVar {
 	private LinkedList varInnerList;
 
 
-	//MAURICE Wird das hier eigentlich benötigt?
-	// HEIKO: Sicher brauchst du den. Aber am besten schreibst du den so um, dass er als
-	// Parameter gleich einen value und name bekommt.
-	public TypeConstVar() {
-		value = new Object();
-		name = new String();
+	public TypeConstVar(Object value, String name) {
+		this.value = value;
+		this.name = name;
 		varInnerList = new LinkedList();
 	}
 
-	public Object getValue() {
+	public TypeConstVar(String name, Object value) {
+		this(value, name);
+	}
+
+	public final Object getValue() {
 		return value;
 	}
 
@@ -98,11 +99,10 @@ public class TypeConstVar {
 	}
 
 	/**
-	 * @return returns varInnerList as an array.
+	 * @return returns varInnerList.
 	 */
-	public final ConstVarFormula[] getVarInnerList() {
-		return (ConstVarFormula[])varInnerList.toArray();
+	public final LinkedList getVarInnerList() {
+		return varInnerList;
 	}
-
 
 }
