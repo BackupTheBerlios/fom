@@ -100,13 +100,15 @@ public class Categories {
 		categoryElements.put(categories[4], form);
 
 		//Category Logical Operators:
-		form = new Formula[6];
+		form = new Formula[8];
 		form[0] = new Not();
 		form[1] = new And();
 		form[2] = new Or();
 		form[3] = new Xor();
 		form[4] = new Eqv();
-		form[5] = new Impl();		
+		form[5] = new Impl();
+		form[6] = new ConstantBoolean(false);
+		form[7] = new VariableBoolean(false);
 		categoryElements.put(categories[5], form);
 
 		//Category Others:
