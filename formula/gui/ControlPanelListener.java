@@ -22,18 +22,18 @@ public class ControlPanelListener
 	 */
 	public void actionPerformed(ActionEvent event) {
 		// TODO Implement functionality to the if-blocks.
-		ControlPanel cp=(ControlPanel)((Component)event.getSource()).getParent().getParent();
+		ControlPanel cp;
 		String actionCommand=event.getActionCommand();
 		if(actionCommand.equals(Messages.getString("ControlPanel.BtnCalcAll"))) {
-			
+			cp=(ControlPanel)((Component)event.getSource()).getParent().getParent();
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnCalcAni"))) {
-			
+			cp=(ControlPanel)((Component)event.getSource()).getParent().getParent();
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnCalcStep"))) {
-			
+			cp=(ControlPanel)((Component)event.getSource()).getParent().getParent();
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnReset"))) {
-			
+			cp=(ControlPanel)((Component)event.getSource()).getParent().getParent();
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnVariables"))) {
-			
+			cp=(ControlPanel)((Component)event.getSource()).getParent();
 		}
 	}
 

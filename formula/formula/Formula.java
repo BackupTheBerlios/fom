@@ -73,17 +73,19 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param g Graphics object for painting.
 	 */
 	public void paint(Graphics g) {
+		super.paint(g);
+		System.out.println("DEBUG: painting "+formulaName);
 		//TODO Grafik verbessern
-				//((Graphics2D)g).scale(scaleX,scaleY);
-				setSize((int)(FORMULAWIDTH+1),(int)(FORMULAHEIGHT+1));
-				g.setColor(Color.BLACK);
-				g.drawRect(0,5,FORMULAWIDTH,30);
-				g.setFont(new Font("Arial",Font.PLAIN,10));
-				g.drawString(formulaName,(FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2,25); // Align: center
-				for(int i=0;i<getInputCount();i++){
-					g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1),35,(i+1)*FORMULAWIDTH/(getInputCount()+1),40);
-				}
-				g.drawLine(FORMULAWIDTH/2 +1,5,FORMULAWIDTH/2 +1,0);
+		//((Graphics2D)g).scale(scaleX,scaleY);
+		setSize((int)(FORMULAWIDTH+1),(int)(FORMULAHEIGHT+1));
+		g.setColor(Color.BLACK);
+		g.drawRect(0,5,FORMULAWIDTH,30);
+		g.setFont(new Font("Arial",Font.PLAIN,10));
+		g.drawString(formulaName,(FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2,25); // Align: center
+		for(int i=0;i<getInputCount();i++){
+			g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1),35,(i+1)*FORMULAWIDTH/(getInputCount()+1),40);
+		}
+		g.drawLine(FORMULAWIDTH/2 +1,5,FORMULAWIDTH/2 +1,0);
 	}
 
 	/**
