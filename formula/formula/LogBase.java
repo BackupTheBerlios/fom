@@ -14,10 +14,13 @@ import utils.Messages;
 public class LogBase extends NumberFormula {
 
 	public final void calc() throws FormulaException {
-		if ((input[0] == null) || (input[1] == null))
+		if ((input[0] == null) || (input[1] == null)) {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
-		else
+		} else if (input[1].getDoubleResult() < 0.0) {
+			throw new FormulaException(Messages.getString("Error.ArithmeticError"));
+		} else {
 			result = new Double (Math.log(input[1].getDoubleResult())/Math.log(input[0].getDoubleResult()));
+		}
 	}
 
 	/**

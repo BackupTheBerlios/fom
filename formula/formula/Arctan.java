@@ -26,7 +26,7 @@ public class Arctan extends NumberFormula {
 	public Arctan() {
 		super();
 		input = new Formula[1];
-		formulaName = "arctan";
+		formulaName = "arctan (radiant)";
 	}
 	
 	/**

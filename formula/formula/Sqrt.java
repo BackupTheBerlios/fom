@@ -14,10 +14,13 @@ import utils.Messages;
 public class Sqrt extends NumberFormula {
 
 	public final void calc() throws FormulaException {
-		if (input[0] == null)
+		if (input[0] == null) {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
-		else
+		} else if (input[0].getDoubleResult() < 0.0) {
+			throw new FormulaException(Messages.getString("Error.ArithmeticError"));
+		} else {
 			result = new Double (Math.sqrt(input[0].getDoubleResult()));
+		}
 	}
 
 	/**

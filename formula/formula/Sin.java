@@ -26,7 +26,7 @@ public class Sin extends NumberFormula {
 	public Sin() {
 		super();
 		input = new Formula[1];
-		formulaName = "sin";
+		formulaName = "sin (radiant)";
 	}
 	
 	/**

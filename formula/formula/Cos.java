@@ -26,7 +26,7 @@ public class Cos extends NumberFormula {
 	public Cos() {
 		super();
 		input = new Formula[1];
-		formulaName = "cos";
+		formulaName = "cos (radiant)";
 	}
 	
 	/**

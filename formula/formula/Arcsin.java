@@ -14,10 +14,13 @@ import utils.Messages;
 public class Arcsin extends NumberFormula {
 
 	public final void calc() throws FormulaException {
-		if (input[0] == null)
+		if (input[0] == null) {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
-		else
+		} else if (Math.abs(input[0].getDoubleResult()) > 1.0) {
+			throw new FormulaException(Messages.getString("Error.ArithmeticError"));
+		} else {
 			result = new Double (Math.asin(input[0].getDoubleResult()));
+		}
 	}
 
 	/**
@@ -26,7 +29,7 @@ public class Arcsin extends NumberFormula {
 	public Arcsin() {
 		super();
 		input = new Formula[1];
-		formulaName = "arcsin";
+		formulaName = "arcsin (radiant)";
 	}
 	
 	/**

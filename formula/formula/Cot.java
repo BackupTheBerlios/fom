@@ -26,7 +26,7 @@ public class Cot extends NumberFormula {
 	public Cot() {
 		super();
 		input = new Formula[1];
-		formulaName = "cot";
+		formulaName = "cot (radiant)";
 	}
 	
 	/**
