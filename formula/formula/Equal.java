@@ -1,8 +1,8 @@
 /*
- * Created on 15.04.2004
- *
+ * Created on 25.05.2004
  */
 package formula;
+
 
 import utils.Messages;
 
@@ -10,16 +10,16 @@ import utils.Messages;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
-public class And extends BooleanFormula {
+public class Equal extends ComparisonFormula {
 
 	public final void calc() throws FormulaException {
 		if ((input[0] == null) || (input[1] == null))
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-			result = new Boolean (input[0].getBooleanResult() && input[1].getBooleanResult());
+			result = new Boolean (input[0].getBooleanResult() == input[1].getBooleanResult());
 	}
 
-	public And() {
+	public Equal() {
 		input = new Formula[2];
 		formulaName = "&";
 		result = null;
@@ -33,7 +33,7 @@ public class And extends BooleanFormula {
 		String outString = "(";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += "&";
+		outString += "=";
 		if (input[1] != null)
 			outString += input[1].toString();
 		outString += ")";

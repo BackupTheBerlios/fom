@@ -3,6 +3,8 @@
  */
 package formula;
 
+import utils.Messages;
+
 /**
  * This is an abstract class for all Formula-Object, which are accepting
  * number values for input and returning boolean values.
@@ -12,29 +14,32 @@ public abstract class ComparisonFormula extends Formula {
 
 	protected Boolean result;
 
+	public abstract void calc() throws FormulaException;
+
+	public boolean getBooleanResult() throws FormulaException {
+		if (result != null)
+			return result.booleanValue();
+		else
+			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
+	}
+
 	/**
 	 * Clears all results that have been saved by calc-operations.
 	 */
-	public final void clearResult() {
+	public void clearResult() {
 		result = null;
 	}
-
-	public abstract void calc();
-
-	public boolean getBooleanResult() {
-		return false;
+//TODO getInputTypes / getOutputTypes
+	public Class[] getInputTypes(int in) {
+		return new Class[0];
 	}
 
-	public double getDoublteResult() {
-		return 0;
-	}
-//TODO Wenn in BooleanFormula isValidInput funktioniert, auch diese fertigstellen.
-	public boolean isValidInput(Formula in, int index) {
-		return false;
+	public Class[] getOutputTypes() {
+		return new Class[0];
 	}
 
-	public boolean isValidOutput(Formula in) {
-		return false;
+	public double getDoubleResult() throws FormulaException {
+		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
 	}
 
 }

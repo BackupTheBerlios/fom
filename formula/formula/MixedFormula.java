@@ -15,7 +15,10 @@ public abstract class MixedFormula extends Formula {
 
 	public abstract Object calc() throws FormulaException;
 
-	public final void clearResult() {
+	/**
+	 * Clears all results that have been saved by calc-operations.
+	 */
+	public void clearResult() {
 		result = null;
 	}
 

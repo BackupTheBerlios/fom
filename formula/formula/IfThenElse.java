@@ -4,17 +4,21 @@
  */
 package formula;
 
+import utils.Messages;
+
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
 public class IfThenElse extends MixedFormula {
-
+// TODO Alles
 	/* (non-Javadoc)
 	 * @see formula.MixedFormula#calc()
+	 * MAURICE Wie kann ich den Typ eine Object abfragen?
 	 */
 	public final Object calc() throws FormulaException {
-		// TODO Auto-generated method stub
+		if ((input[0] == null) || (input[1] == null) || (input[2] == null))
+			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		return null;
 	}
 
@@ -22,26 +26,9 @@ public class IfThenElse extends MixedFormula {
 	 * @see formula.Formula#toString()
 	 */
 	public String toString() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see formula.Formula#isValidInput(java.lang.Object, int)
-	 */
-	public boolean isValidInput(Formula in, int index) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see formula.Formula#isValidOutput(java.lang.Object, int)
-	 */
-	public boolean isValidOutput(Formula out) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	public double getDoubleResult() {
 		return 0;
@@ -53,6 +40,14 @@ public class IfThenElse extends MixedFormula {
 
 	public boolean getBooleanResult() {
 		return false;
+	}
+
+	public Class[] getInputTypes(int in) {
+		return new Class[0];
+	}
+
+	public Class[] getOutputTypes() {
+		return new Class[0];
 	}
 
 }

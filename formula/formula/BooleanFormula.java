@@ -22,21 +22,6 @@ public abstract class BooleanFormula extends Formula {
 	 */
 	public abstract void calc() throws FormulaException;
 
-	public boolean isValidInput(Formula in, int index) {
-		//TODO IsValidInput muss MixedFormula akzeptieren.
-		if ((in instanceof NumberFormula) || (in instanceof ComparisonFormula))
-			return true;
-		else if (in instanceof MixedFormula)
-		//Funktioniert noch nicht.
-			return false;
-		else
-			return false;
-	}
-	//TODO Wenn isValidInput funktioniert, auch isValidOutput fertigstellen.
-	public boolean isValidOutput(Formula out) {
-		return false;
-	}
-
 /*	public long getLongResult() throws FormulaException {
 		return 0;
 	}*/
@@ -52,8 +37,23 @@ public abstract class BooleanFormula extends Formula {
 		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
 	}
 
-	public final void clearResult() {
+	/**
+	 * Clears all results that have been saved by calc-operations.
+	 */
+	public void clearResult() {
 		result = null;
+	}
+
+	/**
+	 * @param index Number of the input (0=left...max-1=right)
+	 * @return Returns an array of all possible classes for the input.
+	 */
+	public Class[] getInputTypes(int in) {
+		return new Class[0];
+	}
+
+	public Class[] getOutputTypes() {
+		return new Class[0];
 	}
 
 }

@@ -29,7 +29,6 @@ public abstract class Formula extends Container implements Cloneable {
 	 * Creates a new formula object.
 	 */
 	public Formula() {
-		//Maurice: Was bedeutet das hier?
 		super();
 	}
 
@@ -62,7 +61,7 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * @return Name of the formula-element.
 	 */
-	public final String getFormulaName() {
+	public String getFormulaName() {
 		return formulaName;
 	}
 
@@ -90,11 +89,11 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * @return Returns the number of inputs a formula element has.
 	 */
-	public final int getInputCount() {
+	public int getInputCount() {
 		return input.length;
 	}
 
-
+// TODO getInputTypes / getOutputTypes
 	/**
 	 * @param index Number of the input (0=left...max-1=right)
 	 * @return Returns an array of all possible classes for the input.
@@ -118,35 +117,8 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param index Number of the input (left=0, right=inputCount-1)
 	 * @return The formula, that is connected to this input, or null.
 	 */
-	public final Formula getInput(int index) {
+	public Formula getInput(int index) {
 		return input[index];
-	}
-
-
-	/**
-	 * Connects another formula-object to this input.
-	 * @param in The other formula-object.
-	 * @param index Number of the input (left=0).
-	 */
-	public final void setInput(Formula in, int index) {
-		this.input[index] = in;
-	}
-
-
-	/**
-	 * @return Returns the formula-object that is connected to this output.
-	 */
-	public final Formula getOutput() {
-		return output;
-	}
-
-
-	/**
-	 * Connects another formula to this output.
-	 * @param out The other formula-object.
-	 */
-	public final void setOutput(Formula out) {
-		this.output = out;
 	}
 
 
@@ -159,17 +131,50 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * @return Returns the maximal number of formula-objects in this subtree which are side by side.
 	 */
-	//TODO Funktioniert noch nicht, da Variablen/Konstanten nicht erkannt werden.
-	//Anmerkung: hab input.length durch getInputCount() ersetzt...
-	// Auﬂerdem macht man Schleifen mit L‰ngen nicht mit <= und -1 
-	// sondern mit < (nur so bevor du dir das angewˆhnst :))
-	public final int getWidthOfTree() {
-		int WidthOfTree = 0;
-		for (int i = 0; i < getInputCount(); i++) {
-			if (input[i] != null)
-				WidthOfTree += input[i].getWidthOfTree();
-		}
-		return WidthOfTree;
+	public int getWidthOfTree() {
+		int widthOfTree = 0;
+		if (getInputCount() == 0)
+			widthOfTree = 1;
+		else {
+			for (int i = 0; i < getInputCount(); i++) {
+				if (input[i] != null)
+					widthOfTree += input[i].getWidthOfTree();		
+		}}
+		return widthOfTree;
+	}
+
+	/**
+	 * Connects another formula to this output.
+	 * @param out The other formula-object.
+	 */
+	public void setOutput(Formula out) {
+		this.output = out;
+	}
+
+	/**
+	 * @return Returns the formula-object that is connected to this output.
+	 */
+	public Formula getOutput() {
+		return output;
+	}
+
+	/**
+	 * Connects another formula-object to this input.
+	 * @param in The other formula-object.
+	 * @param index Number of the input (left=0).
+	 */
+	public void setInput(Formula in, int index) {
+		this.input[index] = in;
+	}
+	/**
+	 * @return Validates, that tree is complete and isn't missing some inputs.
+	 * MAURICE Darf ich dieses Abbruchbedingung benutzen (for-Schleife)?
+	 */
+	public boolean completeTree() {
+		boolean complete = true;
+		for (int i = 0; i < getInputCount() && complete; i++)
+			complete = complete && (input[i] == null);
+		return complete;
 	}
 
 }
