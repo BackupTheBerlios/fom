@@ -18,25 +18,19 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 	 * Creates a constant boolean.
 	 */
 	public ConstantBoolean() {
-		super();
-		formulaName = "                     Constant";
-		result = new Boolean (false);
-		inputBoolean = new Button("False");
-		inputBoolean.addActionListener(this);
-		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);
-		add(inputBoolean);
+		this(false);
 	}
 
 	/**
 	 * Creates a constant boolean.
 	 * @param enabled Enables inputBoolean for input.
 	 */
-	public ConstantBoolean(boolean enabled) {
+	public ConstantBoolean(boolean elementChooser) {
 		super();
 		formulaName = "                     Constant";
-		result = new Boolean (false);
-		inputBoolean = new Button("False");
-		if (! enabled) {
+		result = new Boolean(false);
+		inputBoolean = new Button("false");
+		if (elementChooser) {
 			inputBoolean.enable(false);
 		} else {
 			inputBoolean.addActionListener(this);
@@ -50,11 +44,11 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 	 * @param arg import Method needs argument, but isn't used.
 	 */
 	public void actionPerformed(ActionEvent arg) {
-		if (inputBoolean.getLabel() == "False") {
-			inputBoolean.setLabel("True");
+		if (inputBoolean.getLabel() == "false") {
+			inputBoolean.setLabel("true");
 			result = new Boolean (true);
 		} else {
-			inputBoolean.setLabel("False");
+			inputBoolean.setLabel("false");
 			result = new Boolean (false);
 		}
 		repaint();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" size="1450,1564" id="laptopbbFormulaOMatic2" metadata="nsuml-1.4" initialized="true" showWireOptions="1" scrolledY="1435">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" size="1450,1564" id="laptopbbFormulaOMatic2" metadata="nsuml-1.4" initialized="true" showWireOptions="1" scrolledY="47">
   <children xsi:type="editmodel:ClassEditModel" location="50,1445" size="204,99" stereotype="exception" id="laptopbbFormulaOMatic382" runTimeClassModel="OTPOTPiccoloFormulaOMatic6934;OTPOTPiccoloFormulaOMatic6936">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="181,36">
@@ -26,7 +26,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" location="1247,977" size="183,175" targetConnections="//@children.12/@sourceConnections.0" id="OTPOTPiccoloFormulaOMatic7136" runTimeClassModel="OTPOTPiccoloFormulaOMatic7662;OTPOTPiccoloFormulaOMatic7146;OTPOTPiccoloFormulaOMatic7152;OTPOTPiccoloFormulaOMatic7139;OTPOTPiccoloFormulaOMatic7674;OTPOTPiccoloFormulaOMatic7156;OTPOTPiccoloFormulaOMatic7161">
+  <children xsi:type="editmodel:ClassEditModel" location="1247,977" size="183,175" targetConnections="//@children.12/@sourceConnections.0" id="OTPOTPiccoloFormulaOMatic7136" runTimeClassModel="OTPOTPiccoloFormulaOMatic7662;OTPOTPiccoloFormulaOMatic7152;OTPOTPiccoloFormulaOMatic7146;OTPOTPiccoloFormulaOMatic7139;OTPOTPiccoloFormulaOMatic7674;OTPOTPiccoloFormulaOMatic7156;OTPOTPiccoloFormulaOMatic7161">
     <children xsi:type="editmodel:CompartmentEditModel" size="92,18">
       <children xsi:type="editmodel:AttributeEditModel" id="OTPOTPiccoloFormulaOMatic7139"/>
     </children>
@@ -75,7 +75,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" location="925,1256" size="125,103" id="laptopbbFormulaOMatic2077" runTimeClassModel="laptopbbFormulaOMatic2082;laptopbbFormulaOMatic2084;SumomoshadowiceFormulaOMatic4189">
+  <children xsi:type="editmodel:ClassEditModel" location="925,1256" size="125,103" id="laptopbbFormulaOMatic2077" runTimeClassModel="laptopbbFormulaOMatic2082;SumomoshadowiceFormulaOMatic4189;laptopbbFormulaOMatic2084">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="123,72">
       <children xsi:type="editmodel:MethodEditModel" id="laptopbbFormulaOMatic2082"/>
@@ -103,7 +103,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" location="525,50" size="236,877" targetConnections="//@children.11/@sourceConnections.0" id="laptopbbFormulaOMatic14" runTimeClassModel="OTPOTPiccoloFormulaOMatic8405;SumomoshadowiceFormulaOMatic4982;OTPOTPiccoloFormulaOMatic11121;OTPOTPiccoloFormulaOMatic9771;OTPOTPiccoloFormulaOMatic9777;OTPOTPiccoloFormulaOMatic11049;SumomoshadowiceFormulaOMatic4246;SumomoshadowiceFormulaOMatic5085;OTPOTPiccoloFormulaOMatic11088;SumomoshadowiceFormulaOMatic3281;OTPOTPiccoloFormulaOMatic9469;OTPOTPiccoloFormulaOMatic11156;SumomoshadowiceFormulaOMatic4459;laptopbbFormulaOMatic18;OTPOTPiccoloFormulaOMatic8408;OTPOTPiccoloFormulaOMatic11085;SumomoshadowiceFormulaOMatic4985;laptopbbFormulaOMatic570;OTPOTPiccoloFormulaOMatic8382;OTPOTPiccoloFormulaOMatic11119;SumomoshadowiceFormulaOMatic4423;SumomoshadowiceFormulaOMatic3232;OTPOTPiccoloFormulaOMatic7755;SumomoshadowiceFormulaOMatic4968;SumomoshadowiceFormulaOMatic3254;OTPOTPiccoloFormulaOMatic11046;SumomoshadowiceFormulaOMatic5101;laptopbbFormulaOMatic546;SumomoshadowiceFormulaOMatic4393;OTPOTPiccoloFormulaOMatic11158;OTPOTPiccoloFormulaOMatic9773;laptopbbFormulaOMatic27;SumomoshadowiceFormulaOMatic4461;OTPOTPiccoloFormulaOMatic9745;OTPOTPiccoloFormulaOMatic11117;OTPOTPiccoloFormulaOMatic9779;OTPOTPiccoloFormulaOMatic9786;laptopbbFormulaOMatic25;OTPOTPiccoloFormulaOMatic10453;laptopbbFormulaOMatic227;laptopbbFormulaOMatic46;SumomoshadowiceFormulaOMatic5099;SumomoshadowiceFormulaOMatic1016;OTPOTPiccoloFormulaOMatic9832;OTPOTPiccoloFormulaOMatic11115;OTPOTPiccoloFormulaOMatic9783;OTPOTPiccoloFormulaOMatic9775">
+  <children xsi:type="editmodel:ClassEditModel" location="525,50" size="236,877" targetConnections="//@children.11/@sourceConnections.0" id="laptopbbFormulaOMatic14" runTimeClassModel="OTPOTPiccoloFormulaOMatic8405;SumomoshadowiceFormulaOMatic4982;OTPOTPiccoloFormulaOMatic11121;OTPOTPiccoloFormulaOMatic9771;OTPOTPiccoloFormulaOMatic9777;OTPOTPiccoloFormulaOMatic11049;SumomoshadowiceFormulaOMatic4246;SumomoshadowiceFormulaOMatic5085;SumomoshadowiceFormulaOMatic3281;OTPOTPiccoloFormulaOMatic11088;OTPOTPiccoloFormulaOMatic9469;OTPOTPiccoloFormulaOMatic11156;SumomoshadowiceFormulaOMatic4459;laptopbbFormulaOMatic18;OTPOTPiccoloFormulaOMatic8408;OTPOTPiccoloFormulaOMatic11085;SumomoshadowiceFormulaOMatic4985;laptopbbFormulaOMatic570;OTPOTPiccoloFormulaOMatic11119;OTPOTPiccoloFormulaOMatic8382;SumomoshadowiceFormulaOMatic4423;OTPOTPiccoloFormulaOMatic7755;SumomoshadowiceFormulaOMatic3232;SumomoshadowiceFormulaOMatic4968;SumomoshadowiceFormulaOMatic3254;OTPOTPiccoloFormulaOMatic11046;SumomoshadowiceFormulaOMatic5101;laptopbbFormulaOMatic546;SumomoshadowiceFormulaOMatic4393;OTPOTPiccoloFormulaOMatic11158;OTPOTPiccoloFormulaOMatic9773;laptopbbFormulaOMatic27;SumomoshadowiceFormulaOMatic4461;OTPOTPiccoloFormulaOMatic9745;OTPOTPiccoloFormulaOMatic9779;OTPOTPiccoloFormulaOMatic11117;OTPOTPiccoloFormulaOMatic9786;laptopbbFormulaOMatic25;OTPOTPiccoloFormulaOMatic10453;laptopbbFormulaOMatic46;laptopbbFormulaOMatic227;SumomoshadowiceFormulaOMatic5099;OTPOTPiccoloFormulaOMatic9832;OTPOTPiccoloFormulaOMatic11115;SumomoshadowiceFormulaOMatic1016;OTPOTPiccoloFormulaOMatic9783;OTPOTPiccoloFormulaOMatic9775">
     <children xsi:type="editmodel:CompartmentEditModel" size="170,252">
       <children xsi:type="editmodel:AttributeEditModel" id="SumomoshadowiceFormulaOMatic4393"/>
       <children xsi:type="editmodel:AttributeEditModel" id="SumomoshadowiceFormulaOMatic4423"/>
@@ -157,12 +157,14 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" location="413,1256" size="159,103" id="OTPOTPiccoloFormulaOMatic10323" runTimeClassModel="OTPOTPiccoloFormulaOMatic11654;OTPOTPiccoloFormulaOMatic10330;OTPOTPiccoloFormulaOMatic10325;OTPOTPiccoloFormulaOMatic11682">
+  <children xsi:type="editmodel:ClassEditModel" location="413,1256" size="159,139" id="OTPOTPiccoloFormulaOMatic10323" runTimeClassModel="OTPOTPiccoloFormulaOMatic11654;OTPOTPiccoloFormulaOMatic11822;OTPOTPiccoloFormulaOMatic11826;OTPOTPiccoloFormulaOMatic10330;OTPOTPiccoloFormulaOMatic10325;OTPOTPiccoloFormulaOMatic11829;OTPOTPiccoloFormulaOMatic11682">
     <children xsi:type="editmodel:CompartmentEditModel"/>
-    <children xsi:type="editmodel:CompartmentEditModel" size="108,54">
+    <children xsi:type="editmodel:CompartmentEditModel" size="120,54">
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic10330"/>
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic10325"/>
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11682"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11826"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11829"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" id="OTPOTPiccoloFormulaOMatic10324" connectionRouterKind="Manual" source="//@children.8" target="//@children.14/@sourceConnections.0" targetEnd="//@children.8/@sourceConnections.0/@children.1" sourceEnd="//@children.8/@sourceConnections.0/@children.0">
@@ -171,7 +173,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" location="50,977" size="153,229" targetConnections="//@children.14/@sourceConnections.0" id="OTPOTPiccoloFormulaOMatic9936" runTimeClassModel="OTPOTPiccoloFormulaOMatic10218;OTPOTPiccoloFormulaOMatic10921;OTPOTPiccoloFormulaOMatic9952;OTPOTPiccoloFormulaOMatic11608;OTPOTPiccoloFormulaOMatic9958;OTPOTPiccoloFormulaOMatic11597;OTPOTPiccoloFormulaOMatic9938;OTPOTPiccoloFormulaOMatic10220;OTPOTPiccoloFormulaOMatic9950;OTPOTPiccoloFormulaOMatic9956;OTPOTPiccoloFormulaOMatic9948">
+  <children xsi:type="editmodel:ClassEditModel" location="50,977" size="153,373" targetConnections="//@children.14/@sourceConnections.0" id="OTPOTPiccoloFormulaOMatic9936" runTimeClassModel="OTPOTPiccoloFormulaOMatic11751;OTPOTPiccoloFormulaOMatic11608;OTPOTPiccoloFormulaOMatic9958;OTPOTPiccoloFormulaOMatic11597;OTPOTPiccoloFormulaOMatic11770;OTPOTPiccoloFormulaOMatic10220;OTPOTPiccoloFormulaOMatic11773;OTPOTPiccoloFormulaOMatic9950;OTPOTPiccoloFormulaOMatic11777;OTPOTPiccoloFormulaOMatic9948;OTPOTPiccoloFormulaOMatic11767;OTPOTPiccoloFormulaOMatic11757;OTPOTPiccoloFormulaOMatic10218;OTPOTPiccoloFormulaOMatic9952;OTPOTPiccoloFormulaOMatic10921;OTPOTPiccoloFormulaOMatic11760;OTPOTPiccoloFormulaOMatic11764;OTPOTPiccoloFormulaOMatic9938;OTPOTPiccoloFormulaOMatic9956;OTPOTPiccoloFormulaOMatic11754">
     <children xsi:type="editmodel:CompartmentEditModel" size="84,18">
       <children xsi:type="editmodel:AttributeEditModel" id="OTPOTPiccoloFormulaOMatic9938"/>
     </children>
@@ -185,6 +187,14 @@
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic10220"/>
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic10921"/>
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11608"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11773"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11770"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11760"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11754"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11767"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11764"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11777"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11757"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" id="OTPOTPiccoloFormulaOMatic10035" connectionRouterKind="Manual" source="//@children.9" target="//@children.11/@sourceConnections.0" targetEnd="//@children.9/@sourceConnections.0/@children.1" sourceEnd="//@children.9/@sourceConnections.0/@children.0">
@@ -193,12 +203,14 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" location="590,1256" size="159,103" id="OTPOTPiccoloFormulaOMatic10307" runTimeClassModel="OTPOTPiccoloFormulaOMatic10309;OTPOTPiccoloFormulaOMatic10314;OTPOTPiccoloFormulaOMatic11675;OTPOTPiccoloFormulaOMatic11665">
+  <children xsi:type="editmodel:ClassEditModel" location="590,1256" size="159,139" id="OTPOTPiccoloFormulaOMatic10307" runTimeClassModel="OTPOTPiccoloFormulaOMatic10309;OTPOTPiccoloFormulaOMatic11839;OTPOTPiccoloFormulaOMatic11836;OTPOTPiccoloFormulaOMatic10314;OTPOTPiccoloFormulaOMatic11832;OTPOTPiccoloFormulaOMatic11675;OTPOTPiccoloFormulaOMatic11665">
     <children xsi:type="editmodel:CompartmentEditModel"/>
-    <children xsi:type="editmodel:CompartmentEditModel" size="110,54">
+    <children xsi:type="editmodel:CompartmentEditModel" size="120,54">
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic10314"/>
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic10309"/>
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11675"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11839"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11836"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" id="OTPOTPiccoloFormulaOMatic10308" connectionRouterKind="Manual" source="//@children.10" target="//@children.14/@sourceConnections.0" targetEnd="//@children.10/@sourceConnections.0/@children.1" sourceEnd="//@children.10/@sourceConnections.0/@children.0">
@@ -207,7 +219,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" location="233,977" size="239,229" targetConnections="//@children.6/@sourceConnections.0" id="laptopbbFormulaOMatic87" runTimeClassModel="OTPOTPiccoloFormulaOMatic9897;OTPOTPiccoloFormulaOMatic8699;laptopbbFormulaOMatic364;SumomoshadowiceFormulaOMatic3314;OTPOTPiccoloFormulaOMatic8711;OTPOTPiccoloFormulaOMatic8703;SumomoshadowiceFormulaOMatic2593;SumomoshadowiceFormulaOMatic3334;SumomoshadowiceFormulaOMatic4616;OTPOTPiccoloFormulaOMatic8707">
+  <children xsi:type="editmodel:ClassEditModel" location="233,977" size="239,229" targetConnections="//@children.6/@sourceConnections.0" id="laptopbbFormulaOMatic87" runTimeClassModel="OTPOTPiccoloFormulaOMatic9897;OTPOTPiccoloFormulaOMatic8699;laptopbbFormulaOMatic364;OTPOTPiccoloFormulaOMatic8711;SumomoshadowiceFormulaOMatic3314;OTPOTPiccoloFormulaOMatic8703;SumomoshadowiceFormulaOMatic2593;SumomoshadowiceFormulaOMatic3334;SumomoshadowiceFormulaOMatic4616;OTPOTPiccoloFormulaOMatic8707">
     <children xsi:type="editmodel:CompartmentEditModel" size="137,54">
       <children xsi:type="editmodel:AttributeEditModel" id="SumomoshadowiceFormulaOMatic2593"/>
     </children>
@@ -274,12 +286,12 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.4/@sourceConnections.0 //@children.8/@sourceConnections.0 //@children.10/@sourceConnections.0" id="OTPOTPiccoloFormulaOMatic10043" connectionRouterKind="GeneralizationManhattan" source="//@children.14" target="//@children.9" targetEnd="//@children.14/@sourceConnections.0/@children.1" sourceEnd="//@children.14/@sourceConnections.0/@children.0">
       <children xsi:type="editmodel:AssociationEndEditModel" location="76,0" anchorKind="FixedAtEdge" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="76,229" anchorKind="FixedAtEdge"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="76,373" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
   </children>
   <children xsi:type="editmodel:ClassEditModel" location="244,64" size="142,175" id="OTPOTPiccoloFormulaOMatic11554" runTimeClassModel="OTPOTPiccoloFormulaOMatic11556;OTPOTPiccoloFormulaOMatic11567;OTPOTPiccoloFormulaOMatic11572;OTPOTPiccoloFormulaOMatic11559;OTPOTPiccoloFormulaOMatic11562;OTPOTPiccoloFormulaOMatic11557;OTPOTPiccoloFormulaOMatic11565">
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="119,54">
       <children xsi:type="editmodel:AttributeEditModel" id="OTPOTPiccoloFormulaOMatic11556"/>
       <children xsi:type="editmodel:AttributeEditModel" id="OTPOTPiccoloFormulaOMatic11562"/>
       <children xsi:type="editmodel:AttributeEditModel" id="OTPOTPiccoloFormulaOMatic11572"/>
@@ -289,6 +301,20 @@
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11559"/>
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11565"/>
       <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11567"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" location="37,63" size="185,157" id="OTPOTPiccoloFormulaOMatic11728" runTimeClassModel="OTPOTPiccoloFormulaOMatic11792;OTPOTPiccoloFormulaOMatic11795;OTPOTPiccoloFormulaOMatic11730;OTPOTPiccoloFormulaOMatic11849;OTPOTPiccoloFormulaOMatic11732;OTPOTPiccoloFormulaOMatic11871">
+    <children xsi:type="editmodel:CompartmentEditModel">
+      <children xsi:type="editmodel:AttributeEditModel" id="OTPOTPiccoloFormulaOMatic11730"/>
+      <children xsi:type="editmodel:AttributeEditModel" id="OTPOTPiccoloFormulaOMatic11792"/>
+      <children xsi:type="editmodel:AttributeEditModel" id="OTPOTPiccoloFormulaOMatic11795"/>
+      <children xsi:type="editmodel:AttributeEditModel" id="OTPOTPiccoloFormulaOMatic11871"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel">
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11732"/>
+      <children xsi:type="editmodel:MethodEditModel" id="OTPOTPiccoloFormulaOMatic11849"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>

@@ -12,8 +12,6 @@ import java.util.LinkedList;
  */
 public abstract class ConstVarFormula extends Formula {
 
-	//TODO Variablen interaktiv gestallten
-
 	protected Object result;
 
 	//Contains all VariableBoolean and VariableNumber as well as their names and values
@@ -186,10 +184,21 @@ public abstract class ConstVarFormula extends Formula {
 	}
 
 	/**
+	 * Deletes a whole Branch of ConstVarFormula from varList.
+	 * @param toDelete Name of Variables.
+	 */
+	public static final void deleteVarBranch(String toDelete) {
+		TypeConstVar content = getVarListName(toDelete);
+		if (content != null) {
+			varList.remove(content);
+		}		
+	}
+
+	/**
 	 * @return Returns contents of varList as an array.
 	 */
-	public static final ConstVarFormula[] getVarList() {
-		return (ConstVarFormula[])varList.toArray();
+	public static final TypeConstVar[] getVarList() {
+		return (TypeConstVar[])varList.toArray();
 	}
 
 	/**

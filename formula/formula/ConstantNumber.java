@@ -18,25 +18,19 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 	 * Creates a constant number.
 	 */
 	public ConstantNumber() {
-		super();
-		formulaName = "                     Constant";
-		result = new Double (0);
-		inputNumber = new TextField();
-		inputNumber.addTextListener(this);
-		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
-		add(inputNumber);
+		this(false);
 	}
 
 	/**
 	 * Creates a constant number.
 	 * @param enabled Enables inputNumber for input.
 	 */
-	public ConstantNumber(boolean enabled) {
+	public ConstantNumber(boolean elementChooser) {
 		super();
 		formulaName = "                     Constant";
-		result = new Double (0);
+		result = new Double(0);
 		inputNumber = new TextField();
-		if (! enabled) {
+		if (elementChooser) {
 			inputNumber.enable(false);
 		} else {
 			inputNumber.addTextListener(this);
