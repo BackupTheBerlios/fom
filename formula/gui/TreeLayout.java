@@ -14,7 +14,7 @@ import formula.*;
  */
 public class TreeLayout implements LayoutManager {
 
-	private static final int FORMULA_HGAP = 20;		// horizontal distance between 2 formula components 
+	private static final int FORMULA_HGAP = 5;		// horizontal distance between 2 formula components 
 	private static final int FORMULA_VGAP = 40;		// vertical distance between 2 formula components
 
 	/* (non-Javadoc)
@@ -75,19 +75,18 @@ public class TreeLayout implements LayoutManager {
 		int in_width_px;
 		int xPos = form.getX() - width_px/2;
 		int yPos = form.getY() + form.getHeight() + FORMULA_VGAP;
-		System.out.println("[DEBUG] "+form+"("+form.getX()+", "+form.getY()+")\t "+width+"\t "+width_px);
 		Formula inputForm;
 		for (int i=0;i<form.getInputCount();i++) {
 			inputForm = form.getInput(i);
 			if (inputForm != null) {
-				System.out.println ("xPos = "+xPos);
 				in_width = inputForm.getWidthOfTree();	// if getWidthOfTree is too slow, alternative would be to return an array
-				in_width_px = (in_width*form.getWidth())+(in_width)*FORMULA_HGAP;
-				xPos+=in_width_px/2;
+				in_width_px = (in_width*form.getWidth())+(in_width)*FORMULA_HGAP+FORMULA_HGAP/2;
+				xPos += in_width_px/2;
 				inputForm.moveTo(xPos,yPos);
-				System.out.println("[DEBUG]  "+inputForm+"\t "+ in_width+ "\t "+in_width_px);
-				xPos+= in_width_px/2;
+				xPos += in_width_px/2;
 				layoutTree(inputForm);
+			} else {
+				xPos += form.getWidth()+1.5*FORMULA_HGAP; 
 			}
 		}
 		
