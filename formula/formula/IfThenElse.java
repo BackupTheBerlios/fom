@@ -49,23 +49,6 @@ public class IfThenElse extends MixedFormula {
 		return outString;
 	}
 
-
-	public final double getDoubleResult() throws FormulaException {
-		if ((result != null) && (result instanceof Double))
-			return ((Double)result).doubleValue();
-		else
-			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
-	}
-
-
-	public final boolean getBooleanResult() throws FormulaException {
-		if ((result != null) && (result instanceof Boolean))
-			return ((Boolean)result).booleanValue();
-		else
-			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
-	}
-
-
 	public final Class[] getInputTypes(int index) throws FormulaException {
 		switch (index) {
 			case 0: 

@@ -32,20 +32,41 @@ public abstract class ConstVarFormula extends Formula {
 	}
 
 
-	public abstract void calc() throws FormulaException;
+	public void calc() throws FormulaException {		
+	}
 
-	public double getDoubleResult() {
-		return ((Double)result).doubleValue();
+	public final double getDoubleResult() throws FormulaException {
+		if ((result != null) && (result instanceof Double))
+			return ((Double)result).doubleValue();
+		else
+			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
+	}
+
+
+	public final boolean getBooleanResult() throws FormulaException {
+		if ((result != null) && (result instanceof Boolean))
+			return ((Boolean)result).booleanValue();
+		else
+			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
+	}
+	
+	public final String getStringResult() throws FormulaException {
+		if (result != null) {
+			if (result instanceof Boolean)
+				return ((Boolean)result).toString();
+			else if (result instanceof Double)
+				return ((Double)result).toString();
+			else
+				throw new FormulaException(Messages.getString("Error.IllegalDataType"));
+		}
+		else
+			throw new FormulaException(Messages.getString("Error.IllegalDataType"));
 	}
 
 //	public long getLongResult() {
-//		return 0;
+//	 return 0;
 //	}
-
-	public boolean getBooleanResult() {
-		return ((Boolean)result).booleanValue();
-	}
-
+	
 	/**
 	 * Clears all results that have been saved by calc-operations.
 	 */

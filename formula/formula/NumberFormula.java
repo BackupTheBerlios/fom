@@ -14,17 +14,24 @@ public abstract class NumberFormula extends Formula {
 
 	protected Number result;
 
-	public double getDoubleResult() throws FormulaException {
+	public final double getDoubleResult() throws FormulaException {
 		if (result != null)
 			return result.doubleValue();
 		else
 			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
 	}
 
-	public boolean getBooleanResult() throws FormulaException {
+	public final boolean getBooleanResult() throws FormulaException {
 		throw new FormulaException(Messages.getString("Error.IllegalBforN"));
 	}
 
+	public final String getStringResult() throws FormulaException {
+		if (result != null)
+			return result.toString();
+		else
+			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
+	}
+	
 	/**
 	 * Calculates this fomula-element by using the results from it's inputs.
 	 * @throws FormulaException when the inputs are empty.

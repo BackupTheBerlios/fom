@@ -5,6 +5,8 @@
 package formula;
 
 import java.lang.Object;
+import utils.Messages;
+
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
@@ -22,4 +24,32 @@ public abstract class MixedFormula extends Formula {
 		result = null;
 	}
 
+	public final double getDoubleResult() throws FormulaException {
+		if ((result != null) && (result instanceof Double))
+			return ((Double)result).doubleValue();
+		else
+			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
+	}
+
+
+	public final boolean getBooleanResult() throws FormulaException {
+		if ((result != null) && (result instanceof Boolean))
+			return ((Boolean)result).booleanValue();
+		else
+			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
+	}
+	
+	public final String getStringResult() throws FormulaException {
+		if (result != null) {
+			if (result instanceof Boolean)
+				return ((Boolean)result).toString();
+			else if (result instanceof Double)
+				return ((Double)result).toString();
+			else
+				throw new FormulaException(Messages.getString("Error.IllegalDataType"));
+			}
+		else
+			throw new FormulaException(Messages.getString("Error.IllegalDataType"));
+	}
+	
 }

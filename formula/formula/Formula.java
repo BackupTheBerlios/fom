@@ -15,8 +15,8 @@ import java.util.*;
  */
 public abstract class Formula extends Container implements Cloneable {
 
-	public static final int BOXHEIGHT = 50;
-	public static final int RESULTHEIGHT = 25;
+	public static final int BOXHEIGHT = 30;
+	public static final int RESULTHEIGHT = 20;
 	public static final int CONNECTHEIGHT = 5; 
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
 	public static final int FORMULAWIDTH = 120;
@@ -38,6 +38,11 @@ public abstract class Formula extends Container implements Cloneable {
 		setSize(dimension);
 	}
 
+	/**
+	 * Calculates the result of this formula-object and stores it in result (result is defined in subclasses).
+	 * @throws Throws a FormulaException when there aren't all inputs connected with a formula-object.
+	 */
+	public abstract void calc() throws FormulaException;
 
 	/**
 	 * Will return a boolean-value as a result, if possible. If not, a FormulaException will be thrown.
@@ -55,12 +60,19 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public abstract double getDoubleResult() throws FormulaException;
 
-
 	/**
-	 * Will return a long-value as a result, if possible. If not, a FormulaException will be thrown.
-	 * @return The result of all calc-operations up to this formula-element.
-	 * @throws FormulaException Shouldn't happen. ;)
+	 * Will return a string-value as a result, if possible. If not, a FormulaException
+	 * will be thrown.
+	 * @return The result of all calc-operations up to this formula-element,casted into a string.
+	 * @throws FormulaException Normally this shouldn't happen. ;)
 	 */
+	public abstract String getStringResult() throws FormulaException;
+	
+//	/**
+//	 * Will return a long-value as a result, if possible. If not, a FormulaException will be thrown.
+//	 * @return The result of all calc-operations up to this formula-element.
+//	 * @throws FormulaException Shouldn't happen. ;)
+//	 */
 //	public abstract long getLongResult() throws FormulaException;
 
 
@@ -82,14 +94,15 @@ public abstract class Formula extends Container implements Cloneable {
 		//TODO Grafik verbessern
 		//((Graphics2D)g).scale(scaleX, scaleY);
 		g.setColor(Color.BLACK);
-		g.drawRect(0, 5, FORMULAWIDTH, FORMULAHEIGHT);
-		g.setFont(new Font("Arial", Font.PLAIN, 10));
-		g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+(BOXHEIGHT-g.getFontMetrics().getHeight())/2); // Align: center
-		for (int i=0;i<getInputCount();i++){
-			g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1),35,(i+1)*FORMULAWIDTH/(getInputCount()+1),40);
+		g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
+		g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
+		for (int i=0; i<getInputCount(); i++){
+			g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 		}
-		g.drawLine(FORMULAWIDTH/2 +1, 5, FORMULAWIDTH/2 +1, 0);
-		setSize(FORMULAWIDTH+1, FORMULAHEIGHT+1);
+		g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
+		g.setFont(new Font("Arial", Font.PLAIN, 10));		
+		g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Align: center
+		
 	}
 
 	/**
@@ -211,8 +224,12 @@ public abstract class Formula extends Container implements Cloneable {
 	public Dimension getSize() {
 		return dimension;
 	}
+
+	public Dimension preferredSize() {
+		return dimension;
+	}
 	
-	public Dimension getPreferedSize() {
+	public Dimension getPreferredSize() {
 		return dimension;
 	}
 	

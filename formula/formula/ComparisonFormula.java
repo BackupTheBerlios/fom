@@ -14,8 +14,6 @@ public abstract class ComparisonFormula extends Formula {
 
 	protected Boolean result;
 
-	public abstract void calc() throws FormulaException;
-
 	public boolean getBooleanResult() throws FormulaException {
 		if (result != null)
 			return result.booleanValue();
@@ -23,6 +21,13 @@ public abstract class ComparisonFormula extends Formula {
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
 
+	public String getStringResult() throws FormulaException {
+		if (result != null)
+			return result.toString();
+		else
+			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
+	}
+	
 	/**
 	 * Clears all results that have been saved by calc-operations.
 	 */

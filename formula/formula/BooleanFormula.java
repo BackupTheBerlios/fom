@@ -16,27 +16,28 @@ public abstract class BooleanFormula extends Formula {
 
 	protected Boolean result;
 
-	/**
-	 * Calculates the result of this formula-object and stores it in result.
-	 * @throws Throws a FormulaException when there aren't all inputs connected with a formula-object.
-	 */
-	public abstract void calc() throws FormulaException;
-
 /*	public long getLongResult() throws FormulaException {
 		return 0;
 	}*/
 
-	public boolean getBooleanResult() throws FormulaException {
+	public final boolean getBooleanResult() throws FormulaException {
 		if (result != null)
 			return result.booleanValue();
 		else
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
 
-	public double getDoubleResult() throws FormulaException {
+	public final double getDoubleResult() throws FormulaException {
 		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
 	}
 
+	public final String getStringResult() throws FormulaException {
+		if (result != null)
+			return result.toString();
+		else
+			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
+	}
+	
 	/**
 	 * Clears all results that have been saved by calc-operations.
 	 */
