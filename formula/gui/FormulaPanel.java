@@ -199,15 +199,15 @@ public class FormulaPanel extends Panel {
 						// check for compatibility:
 					 	if (tmpPP.getFormula().getInputCount() > 0) {
 						 	inTypes = tmpPP.getFormula().getInputTypes(tmpPP.getInputNumber());
-							int a=0,b=0;
-							while (((a<inTypes.length) || (b<outTypes.length)) && (inTypes[a] != outTypes[b])) {
-								b++;
-								if (a >= inTypes.length) {
-									a++;
-									b = 0;
-								}
+				 			boolean match = false;
+				 			for (int i_in=0;i_in<inTypes.length;i_in++) {
+				 				for (int i_out=0;i_out<outTypes.length;i_out++) {
+				 					if (inTypes[i_in] == outTypes[i_out]) {
+				 						match = true;				 			
+				 					}
+				 				}
 				 			}
-					 		if (inTypes[a] == outTypes[b]) {
+					 		if (match) {
 								if (tmpPP.getBestCandidate() != null) {
 									if (tmpPP.getBestDistance() > distance) {
 										nearestPP = tmpPP;									
@@ -260,16 +260,16 @@ public class FormulaPanel extends Panel {
 				// and if it has no target so far and the pins are not from the same formula-object:
 					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form)) {
 					// check for compatibility:
-						outTypes = tmpPP.getFormula().getOutputTypes();	
-						int a=0,b=0;
-						while (((a<inTypes.length) || (b<outTypes.length)) && (inTypes[a] != outTypes[b])) {
-							b++;
-							if (a >= inTypes.length) {
-								a++;
-								b = 0;
+						outTypes = tmpPP.getFormula().getOutputTypes();
+						boolean match = false;	
+						for (int i_in=0;i_in<inTypes.length;i_in++) {
+							for (int i_out=0;i_out<outTypes.length;i_out++) {
+								if (inTypes[i_in] == outTypes[i_out]) {
+									match = true;				 			
+								}
 							}
 						}
-						if (inTypes[a] == outTypes[b]) {
+						if (match) {
 							// check if already temp-connected, but distance is lower:
 							if (tmpPP.getBestCandidate() != null) {
 								if (tmpPP.getBestDistance() > distance) {
