@@ -1,4 +1,4 @@
-/*
+/* $Id: Less.java,v 1.5 2004/09/10 13:00:47 shadowice Exp $
  * Created on 27.06.2004
  */
 package formula;
@@ -10,6 +10,7 @@ import utils.Messages;
  * f(x,y) = TRUE for x<y, FALSE for x>=y
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
+ * @version $Revision: 1.5 $
  */
 public class Less extends ComparisonFormula {
 
