@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.13 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: DialogVariables.java,v 1.14 2004/08/25 20:42:45 ot_piccolo Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -11,43 +11,55 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
 
-	private Panel spaceForInputs;
+	//private Panel spaceForInputs;
+	private GridBagLayout spaceForInputs;
 	private ScrollPane scrollForInputs;
 	private Button okButton;
 	private TextField[] varName;
 	private TextField[] varValueNumber;
 	private Button[] varValueBoolean;
 	private String[] oldVarName;
-
+	
 	private AppletPanel aPanel;
-
 	/**
 	 * Creates a window for setting and changing variables.
 	 */
 	// TODO umschreiben auf GridBagLayout, dann gibts auch keine Schwierigkeiten wegen der Größe
 	public DialogVariables(AppletPanel parent) {
 		super(new Frame(), Messages.getString("DialogVariables.Title"), true);
+		Object value;		
 		this.aPanel = parent;
 		TypeConstVar[] varArray = aPanel.getVariableList().toVarArray();
-		Object value;
+		Panel dummyPanel;
+		GridBagConstraints spaceForInputsNameField = new GridBagConstraints();
+		GridBagConstraints spaceForInputsValueField = new GridBagConstraints();		
 		varName = new TextField[varArray.length];
 		varValueNumber = new TextField[varArray.length];
 		varValueBoolean = new Button[varArray.length];
 		oldVarName = new String[varArray.length];
-		spaceForInputs = new Panel(new GridLayout(varArray.length, 2,4,4));
+		spaceForInputs = new GridBagLayout();
+		dummyPanel = new Panel(spaceForInputs);
 		scrollForInputs = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
+		scrollForInputs.add(dummyPanel);
+		spaceForInputsNameField.fill = GridBagConstraints.BOTH;
+		spaceForInputsNameField.weightx = 1.0;
+		spaceForInputsValueField.fill = GridBagConstraints.BOTH;
+		spaceForInputsValueField.weightx = 1.0;
+		spaceForInputsValueField.gridwidth = GridBagConstraints.REMAINDER;
+
 		for (int i=0; i < varArray.length; i++) {
 			//Reading all variables and creating their input fields.
 			varName[i] = new TextField(varArray[i].getName());
 			varName[i].setFont(new Font("Arial", Font.PLAIN, 11));
 			varName[i].setBackground(SystemColor.text);
 			varName[i].addTextListener(this);
-			spaceForInputs.add(varName[i]);
+			spaceForInputs.setConstraints(varName[i], spaceForInputsNameField);
+			dummyPanel.add(varName[i]);
 			oldVarName[i] = varArray[i].getName();
 			value = varArray[i].getValue();
 			if (value instanceof Boolean) {
@@ -55,30 +67,27 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 				varValueBoolean[i] = new Button(((Boolean)value).toString());
 				varValueBoolean[i].setFont(new Font("Arial", Font.PLAIN, 11));
 				varValueBoolean[i].addActionListener(this);
-				spaceForInputs.add(varValueBoolean[i]);
+				spaceForInputs.setConstraints(varValueBoolean[i], spaceForInputsValueField);
+				dummyPanel.add(varValueBoolean[i]);
 			} else if (value instanceof Number) {
 				//Number variable.
 				varValueNumber[i] = new TextField(((Number)value).toString());
 				varValueNumber[i].setFont(new Font("Arial", Font.PLAIN, 11));
 				varValueNumber[i].setBackground(SystemColor.text);
 				varValueNumber[i].addTextListener(this);
-				spaceForInputs.add(varValueNumber[i]);
+				spaceForInputs.setConstraints(varValueNumber[i], spaceForInputsValueField);
+				dummyPanel.add(varValueNumber[i]);
 			}
 		}
 		//Closing button
 		okButton = new Button("OK");
 		okButton.addActionListener(this);
 		add(okButton, BorderLayout.SOUTH);
-		scrollForInputs.add(spaceForInputs);
+
 		add(scrollForInputs, BorderLayout.CENTER);
 		pack();  //Needed for calculating proper height of dialog.
-		if (varArray.length == 0) {
-			setSize(300, okButton.getHeight() + getInsets().top+getInsets().bottom);
-		} else if (varArray.length > 10) {
-			setSize(300, 10*varName[0].getPreferredSize().height + okButton.getHeight() + scrollForInputs.getInsets().top+scrollForInputs.getInsets().bottom + getInsets().top+getInsets().bottom);
-		} else {
-			setSize(300, varArray.length*varName[0].getPreferredSize().height + okButton.getHeight() + scrollForInputs.getInsets().top+scrollForInputs.getInsets().bottom + getInsets().top+getInsets().bottom);
-		}
+		scrollForInputs.setSize(dummyPanel.preferredSize().width + scrollForInputs.getInsets().left + scrollForInputs.getInsets().right, dummyPanel.preferredSize().height + 5);
+		this.setSize(this.preferredSize());
 		addWindowListener(this);
 		show();
 	}
