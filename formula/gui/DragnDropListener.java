@@ -58,6 +58,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				selectedComponentRoot.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 				newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 				newComponentInstance.setVisible(true);
+				Formula.addTree(newComponentInstance);
 				newComponentInstance = null;
 				aPanel.getFormulaPanel().setCursor(Cursor.getDefaultCursor());
 				// add PinPoints to FormulaPanel:

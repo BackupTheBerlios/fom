@@ -41,7 +41,7 @@ public abstract class Formula extends Container implements Cloneable {
 	protected String formulaName;
 
 	// Stores all unlinked Formula Elements
-	protected static LinkedList treeList;
+	protected static LinkedList treeList = new LinkedList();
 	
 	// Input and output pins:
 	protected PinPoint[] inputPins;
@@ -288,11 +288,11 @@ public abstract class Formula extends Container implements Cloneable {
 		return treeList.size();
 	}
 
-	public final static void insertTreeList(Formula root) {
-		treeList.addFirst(root);
+	public final static void addTree(Formula root) {
+		treeList.add(root);
 	}
 
-	public final static void deleteTreeList(Formula root) {
+	public final static void removeTree(Formula root) {
 		treeList.remove(root);
 	}
 

@@ -348,6 +348,7 @@ public class FormulaPanel extends Panel {
 			pin.getTarget().setTarget(null);
 			pin.getTarget().setBestCandidate(null);
 			pin.setTarget(null);
+			Formula.addTree(pin.getFormula());
 		}
 		pin.setBestCandidate(null);
 	}
@@ -362,7 +363,6 @@ public class FormulaPanel extends Panel {
 			PinPoint pin = getOutputPinForFormula(form);	// O(n)
 			if (pin != null) {
 				detachOutput(pin);
-				//outputPinList.remove(pin);		// should remove all outputs to prevent connections between not selected elements
 			}
 		}
 	}
@@ -432,6 +432,7 @@ public class FormulaPanel extends Panel {
 			if (!outputPinList.contains(pin)){
 				outputPinList.add(pin);
 			}
+			Formula.removeTree(pin.getFormula());
 		}
 	}
 	
@@ -457,7 +458,6 @@ public class FormulaPanel extends Panel {
 			}
 		}
 		//setBounds(newBounds);
-		System.out.println("DEBUG: "+newBounds);
 		if (newBounds.x < 0) {
 			newBounds.width -= newBounds.x;
 		}
