@@ -1,16 +1,16 @@
-/* $Id: PinPoint.java,v 1.10 2004/09/10 15:38:19 shadowice Exp $
+/* $Id: PinPoint.java,v 1.11 2004/10/15 10:37:00 shadowice Exp $
  * Created on 02.07.2004
  */
 package gui;
 
-import java.awt.*;
+import java.awt.Point;
 import formula.*;
 
 /**
  * Class to store the points where a formula can be connected.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 /*
  * How to use this:
