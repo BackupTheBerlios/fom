@@ -30,6 +30,7 @@ public abstract class Formula extends Container implements Cloneable {
 	 * Creates a new formula object.
 	 */
 	public Formula() {
+		//Maurice: Was bedeutet das hier?
 		super();
 	}
 
@@ -160,5 +161,16 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public abstract String toString();
 
+	/**
+	 * @return Returns the maximal number of formula-objects in this subtree which are side by side.
+	 */
+	public final int getWidthOfTree() {
+		int WidthOfTree = 0;
+		for (int i = 0; i <= input.length-1; i++) {
+			if (input[i] != null)
+				WidthOfTree += input[i].getWidthOfTree();
+		}
+		return WidthOfTree;
+	}
 
 }

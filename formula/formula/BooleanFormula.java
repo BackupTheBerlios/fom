@@ -14,8 +14,13 @@ public abstract class BooleanFormula extends Formula {
 
 	protected Boolean result;
 
+	/**
+	 * Calculates the result of this formula-object and stores it in result.
+	 * @throws Throws a FormulaException when there aren't all inputs connected with a formula-object.
+	 */
 	public abstract void calc() throws FormulaException;
 
+	//Maurice: Wie kann ich den verwendeten Datentyp erkennen?
 	public boolean isValidInput(Object in, int index) {
 		return false;
 	}
@@ -29,7 +34,7 @@ public abstract class BooleanFormula extends Formula {
 	}*/
 
 	public boolean getBooleanResult() throws FormulaException {
-		if(result!=null)
+		if (result != null)
 			return result.booleanValue();
 		else
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
