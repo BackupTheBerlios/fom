@@ -76,13 +76,20 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		
 	}
 
+	
 	public void setVisible(boolean vis) {
 		super.setVisible(vis);
 		inputNumber.setVisible(vis);
 	}
 	
+	
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		inputNumber.setEnabled(enabled);
+	}
+	
 	public String getInputVarName() {
-		return null;
+		return "";
 	}
 
 

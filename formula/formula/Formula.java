@@ -51,6 +51,8 @@ public abstract class Formula extends Container implements Cloneable {
 	protected PinPoint[] inputPins;
 	protected PinPoint outputPin;
 
+	// Image for double buffering
+	protected Image bufferImage;
 
 	/**
 	 * Creates a new formula object.
@@ -112,6 +114,20 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public final String getFormulaName() {
 		return formulaName;
+	}
+
+
+	public void update(Graphics g) {
+		if (bufferImage == null) {
+			bufferImage = createImage(getWidth(),getHeight());
+		}
+		Graphics bufferGraphics = bufferImage.getGraphics();
+		
+		paint(bufferGraphics);
+		
+		g.drawImage(bufferImage,0,0,this);
+		
+		bufferGraphics.dispose();
 	}
 
 
@@ -373,6 +389,13 @@ public abstract class Formula extends Container implements Cloneable {
 		setLocation(oldLocation.x+xOffset,oldLocation.y+yOffset);
 	}
 
+
+	/**
+	 * Initializes a formula object with a given AppletPanel.
+	 * @param ap AppletPanel of this program's instance
+	 */
+	// NOTE extra method only for VariableBoolean and VariableNumber!
+	public void init(AppletPanel ap) { }
 
 	//"Quick-fix" :)
 	public final Dimension preferredSize() {

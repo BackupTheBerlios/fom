@@ -14,8 +14,10 @@ import gui.*;
  */
 public class VariableBoolean extends ConstVarFormula implements TextListener {
 
-	protected TextField inputVarName;
-	protected String oldName;
+	private TextField inputVarName;
+	private String oldName;
+
+	private AppletPanel aPanel;
 
 	/**
 	 * Creates a variable boolean.
@@ -23,6 +25,7 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 	public VariableBoolean() {
 		this(false);
 	}
+
 
 	/**
 	 * Creates a variable boolean.
@@ -41,12 +44,12 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 			inputVarName.setEnabled(false);
 		} else {
 			inputVarName.addTextListener(this);
-			addVarList(this);
 		}
 		oldName = new String("boolean1");
 		add(inputVarName);
 	}
-	
+
+
 	/**
 	 * @return Returns the variable's name
 	 */
@@ -54,12 +57,14 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 		return inputVarName.getText();
 	}
 	
+
 	/**
 	 * @return Returns textFields' text.
 	 */
 	public final String getInputVarName() {
 		return inputVarName.getText();
 	}
+
 
 	/**
 	 * @param text Sets text field content to text.
@@ -69,31 +74,46 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 		repaint();
 	}
 
+
 	public final void textValueChanged(TextEvent arg) {
 		String newName = inputVarName.getText();
-		if (isValidName(newName, result)) {
-			if (isValidName(oldName, result)) {
-				deleteVarList(this, oldName);
+		VariableList varList = aPanel.getVariableList();
+		if (varList.isValidName(newName, result)) {
+			if (varList.isValidName(oldName, result)) {
+				varList.deleteVarList(this, oldName);
 			}
-			addVarList(this);
+			varList.addVarList(this);
 			inputVarName.setBackground(SystemColor.text);
 		} else {
-			deleteVarList(this, oldName);
+			varList.deleteVarList(this, oldName);
 			result = new Boolean(false);
 			inputVarName.setBackground(Color.RED);
 		}
 		oldName = newName;
-		
+
 		if (getParent() instanceof FormulaPanel) {
 			((AppletPanel)getParent().getParent().getParent()).getControlPanel().getFormulaTextField().updateControlPanelText();
 		}
-		
+
 		repaint();
 	}
-	
+
+
+	public void init(AppletPanel ap) {
+		this.aPanel = ap;
+		aPanel.getVariableList().addVarList(this);	
+	}
+
+
 	public void setVisible(boolean vis) {
 		super.setVisible(vis);
 		inputVarName.setVisible(vis);
+	}
+	
+	
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		inputVarName.setEnabled(enabled);
 	}
 
 }

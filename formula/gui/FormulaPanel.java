@@ -33,6 +33,7 @@ public class FormulaPanel extends Panel {
 	
 	private AppletPanel aPanel;
 
+	private Image bufferImage;
 	
 	/**
 	 * Creates a new FormulaPanel.
@@ -72,7 +73,7 @@ public class FormulaPanel extends Panel {
 		if (pPIn.getTarget() != null) {
 			pPIn.getTarget().setTarget(pPIn);
 		}
-		inputPinList.add(pPIn);
+		inputPinList.addElement(pPIn);
 	}
 
 	
@@ -104,7 +105,7 @@ public class FormulaPanel extends Panel {
 		if (pPOut.getTarget() != null) {
 			pPOut.getTarget().setTarget(pPOut);
 		}
-		outputPinList.add(pPOut);
+		outputPinList.addElement(pPOut);
 	}
 
 	
@@ -114,7 +115,7 @@ public class FormulaPanel extends Panel {
 	 */
 	public void removeInputPins(PinPoint[] pPIn) {
 		for (int i=0;i<pPIn.length;i++) {
-			inputPinList.remove(pPIn[i]);
+			inputPinList.removeElement(pPIn[i]);
 		}
 	}
 	
@@ -125,7 +126,7 @@ public class FormulaPanel extends Panel {
 	 */
 	public void removeOutputPins(PinPoint[] pPOut) {
 		for (int i=0;i<pPOut.length;i++) {
-			outputPinList.remove(pPOut[i]);
+			outputPinList.removeElement(pPOut[i]);
 		}
 	}
 
@@ -146,7 +147,24 @@ public class FormulaPanel extends Panel {
 	}
 
 
+	public void update(Graphics g) {
+		if (bufferImage == null) {
+			bufferImage = createImage(getWidth(),getHeight());
+		}
+		Graphics bufferGraphics = bufferImage.getGraphics();
+		
+		paint(bufferGraphics);
+		
+		g.drawImage(bufferImage,0,0,this);
+		
+		bufferGraphics.dispose();
+	}
+	
+	
 	public void paint(Graphics g) {
+		// clear graphics:
+		g.clearRect(0,0,getWidth(),getHeight());
+		// paint components in this container:
 		super.paint(g);
 		// paint connections between pins:
 		PinPoint pp;
@@ -384,7 +402,7 @@ public class FormulaPanel extends Panel {
 	 */
 	private void detachInput(PinPoint pin) {
 		if (pin.getTarget() != null) {
-			aPanel.getTreeList().add(pin.getTarget().getFormula());
+			aPanel.getTreeList().addElement(pin.getTarget().getFormula());
 			pin.getTarget().getFormula().setOutput(null);
 			pin.getFormula().setInput(null,pin.getInputNumber());
 			pin.getTarget().setTarget(null);
@@ -407,7 +425,7 @@ public class FormulaPanel extends Panel {
 			pin.getTarget().setTarget(null);
 			pin.getTarget().setBestCandidate(null);
 			pin.setTarget(null);
-			aPanel.getTreeList().add(pin.getFormula());
+			aPanel.getTreeList().addElement(pin.getFormula());
 		}
 		pin.setBestCandidate(null);
 	}
@@ -457,9 +475,9 @@ public class FormulaPanel extends Panel {
 					j++;
 				}
 				if (notfound) {
-					detachInput(pin);				// detach pins not connected to outPPList
+					detachInput(pin);					// detach pins not connected to outPPList
 				} else {
-					outPPList.remove(targetPin); 	// prevents double-check
+					outPPList.removeElement(targetPin); // prevents double-check
 				}
 			}
 		}
@@ -487,9 +505,9 @@ public class FormulaPanel extends Panel {
 					pin.getTarget().getFormula().setOutput(pin.getFormula());
 					pin.getTarget().setTarget(pin);
 					if (!inputPinList.contains(pin)) {
-						inputPinList.add(pin);
+						inputPinList.addElement(pin);
 					}
-					aPanel.getTreeList().remove(pin.getTarget().getFormula());
+					aPanel.getTreeList().removeElement(pin.getTarget().getFormula());
 				} else {
 					pin.getTarget().getFormula().setOutput(null);
 					pin.getTarget().setTarget(null);
@@ -508,9 +526,9 @@ public class FormulaPanel extends Panel {
 					pin.getTarget().getFormula().setInput(pin.getFormula(),pin.getTarget().getInputNumber());
 					pin.getTarget().setTarget(pin);
 					if (!outputPinList.contains(pin)){
-						outputPinList.add(pin);
+						outputPinList.addElement(pin);
 					}
-					aPanel.getTreeList().remove(pin.getFormula());
+					aPanel.getTreeList().removeElement(pin.getFormula());
 				} else {
 					pin.getTarget().getFormula().setInput(null,pin.getTarget().getInputNumber());
 					pin.getTarget().setTarget(null);
@@ -587,13 +605,13 @@ public class FormulaPanel extends Panel {
 		PinPoint[] pinList = form.getInputPins();
 		for (int i=0;i<pinList.length;i++) {
 			detachInput(pinList[i]);
-			inputPinList.remove(pinList[i]);
-			tempInPPList.remove(pinList[i]);
+			inputPinList.removeElement(pinList[i]);
+			tempInPPList.removeElement(pinList[i]);
 		}
 		detachOutput(form.getOutputPin());
-		outputPinList.remove(form.getOutputPin());
-		tempOutPPList.remove(form.getOutputPin());
-		aPanel.getTreeList().remove(form);
+		outputPinList.removeElement(form.getOutputPin());
+		tempOutPPList.removeElement(form.getOutputPin());
+		aPanel.getTreeList().removeElement(form);
 		remove(form);
 	}
 
@@ -606,7 +624,7 @@ public class FormulaPanel extends Panel {
 		for (int i=0;i<outputPinList.size();i++) {
 			if (((PinPoint)outputPinList.get(i)).getFormula() instanceof ConstVarFormula) {
 				cvForm = (ConstVarFormula)((PinPoint)outputPinList.get(i)).getFormula();
-				ConstVarFormula.deleteVarList(cvForm,cvForm.getInputVarName());
+				aPanel.getVariableList().deleteVarList(cvForm,cvForm.getInputVarName());
 			}
 		}
 		inputPinList.clear();
@@ -615,7 +633,7 @@ public class FormulaPanel extends Panel {
 		tempOutPPList.clear();
 		Formula[] treeList = aPanel.getTreeList().getTreeArray();
 		for (int i=0;i<treeList.length;i++) {
-			aPanel.getTreeList().remove(treeList[i]);
+			aPanel.getTreeList().removeElement(treeList[i]);
 		}
 		removeAll();
 	}

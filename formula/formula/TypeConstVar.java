@@ -3,7 +3,7 @@
  */
 package formula;
 
-import java.util.LinkedList;
+import java.util.*;
 
 /** TODO JavaDoc ergänzen
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
@@ -12,13 +12,13 @@ public class TypeConstVar {
 
 	private Object value;
 	private String name;
-	private LinkedList varInnerList;
+	private Vector varInnerList;
 
 
 	public TypeConstVar(Object value, String name) {
 		this.value = value;
 		this.name = name;
-		varInnerList = new LinkedList();
+		varInnerList = new Vector();
 	}
 
 	public TypeConstVar(String name, Object value) {
@@ -73,7 +73,7 @@ public class TypeConstVar {
 	 */
 	public final void addVarInnerList(ConstVarFormula toAdd) {
 		if (! varInnerList.contains(toAdd)) {
-			varInnerList.add(toAdd);
+			varInnerList.addElement(toAdd);
 		}
 	}
 
@@ -81,7 +81,7 @@ public class TypeConstVar {
 	 * @param toDelete Deletes toDelete from this list.
 	 */
 	public final void deleteVarInnerList(ConstVarFormula toDelete) {
-		varInnerList.remove(toDelete);
+		varInnerList.removeElement(toDelete);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class TypeConstVar {
 	/**
 	 * @return returns varInnerList.
 	 */
-	public final LinkedList getVarInnerList() {
+	public final Vector getVarInnerList() {
 		return varInnerList;
 	}
 

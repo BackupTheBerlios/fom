@@ -23,6 +23,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	private Button[] varValueBoolean;
 	private String[] oldVarName;
 
+	private AppletPanel aPanel;
 
 	/**
 	 * Creates a window for setting and changing variables.
@@ -30,7 +31,8 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	// TODO umschreiben auf GridBagLayout, dann gibts auch keine Schwierigkeiten wegen der Größe
 	public DialogVariables(AppletPanel parent) {
 		super(new Frame(), Messages.getString("DialogVariables.Title"), true);
-		TypeConstVar[] varArray = ConstVarFormula.getVarList();
+		this.aPanel = parent;
+		TypeConstVar[] varArray = aPanel.getVariableList().toVarArray();
 		Object value;
 		varName = new TextField[varArray.length];
 		varValueNumber = new TextField[varArray.length];
@@ -139,12 +141,12 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 			//Replaces Variablename.
 			index = getArrayPosition(txtEvent.getSource(), varName);
 			if (isValidName(varName[index].getText())) {
-				ConstVarFormula.setVarNameAll(oldVarName[index], varName[index].getText());
+				aPanel.getVariableList().setVarNameAll(oldVarName[index], varName[index].getText());
 				oldVarName[index] = varName[index].getText();
 				varName[index].setBackground(SystemColor.text);
 			} else {
 				//Leere oder doppelete Variablennamen müssen verhindert werden.
-				ConstVarFormula.setVarNameAll(oldVarName[index], "$$InternTempCounter" + new Integer(index).toString() + "$$");
+				aPanel.getVariableList().setVarNameAll(oldVarName[index], "$$InternTempCounter" + new Integer(index).toString() + "$$");
 				oldVarName[index] = "$$InternTempCounter" + new Integer(index).toString() + "$$";
 				varName[index].setBackground(Color.RED);
 			}
@@ -162,7 +164,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 					varValueNumber[index].setBackground(Color.RED);
 				}*/
 				try {
-					ConstVarFormula.setVarValueAll(varName[index].getText(), new Double(newInput.replace(',','.')));
+					aPanel.getVariableList().setVarValueAll(varName[index].getText(), new Double(newInput.replace(',','.')));
 					varValueNumber[index].setBackground(SystemColor.text);
 				} catch (NumberFormatException nfe) {
 					varValueNumber[index].setBackground(Color.RED);
@@ -187,10 +189,10 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 			if (isValidName(varName[index].getText())) {
 				//Replaces value, if variable name is valid.
 				if (varValueBoolean[index].getLabel() == "false") {
-					ConstVarFormula.setVarValueAll(varName[index].getText(), new Boolean(true));
+					aPanel.getVariableList().setVarValueAll(varName[index].getText(), new Boolean(true));
 					varValueBoolean[index].setLabel("true");
 				} else {
-					ConstVarFormula.setVarValueAll(varName[index].getText(), new Boolean(false));
+					aPanel.getVariableList().setVarValueAll(varName[index].getText(), new Boolean(false));
 					varValueBoolean[index].setLabel("false");				
 				}
 			}

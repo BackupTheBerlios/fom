@@ -19,10 +19,12 @@ public class CalculatorThread extends Thread {
 	private volatile boolean running = true;
 	private volatile boolean animating = false;
 	private volatile Formula lastFormula;
-	private volatile int lastPaintStatus;	
+	private volatile int lastPaintStatus;
 
 	/**
 	 * Creates a new calculator-thread.
+	 *
+	 * @param ap AppletPanel of this program.
 	 */
 	public CalculatorThread(AppletPanel ap) {
 		super();
@@ -35,8 +37,8 @@ public class CalculatorThread extends Thread {
 		running = true;
 		animating = false;
 	}
-	
-	
+
+
 	/**
 	 * Stops the while-loops in run().
 	 */
@@ -72,7 +74,6 @@ public class CalculatorThread extends Thread {
 			} catch (InterruptedException ie) {
 				ie.printStackTrace(System.err);
 			}
-			
 		}
 		System.out.println("DEBUG[CalculatorThread]: stop running");
 	}
@@ -109,8 +110,8 @@ public class CalculatorThread extends Thread {
 			animating = false;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Calculates all elements on the stack.
 	 */
@@ -123,8 +124,8 @@ public class CalculatorThread extends Thread {
 			lastFormula = null;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Starts the calc-animation in run().
 	 */
@@ -133,41 +134,42 @@ public class CalculatorThread extends Thread {
 			animating = true;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Initialises the thread by creating a stack with all formula-objects in the tree.
-	 * @param rootFormula
+	 * @param rootFormula root of the formula tree
 	 */
 	public void initCalculation(Formula rootFormula) {
 		animating = false;
 		calcStack.clear();
 		pushTree(rootFormula);
 	}
-	
-	
+
+
 	/**
 	 * Returns true if there is a non-empty stack (initCalculation was called
-	 * and no calc* method was called upto the end of the formula-tree). 
+	 * and no calc* method was called upto the end of the formula-tree).
 	 * @return true if there are still elements to calculate
 	 */
 	public boolean isInitialized() {
 		return !calcStack.isEmpty();
 	}
-	
-	
+
+
 	/**
 	 * @return true if animation-loop is active
 	 */
 	public boolean isAnimating() {
 		return animating;
 	}
-	
-	
+
+
 	/**
 	 * Stops the animation-loop.
 	 */
-	// NOTE: stopAnimation bricht die sleep-Anweisung nicht ab, also könnte gleich darauf die Animation neu gestartet werden, obwohl sie noch nicht fertig ist.
+	// NOTE: stopAnimation bricht die sleep-Anweisung nicht ab, also könnte gleich darauf
+	// die Animation neu gestartet werden, obwohl sie noch nicht fertig ist.
 	public void stopAnimation() {
 		animating = false;
 		if (lastFormula != null) {
@@ -176,15 +178,15 @@ public class CalculatorThread extends Thread {
 		}
 		aPanel.getControlPanel().setAnimating(false);
 	}
-	
-	
+
+
 	/**
-	 * Recursive creates a stack of the whole tree. 
+	 * Recursive creates a stack of the whole tree.
 	 * @param form current formula-object
 	 */
 	private void pushTree(Formula form) {
 		calcStack.push(form);
-		for (int i=0;i<form.getInputCount();i++) {
+		for (int i = 0; i < form.getInputCount(); i++) {
 			pushTree(form.getInput(i));
 		}
 	}

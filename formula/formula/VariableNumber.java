@@ -14,8 +14,11 @@ import gui.*;
  */
 public class VariableNumber extends ConstVarFormula implements TextListener {
 
-	protected TextField inputVarName;
-	protected String oldName;
+	private TextField inputVarName;
+	private String oldName;
+
+	private AppletPanel aPanel;
+
 
 	/**
 	 * Creates a variable number.
@@ -23,6 +26,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 	public VariableNumber() {
 		this(false);
 	}
+
 
 	/**
 	 * Creates a variable boolean.
@@ -41,25 +45,27 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 			inputVarName.setEnabled(false);
 		} else {
 			inputVarName.addTextListener(this);
-			addVarList(this);
 		}
 		oldName = new String("number1");
 		add(inputVarName);
 	}
-	
+
+
 	/**
 	 * @return Returns the variable's name
 	 */
 	public final String toString() {
 		return inputVarName.getText();
 	}
-	
+
+
 	/**
 	 * @return Returns textFields' text.
 	 */
 	public final String getInputVarName() {
 		return inputVarName.getText();
 	}
+
 
 	/**
 	 * @param text Sets text field content to text.
@@ -69,16 +75,18 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		repaint();
 	}
 
+
 	public void textValueChanged(TextEvent arg) {
 		String newName = inputVarName.getText();
-		if (isValidName(newName, result)) {
-			if (isValidName(oldName, result)) {
-				deleteVarList(this, oldName);
+		VariableList varList = aPanel.getVariableList();
+		if (varList.isValidName(newName, result)) {
+			if (varList.isValidName(oldName, result)) {
+				varList.deleteVarList(this, oldName);
 			}
-			addVarList(this);
+			varList.addVarList(this);
 			inputVarName.setBackground(SystemColor.text);
 		} else {
-			deleteVarList(this, oldName);
+			varList.deleteVarList(this, oldName);
 			result = new Double(0);
 			inputVarName.setBackground(Color.RED);
 		}
@@ -91,9 +99,22 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		repaint();
 	}
 	
+
+	public void init(AppletPanel ap) {
+		aPanel = ap;
+		aPanel.getVariableList().addVarList(this);
+	}
+
+	
 	public void setVisible(boolean vis) {
 		super.setVisible(vis);
 		inputVarName.setVisible(vis);	
+	}
+	
+	
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		inputVarName.setEnabled(enabled);
 	}
 
 }

@@ -14,8 +14,9 @@ import gui.*;
  */
 public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 
-	protected Button inputBoolean;
+	private Button inputBoolean;
 
+	
 	/**
 	 * Creates a constant boolean.
 	 */
@@ -23,6 +24,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		this(false);
 	}
 
+	
 	/**
 	 * Creates a constant boolean.
 	 * @param elementChooser Disables inputBoolean for input.
@@ -42,6 +44,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		add(inputBoolean);		
 	}
 
+	
 	/**
 	 * Toggles result between true and false.
 	 * @param arg import Method needs argument, but isn't used.
@@ -66,6 +69,12 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 	public void setVisible(boolean vis) {
 		super.setVisible(vis);
 		inputBoolean.setVisible(vis);
+	}
+	
+	
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		inputBoolean.setEnabled(enabled);
 	}
 	
 	public String getInputVarName() {

@@ -10,17 +10,16 @@ import java.util.ResourceBundle;
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
-public class Messages {
+public final class Messages {
 
 	private static final String BUNDLE_NAME = "strings";
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 
 	/**
-	 * empty constructor :o 
+	 * Hidden constructor for tool class.
 	 */
-	private Messages() {
-	}
+	private Messages() { }
 
 
 	/**

@@ -15,14 +15,15 @@ import utils.Messages;
 public class Categories {
 
 	private String[]		categories;
-	private HashMap		categoryElements;
+	private Hashtable		categoryElements;
 
+	
 	/**
 	 * Private constructor because there'll be only one category-list.
 	 */
 	public Categories() {
 		categories = new String[Integer.parseInt(Messages.getString("Elements.Categories"))];
-		categoryElements = new HashMap(16);
+		categoryElements = new Hashtable(16);
 		for(int i=0;i<categories.length;i++) {
 			categories[i] = Messages.getString("Elements.Category_"+Integer.toString(i));
 		}
@@ -118,12 +119,14 @@ public class Categories {
 		form = new Formula[0];
 	}
 
+
 	/**
 	 * @return all available categories
 	 */
 	public final String[] getCategories() {
 		return categories;
 	}
+	
 
 	/**
 	 * @param category The category you want elements from.
@@ -132,6 +135,7 @@ public class Categories {
 	public final Formula[] getCategoryElements(String category) {
 		return (Formula[])categoryElements.get(category);
 	}
+	
 
 	/**
 	 * Adds a Formula-object to a category.
