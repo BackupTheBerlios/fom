@@ -56,4 +56,12 @@ public abstract class BooleanFormula extends Formula {
 		return new Class[0];
 	}
 
+	public boolean isValidInput(Formula in, int whichInput) {
+		return false;
+	}
+
+	public boolean isValidOutput(Formula in, int whichInput) {
+		return false;
+	}
+
 }

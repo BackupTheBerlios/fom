@@ -24,6 +24,7 @@ public abstract class Formula extends Container implements Cloneable {
 
 	protected String formulaName;
 
+	public static Formula[] treeList;
 
 	/**
 	 * Creates a new formula object.
@@ -175,6 +176,29 @@ public abstract class Formula extends Container implements Cloneable {
 		for (int i = 0; i < getInputCount() && complete; i++)
 			complete = complete && (input[i] == null);
 		return complete;
+	}
+	/**
+	 * A Formula-Object tries to connect to an input of this Formula-Object.
+	 * @param in Which Formula-Object tries to connect
+	 * @param whichInput To which input
+	 * @return Is Formula-Object allowed to connect 
+	 */
+	public abstract boolean isValidInput(Formula in, int whichInput);
+
+	/**
+	 * A Formula-Object tries to connect to output of this Formula-Object.
+	 * @param in Which Formula-Object tries to connect.
+	 * @param whichInput Which input tries to connect.
+	 * @return Is Formula-Object allowed to connect.
+	 */
+	public abstract boolean isValidOutput(Formula in, int whichInput);
+
+	public static Formula[] getTreeList() {
+		return treeList;
+	}
+
+	public static void setTreeList(Formula[] treeListParameter) {
+		treeList = treeListParameter;
 	}
 
 }

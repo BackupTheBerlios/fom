@@ -25,29 +25,37 @@ public class IfThenElse extends MixedFormula {
 	/* (non-Javadoc)
 	 * @see formula.Formula#toString()
 	 */
-	public String toString() {
+	public final String toString() {
 		return null;
 	}
 
 
-	public double getDoubleResult() {
+	public final double getDoubleResult() {
 		return 0;
 	}
 
-	public long getLongResult() {
-		return 0;
-	}
+//	public final long getLongResult() {
+//		return 0;
+//	}
 
-	public boolean getBooleanResult() {
+	public final boolean getBooleanResult() {
 		return false;
 	}
 
-	public Class[] getInputTypes(int in) {
+	public final Class[] getInputTypes(int in) {
 		return new Class[0];
 	}
 
-	public Class[] getOutputTypes() {
+	public final Class[] getOutputTypes() {
 		return new Class[0];
+	}
+
+	public final boolean isValidInput(Formula in, int whichInput) {
+		return false;
+	}
+
+	public final boolean isValidOutput(Formula in, int whichInput) {
+		return false;
 	}
 
 }
