@@ -1,4 +1,4 @@
-/* $Id: AppletPanel.java,v 1.29 2004/09/09 20:14:55 shadowice Exp $
+/* $Id: AppletPanel.java,v 1.30 2004/09/10 10:05:30 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.29 $
+ * @version $Revision: 1.30 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 
@@ -22,7 +22,7 @@ public class AppletPanel extends Applet implements WindowListener {
 	private ControlPanel		pnlControls;
 	private ElementPanel		pnlElements;
 
-	private FormulaPanel		pnlFormula;
+	private FormulaPanel		pnlFormula = null;
 
 	private FormulaList			treeList;
 	private VariableList		varList;
@@ -133,7 +133,6 @@ public class AppletPanel extends Applet implements WindowListener {
 		ScrollPane sPane = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
 		sPane.getHAdjustable().setUnitIncrement(32);
 		sPane.getVAdjustable().setUnitIncrement(32);
-		pnlFormula.setLayout(new TreeLayout());
 
 		hotkey = new HotkeyListener(this);
 		pnlFormula.addMouseListener(dnd);

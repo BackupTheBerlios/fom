@@ -1,4 +1,4 @@
-/* $Id: TreeLayout.java,v 1.14 2004/09/09 16:23:02 shadowice Exp $
+/* $Id: TreeLayout.java,v 1.15 2004/09/10 10:05:30 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -10,7 +10,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public class TreeLayout implements LayoutManager {
 
@@ -49,12 +49,15 @@ public class TreeLayout implements LayoutManager {
 
 
 	public Dimension minimumLayoutSize(Container container) {
-		return container.getSize();
+		Dimension size = new Dimension(container.getSize());
+		size.width += container.getInsets().left + container.getInsets().right;
+		size.height += container.getInsets().bottom + container.getInsets().top;
+		return size;
 	}
 
 
 	public Dimension preferredLayoutSize(Container container) {
-		return container.getSize();
+		return minimumLayoutSize(container);
 	}
 
 
@@ -131,12 +134,11 @@ public class TreeLayout implements LayoutManager {
 		// set new container size if it's bigger:
 		ScrollPane sp = (ScrollPane)container.getParent();
 		if ((container.getSize().width < max_x) && (max_x != 0)) {
+			//container.setBounds(container.getBounds().x,container.getBounds().y,max_x,container.getBounds().height);
 			container.setSize(max_x,container.getSize().height);
-			container.invalidate();
 		}
 		if ((container.getSize().height < max_y) && (max_y != 0)) {
 			container.setSize(container.getSize().width,max_y);
-			container.invalidate();
 		}
 	}
 }

@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.21 2004/09/09 16:23:02 shadowice Exp $
+/* $Id: Selection.java,v 1.22 2004/09/10 10:05:30 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.21 $
+ * @version $Revision: 1.22 $
  */
 public class Selection {
 
@@ -420,12 +420,17 @@ public class Selection {
 	}
 
 
-	// NOTE this works under windows with Sun-JDK 1.4.2_05
+	
 	private void doFormulaPanelLayout() {
+		// NOTE this works under windows with Sun-JDK 1.4.2_05
+		/*
 		aPanel.getFormulaPanel().invalidate();
 		aPanel.getFormulaPanel().getParent().validate();
 		aPanel.getFormulaPanel().invalidate();
 		aPanel.getFormulaPanel().getParent().validate();
+		*/
+		// NOTE best linux solution:
+		aPanel.getFormulaPanel().doLayout();
 		aPanel.getFormulaPanel().repaint();
 	}
 
