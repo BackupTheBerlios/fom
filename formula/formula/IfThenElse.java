@@ -88,7 +88,7 @@ public class IfThenElse extends MixedFormula {
 					return output.getInputTypes(indexOfInput(this, output));
 				}
 			default:
-				throw new FormulaException(Messages.getString("Error.OutOfBound")); 
+				throw new FormulaException(Messages.getString("Error.OutOfBounds")); 
 		}
 	}
 

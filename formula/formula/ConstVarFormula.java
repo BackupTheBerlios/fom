@@ -7,26 +7,26 @@ import utils.Messages;
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
-public abstract class KonstVarFormula extends Formula {
+public abstract class ConstVarFormula extends Formula {
 
 	protected Object result;
 
 	/**
-	 * Overwrites function. Konstants/Variables have no input.
+	 * Overwrites function. Constants/Variables have no input.
 	 */
 	public int getInputCount() {
 		return 0;
 	}
 
 	/**
-	 * Overwrites function. Konstants/Variables have no input.
+	 * Overwrites function. Constants/Variables have no input.
 	 */
 	public Formula getInput(int index) {
 		return null;
 	}
 
 	/**
-	 * Overwrites function. Konstants/Variables have no input.
+	 * Overwrites function. Constants/Variables have no input.
 	 */
 	public void setInput(Formula in, int index) {
 	}
@@ -54,7 +54,7 @@ public abstract class KonstVarFormula extends Formula {
 	
 
 	public Class[] getInputTypes(int index) throws FormulaException {
-		throw new FormulaException(Messages.getString("Error.KonstVarInput"));
+		throw new FormulaException(Messages.getString("Error.ConstVarInput"));
 	}
 
 	public Class[] getOutputTypes() throws FormulaException {
@@ -74,13 +74,5 @@ public abstract class KonstVarFormula extends Formula {
 		}
 		return classArray;
 	}
-
-//	public boolean isValidInput(Formula in, int whichInput) {
-//		return false;
-//	}
-//
-//	public boolean isValidOutput(Formula in, int whichInput) {
-//		return false;
-//	}
 
 }
