@@ -10,19 +10,19 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @since 16.05.2004
  *
  */
-public class FormulaLabel extends TextField {
+public class FormulaTextField extends TextField {
 
 	private ControlPanel cPanel = null;
 
 	/**
 	 * @param string
 	 */
-	public FormulaLabel(ControlPanel cp,String string) {
+	public FormulaTextField(ControlPanel cp,String string) {
 		super(string);
 		setEditable(false);
+		setColumns(20);
 		setBackground(SystemColor.text);
 		this.cPanel = cp;
 	}
@@ -47,7 +47,7 @@ public class FormulaLabel extends TextField {
 	}
 
 	// NOTE: hardcoded size:
-	public Dimension getMinimumSize() {
+/*	public Dimension getMinimumSize() {
 		return new Dimension(250,48);
 	}
 
@@ -57,8 +57,6 @@ public class FormulaLabel extends TextField {
 	
 	public Dimension getMaximumSize() {
 		return new Dimension(350,48);
-	}
-	
-
+	} */
 
 }

@@ -15,7 +15,7 @@ import utils.Messages;
 public class Categories {
 
 	private static String[]		categories;
-	private static HashMap		categoryElements;
+	private static HashMap	categoryElements;
 	private static Categories	categoryObj			= new Categories();
 
 	/**
