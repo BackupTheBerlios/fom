@@ -13,7 +13,7 @@ import java.awt.*;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  * @version 0.1.5 (21.04.2004)
  */
-public abstract class Formula extends Canvas implements Cloneable {
+public abstract class Formula extends Container implements Cloneable {
 
 	public static final int BOXHEIGHT = 50;
 	public static final int RESULTHEIGHT = 25;
