@@ -23,6 +23,7 @@ public class Arcsin extends NumberFormula {
 	 * Creates an "arcsin" with 1 input.
 	 */
 	public Arcsin() {
+		super();
 		input = new Formula[1];
 		formulaName = "arcsin";
 	}

@@ -23,6 +23,7 @@ public class Greater extends ComparisonFormula {
 	 * Creates a ">" with 2 inputs.
 	 */
 	public Greater() {
+		super();
 		input = new Formula[2];
 		formulaName = ">";
 	}

@@ -23,6 +23,7 @@ public class Sinh extends NumberFormula {
 	 * Creates a "sinh" with 1 input.
 	 */
 	public Sinh() {
+		super();
 		input = new Formula[1];
 		formulaName = "sinh";
 	}

@@ -23,6 +23,7 @@ public class Abs extends NumberFormula {
 	 * Creates an "abs" with 1 input.
 	 */
 	public Abs() {
+		super();
 		input = new Formula[1];
 		formulaName = "abs";
 	}	

@@ -23,6 +23,7 @@ public class Exp extends NumberFormula {
 	 * Creates an "Exp" with 2 inputs.
 	 */
 	public Exp() {
+		super();
 		input = new Formula[1];
 		formulaName = "Exp";
 	}

@@ -23,6 +23,7 @@ public class Deg2rad extends NumberFormula {
 	 * Creates a "deg to rad" with 1 input.
 	 */
 	public Deg2rad() {
+		super();
 		input = new Formula[1];
 		formulaName = "deg to rad";
 	}

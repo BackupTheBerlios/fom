@@ -23,6 +23,7 @@ public class Mult extends NumberFormula {
 	 * Creates a "*" with 2 inputs.
 	 */
 	public Mult() {
+		super();
 		input = new Formula[2];
 		formulaName = "*";
 	}	

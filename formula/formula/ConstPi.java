@@ -14,9 +14,10 @@ public class ConstPi extends NumberFormula {
 	}
 	
 	/**
-	 * Creates a "pi".
+	 * Creates a "Pi".
 	 */
 	public ConstPi() {
+		super();
 		input = new Formula[0];
 		formulaName = "Pi";
 		result = new Double (Math.PI);

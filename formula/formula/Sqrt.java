@@ -23,6 +23,7 @@ public class Sqrt extends NumberFormula {
 	 * Creates a "SQRT" with 1 input.
 	 */
 	public Sqrt() {
+		super();
 		input = new Formula[1];
 		formulaName = "SQRT";
 	}

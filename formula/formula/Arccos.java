@@ -23,6 +23,7 @@ public class Arccos extends NumberFormula {
 	 * Creates an "arccos" with 1 input.
 	 */
 	public Arccos() {
+		super();
 		input = new Formula[1];
 		formulaName = "arcccos";
 	}

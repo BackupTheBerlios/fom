@@ -23,6 +23,7 @@ public class Tan extends NumberFormula {
 	 * Creates a "tan" with 1 input.
 	 */
 	public Tan() {
+		super();
 		input = new Formula[1];
 		formulaName = "tan";
 	}

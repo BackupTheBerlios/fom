@@ -23,6 +23,7 @@ public class Unequal extends ComparisonFormula {
 	 * Creates a "<>" with 2 inputs.
 	 */
 	public Unequal() {
+		super();
 		input = new Formula[2];
 		formulaName = "<>";
 	}

@@ -23,6 +23,7 @@ public class Arctan extends NumberFormula {
 	 * Creates an "arctan" with 1 input.
 	 */
 	public Arctan() {
+		super();
 		input = new Formula[1];
 		formulaName = "arctan";
 	}

@@ -23,6 +23,7 @@ public class Sin extends NumberFormula {
 	 * Creates a "sin" with 1 input.
 	 */
 	public Sin() {
+		super();
 		input = new Formula[1];
 		formulaName = "sin";
 	}

@@ -23,6 +23,7 @@ public class Eqv extends BooleanFormula {
 	 * Creates an "EQV" with 2 inputs.
 	 */
 	public Eqv() {
+		super();
 		input = new Formula[2];
 		formulaName = "EQV";
 	}

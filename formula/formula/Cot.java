@@ -23,6 +23,7 @@ public class Cot extends NumberFormula {
 	 * Creates a "cot" with 1 input.
 	 */
 	public Cot() {
+		super();
 		input = new Formula[1];
 		formulaName = "cot";
 	}

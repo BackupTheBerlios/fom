@@ -17,6 +17,7 @@ public class ConstE extends NumberFormula {
 	 * Creates an "e".
 	 */
 	public ConstE() {
+		super();
 		input = new Formula[0];
 		formulaName = "e";
 		result = new Double (Math.E);

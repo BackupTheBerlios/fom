@@ -23,6 +23,7 @@ public class Min extends NumberFormula {
 	 * Creates a "min" with 2 inputs.
 	 */
 	public Min() {
+		super();
 		input = new Formula[2];
 		formulaName = "min";
 	}

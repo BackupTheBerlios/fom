@@ -23,6 +23,7 @@ public class Equal extends ComparisonFormula {
 	 * Creates a "=" with 2 inputs.
 	 */
 	public Equal() {
+		super();
 		input = new Formula[2];
 		formulaName = "=";
 	}

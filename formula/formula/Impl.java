@@ -23,6 +23,7 @@ public class Impl extends BooleanFormula {
 	 * Creates an "IMPL" with 2 inputs.
 	 */
 	public Impl() {
+		super();
 		input = new Formula[2];
 		formulaName = "IMPL";
 	}

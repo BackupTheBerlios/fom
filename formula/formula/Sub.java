@@ -23,6 +23,7 @@ public class Sub extends NumberFormula {
 	 * Creates a "-" with 2 inputs.
 	 */
 	public Sub() {
+		super();
 		input = new Formula[2];
 		formulaName = "-";
 	}

@@ -23,6 +23,7 @@ public class Div extends NumberFormula {
 	 * Creates a "/" with 2 inputs.
 	 */
 	public Div() {
+		super();
 		input = new Formula[2];
 		formulaName = "/";
 	}

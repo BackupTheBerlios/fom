@@ -23,6 +23,7 @@ public class Modulo extends NumberFormula {
 	 * Creates a "mod" with 2 inputs.
 	 */
 	public Modulo() {
+		super();
 		input = new Formula[2];
 		formulaName = "mod";
 	}

@@ -23,6 +23,7 @@ public class Ln extends NumberFormula {
 	 * Creates a "ln" with 1 input.
 	 */
 	public Ln() {
+		super();
 		input = new Formula[1];
 		formulaName = "ln";
 	}

@@ -18,6 +18,7 @@ public class Random extends NumberFormula {
 	 * Creates a "RANDOM".
 	 */
 	public Random() {
+		super();
 		input = new Formula[0];
 		formulaName = "RANDOM";
 	}

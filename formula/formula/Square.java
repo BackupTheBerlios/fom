@@ -23,6 +23,7 @@ public class Square extends NumberFormula {
 	 * Creates a "x²" with 1 input.
 	 */
 	public Square() {
+		super();
 		input = new Formula[1];
 		formulaName = "x²";
 	}

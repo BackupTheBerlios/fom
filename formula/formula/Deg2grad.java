@@ -23,6 +23,7 @@ public class Deg2grad extends NumberFormula {
 	 * Creates a "deg to grad" with 1 input.
 	 */
 	public Deg2grad() {
+		super();
 		input = new Formula[1];
 		formulaName = "deg to grad";
 	}

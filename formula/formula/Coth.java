@@ -23,6 +23,7 @@ public class Coth extends NumberFormula {
 	 * Creates a "coth" with 1 input.
 	 */
 	public Coth() {
+		super();
 		input = new Formula[1];
 		formulaName = "coth";
 	}

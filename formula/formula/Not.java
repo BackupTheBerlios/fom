@@ -23,6 +23,7 @@ public class Not extends BooleanFormula {
 	 * Creates a "NOT" with 1 input.
 	 */
 	public Not() {
+		super();
 		input = new Formula[1];
 		formulaName = "NOT";
 	}

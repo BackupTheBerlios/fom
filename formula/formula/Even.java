@@ -23,6 +23,7 @@ public class Even extends ComparisonFormula {
 	 * Creates an "Evem" with 1 input.
 	 */
 	public Even() {
+		super();
 		input = new Formula[1];
 		formulaName = "Even";
 	}

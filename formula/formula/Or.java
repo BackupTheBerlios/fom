@@ -23,6 +23,7 @@ public class Or extends BooleanFormula {
 	 * Creates an "OR" with 2 inputs.
 	 */
 	public Or() {
+		super();
 		input = new Formula[2];
 		formulaName = "OR";
 	}

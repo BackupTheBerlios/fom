@@ -23,6 +23,7 @@ public class Cos extends NumberFormula {
 	 * Creates a "cos" with 1 input.
 	 */
 	public Cos() {
+		super();
 		input = new Formula[1];
 		formulaName = "cos";
 	}

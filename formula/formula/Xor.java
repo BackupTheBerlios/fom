@@ -23,6 +23,7 @@ public class Xor extends BooleanFormula {
 	 * Creates a "XOR" with 2 inputs.
 	 */
 	public Xor() {
+		super();
 		input = new Formula[2];
 		formulaName = "XOR";
 	}

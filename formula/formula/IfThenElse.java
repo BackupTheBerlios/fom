@@ -16,6 +16,7 @@ public class IfThenElse extends MixedFormula {
 	 * Creates an "if-then-else" with 3 inputs.
 	 */
 	public IfThenElse() {
+		super();
 		formulaName = "if-then-else";
 		input = new Formula[3];
 	}

@@ -23,6 +23,7 @@ public class Euler extends NumberFormula {
 	 * Creates an "e^x" with 1 input.
 	 */
 	public Euler() {
+		super();
 		input = new Formula[1];
 		formulaName = "e^x";
 	}

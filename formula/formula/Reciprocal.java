@@ -23,6 +23,7 @@ public class Reciprocal extends NumberFormula {
 	 * Creates a "1/x" with 1 input.
 	 */
 	public Reciprocal() {
+		super();
 		input = new Formula[1];
 		formulaName = "1/x";
 	}

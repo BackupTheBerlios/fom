@@ -23,6 +23,7 @@ public class LessEqual extends ComparisonFormula {
 	 * Creates a "<=" with 2 inputs.
 	 */
 	public LessEqual() {
+		super();
 		input = new Formula[2];
 		formulaName = "<=";
 	}

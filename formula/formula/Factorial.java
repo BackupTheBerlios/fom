@@ -37,6 +37,7 @@ public class Factorial extends NumberFormula {
 	 * Creates a "fact" with 1 input.
 	 */
 	public Factorial() {
+		super();
 		input = new Formula[1];
 		formulaName = "fact";
 	}

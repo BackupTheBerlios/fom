@@ -23,6 +23,7 @@ public class Max extends NumberFormula {
 	 * Creates a "max" with 2 inputs.
 	 */
 	public Max() {
+		super();
 		input = new Formula[2];
 		formulaName = "max";
 	}

@@ -23,6 +23,7 @@ public class Tanh extends NumberFormula {
 	 * Creates a "tanh" with 1 input.
 	 */
 	public Tanh() {
+		super();
 		input = new Formula[1];
 		formulaName = "tanh";
 	}

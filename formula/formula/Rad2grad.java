@@ -23,6 +23,7 @@ public class Rad2grad extends NumberFormula {
 	 * Creates a "rad to grad" with 1 input.
 	 */
 	public Rad2grad() {
+		super();
 		input = new Formula[1];
 		formulaName = "rad to grad";
 	}

@@ -23,6 +23,7 @@ public class Odd extends ComparisonFormula {
 	 * Creates an "Odd" with 1 input.
 	 */
 	public Odd() {
+		super();
 		input = new Formula[1];
 		formulaName = "Odd";
 	}

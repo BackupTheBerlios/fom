@@ -23,6 +23,7 @@ public class Pow extends NumberFormula {
 	 * Creates a "x^y" with 2 inputs.
 	 */
 	public Pow() {
+		super();
 		input = new Formula[2];
 		formulaName = "x^y";
 	}

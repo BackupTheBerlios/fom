@@ -23,6 +23,7 @@ public class Cosh extends NumberFormula {
 	 * Creates a "cosh" with 1 input.
 	 */
 	public Cosh() {
+		super();
 		input = new Formula[1];
 		formulaName = "cosh";
 	}

@@ -23,6 +23,7 @@ public class And extends BooleanFormula {
 	 * Creates an "AND" with 2 inputs.
 	 */
 	public And() {
+		super();
 		input = new Formula[2];
 		formulaName = "AND";
 	}
