@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.11 2004/08/29 15:15:41 shadowice Exp $
+/* $Id: Selection.java,v 1.12 2004/08/30 19:30:52 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -10,11 +10,9 @@ import java.awt.*;
 /**
  * A selection object stores all information regarding selected elements in
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
- * It also contains methods to handle an application-clipboard (no real clipboard, but
- * it might work over 2 instances of the applet).
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class Selection {
 
@@ -38,9 +36,7 @@ public class Selection {
 	private Vector inactivePPInputs			= new Vector(); // list of input pins, already connected to the selection (only move around)
 	private Vector inactivePPOutputs		= new Vector(); // list of output pins, already connected to the selection (only move around)
 
-	private static Object clipboard;
 
-	
 	/**
 	 * Creates a new Selection object. You only need one selection object per applet. 
 	 */
@@ -411,5 +407,15 @@ public class Selection {
 			aPanel.getFormulaPanel().repaint();
 		}
 	}
-	
+
+
+	/**
+	 * Create a copy (clone) of the selected components and puts it to the clipboard.
+	 */
+	public void copyToClipboard() {
+		if (selectedComponents.size() > 0) {
+			AppletPanel.setClipboard((Formula)selectedComponentRoot.clone());
+		}
+	}
+
 }

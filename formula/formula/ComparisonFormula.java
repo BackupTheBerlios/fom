@@ -1,4 +1,4 @@
-/*
+/* $Id: ComparisonFormula.java,v 1.12 2004/08/30 19:30:52 shadowice Exp $
  * Created on 22.05.2004
  */
 package formula;
@@ -10,6 +10,7 @@ import utils.Messages;
  * number values for input and return boolean values.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
+ * @version $Revision: 1.12 $
  */
 public abstract class ComparisonFormula extends Formula {
 

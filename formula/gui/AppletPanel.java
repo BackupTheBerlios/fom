@@ -1,4 +1,4 @@
-/* $Id: AppletPanel.java,v 1.23 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: AppletPanel.java,v 1.24 2004/08/30 19:30:52 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 
@@ -27,6 +27,7 @@ public class AppletPanel extends Applet implements WindowListener {
 	private FormulaList			treeList;
 	private VariableList		varList;
 
+	private static Formula clipboard;	// root formula of a copied (sub)tree
 
 	/**
 	 * Main method to run this program as application.
@@ -137,6 +138,25 @@ public class AppletPanel extends Applet implements WindowListener {
 		this.add(pnlElements, BorderLayout.WEST);
 		this.add(pnlControls, BorderLayout.SOUTH);
 		this.add(sPane, BorderLayout.CENTER);
+	}
+
+
+	/**
+	 * Sets the clipboard content.
+	 * Note: No real clipboard, just a fake implementation.
+	 * @param form root formula element of a tree
+	 */
+	public static void setClipboard(Formula form) {
+		clipboard = form;
+	}
+
+
+	/**
+	 * Note: No real clipboard, just a fake implementation.
+	 * @return returns the content of the clipboard
+	 */
+	public static Formula getClipboard() {
+		return clipboard;
 	}
 
 

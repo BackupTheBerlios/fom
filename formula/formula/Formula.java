@@ -1,4 +1,4 @@
-/* $Id: Formula.java,v 1.45 2004/08/29 15:16:15 shadowice Exp $
+/* $Id: Formula.java,v 1.46 2004/08/30 19:30:52 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
@@ -13,7 +13,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.45 $
+ * @version $Revision: 1.46 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -348,8 +348,9 @@ public abstract class Formula extends Container implements Cloneable {
 	}
 
 
-	/** TODO javadoc
-	 * @param status
+	/**
+	 * Sets the paint status, that will affect the behavior of the paint method.
+	 * @param status one of the PAINTSTATUS_*
 	 */
 	public final void setPaintStatus(int status) {
 		paintStatus = status;
@@ -424,6 +425,39 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	// NOTE extra method only for VariableBoolean and VariableNumber!
 	public void init(AppletPanel ap) { }
+	
+	
+	/**
+	 * Clones a formula object. If the object has an inputs != null those will be cloned too.
+	 * Clone used on the first element of a whole formula tree will clone the complete tree. 
+	 */
+	public Object clone() {
+		try {
+	    	Formula clonedForm = (Formula)super.clone();
+	    	clonedForm.dimension = (Dimension)dimension.clone();
+	    	clonedForm.formulaName = new String(formulaName);
+	    	clonedForm.inputPins = (PinPoint[])inputPins.clone();
+	    	for (int i=0;i<clonedForm.inputPins.length;i++) {
+	    		clonedForm.inputPins[i].setFormula(clonedForm);
+	    	}
+	    	clonedForm.outputPin = (PinPoint)outputPin.clone();
+	    	clonedForm.outputPin.setFormula(clonedForm);
+	    	clonedForm.bufferImage = null;
+	    	
+	    	// clone inputs:
+	    	for (int i=0;i<getInputCount();i++) {
+	    		Formula form = (Formula)getInput(i).clone();
+	    		form.setOutput(clonedForm);
+	    		clonedForm.setInput(form,i);
+	    		clonedForm.inputPins[i].setTarget(form.getOutputPin());
+	    		form.getOutputPin().setTarget(clonedForm.inputPins[i]);
+	    	}
+	    	
+	    	return clonedForm;
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError(e.toString());
+		}
+	}
 
 	//"Quick-fix" :)
 	public final Dimension preferredSize() {

@@ -1,6 +1,5 @@
-/* $Id: PinPoint.java,v 1.7 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: PinPoint.java,v 1.8 2004/08/30 19:30:52 shadowice Exp $
  * Created on 02.07.2004
- *
  */
 package gui;
 
@@ -11,7 +10,7 @@ import formula.*;
  * Class to store the points where a formula can be connected.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 /*
  * How to use this:
@@ -23,7 +22,7 @@ import formula.*;
  * It is used to specify the area where 2 formula elements are connected.
  */
 
-public class PinPoint {
+public class PinPoint implements Cloneable {
 
 // local attributes:
 	private Formula formula;			// formula of this point
@@ -46,6 +45,7 @@ public class PinPoint {
 		this.pinPoint = new Point(x,y);
 	}
 
+
 	/**
 	 * Constructor for output-pins.
 	 * @param form Formula element of this pin
@@ -55,7 +55,8 @@ public class PinPoint {
 		this.formula = form;
 		this.pinPoint = p;
 	}
-	
+
+
 	/**
 	 * Constructor for output-pins.
 	 * @param form Formula element of this pin
@@ -64,7 +65,8 @@ public class PinPoint {
 		this.formula = form;
 		this.pinPoint = new Point();
 	}
-	
+
+
 	/**
 	 * Constructor for input-pins.
 	 * @param form Formula element of this pin
@@ -78,6 +80,7 @@ public class PinPoint {
 		this.inputNumber = inNumber;
 	}
 
+
 	/**
 	 * Constructor for input-pins.
 	 * @param form Formula element of this pin
@@ -90,6 +93,7 @@ public class PinPoint {
 		this.inputNumber = inNumber;
 	}
 
+
 	/**
 	 * Constructor for input-pins.
 	 * @param form Formula element of this pin
@@ -101,7 +105,7 @@ public class PinPoint {
 		this.inputNumber = inNumber;
 	}
 
-	
+
 // methods:
 	/**
 	 * Sets the x and y coordinates of this PinPoint.
@@ -111,14 +115,16 @@ public class PinPoint {
 	public void setCoordinates(int x, int y) {
 		this.pinPoint.setLocation(x,y);
 	}
-	
+
+
 	/**
 	 * @return Returns the x,y-coordinates of this PinPoint.
 	 */
 	public Point getCoordinates() {
 		return this.pinPoint;
 	}
-	
+
+
 	/**
 	 * Sets the target to another PinPoint.
 	 * @param pTarget target PinPoint
@@ -126,14 +132,16 @@ public class PinPoint {
 	public void setTarget(PinPoint pTarget) {
 		this.targetPoint = pTarget;
 	}
-	
+
+
 	/**
 	 * @return returns the target PinPoint
 	 */
 	public PinPoint getTarget() {
 		return this.targetPoint;
 	}
-	
+
+
 	/**
 	 * Sets the input-number of the formula for this PinPoint, only works for input-pins.
 	 * @param inNumber the number of this input-PinPoint (0 = first)
@@ -141,15 +149,16 @@ public class PinPoint {
 	public void setInputNumber(int inNumber) {
 		this.inputNumber = inNumber;
 	}
-	
+
+
 	/**
 	 * @return returns the number of this PinPoint
 	 */
 	public int getInputNumber() {
 		return this.inputNumber;
 	}
-	
-	
+
+
 	/**
 	 * The mouseTargetPoint is used to determine if another Formula is within reach of this PinPoint.
 	 * @param mtp
@@ -157,7 +166,8 @@ public class PinPoint {
 	public void setMouseTargetPoint(Point mtp) {
 		this.mouseTargetPoint = mtp;
 	}
-	
+
+
 	/**
 	 * The mouseTargetPoint is used to determine if another Formula is within reach of this PinPoint. 
 	 * @param x x coordinates
@@ -166,14 +176,16 @@ public class PinPoint {
 	public void setMouseTargetPoint(int x, int y) {
 		this.mouseTargetPoint = new Point(x,y);
 	}
-	
+
+
 	/**
 	 * @return
 	 */
 	public Point getMouseTargetPoint() {
 		return this.mouseTargetPoint;
 	}
-	
+
+
 	/**
 	 * @param p another point
 	 * @return returns the distance between this PinPoint's mouseTargetPoint and the point p.
@@ -181,6 +193,7 @@ public class PinPoint {
 	public int getDistance(Point p) {
 		return (int)this.mouseTargetPoint.distance(p);
 	}
+
 
 	/**
 	 * @param x x coordinates of another point
@@ -191,14 +204,24 @@ public class PinPoint {
 		return (int)this.mouseTargetPoint.distance(x,y);
 	}
 
+
 	/**
 	 * @return returns the Formula this pin belongs to
 	 */
 	public Formula getFormula() {
 		return this.formula;
 	}
-	
-	
+
+
+	/**
+	 * Sets the formula this PinPoint belongs to.
+	 * @param form Formula object
+	 */
+	public void setFormula(Formula form) {
+		this.formula = form;
+	}
+
+
 	/**
 	 * Moves the mouseTargetPoint and pinPoint to (x+x_off,y+y_off). 
 	 * @param x_off x offset
@@ -208,33 +231,60 @@ public class PinPoint {
 		this.mouseTargetPoint.translate(x_off,y_off);
 		this.pinPoint.translate(x_off,y_off);
 	}
-	
+
+
 	/**
-	 * @return
+	 * @return nearest PinPoint
 	 */
 	public PinPoint getBestCandidate() {
 		return bestCandidate;
 	}
 
+
 	/**
-	 * @return
+	 * @return best distance
 	 */
 	public int getBestDistance() {
 		return bestDistance;
 	}
 
+
 	/**
+	 * Sets the best (nearest) PinPoint found so far. Only temporary, used by Selection.refreshPinPointList().
 	 * @param point
 	 */
 	public void setBestCandidate(PinPoint point) {
 		bestCandidate = point;
 	}
 
+
 	/**
-	 * @param i
+	 * Sets the best found distance. Only temporary, used by Selection.refreshPinPointList().
+	 * @param dist distance
 	 */
 	public void setBestDistance(int dist) {
 		bestDistance = dist;
+	}
+
+
+	/**
+	 * Clones a PinPoint object. This will only clone it's point-datas.
+	 *
+	 * <b>IMPORTANT: Clone doesn't clone all references in this formula!
+	 * Don't use this clone method without setting the formula and targets afterwards!</b> 
+	 */
+	public Object clone() {
+		try {
+			PinPoint cpp = (PinPoint)super.clone();
+			cpp.bestCandidate = null;
+			cpp.formula = null;
+			cpp.mouseTargetPoint = (Point)mouseTargetPoint.clone();
+			cpp.pinPoint = (Point)pinPoint.clone();
+			cpp.targetPoint = null;
+			return cpp;
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError(e.toString());
+		}
 	}
 
 }

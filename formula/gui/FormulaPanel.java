@@ -1,29 +1,25 @@
-/* $Id: FormulaPanel.java,v 1.25 2004/08/26 16:54:38 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.26 2004/08/30 19:30:52 shadowice Exp $
  * Created on 22.04.2004
- *
  */
 package gui;
-
-import formula.*;
 
 import java.awt.*;
 import java.util.*;
 
+import formula.*;
 import utils.*;
 
 /**
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.26 $
  */
 public class FormulaPanel extends Panel {
-
 
 	private static final int MAX_PIN_DISTANCE	= 70;	// distance to a pin (mouseTargetPoint) to be of any interest (should be <100)
 	private static final int OVERSIZE_WIDTH		= 5;
 	private static final int OVERSIZE_HEIGHT	= 5;
-
 
 	// These lists store all input/output pins.
 	private Vector inputPinList 	= new Vector();
@@ -36,7 +32,8 @@ public class FormulaPanel extends Panel {
 	private Image bufferImage;
 	private int lastBufferWidth = 0;
 	private int lastBufferHeight = 0;
-	
+
+
 	/**
 	 * Creates a new FormulaPanel.
 	 */
@@ -45,8 +42,8 @@ public class FormulaPanel extends Panel {
 		setLayout(new TreeLayout());
 		setBackground(SystemColor.text);
 	}
-	
-	
+
+
 	/**
 	 * Adds an array of input pins to the appropriate pin list.
 	 * @param pPIn array of input pins
@@ -56,8 +53,8 @@ public class FormulaPanel extends Panel {
 			addInputPin(pPIn[i]);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Adds a list (Vector) of input pins to the appropriate pin list.
 	 * @param pPIn list of input pins
@@ -66,7 +63,7 @@ public class FormulaPanel extends Panel {
 		inputPinList.addAll(pPIn);
 	}
 
-	
+
 	/**
 	 * Adds an input pin to the appropriate pin list.
 	* @param pPIn input pin
@@ -78,7 +75,7 @@ public class FormulaPanel extends Panel {
 		inputPinList.addElement(pPIn);
 	}
 
-	
+
 	/**
 	 * Adds an array of output pins to the appropriate pin list.
 	 * @param pPOut list of output pins
@@ -88,8 +85,8 @@ public class FormulaPanel extends Panel {
 			addOutputPin(pPOut[i]);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Adds a list (Vector) of output pins to the appropriate pin list.
 	 * @param pPOut list of output pins
@@ -98,7 +95,7 @@ public class FormulaPanel extends Panel {
 		outputPinList.addAll(pPOut);
 	}
 
-	
+
 	/**
 	 * Adds an output pin to the appropriate pin list.
 	 * @param pPOut output pin
@@ -110,7 +107,7 @@ public class FormulaPanel extends Panel {
 		outputPinList.addElement(pPOut);
 	}
 
-	
+
 	/**
 	 * Used to remove a list of input pins from the pinList.
 	 * @param pPIn list of input pins
@@ -120,8 +117,8 @@ public class FormulaPanel extends Panel {
 			inputPinList.removeElement(pPIn[i]);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Used to remove a list of output pins from the pinList.
 	 * @param pPOut list of output pins
@@ -132,7 +129,7 @@ public class FormulaPanel extends Panel {
 		}
 	}
 
-	
+
 	/**
 	 * @return returns a vector of input pins from all formula elements in the panel
 	 */
@@ -140,7 +137,7 @@ public class FormulaPanel extends Panel {
 		return inputPinList;
 	}
 
-	
+
 	/**
 	 * @return returns a vector of output pins from all formula elements in the panel
 	 */
@@ -152,25 +149,21 @@ public class FormulaPanel extends Panel {
 	public boolean isDoubleBuffered() {
 		return true;
 	}
-	
-	
+
+
 	public void update(Graphics g) {
 		if ((bufferImage == null) || (getWidth() > lastBufferWidth) || (getHeight() > lastBufferHeight)) {
 			lastBufferWidth = getWidth();
 			lastBufferHeight = getHeight();
 			bufferImage = createImage(lastBufferWidth,lastBufferHeight);
 		}
-		
 		Graphics bufferGraphics = bufferImage.getGraphics();
-		
 		paint(bufferGraphics);
-		
 		g.drawImage(bufferImage,0,0,this);
-		
 		bufferGraphics.dispose();
 	}
-	
-	
+
+
 	public void paint(Graphics g) {
 		// clear graphics:
 		g.clearRect(0,0,getWidth(),getHeight());
@@ -191,7 +184,7 @@ public class FormulaPanel extends Panel {
 			pp = (PinPoint)inputPinList.get(i);
 			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5);
 		}*/
-		
+
 		g.setColor(Color.RED);
 		for (int i=0;i<tempInPPList.size();i++) {
 			pp = (PinPoint)tempInPPList.get(i);
@@ -207,7 +200,6 @@ public class FormulaPanel extends Panel {
 				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}
 		}
-
 	}
 
 
@@ -646,6 +638,11 @@ public class FormulaPanel extends Panel {
 			aPanel.getTreeList().removeElement(treeList[i]);
 		}
 		removeAll();
+	}
+
+
+	public void addFormula(Formula form) {
+		
 	}
 
 }

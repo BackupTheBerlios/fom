@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.9 2004/08/26 16:54:38 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.10 2004/08/30 19:30:52 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -43,10 +43,12 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 	public void actionPerformed(ActionEvent aevent) {
 		if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnAddFormula"))) {
 			// TODO CustomFormula statt Add verwenden.
-			Add add=new Add();
-			add.setName(cfDialog.showDialog(add));	// TODO setFormulaName wenn mit CustomFormula
-			ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),add);
-			ePanel.refreshElementList();
+			if (aPanel.getTreeList().isCompleteGlobalTree()) {
+				Add add=new Add();
+				add.setName(cfDialog.showDialog(add));	// TODO setFormulaName wenn mit CustomFormula
+				ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),add);
+				ePanel.refreshElementList();
+			}
 		} else if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
 			aPanel.getFormulaPanel().deleteAll();
 			aPanel.getControlPanel().updateTfResult("");

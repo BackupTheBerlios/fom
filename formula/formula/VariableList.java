@@ -1,6 +1,5 @@
-/*
+/* $Id: VariableList.java,v 1.2 2004/08/30 19:30:52 shadowice Exp $
  * Created on 24.08.2004
- *
  */
 package formula;
 
@@ -9,7 +8,7 @@ import java.util.Vector;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.2 $
  */
 public class VariableList extends Vector {
 
@@ -19,14 +18,15 @@ public class VariableList extends Vector {
 	public VariableList() {
 		super();
 	}
-	
-	
+
+
 	/**
 	 * @param initialCapacity
 	 */
 	public VariableList(int initialCapacity) {
 		super(initialCapacity);
 	}
+
 
 	/**
 	 * @param initialCapacity
@@ -36,18 +36,19 @@ public class VariableList extends Vector {
 		super(initialCapacity, capacityIncrement);
 	}
 
+
 	/**
 	 * @param c
 	 */
 	public VariableList(Collection c) {
 		super(c);
 	}
-	
-	
+
+
 	/* ---------------------------------------------*/
 	/* old methods from ConstVarFormula: 			*/
 	/* ---------------------------------------------*/
-	
+
 	/**
 	 * Searches in this VariableList for a TypeConstVar with a certain variable name.
 	 * 
@@ -100,12 +101,11 @@ public class VariableList extends Vector {
 	 */
 	public final void addVarList(VariableNumber toAdd) {
 		TypeConstVar content = getVarListName(toAdd.getInputVarName());
-		TypeConstVar newVariable;
 		if (content == null) {
 			//Variablenname existiert noch nicht.
-			newVariable = new TypeConstVar((Double)toAdd.result, toAdd.getInputVarName());
-			newVariable.addVarInnerList(toAdd);
-			addElement(newVariable);
+			content = new TypeConstVar((Double)toAdd.result, toAdd.getInputVarName());
+			content.addVarInnerList(toAdd);
+			addElement(content);
 		} else {
 			if (content.getValue() instanceof Number) {
 				toAdd.result = content.getValue();

@@ -1,4 +1,4 @@
-/* $Id: HotkeyListener.java,v 1.9 2004/08/29 15:15:54 shadowice Exp $
+/* $Id: HotkeyListener.java,v 1.10 2004/08/30 19:30:52 shadowice Exp $
  * Created on 13.08.2004
  *
  */
@@ -6,9 +6,11 @@ package gui;
 
 import java.awt.event.*;
 
+import formula.*;
+
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class HotkeyListener implements KeyListener {
 
@@ -27,13 +29,16 @@ public class HotkeyListener implements KeyListener {
 		char keyChar = kEvent.getKeyChar();
 		switch (keyChar) {
 			case 'c':
-				// TODO Copy
+				aPanel.getSelection().copyToClipboard();
 				break;
 			case 'x':
-				// TODO Cut
+				aPanel.getSelection().copyToClipboard();
+				aPanel.getSelection().delete();
 				break;
 			case 'v':
-				// TODO Paste
+				// doesn't paste the clipboard content, pastes a copy of it instead
+				Formula pasteForm = (Formula)AppletPanel.getClipboard().clone();
+				
 				break;
 		}
 	}

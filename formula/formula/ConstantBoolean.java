@@ -35,7 +35,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		formulaName = "                    Constant";
 		result = new Boolean(false);
 		inputBoolean = new Button("false");
-		inputBoolean.setFont(new Font("Arial", Font.PLAIN, 11));
+		inputBoolean.setFont(DEFAULT_FONT);
 		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
 		if (elementChooser) {
 			inputBoolean.setEnabled(false);
