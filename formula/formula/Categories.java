@@ -66,7 +66,7 @@ public class Categories {
 		categoryElements.put(categories[2], form);
 
 		//Category Trigonometrics:
-		form = new Formula[11];
+		form = new Formula[17];
 		form[0] = new Sin();
 		form[1] = new Cos();
 		form[2] = new Tan();
@@ -78,10 +78,16 @@ public class Categories {
 		form[8] = new Cosh();
 		form[9] = new Tanh();
 		form[10] = new Coth();
+		form[11] = new Deg2grad();
+		form[12] = new Deg2rad();
+		form[13] = new Grad2deg();
+		form[14] = new Grad2rad();
+		form[15] = new Rad2deg();
+		form[16] = new Rad2grad();	
 		categoryElements.put(categories[3], form);
 
 		//Category Comparison:
-		form = new Formula[8];
+		form = new Formula[9];
 		form[0] = new Equal();
 		form[1] = new Unequal();
 		form[2] = new Less();
@@ -89,7 +95,8 @@ public class Categories {
 		form[4] = new Greater();
 		form[5] = new GreaterEqual();		
 		form[6] = new Even();
-		form[7] = new Odd();		
+		form[7] = new Odd();
+		form[8] = new Eqv();
 		categoryElements.put(categories[4], form);
 
 		//Category Logical Operators:
@@ -103,17 +110,11 @@ public class Categories {
 		categoryElements.put(categories[5], form);
 
 		//Category Others:
-		form = new Formula[10];
+		form = new Formula[4];
 		form[0] = new IfThenElse();
 		form[1] = new Min();
 		form[2] = new Max();
 		form[3] = new Random();
-		form[4] = new Deg2grad();
-		form[5] = new Deg2rad();
-		form[6] = new Grad2deg();
-		form[7] = new Grad2rad();
-		form[8] = new Rad2deg();
-		form[9] = new Rad2grad();	
 		categoryElements.put(categories[6], form);
 
 		//Category Custom:
