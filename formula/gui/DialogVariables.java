@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.15 2004/08/29 20:33:21 ot_piccolo Exp $
+/* $Id: DialogVariables.java,v 1.16 2004/08/30 19:51:33 ot_piccolo Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -11,7 +11,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
@@ -215,7 +215,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 */
 	 // HEIKO: Behoben mit requestFocus?
 	 // Wenn nicht müsste ich einen WindowListener in AppletPanel einbauen.
-
+	  // MAURICE: Ja, hat sich erledigt.
 	// Methods from WindowListener:
 	public void windowClosing(WindowEvent arg0) {
 		dispose();

@@ -12,14 +12,24 @@ public class CustomFormula extends Formula {
 
 	protected Object result;
 
+	protected Formula root;
+	protected String[] mappingInputsVariables;
 	protected Class[] validInputTypes;
 
 	public CustomFormula(Formula root) throws FormulaException {
-		if (root.isCompleteSubTree()) {
-			
+		if ((root != null) && root.isCompleteSubTree()) {
+
 		} else {
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		}
+	}
+
+	private final void createTree(Formula formulaNode, Formula customNode, Formula customNodeFather) {
+		
+	}
+
+	private final void setMapping() {
+		 
 	}
 
 	/**
@@ -59,6 +69,14 @@ public class CustomFormula extends Formula {
 			}
 		else
 			return null;
+	}
+
+	public boolean hasBooleanResult() {
+		return (result != null) && (result instanceof Boolean);
+	}
+
+	public boolean hasDoubleResult() {
+		return (result != null) && (result instanceof Double);
 	}
 
 	public final void calc() throws FormulaException {
