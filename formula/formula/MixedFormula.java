@@ -37,14 +37,14 @@ public abstract class MixedFormula extends Formula {
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
 	
-	public final String getStringResult() throws FormulaException {
+	public final String getStringResult() {
 		if (result != null) {
 			if (result instanceof Boolean)
 				return ((Boolean)result).toString();
 			else if (result instanceof Double)
 				return ((Double)result).toString();
 			else
-				throw new FormulaException(Messages.getString("Error.IllegalDataType"));
+				return null;
 			}
 		else
 			return null;

@@ -15,22 +15,18 @@ import java.util.*;
  */
 public abstract class Formula extends Container implements Cloneable {
 
-	public static final int BOXHEIGHT = 30;
+	public static final int BOXHEIGHT = 28;
 	public static final int RESULTHEIGHT = 20;
 	public static final int CONNECTHEIGHT = 5; 
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
 	public static final int FORMULAWIDTH = 120;
 
 	protected Dimension dimension = new Dimension(FORMULAWIDTH+1,FORMULAHEIGHT+1);
-
 	protected Formula[] input;
 	protected Formula output;
-
 	protected String formulaName;
-
 	protected int drawStatus;
-
-	public static LinkedList treeList;
+	protected static LinkedList treeList;
 
 	/**
 	 * Creates a new formula object.
@@ -67,9 +63,8 @@ public abstract class Formula extends Container implements Cloneable {
 	 * Will return a string-value as a result, if possible. If not, a FormulaException
 	 * will be thrown.
 	 * @return The result of all calc-operations up to this formula-element, casted into a string.
-	 * @throws FormulaException Normally this shouldn't happen. ;)
 	 */
-	public abstract String getStringResult() throws FormulaException;
+	public abstract String getStringResult();
 	
 //	/**
 //	 * Will return a long-value as a result, if possible. If not, a FormulaException will be thrown.
@@ -82,7 +77,7 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * @return Name of the formula-element.
 	 */
-	public String getFormulaName() {
+	public final String getFormulaName() {
 		return formulaName;
 	}
 
@@ -94,13 +89,11 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public void paint(Graphics g) {
 		String resultString;
-//		try {
-//			resultString = getStringResult();
-//		} catch (FormulaException) { 
-//		}
+		resultString = getStringResult();
+		g.setFont(new Font("Arial", Font.PLAIN, 10));	
 		super.paint(g);
-		//TODO Grafik verbessern
 		//((Graphics2D)g).scale(scaleX, scaleY);
+		//Standard Aussehen
 		if (drawStatus == 0) {
 			g.setColor(Color.BLACK);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
@@ -109,29 +102,47 @@ public abstract class Formula extends Container implements Cloneable {
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
 			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
-			g.setFont(new Font("Arial", Font.PLAIN, 10));		
 			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
-//			if (resultString != null) {
-//				
-//			}
-		//TODO Andere Grafiktypen verwenden
-		} else {
-			g.setColor(Color.BLACK);
+			if (resultString != null) {
+				g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
+			}
+		//Element markiert
+		} else if (drawStatus == 1) {
+			g.setColor(Color.BLUE);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
 			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
 			for (int i=0; i<getInputCount(); i++){
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
 			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
-			g.setFont(new Font("Arial", Font.PLAIN, 10));		
-			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Align: center
+			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
+			if (resultString != null) {
+				g.drawString(resultString, (FORMULAWIDTH-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
+			}
+		//Element bewegen
+		} else {
+			g.setColor(Color.BLACK);
+			for (int i=0; i<FORMULAWIDTH/4; i++) {
+				g.drawLine(i*4, CONNECTHEIGHT, i*4+2, CONNECTHEIGHT);
+				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2, CONNECTHEIGHT+RESULTHEIGHT);
+				g.drawLine(i*4, FORMULAHEIGHT-CONNECTHEIGHT, i*4+2, FORMULAHEIGHT-CONNECTHEIGHT);
+			}
+			for (int i=0; i<(BOXHEIGHT+RESULTHEIGHT)/4; i++) {
+				g.drawLine(0, i*4+CONNECTHEIGHT, 0, i*4+2+CONNECTHEIGHT);
+				g.drawLine(FORMULAWIDTH, i*4+CONNECTHEIGHT, FORMULAWIDTH, i*4+2+CONNECTHEIGHT);
+			}
+			for (int i=0; i<getInputCount(); i++){
+				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
+			}
+			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
+			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		}
 	}
 
 	/**
 	 * @return Returns the number of inputs a formula element has.
 	 */
-	public int getInputCount() {
+	public final int getInputCount() {
 		return input.length;
 	}
 
@@ -163,7 +174,7 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param index Number of the input (left=0, right=inputCount-1)
 	 * @return The formula, that is connected to this input, or null.
 	 */
-	public Formula getInput(int index) {
+	public final Formula getInput(int index) {
 		return input[index];
 	}
 
@@ -176,7 +187,7 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * @return Returns the maximal number of formula-objects in this subtree which are side by side.
 	 */
-	public int getWidthOfTree() {
+	public final int getWidthOfTree() {
 		int widthOfTree = 0;
 		if (getInputCount() == 0)
 			widthOfTree = 1;
@@ -192,14 +203,14 @@ public abstract class Formula extends Container implements Cloneable {
 	 * Connects another formula to this output.
 	 * @param out The other formula-object.
 	 */
-	public void setOutput(Formula out) {
+	public final void setOutput(Formula out) {
 		this.output = out;
 	}
 
 	/**
 	 * @return Returns the formula-object that is connected to this output.
 	 */
-	public Formula getOutput() {
+	public final Formula getOutput() {
 		return output;
 	}
 
@@ -208,14 +219,14 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param in The other formula-object.
 	 * @param index Number of the input (left=0).
 	 */
-	public void setInput(Formula in, int index) {
+	public final void setInput(Formula in, int index) {
 		this.input[index] = in;
 	}
 	/**
 	 * @return Validates, that tree is complete and isn't missing some inputs.
 	 * MAURICE Darf ich dieses Abbruchbedingung benutzen (for-Schleife)?
 	 */
-	public boolean completeTree() {
+	public final boolean completeTree() {
 		boolean complete = true;
 		for (int i = 0; i < getInputCount() && complete; i++) {
 			complete = complete && (input[i] == null);
@@ -230,7 +241,7 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param whereToFind Formula-Object, whose inputs have to be checked.
 	 * @return Returns value of input index, -1 if it isn't found.
 	 */
-	protected int indexOfInput(Formula toFind, Formula whereToFind) {
+	protected final int indexOfInput(Formula toFind, Formula whereToFind) {
 		int index = -1;
 		for (int i = 0; i < whereToFind.getInputCount() && index != -1; i++) {
 			if (toFind == whereToFind.input[i])
@@ -239,32 +250,50 @@ public abstract class Formula extends Container implements Cloneable {
 		return index;
 	}
 
-	public static LinkedList getTreeList() {
-		return treeList;
+	//MAURICE Brauchst du das hier irgendwie anders? 
+	public final static Object[] getTreeList() {
+		return treeList.toArray();
+	}
+
+	public final static void insertTreeList(Formula wurzel) {
+		treeList.addFirst(wurzel);
+	}
+
+	public final static void deleteTreeList(Formula wurzel) {
+		treeList.remove(wurzel);
+	}
+	//MAURICE Bis hier
+
+	public final void setDrawStatus(int status) {
+		drawStatus = status;
+	}
+
+	public final int getDrawStatus() {
+		return drawStatus;
 	}
 
 	//"Quick-fix" :)
-	public Dimension getSize() {
+	public final Dimension getSize() {
 		return dimension;
 	}
 
-	public Dimension preferredSize() {
+	public final Dimension preferredSize() {
 		return dimension;
 	}
 	
-	public Dimension getPreferredSize() {
+	public final Dimension getPreferredSize() {
 		return dimension;
 	}
 	
-	public Dimension getMinimumSize() {
+	public final Dimension getMinimumSize() {
 		return dimension;
 	}
 	
-	public void setSize(int x,int y) {
+	public final void setSize(int x,int y) {
 		dimension = new Dimension(x,y);
 	}
 	
-	public void setSize(Dimension dim) {
+	public final void setSize(Dimension dim) {
 		dimension = dim;
 	}
 

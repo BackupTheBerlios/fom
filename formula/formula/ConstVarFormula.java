@@ -13,26 +13,10 @@ public abstract class ConstVarFormula extends Formula {
 
 	protected Object result;
 
-	/**
-	 * Overwrites function. Constants/Variables have no input.
-	 */
-	public final int getInputCount() {
-		return 0;
+	public ConstVarFormula() {
+		super();
+		input = new Formula[0];
 	}
-
-	/**
-	 * Overwrites function. Constants/Variables have no input.
-	 */
-	public final Formula getInput(int index) {
-		return null;
-	}
-
-	/**
-	 * Overwrites function. Constants/Variables have no input.
-	 */
-	public final void setInput(Formula in, int index) {
-	}
-
 
 	public final void calc() throws FormulaException {		
 	}
@@ -52,14 +36,14 @@ public abstract class ConstVarFormula extends Formula {
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
 	
-	public final String getStringResult() throws FormulaException {
+	public final String getStringResult() {
 		if (result != null) {
 			if (result instanceof Boolean)
 				return ((Boolean)result).toString();
 			else if (result instanceof Double)
 				return ((Double)result).toString();
 			else
-				throw new FormulaException(Messages.getString("Error.IllegalDataType"));
+				return null;
 		}
 		else
 			return null;
@@ -72,7 +56,7 @@ public abstract class ConstVarFormula extends Formula {
 	/**
 	 * Clears all results that have been saved by calc-operations.
 	 */
-	public void clearResult() {
+	public final void clearResult() {
 	}
 	
 

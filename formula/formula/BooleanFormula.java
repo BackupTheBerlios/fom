@@ -31,7 +31,7 @@ public abstract class BooleanFormula extends Formula {
 		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
 	}
 
-	public final String getStringResult() throws FormulaException {
+	public final String getStringResult() {
 		if (result != null)
 			return result.toString();
 		else

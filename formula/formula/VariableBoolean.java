@@ -21,7 +21,6 @@ public class VariableBoolean extends ConstVarFormula {
 	}
 
 	public VariableBoolean() {
-		input = new Formula[0];
 		formulaName = "VariableBoolean";
 		result = new Boolean (false);
 	}

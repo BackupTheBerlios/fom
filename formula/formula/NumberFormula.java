@@ -25,7 +25,7 @@ public abstract class NumberFormula extends Formula {
 		throw new FormulaException(Messages.getString("Error.IllegalBforN"));
 	}
 
-	public final String getStringResult() throws FormulaException {
+	public final String getStringResult() {
 		if (result != null)
 			return result.toString();
 		else

@@ -42,9 +42,11 @@ public class Categories {
 		categoryElements.put(categories[0], form);
 
 		//Category Variables:
-		form = new Formula[2];
+		form = new Formula[4];
 		form[0] = new ConstantNumber();
 		form[1] = new ConstantBoolean();
+		form[2] = new VariableNumber();
+		form[3] = new VariableBoolean();
 		categoryElements.put(categories[1], form);
 
 		//Category Arithmetics

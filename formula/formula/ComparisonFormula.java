@@ -21,7 +21,7 @@ public abstract class ComparisonFormula extends Formula {
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
 
-	public String getStringResult() throws FormulaException {
+	public String getStringResult() {
 		if (result != null)
 			return result.toString();
 		else

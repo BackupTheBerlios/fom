@@ -21,7 +21,6 @@ public class VariableNumber extends ConstVarFormula {
 	}
 
 	public VariableNumber() {
-		input = new Formula[0];
 		formulaName = "VariableNumber";
 		result = new Double (0);
 	}
