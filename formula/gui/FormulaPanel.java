@@ -4,9 +4,10 @@
  */
 package gui;
 
+import formula.*;
+
 import java.awt.*;
 import java.util.*;
-import formula.*;
 
 /**
  * The FormulaPanel displays the formula-trees, created by the user.
@@ -17,16 +18,16 @@ import formula.*;
 public class FormulaPanel extends Panel {
 
 
-	private static final int MAX_PIN_DISTANCE = 70;	// distance to a pin (mouseTargetPoint) to be of any interest (should be <100)
+	private static final int MAX_PIN_DISTANCE	= 70;	// distance to a pin (mouseTargetPoint) to be of any interest (should be <100)
 	private static final int OVERSIZE_WIDTH		= 5;
 	private static final int OVERSIZE_HEIGHT	= 5;
 
 
 	// These lists store all input/output pins.
-	private LinkedList inputPinList 	= new LinkedList();
-	private LinkedList outputPinList 	= new LinkedList();
-	private LinkedList tempInPPList		= new LinkedList();
-	private LinkedList tempOutPPList	= new LinkedList();
+	private Vector inputPinList 		= new Vector();
+	private Vector outputPinList 		= new Vector();
+	private Vector tempInPPList		= new Vector();
+	private Vector tempOutPPList	= new Vector();
 	
 	private AppletPanel aPanel;
 
@@ -42,7 +43,8 @@ public class FormulaPanel extends Panel {
 	
 	
 	/**
-	 * @param pPIn
+	 * Adds an array of input pins to the appropriate pin list.
+	 * @param pPIn array of input pins
 	 */
 	public void addInputPins(PinPoint[] pPIn) {
 		for (int i=0;i<pPIn.length;i++) {
@@ -50,12 +52,17 @@ public class FormulaPanel extends Panel {
 		}
 	}
 	
-	public void addInputPins(LinkedList pPIn) {
+	/**
+	 * Adds a list (Vector) of input pins to the appropriate pin list.
+	 * @param pPIn list of input pins
+	 */
+	public void addInputPins(Vector pPIn) {
 		inputPinList.addAll(pPIn);
 	}
 
 	/**
-	* @param pPIn
+	 * Adds an input pin to the appropriate pin list.
+	* @param pPIn input pin
 	 */
 	public void addInputPin(PinPoint pPIn) {
 		if (pPIn.getTarget() != null) {
@@ -65,7 +72,8 @@ public class FormulaPanel extends Panel {
 	}
 
 	/**
-	 * @param pPOut
+	 * Adds an array of output pins to the appropriate pin list.
+	 * @param pPOut list of output pins
 	 */
 	public void addOutputPins(PinPoint[] pPOut) {
 		for (int i=0;i<pPOut.length;i++) {
@@ -74,14 +82,16 @@ public class FormulaPanel extends Panel {
 	}
 	
 	/**
-	 * @param pPOut
+	 * Adds a list (Vector) of output pins to the appropriate pin list.
+	 * @param pPOut list of output pins
 	 */
-	public void addOutputPins(LinkedList pPOut) {
+	public void addOutputPins(Vector pPOut) {
 		outputPinList.addAll(pPOut);
 	}
 
 	/**
-	 * @param pPOut
+	 * Adds an output pin to the appropriate pin list.
+	 * @param pPOut output pin
 	 */
 	public void addOutputPin(PinPoint pPOut) {
 		if (pPOut.getTarget() != null) {
@@ -91,7 +101,8 @@ public class FormulaPanel extends Panel {
 	}
 
 	/**
-	 * @param pPIn
+	 * Used to remove a list of input pins from the pinList.
+	 * @param pPIn list of input pins
 	 */
 	public void removeInputPins(PinPoint[] pPIn) {
 		for (int i=0;i<pPIn.length;i++) {
@@ -100,7 +111,8 @@ public class FormulaPanel extends Panel {
 	}
 	
 	/**
-	 * @param pPOut
+	 * Used to remove a list of output pins from the pinList.
+	 * @param pPOut list of output pins
 	 */
 	public void removeOutputPins(PinPoint[] pPOut) {
 		for (int i=0;i<pPOut.length;i++) {
@@ -109,16 +121,16 @@ public class FormulaPanel extends Panel {
 	}
 
 	/**
-	 * @return
+	 * @return returns a vector of input pins from all formula elements in the panel
 	 */
-	public LinkedList getInputPins() {
+	public Vector getInputPins() {
 		return inputPinList;
 	}
 
 	/**
-	 * @return
+	 * @return returns a vector of output pins from all formula elements in the panel
 	 */
-	public LinkedList getOutputPins() {
+	public Vector getOutputPins() {
 		return outputPinList;
 	}
 
@@ -288,7 +300,7 @@ public class FormulaPanel extends Panel {
 	 * @param ppInList List of input PinPoints.
 	 * @param ppOutList List of output PinPoints.
 	 */
-	public void setTempPinPoints(LinkedList ppInList, LinkedList ppOutList) {
+	public void setTempPinPoints(Vector ppInList, Vector ppOutList) {
 		tempInPPList = ppInList;
 		tempOutPPList = ppOutList;
 	}
@@ -333,7 +345,7 @@ public class FormulaPanel extends Panel {
 
 	private void detachInput(PinPoint pin) {
 		if (pin.getTarget() != null) {
-			Formula.addTree(pin.getTarget().getFormula());
+			aPanel.getTreeList().add(pin.getTarget().getFormula());
 			pin.getTarget().getFormula().setOutput(null);
 			pin.getFormula().setInput(null,pin.getInputNumber());
 			pin.getTarget().setTarget(null);
@@ -350,7 +362,7 @@ public class FormulaPanel extends Panel {
 			pin.getTarget().setTarget(null);
 			pin.getTarget().setBestCandidate(null);
 			pin.setTarget(null);
-			Formula.addTree(pin.getFormula());
+			aPanel.getTreeList().add(pin.getFormula());
 		}
 		pin.setBestCandidate(null);
 	}
@@ -378,7 +390,7 @@ public class FormulaPanel extends Panel {
 	 * @param outPPList output pins
 	 */
 	// NOTE: Slow (if that matters) and not tested yet!
-	public void detach(LinkedList inPPList, LinkedList outPPList) {
+	public void detach(Vector inPPList, Vector outPPList) {
 		PinPoint pin;
 		PinPoint targetPin;
 		int j;
@@ -415,7 +427,7 @@ public class FormulaPanel extends Panel {
 	 * @param ppInList
 	 * @param ppOutList
 	 */
-	public void attach(LinkedList ppInList, LinkedList ppOutList) {
+	public void attach(Vector ppInList, Vector ppOutList) {
 		PinPoint pin;
 		for (int i=0;i<ppInList.size();i++) {
 			pin = (PinPoint)ppInList.get(i);
@@ -425,7 +437,7 @@ public class FormulaPanel extends Panel {
 			if (!inputPinList.contains(pin)) {
 				inputPinList.add(pin);
 			}
-			Formula.removeTree(pin.getTarget().getFormula());
+			aPanel.getTreeList().remove(pin.getTarget().getFormula());
 		}
 		for (int i=0;i<ppOutList.size();i++) {
 			pin = (PinPoint)ppOutList.get(i);
@@ -435,7 +447,7 @@ public class FormulaPanel extends Panel {
 			if (!outputPinList.contains(pin)){
 				outputPinList.add(pin);
 			}
-			Formula.removeTree(pin.getFormula());
+			aPanel.getTreeList().remove(pin.getFormula());
 		}
 	}
 	
@@ -494,7 +506,7 @@ public class FormulaPanel extends Panel {
 		detachOutput(form.getOutputPin());
 		outputPinList.remove(form.getOutputPin());
 		tempOutPPList.remove(form.getOutputPin());
-		Formula.removeTree(form);
+		aPanel.getTreeList().remove(form);
 		remove(form);
 	}
 
@@ -514,9 +526,9 @@ public class FormulaPanel extends Panel {
 		outputPinList.clear();
 		tempInPPList.clear();
 		tempOutPPList.clear();
-		Formula[] treeList = Formula.getTreeList();
+		Formula[] treeList = aPanel.getTreeList().getTreeArray();
 		for (int i=0;i<treeList.length;i++) {
-			Formula.removeTree(treeList[i]);
+			aPanel.getTreeList().remove(treeList[i]);
 		}
 		removeAll();
 	}

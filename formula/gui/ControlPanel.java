@@ -116,6 +116,9 @@ public class ControlPanel extends Panel {
 		return sbSpeed.getValue()*SPEED_MULTIPLIER;		
 	}
 
+	public AppletPanel getAppletPanel() {
+		return aPanel;
+	}
 
 	public void setAnimating(boolean anim) {
 		if (anim) {

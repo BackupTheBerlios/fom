@@ -5,7 +5,6 @@
 package formula;
 
 import java.awt.*;
-import java.util.*;
 import gui.*;
 
 /**
@@ -30,11 +29,13 @@ public abstract class Formula extends Container implements Cloneable {
 	public static final int PAINTSTATUS_MOVING		= 8;
 	public static final int PAINTSTATUS_CALCULATING = 16;
 
-	protected int paintStatus = PAINTSTATUS_STANDARD;
 	protected static final Font DEFAULT_FONT		= new Font("Arial", Font.PLAIN, 11);
 	protected static final Font CALC_FONT			= new Font("Arial", Font.BOLD, 11);
 
+	protected int paintStatus = PAINTSTATUS_STANDARD;
+
 	protected Dimension dimension = new Dimension(FORMULAWIDHT,FORMULAHEIGHT);
+	//protected Vector treeList;
 
 	// Input/Output for Formula Elements
 	protected Formula[] input;
@@ -44,11 +45,12 @@ public abstract class Formula extends Container implements Cloneable {
 	protected String formulaName;
 
 	// Stores all unlinked Formula Elements
-	protected static LinkedList treeList = new LinkedList();
+	//protected AppletPanel aPanel;
 	
 	// Input and output pins:
 	protected PinPoint[] inputPins;
 	protected PinPoint outputPin;
+
 
 	/**
 	 * Creates a new formula object.
@@ -58,16 +60,27 @@ public abstract class Formula extends Container implements Cloneable {
 		setSize(dimension);
 	}
 
+	
+	public Formula(AppletPanel ap) {
+		super();
+		setSize(dimension);
+		//this.aPanel = ap;
+		//this.treeList = aPanel.getTreeList();
+	}
+
+
 	/**
 	 * Calculates the result of this formula-object and stores it in result (result is defined in subclasses).
 	 * @throws Throws a FormulaException when there aren't all inputs connected with a formula-object.
 	 */
 	public abstract void calc() throws FormulaException;
 
+
 	/**
 	 * @return Returns, if Formula is already calculated.
 	 */
 	public abstract boolean isResultCalculated();
+
 
 	/**
 	 * Will return a boolean-value as a result, if possible. If not, a FormulaException will be thrown.
@@ -85,6 +98,7 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public abstract double getDoubleResult() throws FormulaException;
 
+
 	/**
 	 * Will return a string-value as a result, if possible. If not, a FormulaException
 	 * will be thrown.
@@ -98,6 +112,7 @@ public abstract class Formula extends Container implements Cloneable {
 	public final String getFormulaName() {
 		return formulaName;
 	}
+
 
 	/**
 	 * Paints the formula element. For a different visible style
@@ -161,6 +176,7 @@ public abstract class Formula extends Container implements Cloneable {
 		}
 	}
 
+
 	/**
 	 * @return Returns the number of inputs a formula element has.
 	 */
@@ -200,11 +216,13 @@ public abstract class Formula extends Container implements Cloneable {
 		return input[index];
 	}
 
+
 	/**
 	 * @return Returns the string-equvalent of this formula-object (if inputs not connected)
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
 	public abstract String toString();
+
 
 	/**
 	 * @return Returns the maximal number of formula-objects in this subtree which are side by side.
@@ -224,6 +242,7 @@ public abstract class Formula extends Container implements Cloneable {
 		}}
 		return widthOfTree;
 	}
+	
 
 	/**
 	 * Connects another formula to this output.
@@ -232,6 +251,7 @@ public abstract class Formula extends Container implements Cloneable {
 	public final void setOutput(Formula out) {
 		this.output = out;
 	}
+	
 
 	/**
 	 * @return Returns the formula-object that is connected to this output.
@@ -239,6 +259,7 @@ public abstract class Formula extends Container implements Cloneable {
 	public final Formula getOutput() {
 		return output;
 	}
+
 
 	/**
 	 * Connects another formula-object to this input.
@@ -248,6 +269,7 @@ public abstract class Formula extends Container implements Cloneable {
 	public final void setInput(Formula in, int index) {
 		this.input[index] = in;
 	}
+	
 
 	/**
 	 * @return Validates, that subtree is complete and isn't missing some inputs.
@@ -264,16 +286,6 @@ public abstract class Formula extends Container implements Cloneable {
 		return complete;
 	}
 
-	/**
-	 * @return Validates, that only one tree exists and isn't missing some inputs.
-	 */
-	public static final boolean isCompleteGlobalTree() {
-		boolean complete = false;
-		if (getTreeListSize() == 1) {
-			complete = getTreeList()[0].isCompleteSubTree();
-		}
-		return complete;
-	}
 
 	/**
 	 * Checks, on which input a specific Formula-Object is.
@@ -290,40 +302,16 @@ public abstract class Formula extends Container implements Cloneable {
 		return index;
 	}
 
-	/**
-	 * Returns an array of formula objects that don't have anything connected
-	 * to their output-pins.
-	 * @return array of formulas
+
+	/** TODO javadoc
+	 * @param status
 	 */
-	public final static Formula[] getTreeList() {
-		Formula[] treeListArray = new Formula[treeList.size()];
-		for (int i=0; i < treeListArray.length; i++) {
-			treeListArray[i] = (Formula)treeList.get(i);
-		}
-		return treeListArray;
-	}
-
-	/** TODO Javadoc
-	 * 
-	 * @return
-	 */
-	public final static int getTreeListSize() {
-		return treeList.size();
-	}
-
-	public final static void addTree(Formula root) {
-		treeList.add(root);
-	}
-
-	public final static void removeTree(Formula root) {
-		treeList.remove(root);
-	}
-
 	public final void setPaintStatus(int status) {
 		paintStatus = status;
 		repaint();
 	}
 	
+
 	/** TODO Javadoc
 	 * 
 	 * @return
@@ -332,6 +320,7 @@ public abstract class Formula extends Container implements Cloneable {
 		return paintStatus;
 	}
 
+
 	/**
 	 * @return returns the input-pins for this formula
 	 */
@@ -339,12 +328,14 @@ public abstract class Formula extends Container implements Cloneable {
 		return inputPins;
 	}
 
+
 	/**
 	 * @return returns the output-pin for this formula
 	 */
 	public PinPoint getOutputPin() {
 		return outputPin;
 	}
+
 
 	/**
 	 * Sets the input pins for this formula.
@@ -354,6 +345,7 @@ public abstract class Formula extends Container implements Cloneable {
 		inputPins = pins;
 	}
 
+
 	/**
 	 * Sets the output pin for this formula.
 	 * @param pin output-pin
@@ -361,6 +353,7 @@ public abstract class Formula extends Container implements Cloneable {
 	public void setOutputPin(PinPoint pin) {
 		outputPin = pin;
 	}
+
 
 	/**
 	 * Moves a formula to a new position and also moves the input-pins
@@ -378,6 +371,7 @@ public abstract class Formula extends Container implements Cloneable {
 		outputPin.translate(xOffset,yOffset);
 		setLocation(oldLocation.x+xOffset,oldLocation.y+yOffset);
 	}
+
 
 	//"Quick-fix" :)
 	public final Dimension preferredSize() {

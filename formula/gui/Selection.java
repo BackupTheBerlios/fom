@@ -6,6 +6,7 @@ package gui;
 
 import java.util.*;
 import formula.*;
+import java.lang.reflect.*;
 import java.awt.*;
 
 /**
@@ -25,14 +26,14 @@ public class Selection {
 	private Point selectedStartPoint		= null;				// the starting point of DnD actions
 	private Point selectedRelativePoint		= null;				// the relative point within the dragged element
 	private Formula selectedComponentRoot	= null;				// component that is dragged or selected (or root of a component)
-	private LinkedList selectedComponents	= new LinkedList(); // list of all selected formula-objects
+	private Vector selectedComponents	= new Vector(); // list of all selected formula-objects
 	private Formula newComponentInstance 	= null;				// new instance of a selected component
-	private LinkedList pPInputs				= new LinkedList();	// list of input PinPoints of the selected element(s)
-	private LinkedList pPOutputs			= new LinkedList();	// list of output PinPoints of the selected element(s)
-	private LinkedList tempPPInputs			= new LinkedList(); // list of temporary connections between input and output
-	private LinkedList tempPPOutputs		= new LinkedList(); // list of temporary connections between output and input
-	private LinkedList inactivePPInputs		= new LinkedList(); // list of input pins, already connected to the selection (only move around)
-	private LinkedList inactivePPOutputs	= new LinkedList(); // list of output pins, already connected to the selection (only move around)
+	private Vector pPInputs				= new Vector();	// list of input PinPoints of the selected element(s)
+	private Vector pPOutputs				= new Vector();	// list of output PinPoints of the selected element(s)
+	private Vector tempPPInputs			= new Vector(); // list of temporary connections between input and output
+	private Vector tempPPOutputs		= new Vector(); // list of temporary connections between output and input
+	private Vector inactivePPInputs		= new Vector(); // list of input pins, already connected to the selection (only move around)
+	private Vector inactivePPOutputs	= new Vector(); // list of output pins, already connected to the selection (only move around)
 
 
 	/**
@@ -152,7 +153,7 @@ public class Selection {
 				
 		selectedComponents.add(form);
 		// get input PinPoints:
-		LinkedList ppList = aPanel.getFormulaPanel().getInputPins();
+		Vector ppList = aPanel.getFormulaPanel().getInputPins();
 		PinPoint pin;
 		for (int i=0; i<ppList.size();i++) {
 			pin = (PinPoint)ppList.get(i);
@@ -255,9 +256,9 @@ public class Selection {
 			aPanel.getFormulaPanel().repaint();
 			newComponentInstance.addKeyListener(aPanel.getHotkeyListener());
 		} catch (IllegalAccessException iae) {
-			iae.printStackTrace();
+			iae.printStackTrace(System.err);
 		} catch (InstantiationException ie) {
-			ie.printStackTrace();
+			ie.printStackTrace(System.err);
 		}
 		//create PinPoint lists for inputs & output
 		//newComponentInstance may be null if newInstance was unsuccessful
@@ -293,7 +294,7 @@ public class Selection {
 		selectedComponentRoot.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 		newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 		newComponentInstance.setVisible(true);
-		Formula.addTree(newComponentInstance);
+		aPanel.getTreeList().add(newComponentInstance);
 		newComponentInstance = null;
 		aPanel.getFormulaPanel().setCursor(Cursor.getDefaultCursor());
 		// add PinPoints to FormulaPanel:

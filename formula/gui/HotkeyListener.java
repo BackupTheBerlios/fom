@@ -43,6 +43,7 @@ public class HotkeyListener implements KeyListener {
 		switch (keyCode) {
 			case KeyEvent.VK_DELETE:
 				aPanel.getSelection().delete();
+				aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 				break;
 		}
 		

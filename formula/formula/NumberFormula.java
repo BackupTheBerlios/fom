@@ -12,12 +12,14 @@ public abstract class NumberFormula extends Formula {
 
 	protected Number result;
 
+
 	public final double getDoubleResult() throws FormulaException {
 		if (result != null)
 			return result.doubleValue();
 		else
 			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
 	}
+	
 
 	public final boolean getBooleanResult() throws FormulaException {
 		throw new FormulaException(Messages.getString("Error.IllegalBforN"));

@@ -22,13 +22,12 @@ public class FormulaTextField extends TextField {
 	public FormulaTextField(ControlPanel cp,String string) {
 		super(string);
 		setEditable(false);
-		//setColumns(20);
 		setBackground(SystemColor.text);
 		this.cPanel = cp;
 	}
 
 	public void updateControlPanelText() {
-		Formula[] treeArray = Formula.getTreeList();
+		Formula[] treeArray = cPanel.getAppletPanel().getTreeList().getTreeArray();
 		if (treeArray != null) {
 			if (treeArray.length > 1) {
 				setText(Messages.getString("Error.TooManyTrees"));			
@@ -46,17 +45,5 @@ public class FormulaTextField extends TextField {
 		}
 	}
 
-	// NOTE: hardcoded size:
-/*	public Dimension getMinimumSize() {
-		return new Dimension(250,48);
-	}
-
-	public Dimension getPreferredSize() {
-		return new Dimension(350,48);
-	}
-	
-	public Dimension getMaximumSize() {
-		return new Dimension(350,48);
-	} */
 
 }

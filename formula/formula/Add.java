@@ -20,6 +20,7 @@ public class Add extends NumberFormula {
 			result = new Double (input[0].getDoubleResult() + input[1].getDoubleResult());
 	}
 	
+	
 	/**
 	 * Creates a "+" with 2 inputs.
 	 */
@@ -28,6 +29,7 @@ public class Add extends NumberFormula {
 		input = new Formula[2];
 		formulaName = "+";
 	}
+
 	
 	/**
 	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
