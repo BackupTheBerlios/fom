@@ -24,8 +24,8 @@ public class AppletPanel extends Applet {
 	public void init() {
 		setLayout(new BorderLayout());
 		
-		pnlFormula=new FormulaPanel();
-		pnlControls=new ControlPanel();
+		pnlFormula=new FormulaPanel(this);
+		pnlControls=new ControlPanel(this);
 		pnlElements=new ElementPanel(this);
 		
 		ScrollPane sPane = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);

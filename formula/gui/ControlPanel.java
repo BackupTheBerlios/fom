@@ -27,6 +27,8 @@ public class ControlPanel extends Panel {
 	private FormulaLabel lblFormula;
 	private Choice chZoom;
 	private Label lblSpeed;
+	private AppletPanel aPanel;
+
 
 	public Label getLblFormula() {
 		return lblFormula;
@@ -47,7 +49,8 @@ public class ControlPanel extends Panel {
 	/**
 	 * Creates the control panel.
 	 */
-	public ControlPanel() {
+	public ControlPanel(AppletPanel ap) {
+		this.aPanel 		= ap;
 		//creating all objects:
 		btnCalcAll			= new Button(Messages.getString("ControlPanel.BtnCalcAll"));
 		btnCalcAni			= new Button(Messages.getString("ControlPanel.BtnCalcAni"));
@@ -59,7 +62,7 @@ public class ControlPanel extends Panel {
 		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 10, 1, 0, 20);
 		chZoom				= new Choice();
 		GridBagLayout gbl	= new GridBagLayout();
-		ControlPanelListener cpListener = new ControlPanelListener();
+		ControlPanelListener cpListener = new ControlPanelListener(aPanel,this);
 
 		chZoom.add("25%");
 		chZoom.add("50%");

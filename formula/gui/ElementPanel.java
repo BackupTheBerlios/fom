@@ -30,14 +30,14 @@ public class ElementPanel extends Panel {
 	public ElementPanel(AppletPanel parent) {
 		this.parent = (AppletPanel)parent;
 		//create objects for element panel:
-		Panel topPanel			= new Panel(new GridLayout(2,1));
+		Panel topPanel		= new Panel(new GridLayout(2,1));
 		chCategoryList		= new Choice();
 		scpElementList		= new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-		elementPanel			= new Panel();
-		dnd							= new DragnDropListener(this.parent);
+		elementPanel		= new Panel();
+		dnd					= new DragnDropListener(this.parent);
 		btnAddFormula		= new Button(Messages.getString("ElementPanel.BtnAddFormula"));
-		clListener					= new CategoryListListener(this);
-		elementPanelLayout = new GridLayout();
+		clListener			= new CategoryListListener(this);
+		elementPanelLayout	= new GridLayout();
 		//adding categories:
 		String[] categories=Categories.getCategories();
 		for(int i=0;i<categories.length;i++) {

@@ -14,26 +14,34 @@ import utils.Messages;
  * @since 22.04.2004
  *
  */
-public class ControlPanelListener
-	implements ActionListener, ItemListener, AdjustmentListener {
+public class ControlPanelListener implements ActionListener, ItemListener, AdjustmentListener {
+	
+	
+	AppletPanel aPanel;
+	ControlPanel cPanel;
+	
+	public ControlPanelListener(AppletPanel ap, ControlPanel cp){
+		this.aPanel = ap;
+		this.cPanel = cp;
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	public void actionPerformed(ActionEvent event) {
 		// TODO Implement functionality to the if-blocks.
-		ControlPanel cp;
 		String actionCommand=event.getActionCommand();
 		if(actionCommand.equals(Messages.getString("ControlPanel.BtnCalcAll"))) {
-			cp=(ControlPanel)((Component)event.getSource()).getParent().getParent();
+
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnCalcAni"))) {
-			cp=(ControlPanel)((Component)event.getSource()).getParent().getParent();
+
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnCalcStep"))) {
-			cp=(ControlPanel)((Component)event.getSource()).getParent().getParent();
+
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnReset"))) {
-			cp=(ControlPanel)((Component)event.getSource()).getParent().getParent();
+
 		}else if(actionCommand.equals(Messages.getString("ControlPanel.BtnVariables"))) {
-			cp=(ControlPanel)((Component)event.getSource()).getParent();
+			DialogVariables dv = new DialogVariable(aPanel);
 		}
 	}
 
