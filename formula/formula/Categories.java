@@ -59,8 +59,8 @@ public class Categories {
 		form[0] = new Sqrt();
 		form[1] = new Pow();
 		form[2] = new Ln();
-//		form[3] = new LogTen();
-//		form[4] = new LogBase();
+		form[3] = new LogTen();
+		form[4] = new LogBase();
 		form[5] = new Euler();
 		form[6] = new Factorial();
 		form[7] = new Modulo();
