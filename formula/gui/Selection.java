@@ -18,7 +18,7 @@ public class Selection {
 	public static final int MOUSE_POINT_DISTANCE = 15;
 
 	private AppletPanel aPanel				= null;				// root panel of everything
-	private FormulaPanel fPanel				= null;				// formula panel
+	//private FormulaPanel fPanel				= null;				// formula panel
 	
 	private boolean dragInProgress			= false;			// true if something is dragged
 	private boolean insertInProgress		= false;			// true if element is selected from the ElementPanel
@@ -41,7 +41,7 @@ public class Selection {
 	public Selection(AppletPanel ap) {
 		super();
 		aPanel = ap;
-		fPanel = aPanel.getFormulaPanel();
+		//fPanel = aPanel.getFormulaPanel();
 	}
 	
 	
@@ -91,7 +91,7 @@ public class Selection {
 		ppStack.addAll(pPOutputs);
 		while (!ppStack.isEmpty()) {
 			pin = (PinPoint)ppStack.pop();
-			targetPP = fPanel.getNearestInputPin(pin);
+			targetPP = aPanel.getFormulaPanel().getNearestInputPin(pin);
 			if (targetPP != null) {
 				if (targetPP.getBestCandidate() != null) {
 					// special case if pin is nearer than another pin
@@ -110,7 +110,7 @@ public class Selection {
 		ppStack.addAll(pPInputs);
 		while (!ppStack.isEmpty()) {
 			pin = (PinPoint)ppStack.pop();			
-			targetPP = fPanel.getNearestOutputPin(pin);
+			targetPP = aPanel.getFormulaPanel().getNearestOutputPin(pin);
 			if (targetPP != null) {
 				if (targetPP.getBestCandidate() != null) {
 					// special case if pin is nearer than another pin
@@ -138,7 +138,7 @@ public class Selection {
 		form.requestFocus();
 		selectedStartPoint = selectedComponentRoot.getLocation();
 		selectedRelativePoint = new Point((int)(selectedStartPoint.getX()-point.getX()),(int)(selectedStartPoint.getY()-point.getY()));
-		fPanel.detach(selectedComponentRoot);
+		aPanel.getFormulaPanel().detach(selectedComponentRoot);
 		recursiveSelectRec(form);
 		aPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
@@ -152,7 +152,7 @@ public class Selection {
 				
 		selectedComponents.add(form);
 		// get input PinPoints:
-		LinkedList ppList = fPanel.getInputPins();
+		LinkedList ppList = aPanel.getFormulaPanel().getInputPins();
 		PinPoint pin;
 		for (int i=0; i<ppList.size();i++) {
 			pin = (PinPoint)ppList.get(i);
@@ -166,7 +166,7 @@ public class Selection {
 		}
 
 		// get output PinPoints:
-		ppList = fPanel.getOutputPins();
+		ppList = aPanel.getFormulaPanel().getOutputPins();
 		for (int i=0; i<ppList.size();i++) {
 			pin = (PinPoint)ppList.get(i);
 			if (pin.getFormula() == form) {
@@ -217,7 +217,7 @@ public class Selection {
 		inactivePPInputs.clear();
 		inactivePPOutputs.clear();
 		if (newComponentInstance != null) {
-			fPanel.remove(newComponentInstance);
+			aPanel.getFormulaPanel().remove(newComponentInstance);
 			newComponentInstance = null;
 		}
 		if (selectedComponentRoot != null) {
@@ -250,9 +250,9 @@ public class Selection {
 		try {
 			newComponentInstance = (Formula)selectedComponentRoot.getClass().newInstance();
 			newComponentInstance.setVisible(false);	//not visible as long as mouse outside of formula-panel
-			fPanel.add(newComponentInstance);
+			aPanel.getFormulaPanel().add(newComponentInstance);
 			newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_INSERTING);
-			fPanel.repaint();
+			aPanel.getFormulaPanel().repaint();
 			newComponentInstance.addKeyListener(aPanel.getHotkeyListener());
 		} catch (IllegalAccessException iae) {
 			iae.printStackTrace();
@@ -282,8 +282,8 @@ public class Selection {
 		pPOutputs.add(pp);
 		newComponentInstance.setOutputPin(pp);
 		newComponentInstance.setLocation(xPos,yPos); // bugfix, newComponentInstance may be at another position
-		fPanel.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-		fPanel.validate();
+		aPanel.getFormulaPanel().setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+		aPanel.getFormulaPanel().validate();
 	}
 
 
@@ -295,18 +295,18 @@ public class Selection {
 		newComponentInstance.setVisible(true);
 		Formula.addTree(newComponentInstance);
 		newComponentInstance = null;
-		fPanel.setCursor(Cursor.getDefaultCursor());
+		aPanel.getFormulaPanel().setCursor(Cursor.getDefaultCursor());
 		// add PinPoints to FormulaPanel:
 		for (int i=0;i<pPInputs.size();i++) {
-			fPanel.addInputPin((PinPoint)pPInputs.get(i));
+			aPanel.getFormulaPanel().addInputPin((PinPoint)pPInputs.get(i));
 		}
 		for (int i=0;i<pPOutputs.size();i++) {
-			fPanel.addOutputPin((PinPoint)pPOutputs.get(i));
+			aPanel.getFormulaPanel().addOutputPin((PinPoint)pPOutputs.get(i));
 		}
-		fPanel.attach(tempPPInputs,tempPPOutputs);
+		aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 		deselect();
-		fPanel.doLayout();
-		fPanel.checkBounds();
+		aPanel.getFormulaPanel().doLayout();
+		aPanel.getFormulaPanel().checkBounds();
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();		
 	}
 
@@ -341,10 +341,10 @@ public class Selection {
 		dragInProgress = false;
 		aPanel.setCursor(Cursor.getDefaultCursor());
 		updatePaintStatus(Formula.PAINTSTATUS_SELECTED);
-		fPanel.attach(tempPPInputs,tempPPOutputs);
-		fPanel.doLayout();
-		fPanel.checkBounds();
-		fPanel.repaint();
+		aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
+		aPanel.getFormulaPanel().doLayout();
+		aPanel.getFormulaPanel().checkBounds();
+		aPanel.getFormulaPanel().repaint();
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 	}
 	
@@ -358,16 +358,16 @@ public class Selection {
 			moveTo(selectedComponentRoot,new Point(selectedRelativePoint.x+point.x,selectedRelativePoint.y+point.y));
 			// update possible connections:
 			refreshPinPointList();
-			fPanel.setTempPinPoints(tempPPInputs,tempPPOutputs);
-			fPanel.repaint();
+			aPanel.getFormulaPanel().setTempPinPoints(tempPPInputs,tempPPOutputs);
+			aPanel.getFormulaPanel().repaint();
 		} else if (insertInProgress) {
 			point.translate(-newComponentInstance.getWidth()/2,-newComponentInstance.getHeight()/2);
 			moveTo(newComponentInstance,point);
 			// update possible connections:
 			refreshPinPointList();
-			fPanel.setTempPinPoints(tempPPInputs,tempPPOutputs);
-			fPanel.repaint();
-			//fPanel.checkBounds();
+			aPanel.getFormulaPanel().setTempPinPoints(tempPPInputs,tempPPOutputs);
+			aPanel.getFormulaPanel().repaint();
+			//aPanel.getFormulaPanel().checkBounds();
 		}
 	}
 	
@@ -380,12 +380,12 @@ public class Selection {
 					ConstVarFormula cvForm = (ConstVarFormula)form;
 					ConstVarFormula.deleteVarList(cvForm,cvForm.getInputVarName());
 				}
-				fPanel.delete(form);
+				aPanel.getFormulaPanel().delete(form);
 			}
-			fPanel.validate();
-			fPanel.doLayout();
-			fPanel.checkBounds();
-			fPanel.repaint();
+			aPanel.getFormulaPanel().validate();
+			aPanel.getFormulaPanel().doLayout();
+			aPanel.getFormulaPanel().checkBounds();
+			aPanel.getFormulaPanel().repaint();
 		}
 	}
 

@@ -27,6 +27,8 @@ public class AppletPanel extends Applet {
 		debug();
 		
 		this.setLayout(new BorderLayout());
+
+		dnd = new DragnDropListener(this);				// NOTE this must be initialized _before_ any other panel is created!
 		
 		this.pnlFormula=new FormulaPanel(this);
 		this.pnlControls=new ControlPanel(this);
@@ -34,7 +36,7 @@ public class AppletPanel extends Applet {
 		
 		ScrollPane sPane = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
 		pnlFormula.setLayout(new TreeLayout());
-		dnd = new DragnDropListener(this);
+
 		hotkey = new HotkeyListener(this);
 		pnlFormula.addMouseListener(dnd);
 		pnlFormula.addMouseMotionListener(dnd);
@@ -64,6 +66,10 @@ public class AppletPanel extends Applet {
 	public HotkeyListener getHotkeyListener() {
 		return hotkey;
 	}
+	
+	public DragnDropListener getDragnDropListener() {
+		return dnd;
+	}
 
 	private void debug() {
 		System.out.println("DEBUG: Java Version: " + System.getProperty("java.version") + " from "+System.getProperty("java.vendor"));
@@ -72,7 +78,7 @@ public class AppletPanel extends Applet {
 	// TODO: windowListener schreiben für Fenster schließen
 	public static void main(String[] args) {
 		AppletPanel ap=new AppletPanel();
-		ap.init();
+		//ap.init();
 		Frame f = new Frame(Messages.getString("AppletPanel.Title"));
 		f.add(ap);
 		f.setSize(650,500);

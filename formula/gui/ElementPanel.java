@@ -35,7 +35,7 @@ public class ElementPanel extends Panel {
 		chCategoryList		= new Choice();
 		scpElementList		= new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
 		elementPanel		= new Panel();
-		dnd					= new DragnDropListener(this.aPanel);
+		dnd						= aPanel.getDragnDropListener();
 		btnClearFormulas	= new Button(Messages.getString("ElementPanel.BtnClearFormulas"));
 		btnAddFormula		= new Button(Messages.getString("ElementPanel.BtnAddFormula"));
 		epListener			= new ElementPanelListener(aPanel,this);
