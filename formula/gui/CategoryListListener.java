@@ -14,11 +14,8 @@ import java.awt.event.ItemListener;
  */
 public class CategoryListListener implements ItemListener {
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
-	 */
 	public void itemStateChanged(ItemEvent arg0) {
-		// TODO: get new list
+		//TODO get new list
 
 	}
 

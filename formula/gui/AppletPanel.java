@@ -9,7 +9,6 @@ import java.awt.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @since 22.04.2004
  *
  */
 public class AppletPanel extends Applet {

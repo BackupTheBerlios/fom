@@ -14,7 +14,6 @@ import utils.Messages;
  * how the formula-tree is calculated or what to do with it.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @since 22.04.2004
  *
  */
 public class ControlPanel extends Panel {
@@ -56,7 +55,7 @@ public class ControlPanel extends Panel {
 		btnReset			= new Button(Messages.getString("ControlPanel.BtnReset"));
 		btnVariables		= new Button(Messages.getString("ControlPanel.BtnVariables"));
 		lblSpeed			= new Label(Messages.getString("ControlPanel.LblSpeed"),Label.RIGHT);
-		lblFormula			= new FormulaLabel("The formula tree is incomplete.");
+		lblFormula			= new FormulaLabel("The formula tree is incomplete.");  //Text nur zum testen der Länge :)
 		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 10, 1, 0, 20);
 		chZoom				= new Choice();
 		GridBagLayout gbl	= new GridBagLayout();
@@ -87,8 +86,9 @@ public class ControlPanel extends Panel {
 		Panel plBottom=new Panel(new BorderLayout(8,8));
 		plBottom.add(lblSpeed,BorderLayout.WEST);
 		plBottom.add(sbSpeed,BorderLayout.CENTER);
-		plBottom.add(btnVariables,BorderLayout.EAST);
 		GUIToolkit.addComponent(this,gbl,plBottom,1,1,1,1,1.0,0.0,GridBagConstraints.BOTH);
+
+		GUIToolkit.addComponent(this,gbl,btnVariables,2,0,1,1,0.0,0.0,GridBagConstraints.NONE);
 
 		//adding the listeners:
 		btnCalcAll.addActionListener(cpListener);
