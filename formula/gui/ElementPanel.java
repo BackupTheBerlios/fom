@@ -1,4 +1,4 @@
-/* $Id: ElementPanel.java,v 1.27 2004/09/06 15:15:24 shadowice Exp $
+/* $Id: ElementPanel.java,v 1.28 2004/09/09 20:14:55 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  */
 public class ElementPanel extends Panel {
 
@@ -59,6 +59,9 @@ public class ElementPanel extends Panel {
 		scpElementList.setBackground(Color.white);
 		elementPanel.setBackground(Color.white);
 		setBackground(SystemColor.activeCaptionBorder);
+		//scrollpane behaviour:
+		scpElementList.getHAdjustable().setUnitIncrement(8);
+		scpElementList.getVAdjustable().setUnitIncrement(8);
 		//layouts:
 		setLayout(gbl);
 		elementPanel.setLayout(elementPanelLayout);
@@ -71,6 +74,7 @@ public class ElementPanel extends Panel {
 
 		updateElementList(categories.getCategoryElements(chCategoryList.getSelectedItem()));
 	}
+
 
 	/**
 	 * Updates the list of formula element if the category changes.

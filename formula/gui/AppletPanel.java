@@ -1,4 +1,4 @@
-/* $Id: AppletPanel.java,v 1.28 2004/09/09 15:09:17 shadowice Exp $
+/* $Id: AppletPanel.java,v 1.29 2004/09/09 20:14:55 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,23 +13,24 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.28 $
+ * @version $Revision: 1.29 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 
 	private DragnDropListener	dnd;
 	private HotkeyListener		hotkey;
-	private ControlPanel			pnlControls;
+	private ControlPanel		pnlControls;
 	private ElementPanel		pnlElements;
 
 	private FormulaPanel		pnlFormula;
 
 	private FormulaList			treeList;
-	private VariableList			varList;
+	private VariableList		varList;
 
 	private static Formula clipboard;	// root formula of a copied (sub)tree
 	
 	private PopupMenu 			popupMenu;
+	private Dialog				infoDialog;
 
 	/**
 	 * Main method to run this program as application.

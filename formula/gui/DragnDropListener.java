@@ -1,4 +1,4 @@
-/* $Id: DragnDropListener.java,v 1.36 2004/09/09 16:23:02 shadowice Exp $
+/* $Id: DragnDropListener.java,v 1.37 2004/09/09 20:14:55 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -14,7 +14,7 @@ import formula.*;
  * for (re)placing formula-elements or whole trees and connecting them.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.36 $
+ * @version $Revision: 1.37 $
  *
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
@@ -42,13 +42,14 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 			aPanel.getPopupMenu().show(me.getComponent(),me.getPoint().x,me.getPoint().y);
 		} else {
 			// if event happened in the ElementPanel:
-			if (me.getComponent().getParent().getParent() instanceof ElementPanel) {
+			/*if (me.getComponent().getParent().getParent() instanceof ElementPanel) {
 				Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
 				if (targetComponent instanceof Formula) { // if clicked on a Formula-object
 					selection.selectNewElement((Formula)targetComponent);
-				}
+				}*/
 			// if event happened in the FormulaPanel:
-			} else if (me.getComponent() instanceof FormulaPanel){
+			//} else
+			if (me.getComponent() instanceof FormulaPanel){
 				// if a component is selected from the ElementPanel (newComponentInstance != null),
 				// a mouseClicked event within the FormulaPanel will place it there.
 				if (selection.isInsertInProgress()) {
@@ -101,6 +102,12 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		if (me.isPopupTrigger()) {
 			aPanel.getPopupMenu().show(me.getComponent(),me.getPoint().x,me.getPoint().y);
 		} else {
+			if (me.getComponent().getParent().getParent() instanceof ElementPanel) {
+				Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
+				if (targetComponent instanceof Formula) { // if clicked on a Formula-object
+					selection.selectNewElement((Formula)targetComponent);
+				}
+			}			
 			if (selection.isDragInProgress()) {
 				selection.dragEnd();
 			}
