@@ -1,4 +1,4 @@
-/* $Id: Less.java,v 1.5 2004/09/10 13:00:47 shadowice Exp $
+/* $Id: Less.java,v 1.6 2004/09/10 13:03:27 shadowice Exp $
  * Created on 27.06.2004
  */
 package formula;
@@ -7,10 +7,10 @@ import utils.Messages;
 
 /**
  * This class provides an element that checks whether one number is less than the other. 
- * f(x,y) = TRUE for x<y, FALSE for x>=y
+ * f(x,y) = TRUE for x&lt;y, FALSE for x&gt;=y
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class Less extends ComparisonFormula {
 
