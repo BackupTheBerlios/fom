@@ -25,7 +25,9 @@ public class ControlPanel extends Panel {
 	private Button btnCalcAll;
 	private Scrollbar sbSpeed;
 	private FormulaTextField tfFormula;
+	private FormulaTextField tfResult;
 	private Label lblSpeed;
+	private Label lblEqualsign;
 	//private Choice chZoom;
 	private AppletPanel aPanel;
 
@@ -43,7 +45,9 @@ public class ControlPanel extends Panel {
 		btnReset			= new Button(Messages.getString("ControlPanel.BtnReset"));
 		btnVariables		= new Button(Messages.getString("ControlPanel.BtnVariables"));
 		lblSpeed			= new Label(Messages.getString("ControlPanel.LblSpeed"),Label.RIGHT);
+		lblEqualsign		= new Label(Messages.getString("ControlPanel.LblEqualsign"),Label.RIGHT);
 		tfFormula			= new FormulaTextField(this,"");
+		tfResult			= new FormulaTextField(this,"");
 		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 50, 1, 10, 200);
 		//chZoom				= new Choice();
 		GridBagLayout gbl	= new GridBagLayout();
@@ -57,9 +61,14 @@ public class ControlPanel extends Panel {
 		//chZoom.add("200%");
 		
 		setLayout(gbl);
-		
+			
 		//adding the components (in sub-panels) to this panel:
-		GUIToolkit.addComponent(this,gbl,tfFormula,0,0,6,1,1.0,0.0,GridBagConstraints.BOTH);
+		Panel plTexts=new Panel(new GridLayout());	
+		plTexts.add(tfFormula);
+		plTexts.add(lblEqualsign);
+		plTexts.add(tfResult);
+
+		GUIToolkit.addComponent(this,gbl,plTexts,0,0,6,1,1.0,0.0,GridBagConstraints.BOTH);
 		
 		GUIToolkit.addComponent(this,gbl,btnVariables,0,1,1,1,0.0,0.0,GridBagConstraints.NONE);
 		GUIToolkit.addComponent(this,gbl,btnCalcStep,1,1,1,1,0.0,0.0,GridBagConstraints.NONE);
