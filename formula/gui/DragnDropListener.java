@@ -20,7 +20,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 
 	private AppletPanel aPanel		= null;				// root panel of everything
 	
-	private Selection selection		= null;				// TODO rausfinden, wieso das nur statisch funktioniert.
+	private Selection selection		= null;
 	
 
 	/**

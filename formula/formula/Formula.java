@@ -116,7 +116,12 @@ public abstract class Formula extends Container implements Cloneable {
 		return formulaName;
 	}
 
-
+	
+	public boolean isDoubleBuffered() {
+		return true;
+	}
+	
+	
 	public void update(Graphics g) {
 		if (bufferImage == null) {
 			bufferImage = createImage(getWidth(),getHeight());

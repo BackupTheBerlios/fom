@@ -147,6 +147,11 @@ public class FormulaPanel extends Panel {
 	}
 
 
+	public boolean isDoubleBuffered() {
+		return true;
+	}
+	
+	
 	public void update(Graphics g) {
 		if (bufferImage == null) {
 			bufferImage = createImage(getWidth(),getHeight());
