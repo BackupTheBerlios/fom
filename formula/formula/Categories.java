@@ -4,7 +4,11 @@
  */
 package formula;
 
+import gui.DragnDropListener;
+
 import java.util.*;
+import java.awt.event.*;
+import gui.*;
 import utils.Messages;
 /**
  * The class Categories is used to store the different categories of formula-elements
@@ -94,5 +98,17 @@ public class Categories {
 		newForm[newForm.length-1] = formula;
 		categoryElements.put(category,newForm);
 	}
-
+	
+	public static void initMouseListener(AppletPanel ap) {
+		for(int i=0;i<categories.length;i++) {
+			Formula[] form = (Formula[])categoryElements.get(categories[i]);
+			if (form!=null) {
+				for(int j=0;j<form.length;j++) {
+					DragnDropListener dnd = new DragnDropListener(ap);
+					form[j].addMouseListener(dnd);
+					form[j].addMouseMotionListener(dnd);
+				}
+			}
+		}
+	}
 }

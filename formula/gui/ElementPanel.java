@@ -22,19 +22,21 @@ public class ElementPanel extends Panel {
 	
 	private GridLayout elementPanelLayout;
 	private DragnDropListener dnd;
+	private AppletPanel parent;
 	
 	/**
 	 * Creates the panel for categories and element list.
 	 */
-	public ElementPanel() {
+	public ElementPanel(AppletPanel parent) {
+		this.parent = (AppletPanel)parent;
 		//create objects for element panel:
-		Panel topPanel	= new Panel(new GridLayout(2,1));
-		chCategoryList	= new Choice();
-		scpElementList	= new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-		elementPanel	= new Panel();
-		dnd				= new DragnDropListener();
-		btnAddFormula	= new Button(Messages.getString("ElementPanel.BtnAddFormula"));
-		clListener		= new CategoryListListener(this);
+		Panel topPanel			= new Panel(new GridLayout(2,1));
+		chCategoryList		= new Choice();
+		scpElementList		= new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
+		elementPanel			= new Panel();
+		dnd							= new DragnDropListener(this.parent);
+		btnAddFormula		= new Button(Messages.getString("ElementPanel.BtnAddFormula"));
+		clListener					= new CategoryListListener(this);
 		elementPanelLayout = new GridLayout();
 		//adding categories:
 		String[] categories=Categories.getCategories();
@@ -61,7 +63,7 @@ public class ElementPanel extends Panel {
 		setSize(150,getSize().height);
 		chCategoryList.setSize(150,chCategoryList.getSize().height);
 		scpElementList.setSize(150,scpElementList.getSize().height);		
-		
+		Categories.initMouseListener(this.parent);
 		updateElementList(Categories.getCategoryElements(chCategoryList.getSelectedItem()));
 	}
 

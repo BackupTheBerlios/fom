@@ -6,15 +6,20 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @since 05.05.2004
  *
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
 
-	private static boolean dragInProgress = false;
+	private static boolean dragInProgress	= false;
+	private static AppletPanel aPanel				= null;
+	
+	public DragnDropListener(AppletPanel ap) {
+		aPanel = ap;
+	}
 
 	public void mouseClicked(MouseEvent me) {
 
@@ -29,21 +34,34 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mousePressed(MouseEvent me) {
-		dragInProgress=true;
-		((Component)me.getSource()).setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		if (me.getComponent() instanceof Formula) {
+			dragInProgress = true;
+			aPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
 	}
 
 	public void mouseReleased(MouseEvent me) {
 		dragInProgress=false;
-		((Component)me.getSource()).setCursor(Cursor.getDefaultCursor());
+		aPanel.setCursor(Cursor.getDefaultCursor());
 	}
 
 	public void mouseDragged(MouseEvent me) {
-
+		if (dragInProgress) {
+			Component srcComponent = aPanel.getComponentAt(me.getPoint());
+			System.out.println(srcComponent);
+			System.out.println(me.getPoint());
+			if (srcComponent != null) {
+				Graphics srcGraphics = srcComponent.getGraphics();
+				srcGraphics.drawOval(me.getX(),me.getY(),10,10);
+			}
+			
+		}
 	}
+	
+	public void mouseMoved(MouseEvent me) {
+		if (dragInProgress) {
 
-	public void mouseMoved(MouseEvent arg0) {
-
+		}
 	}
 
 }

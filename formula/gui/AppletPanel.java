@@ -6,6 +6,7 @@ package gui;
 
 import java.applet.Applet;
 import java.awt.*;
+import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
@@ -23,52 +24,40 @@ public class AppletPanel extends Applet {
 	public void init() {
 		setLayout(new BorderLayout());
 		
-		pnlElements=new ElementPanel();
-		pnlControls=new ControlPanel();
 		pnlFormula=new FormulaPanel();
+		pnlControls=new ControlPanel();
+		pnlElements=new ElementPanel(this);
 		
 		ScrollPane sPane = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
+		pnlFormula.setLayout(new TreeLayout());
+		DragnDropListener dnd = new DragnDropListener(this);
+		pnlFormula.addMouseListener(dnd);
+		pnlFormula.addMouseMotionListener(dnd);
 		sPane.add(pnlFormula);
 		
 		add(pnlElements,BorderLayout.WEST);
 		add(pnlControls,BorderLayout.SOUTH);
 		add(sPane,BorderLayout.CENTER);
+		
+		pnlFormula.add(new Add());
 	}
 
-	public FormulaPanel getPnlFormula() {
+	public FormulaPanel getFormulaPanel() {
 		return pnlFormula;
 	}
 
-	public void setPnlFormula(FormulaPanel pnlFormula) {
-		this.pnlFormula = pnlFormula;
-	}
-
-	public ElementPanel getPnlElements() {
+	public ElementPanel getElementPanel() {
 		return pnlElements;
 	}
 
-	public void setPnlElements(ElementPanel pnlElements) {
-		this.pnlElements = pnlElements;
-	}
-
-	public ControlPanel getPnlControls() {
+	public ControlPanel getControlPanel() {
 		return pnlControls;
-	}
-
-	public void setPnlControls(ControlPanel pnlControls) {
-		this.pnlControls = pnlControls;
-	}
-
-	
-	/*
-	 * Constructor is needed if running as application.
-	 */
-	public AppletPanel() {
 	}
 
 /*	public static void main(String[] args) {
 		Frame f=new Frame("Test");
 		AppletPanel ap=new AppletPanel();
+		//ap.init();
 		f.add(ap);
 		f.setSize(800,600);
 		f.setVisible(true);

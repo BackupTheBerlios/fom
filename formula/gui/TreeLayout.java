@@ -4,40 +4,45 @@
  */
 package gui;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.LayoutManager;
+import java.awt.*;
+//import java.util.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @since 05.05.2004
  *
  */
 public class TreeLayout implements LayoutManager {
 
+
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
 	 */
-	public void removeLayoutComponent(Component arg0) {
-		// TODO Auto-generated method stub
-
+	public void removeLayoutComponent(Component component) {
 	}
 
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
 	 */
-	public void layoutContainer(Container arg0) {
-		// TODO Auto-generated method stub
-
+	public void layoutContainer(Container container) {
+		Component component;
+		Rectangle bounds;
+		int count = container.getComponentCount();
+		for (int i=0;i<count;i++) {
+			component = container.getComponent(i);
+			bounds = component.getBounds();
+			bounds.x=0;
+			bounds.y=0;
+			bounds.height = component.getSize().height;
+			bounds.width = component.getSize().width;
+			component.setBounds(bounds);
+		}
 	}
 
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String, java.awt.Component)
 	 */
-	public void addLayoutComponent(String arg0, Component arg1) {
-		// TODO Auto-generated method stub
-
+	public void addLayoutComponent(String str, Component component) {
+	
 	}
 
 	/* (non-Javadoc)
