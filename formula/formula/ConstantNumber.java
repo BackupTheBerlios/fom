@@ -32,7 +32,6 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		result = new Double(0);
 		inputNumber = new TextField();
 		inputNumber.setFont(DEFAULT_FONT);
-		System.out.println(inputNumber.getFontMetrics(DEFAULT_FONT).getHeight());
 		inputNumber.setBackground(SystemColor.text);
 		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);		
 		if (elementChooser) {

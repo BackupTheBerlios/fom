@@ -29,8 +29,8 @@ public abstract class Formula extends Container implements Cloneable {
 	public static final int PAINTSTATUS_MOVING		= 8;
 	public static final int PAINTSTATUS_CALCULATING = 16;
 
-	protected static final Font DEFAULT_FONT		= new Font("Arial", Font.PLAIN, 11);
-	protected static final Font CALC_FONT			= new Font("Arial", Font.BOLD, 11);
+	protected static final Font DEFAULT_FONT		= new Font("sansserif", Font.PLAIN, 11);
+	protected static final Font CALC_FONT			= new Font("sansserif", Font.BOLD, 11);
 
 	protected int paintStatus = PAINTSTATUS_STANDARD;
 
