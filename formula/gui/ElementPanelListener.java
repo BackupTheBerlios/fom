@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.12 2004/09/06 13:02:06 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.13 2004/09/06 15:15:24 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -37,6 +37,7 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 		String category=(String)ievent.getItem();
 		Formula[] elements=ePanel.getCategories().getCategoryElements(category);
 		ePanel.updateElementList(elements);
+		aPanel.getSelection().deselect();
 	}
 
 
@@ -64,8 +65,9 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 			aPanel.getFormulaPanel().validate();
 			aPanel.getFormulaPanel().doLayout();
 			aPanel.getFormulaPanel().repaint();
+			aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
+			System.gc();
 		}
-		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 	}
 
 
