@@ -6,6 +6,7 @@ package gui;
 import java.awt.*;
 import java.awt.event.*;
 
+import utils.Messages;
 import formula.*;
 
 /**
@@ -28,7 +29,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 * Creates a window for setting and changing variables.
 	 */
 	public DialogVariables(AppletPanel parent) {
-		super(new Frame(), "Variables' Dialog", true);
+		super(new Frame(), Messages.getString("DialogVariables.Title"), true);
 		TypeConstVar[] varArray = ConstVarFormula.getVarList();
 		Object value;
 		varName = new TextField[varArray.length];

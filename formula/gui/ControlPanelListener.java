@@ -11,7 +11,6 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @since 22.04.2004
  *
  */
 public class ControlPanelListener implements ActionListener, ItemListener, AdjustmentListener {
