@@ -196,7 +196,9 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	/**
 	 * Refreshs the list of connections to other formula elements.
 	 */
-	// NOTE: would probably be better in a thread	
+	// NOTE: would probably be better in a thread
+	// BUG: Wenn 2 Input-Pins der selektierten Elemente in Reichweite eines Output-Pins sind,
+	// dann wird der erste in der Liste verbunden, und der 2. nicht....egal wie weit sie entfernt sind! 	
 	private void refreshPinPointList() {
 		FormulaPanel fp = aPanel.getFormulaPanel();
 		PinPoint targetPP;
