@@ -2,3 +2,4 @@
 .project
 .checkstyle
 java.policy.applet
+.jetproperties
