@@ -197,11 +197,7 @@ public abstract class ConstVarFormula extends Formula {
 	 */
 	public static final TypeConstVar[] getVarList() {
 		TypeConstVar[] resultArray = new TypeConstVar[varList.size()];
-		//TypeConstVar content;
 		for (int i=0; i < resultArray.length; i++) {
-			//content = (TypeConstVar)varList.get(i);
-			//resultArray[i] = new TypeConstVar(content.getName(), content.getValue());
-			//resultArray[i].setVarInnerList(content.getVarInnerList());
 			resultArray[i] = (TypeConstVar)varList.get(i);
 		}
 		return resultArray;

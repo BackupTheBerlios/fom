@@ -57,6 +57,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		for (int i=0; i < varArray.length; i++) {
 			//Reading all variables and creating their input fields.
 			varName[i] = new TextField(varArray[i].getName());
+			varName[i].setBackground(SystemColor.text);
 			varName[i].addTextListener(this);
 			spaceForInputs.add(varName[i]);
 			oldVarName[i] = varArray[i].getName();
@@ -69,6 +70,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 			} else if (value instanceof Number) {
 				//Number variable.
 				varValueNumber[i] = new TextField(((Number)value).toString());
+				varValueNumber[i].setBackground(SystemColor.text);
 				varValueNumber[i].addTextListener(this);
 				spaceForInputs.add(varValueNumber[i]);
 			}
@@ -103,7 +105,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 * immer gepaart habe. Es reicht also nicht nur das geänderte Array zu haben, sondern
 	 * ich muss auch noch das dazu passende Array rausfinden. Zugegeben, ist vieleicht ein
 	 * bisschen unsauber, aber es funktioniert. Wenn ich nämlich denen Namen geben würde,
-	 * müsste ich dort auch den Index reincoden, was das auslesen dann auch unschön macht. */
+	 * müsste ich dort auch den Index reincoden, was das auslesen dann auch unschön macht. */ 
 	/* HEIKO: Wenn du meinst, der Code hier ist mir sowieso zu unsauber, um mir den genauer anzuschaun.
 	 * Aber imho solltest du dafür keine Arrays sondern Hashtabellen verwenden, bzw.
 	 * so Zeug der Klasse ConstVarFormula überlassen. Also wenn du irgendeine Variable änderst, dann übergibst du
@@ -133,6 +135,32 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		return -1;
 	}
 
+	/**
+	 * Validates a variable name. Valid names have at least one non-space character and
+	 * don't use an already existing name.
+	 * @param isValid To be checked.
+	 * @return Returns, if variable name is valid.
+	 */
+	private final boolean isValidName(String isValid) {
+		boolean valid = true;
+		int count = 0;
+		//name must have at least one non-space character.
+		if (isValid.matches(" *")) {
+			valid = false;
+		}
+		if (valid) {
+			//Double names are not valid.
+			for (int i=0; i < varName.length; i++) {
+				if (isValid.equals(varName[i].getText())) {
+					count += 1;
+				}
+			}
+			if (count > 1) {
+				valid = false;
+			}
+		}
+		return valid;
+	}
 
 	/**
 	 * Ersetzt alle Variablennamen durch neue, oder den Number-Wert von den Variablen
@@ -143,24 +171,30 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		if (index == -1) {
 			//Replaces Variablename.
 			index = getArrayPosition(txtEvent.getSource(), varName);
-			if (varName[index].getText().length() == 0) {
-				ConstVarFormula.setVarNameAll(oldVarName[index], "$$InternTempCounter" + tempCounter.toString() + "$$");
-				oldVarName[index] = "$$InternTempCounter" + tempCounter.toString() + "$$";
-				//MAURICE: Nein, ich meine die Erhöhung des tempCounters.
-				// HEIKO: ähm, lol....verwend int (das solltest du sowieso immer machen, außer du brauchst das als Objekt)
-				tempCounter = new Integer(tempCounter.intValue() + 1);
-			} else {
+			if (isValidName(varName[index].getText())) {
 				ConstVarFormula.setVarNameAll(oldVarName[index], varName[index].getText());
 				oldVarName[index] = varName[index].getText();
+				varName[index].setBackground(SystemColor.text);
+			} else {
+				//Leere oder doppelete Variablennamen müssen verhindert werden.
+				ConstVarFormula.setVarNameAll(oldVarName[index], "$$InternTempCounter" + tempCounter.toString() + "$$");
+				oldVarName[index] = "$$InternTempCounter" + tempCounter.toString() + "$$";
+				varName[index].setBackground(Color.RED);
+				//MAURICE Dies gefällt mir nicht. Gibts da nicht was schöneres?
+				// HEIKO: siehe getArrayPosition
+				//MAURICE: Nein, ich meine die Erhöhung des tempCounters.
+				tempCounter = new Integer(tempCounter.intValue() + 1);
 			}
 		} else {
-			//Replaces value.
-			newInput = varValueNumber[index].getText();
-			if (newInput.length() == 0) {
-				newInput = "0";
-			}
-			if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
-				ConstVarFormula.setVarValueAll(varName[index].getText(), new Double(newInput.replace(',','.')));
+			if (isValidName(varName[index].getText())) {
+				//Replaces value, if variable name is valid.
+				newInput = varValueNumber[index].getText();
+				if (newInput.length() == 0) {
+					newInput = "0";
+				}
+				if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
+					ConstVarFormula.setVarValueAll(varName[index].getText(), new Double(newInput.replace(',','.')));
+				}
 			}
 		}
 	}
@@ -172,33 +206,19 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		int index = getArrayPosition(txtEvent.getSource(), varValueBoolean);
 		if (index == -1) {
 			//Closes dialog (OK button pressed).
-			closingDialog();
+			dispose();
 		} else {
-			//Replaces value.
-			if (varValueBoolean[index].getLabel() == "false") {
-				ConstVarFormula.setVarValueAll(varName[index].getText(), new Boolean(true));
-				varValueBoolean[index].setLabel("true");
-			} else {
-				ConstVarFormula.setVarValueAll(varName[index].getText(), new Boolean(false));
-				varValueBoolean[index].setLabel("false");				
-			}
-		}
-	}
-
-	private void closingDialog() {
-		for (int i=0; i < varName.length; i++) {
-			//All empty Variable names are getting a standard value.
-			if (varName[i].getText().length() == 0) {
-				if (varValueBoolean[i] != null) {
-					ConstVarFormula.setVarValueAll(oldVarName[i], new Boolean(false));
+			if (isValidName(varName[index].getText())) {
+				//Replaces value, if variable name is valid.
+				if (varValueBoolean[index].getLabel() == "false") {
+					ConstVarFormula.setVarValueAll(varName[index].getText(), new Boolean(true));
+					varValueBoolean[index].setLabel("true");
 				} else {
-					ConstVarFormula.setVarValueAll(oldVarName[i], new Double(0));
+					ConstVarFormula.setVarValueAll(varName[index].getText(), new Boolean(false));
+					varValueBoolean[index].setLabel("false");				
 				}
-				ConstVarFormula.deleteVarBranch(oldVarName[i]);
 			}
 		}
-		dispose();
-		//parent.repaint();
 	}
 
 	/* MAURICE: Wenn das Variablenfenster von einem anderen Fenster überdeckt wird,
@@ -213,7 +233,6 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 * @see java.awt.event.WindowListener#windowActivated(java.awt.event.WindowEvent)
 	 */
 	public void windowActivated(WindowEvent arg0) {
-		repaint();
 		// TODO Auto-generated method stub
 		
 	}
@@ -230,9 +249,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 * @see java.awt.event.WindowListener#windowClosing(java.awt.event.WindowEvent)
 	 */
 	public void windowClosing(WindowEvent arg0) {
-		closingDialog();
-		// TODO Auto-generated method stub
-		
+		dispose();
 	}
 
 	/* (non-Javadoc)

@@ -30,7 +30,7 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 	public VariableBoolean(boolean elementChooser) {
 		super();
 		formulaName = "                     Boolean";
-		result = new Double (0);
+		result = new Boolean(false);
 		inputVarName = new TextField();
 		inputVarName.setText("boolean1");
 		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, (FORMULAWIDTH)/2, BOXHEIGHT-6);		
