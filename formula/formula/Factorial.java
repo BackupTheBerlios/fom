@@ -12,16 +12,26 @@ import utils.Messages;
  */
 public class Factorial extends NumberFormula {
 
+	/**
+	 * Calculates the factorial.
+	 */
+	static int fact(int n) {
+		int e = 1;
+
+		if (n == 0 || n == 1)
+		  return e;
+
+		if (n > 1)
+		  for (int i = 1; i <= n; i++)
+			e = e*i;
+		return e;
+	  }
+
 	public final void calc() throws FormulaException {	
 		if (input[0] == null)
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-		//MAURICE: Kann ich aus Double eine Int hinkriegen?
-		// mit Typecast: (int)1.5D = 1
-		// mit Math.round: Math.round(1.5D) = 2L
-		// FRAGE: Wozu ist denn "factorial" da?
-//			result = new Double (Factorial.fact((input[0].getDoubleResult())));
-			result = new Double (1234567890);
+			result = new Double (Factorial.fact((int)input[0].getDoubleResult()));
 	}
 	
 	/**
