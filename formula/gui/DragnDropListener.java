@@ -30,7 +30,6 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	public DragnDropListener(AppletPanel ap) {
 		aPanel = ap;
 		selection = new Selection(ap);
-		System.out.println(ap + " " + selection);
 	}
 
 	public Selection getSelection() {
@@ -39,7 +38,6 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 
 	public void mouseClicked(MouseEvent me) {
 		// if event happened in the ElementPanel:
-		System.out.println("mouseClicked: "+selection);
 		if (me.getComponent().getParent().getParent() instanceof ElementPanel) {
 			Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
 			if (targetComponent != null) { // if clicked on a Formula-object
