@@ -1,64 +1,25 @@
-/*
+/* $Id: FOMToolkit.java,v 1.4 2004/08/29 15:15:03 shadowice Exp $
  * Created on 16.05.2004
- *
  */
 package utils;
 
 import java.awt.*;
 import java.text.*;
 
-import formula.*;
-import gui.*;
-
 /**
  * Tool class for Formula-o-Matic.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @since 16.05.2004
- *
+ * @version $Revision: 1.4 $
  */
 
 
 public final class FOMToolkit {
 
-	private static float zoomFactor = 1.0f;
-
-
 	/**
 	 * Hidden constructor for tool class.
 	 */
 	private FOMToolkit() { }
-
-
-	/**
-	 * @return Returns the global zoom-factor for formula elements.
-	 */
-	public static float getZoomFactor() {
-		return zoomFactor;
-	}
-
-
-	/**
-	 * @param form The Formula object that need's a zoom-factor.
-	 * @return Returns the object-dependand zoom-factor.
-	 */
-	public static float getZoomFactor(Formula form) {
-		//no zooming for elements outside of the FormulaPanel!
-		if (form.getParent() instanceof FormulaPanel) {
-			return zoomFactor;
-		} else {
-			return 1.0f;
-		}
-	}
-
-
-	/**
-	 * Sets the global zoom-factor.
-	 * @param zf zoom-factor (1.0 = 100%)
-	 */
-	public static void setZoomFactor(float zf) {
-		zoomFactor = zf;
-	}
 
 
 	/**
