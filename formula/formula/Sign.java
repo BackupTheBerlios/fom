@@ -16,28 +16,27 @@ public class Sign extends NumberFormula {
 		if (input[0] == null)
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-			result = new Double(- input[0].getDoubleResult());
-	}
-	
-	public String toString() {
-		try {
-			if (input[0].getDoubleResult() > 0)
-				return "(-"+input[0].toString()+")";
-			else
-				return input[0].toString();
-		} catch (FormulaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+			result = new Double (- input[0].getDoubleResult());
 	}
 
 	/**
-	 * Creates a "+/-" with an input.
+	 * Creates a "+/-" with 1 input.
 	 */
 	public Sign() {
-		input=new Formula[1];
-		formulaName="+/-";
+		input = new Formula[1];
+		formulaName = "+/-";
+	}	
+	
+	/**
+	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
+	 * or the resulting formula as string for a (sub)tree with this object as root.
+	 */	
+	public final String toString() {
+		String outString = "(- ";
+		if (input[0] != null)
+			outString += input[0].toString();
+		outString += ")";
+		return outString;
 	}
 
 }

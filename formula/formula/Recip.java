@@ -16,28 +16,27 @@ public class Recip extends NumberFormula {
 		if (input[0] == null)
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-			result = new Double(1 / input[0].getDoubleResult());
-	}
-	
-	public String toString() {
-		try {
-			if (input[0].getDoubleResult() == 0)
-				return "(1/"+input[0].toString()+")";
-			else
-				throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
-		} catch (FormulaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+			result = new Double (1 / input[0].getDoubleResult());
 	}
 
 	/**
-	 * Creates a "1/x" with an input.
+	 * Creates a "1/x" with 1 input.
 	 */
 	public Recip() {
-		input=new Formula[1];
-		formulaName="1/x";
+		input = new Formula[1];
+		formulaName = "1/x";
+	}
+	
+	/**
+	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
+	 * or the resulting formula as string for a (sub)tree with this object as root.
+	 */	
+	public final String toString() {
+		String outString = "(1 / ";
+		if (input[0] != null)
+			outString += input[0].toString();
+		outString += ")";
+		return outString;
 	}
 
 }
