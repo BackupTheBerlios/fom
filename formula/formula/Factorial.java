@@ -16,9 +16,9 @@ public class Factorial extends NumberFormula {
 	/**
 	 * Calculates the factorial.
 	 */
-	private final static int fact(int n) {
-		int result = 1;
-		for (int i = 2; i <= n; i++) {
+	private final static long fact(long n) {
+		long result = 1;
+		for (long i = 2; i <= n; i++) {
 			result = result*i;
 		}
 		return result;
