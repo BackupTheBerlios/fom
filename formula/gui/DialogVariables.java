@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.21 2004/09/10 11:09:24 shadowice Exp $
+/* $Id: DialogVariables.java,v 1.22 2004/09/10 12:15:29 shadowice Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.21 $
+ * @version $Revision: 1.22 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
@@ -52,8 +52,8 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		okButton.addActionListener(this);
 		add(okButton, BorderLayout.SOUTH);
 
-		scrollForVariables.getHAdjustable().setUnitIncrement(16);
-		scrollForVariables.getVAdjustable().setUnitIncrement(16);
+		scrollForVariables.getHAdjustable().setUnitIncrement(8);
+		scrollForVariables.getVAdjustable().setUnitIncrement(8);
 		scrollForVariables.add(variablesPanel);
 		add(scrollForVariables, BorderLayout.CENTER);
 		
