@@ -74,7 +74,6 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public void paint(Graphics g) {
 		super.paint(g);
-		System.out.println("DEBUG: painting "+formulaName);
 		//TODO Grafik verbessern
 		//((Graphics2D)g).scale(scaleX,scaleY);
 		setSize((int)(FORMULAWIDTH+1),(int)(FORMULAHEIGHT+1));
