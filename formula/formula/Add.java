@@ -23,6 +23,7 @@ public class Add extends NumberFormula {
 	 * Creates a "+" with 2 inputs.
 	 */
 	public Add() {
+		super();
 		input = new Formula[2];
 		formulaName = "+";
 	}
