@@ -32,7 +32,7 @@ public abstract class Formula extends Container implements Cloneable {
 
 	protected int paintStatus = PAINTSTATUS_STANDARD;
 	protected static final Font DEFAULT_FONT		= new Font("Arial", Font.PLAIN, 11);
-	protected static final Font CALC_FONT			= new Font("Arial", Font.BOLD, 	11);
+	protected static final Font CALC_FONT			= new Font("Arial", Font.BOLD, 11);
 
 	protected Dimension dimension = new Dimension(FORMULAWIDHT,FORMULAHEIGHT);
 

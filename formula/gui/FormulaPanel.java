@@ -17,7 +17,10 @@ import formula.*;
 public class FormulaPanel extends Panel {
 
 
-	private static int maxPinDistance = 70;	// distance to a pin (mouseTargetPoint) to be of any interest (should be <100)
+	private static final int MAX_PIN_DISTANCE = 70;	// distance to a pin (mouseTargetPoint) to be of any interest (should be <100)
+	private static final int OVERSIZE_WIDTH		= 5;
+	private static final int OVERSIZE_HEIGHT	= 5;
+
 
 	// These lists store all input/output pins.
 	private LinkedList inputPinList 	= new LinkedList();
@@ -27,9 +30,7 @@ public class FormulaPanel extends Panel {
 	
 	private AppletPanel aPanel;
 
-	private static final int OVERSIZE_WIDTH		= 5;
-	private static final int OVERSIZE_HEIGHT	= 5;
-
+	
 	/**
 	 * Creates a new FormulaPanel.
 	 */
@@ -172,7 +173,7 @@ public class FormulaPanel extends Panel {
 		PinPoint tmpPP = null;
 		Formula tmpForm = null;
 		Formula form = outPin.getFormula();
-		int minDistance = maxPinDistance;		// pins farther away are not interesting
+		int minDistance = MAX_PIN_DISTANCE;		// pins farther away are not interesting
 		int distance = 0;
 		try {
 			Class[] inTypes;
@@ -235,7 +236,7 @@ public class FormulaPanel extends Panel {
 		PinPoint tmpPP = null;
 		Formula tmpForm = null;
 		Formula form = inPin.getFormula();
-		int minDistance = maxPinDistance;		// pins farther away are not interesting
+		int minDistance = MAX_PIN_DISTANCE;		// pins farther away are not interesting
 		int distance = 0;
 		try {
 			Class[] inTypes = inPin.getFormula().getInputTypes(inPin.getInputNumber());
@@ -440,42 +441,47 @@ public class FormulaPanel extends Panel {
 	
 	public void checkBounds() {
 		Component comp;
+		int width = getWidth();
+		int height = getHeight();
+		Dimension oldSize = new Dimension(getWidth(),getHeight());
 		Rectangle newBounds = new Rectangle(0,0,0,0);
 		for (int i=0;i<getComponentCount();i++) {
 			comp = getComponent(i);
 			if ((comp.getX()+comp.getWidth()) > newBounds.width) {
 				newBounds.width = comp.getX() + comp.getWidth() + OVERSIZE_WIDTH;
 			}
-			if (comp.getX() < (getX()+OVERSIZE_WIDTH)) {
-				newBounds.x = comp.getX()-OVERSIZE_WIDTH;
+			if (comp.getX() < getX()) {
+				newBounds.x = comp.getX();
 			}
 			if ((comp.getY()+comp.getHeight()) > newBounds.height) {
 				newBounds.height = comp.getY() + comp.getHeight() + OVERSIZE_HEIGHT;
 			}
-			if (comp.getY() < (getY()+OVERSIZE_HEIGHT)) {
-				newBounds.y = comp.getY()-OVERSIZE_HEIGHT;
+			if (comp.getY() < getY()) {
+				newBounds.y = comp.getY();
 			}
 		}
 
 		Formula form;
 		if ((newBounds.x < 0) || (newBounds.y < 0)) {
 			if (newBounds.x < 0) {
-				newBounds.width -= newBounds.x;
+				newBounds.width = newBounds.width - newBounds.x;
 			}
 			if (newBounds.y < 0) {
-				newBounds.height -= newBounds.y;
+				newBounds.height = newBounds.height - newBounds.y;
 			}
 			
 			for (int i=0;i<getComponentCount();i++) {
 				form = (Formula)getComponent(i);
 				form.moveTo(form.getX()-newBounds.x+OVERSIZE_WIDTH,form.getY()-newBounds.y+OVERSIZE_HEIGHT);
 			}
-			ScrollPane sPane = (ScrollPane)getParent();
+			//ScrollPane sPane = (ScrollPane)getParent();
 			//sPane.setScrollPosition(sPane.getScrollPosition().x,0);
 		}
-					
-		setSize(newBounds.width+OVERSIZE_WIDTH,newBounds.height+OVERSIZE_HEIGHT);
-		getParent().validate();
+		
+		if ((newBounds.width > 0) && (newBounds.height > 0) && !oldSize.equals(newBounds.getSize())) {
+			setSize(newBounds.width,newBounds.height);
+			getParent().validate();
+		}
 	}
 
 	public void delete(Formula form) {

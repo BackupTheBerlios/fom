@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
  */
 public class HotkeyListener implements KeyListener {
 
-	AppletPanel aPanel;
+	private AppletPanel aPanel;
 
 	/**
 	 * 

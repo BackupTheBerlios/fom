@@ -66,10 +66,10 @@ public class ElementPanel extends Panel {
 		add(topPanel,BorderLayout.NORTH);
 		add(scpElementList,BorderLayout.CENTER);
 		//hardcoded size, because the default-size sux (it did, now it doesn't seem to matter) :)		
-		int epWidth = Formula.FORMULAWIDHT+20;
+		/*int epWidth = Formula.FORMULAWIDHT+20;
 		setSize(epWidth,getSize().height);
 		chCategoryList.setSize(epWidth,chCategoryList.getSize().height);
-		scpElementList.setSize(epWidth,scpElementList.getSize().height);
+		scpElementList.setSize(epWidth,scpElementList.getSize().height);*/
 		updateElementList(Categories.getCategoryElements(chCategoryList.getSelectedItem()));
 	}
 
