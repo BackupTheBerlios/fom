@@ -1,4 +1,4 @@
-/* $Id: DragnDropListener.java,v 1.31 2004/09/02 13:49:08 shadowice Exp $
+/* $Id: DragnDropListener.java,v 1.32 2004/09/02 14:47:39 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -14,7 +14,7 @@ import formula.*;
  * for (re)placing formula-elements or whole trees and connecting them.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.31 $
+ * @version $Revision: 1.32 $
  *
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
@@ -37,7 +37,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		return selection;
 	}
 
-	public void mouseClicked(MouseEvent me) {
+	public synchronized void mouseClicked(MouseEvent me) {
 		if (me.isPopupTrigger()) {
 			aPanel.getPopupMenu().show(me.getComponent(),me.getPoint().x,me.getPoint().y);
 		} else {
@@ -56,12 +56,11 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				} else if (!(me.getComponent().getComponentAt(me.getPoint()) instanceof Formula)) {
 					selection.deselect();
 				}
-				
 			}
 		}
 	}
 
-	public void mouseEntered(MouseEvent me) {
+	public synchronized void mouseEntered(MouseEvent me) {
 		if (me.getComponent() instanceof FormulaPanel) {
 			if (selection.isInsertInProgress()) {
 				selection.setElementVisible(true);
@@ -70,7 +69,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		
 	}
 
-	public void mouseExited(MouseEvent me) {
+	public synchronized void mouseExited(MouseEvent me) {
 		if (me.getComponent() instanceof FormulaPanel) {
 			if (selection.isInsertInProgress()) {
 				Component comp = me.getComponent();
@@ -81,7 +80,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		}
 	}
 
-	public void mousePressed(MouseEvent me) {
+	public synchronized void mousePressed(MouseEvent me) {
 		if (me.isPopupTrigger()) {
 			aPanel.getPopupMenu().show(me.getComponent(),me.getPoint().x,me.getPoint().y);
 		} else {
@@ -97,7 +96,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		}
 	}
 
-	public void mouseReleased(MouseEvent me) {
+	public synchronized void mouseReleased(MouseEvent me) {
 		if (me.isPopupTrigger()) {
 			aPanel.getPopupMenu().show(me.getComponent(),me.getPoint().x,me.getPoint().y);
 		} else {
@@ -110,7 +109,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		}
 	}
 
-	public void mouseDragged(MouseEvent me) {
+	public synchronized void mouseDragged(MouseEvent me) {
 		if (selection.isDragInProgress()) {
 			// dragging only works in the FormulaPanel (atm)
 			if (me.getComponent() instanceof FormulaPanel) {
@@ -127,7 +126,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	 * 
 	 * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
 	 */
-	public void mouseMoved(MouseEvent me) {
+	public synchronized void mouseMoved(MouseEvent me) {
 		if (me.getComponent() instanceof FormulaPanel) {
 			if (selection.isInsertInProgress()) {
 				// move to new location:
@@ -135,6 +134,5 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 			}
 		}
 	}
-	
-	
+
 }
