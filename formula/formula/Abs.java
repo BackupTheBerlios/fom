@@ -1,15 +1,15 @@
 /*
  * Created on 05.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
- * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * This class provides an element, calculating the absolute value of a number.
+ * This class provides an element that calculates the absolute value of a number.
  * f(x) = |x|
+ * 
+ * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
 public class Abs extends NumberFormula {
 

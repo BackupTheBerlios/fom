@@ -1,14 +1,14 @@
 /*
  * Created on 02.06.2004
- *
  */
 package formula;
-
+// TODO Einige auskommentierte Sachen!
 //import gui.DragnDropListener;
 import java.util.*;
 //import java.awt.event.*;
 import gui.*;
 import utils.Messages;
+
 /**
  * The class Categories is used to store the different categories of formula-elements
  * and the elements in each category.
@@ -31,7 +31,7 @@ public class Categories {
 			categories[i] = Messages.getString("Elements.Category_"+Integer.toString(i));
 		}
 
-		//TODO Liste fertig machen, wenn mal alle Operatoren fertig sind.
+		//TODO Liste am Ende auf Vollständigkeit und Sinn (!) kontrollieren.
 		//Category Default:
 		Formula[] form = new Formula[8];
 		form[0] = new Add();

@@ -6,8 +6,9 @@ package formula;
 import utils.Messages;
 
 /**
- * This is an abstract class for all Formula-Object, which are accepting
- * number values for input and returning boolean values.
+ * This is an abstract class for all Formula-objects which accept
+ * number values for input and return boolean values.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
 public abstract class ComparisonFormula extends Formula {

@@ -1,14 +1,15 @@
 /*
  * Created on 05.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the arccos of a number.
+ * f(x) = arccos (x)
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Arccos extends NumberFormula {
 

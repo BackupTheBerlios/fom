@@ -40,12 +40,13 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		add(inputNumber);
 	}
 
+// TODO Ist der non-Javadoc Kommentar hier gewollt?
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 
 	/**
-	 * After each keypress, result has to be updated, if textfield contains
+	 * After each keypress the result has to be updated if the textfield contains
 	 * still a valid number.
 	 * @param arg import Method needs argument, but isn't used.
 	 */

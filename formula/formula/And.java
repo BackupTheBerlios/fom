@@ -1,15 +1,15 @@
 /*
  * Created on 15.04.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
- * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * This class provides an element, calculating the AND-connection of two boolean values.
+ * This class provides an element that calculates the AND-connection of two boolean values.
  * f(a,b) = a AND b
+ * 
+ * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
 public class And extends BooleanFormula {
 

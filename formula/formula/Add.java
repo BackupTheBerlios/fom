@@ -1,15 +1,15 @@
 /*
  * Created on 07.04.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
- * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * This class provides an element, calculating the sum of two numbers.
+ * This class provides an element that calculates the sum of two numbers.
  * f(x,y) = x + y
+ * 
+ * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
 public class Add extends NumberFormula {
 

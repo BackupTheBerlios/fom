@@ -5,6 +5,7 @@ package formula;
 import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 /**
  * Class for constant booleans.
  * 

@@ -1,10 +1,12 @@
 /*
  * Created on 08.07.2004
- *
  */
 package formula;
 
 /**
+ * This class provides an element that represents the constant e (approx. 2,71828...).
+ * f = e
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */

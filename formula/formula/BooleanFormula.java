@@ -1,21 +1,20 @@
 /*
  * Created on 05.04.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
- * This is an abstract class for all Formula-Object, which are accepting
- * boolean values for input/output.
+ * This is an abstract class for all Formula-objects which accept
+ * boolean values for input.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public abstract class BooleanFormula extends Formula {
 
 	protected Boolean result;
-
+//	TODO Einige auskommentierte Sachen!
 /*	public long getLongResult() throws FormulaException {
 		return 0;
 	}*/

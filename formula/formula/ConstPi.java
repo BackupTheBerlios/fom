@@ -1,10 +1,12 @@
 /*
  * Created on 08.07.2004
- *
  */
 package formula;
 
 /**
+ * This class provides an element that represents the constant pi (approx. 3,14159...).
+ * f = pi
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
