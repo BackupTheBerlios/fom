@@ -76,5 +76,10 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		oldName = newName;
 		repaint();
 	}
+	
+	public void setVisible(boolean vis) {
+		this.setVisible(vis);
+		inputVarName.setVisible(vis);	
+	}
 
 }

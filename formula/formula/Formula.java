@@ -243,13 +243,13 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * @return Validates, that subtree is complete and isn't missing some inputs.
 	 */
-	public final boolean completeSubTree() {
+	public final boolean isCompleteSubTree() {
 		boolean complete = true;
 		for (int i = 0; complete && (i < getInputCount()); i++) {
 			if (input[i] == null) {
 				complete = false;
 			} else {
-				complete = input[i].completeSubTree();
+				complete = input[i].isCompleteSubTree();
 			}
 		}
 		return complete;
@@ -258,10 +258,11 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * @return Validates, that only one tree exists and isn't missing some inputs.
 	 */
-	public final boolean completeGlobalTree() {
+	// HEIKO: Brauchst du das irgendwo? Ansonsten wird's u.U. nicht benötigt.
+	public final boolean isCompleteGlobalTree() {
 		boolean complete = false;
 		if (getTreeListSize() != 1) {
-			complete = getTreeList()[0].completeSubTree();
+			complete = getTreeList()[0].isCompleteSubTree();
 		}
 		return complete;
 	}

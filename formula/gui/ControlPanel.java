@@ -30,12 +30,16 @@ public class ControlPanel extends Panel {
 	private AppletPanel aPanel;
 
 
-	public Label getLblFormula() {
+	public FormulaLabel getLblFormula() {
 		return lblFormula;
 	}
 
 	public void setLblFormula(FormulaLabel lblFormula) {
 		this.lblFormula = lblFormula;
+	}
+	
+	public void updateLblFormula(String text) {
+		this.lblFormula.setText(text);
 	}
 
 	public Choice getChZoom() {
@@ -58,7 +62,7 @@ public class ControlPanel extends Panel {
 		btnReset			= new Button(Messages.getString("ControlPanel.BtnReset"));
 		btnVariables		= new Button(Messages.getString("ControlPanel.BtnVariables"));
 		lblSpeed			= new Label(Messages.getString("ControlPanel.LblSpeed"),Label.RIGHT);
-		lblFormula			= new FormulaLabel("The formula tree is incomplete.");  //Text nur zum testen der Länge :)
+		lblFormula			= new FormulaLabel(this,"The formula tree is incomplete.");  //Text nur zum testen der Länge :)
 		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 10, 1, 0, 20);
 		chZoom				= new Choice();
 		GridBagLayout gbl	= new GridBagLayout();
