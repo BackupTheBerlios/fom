@@ -1,4 +1,4 @@
-/* $Id: Formula.java,v 1.56 2004/10/19 21:26:05 shadowice Exp $
+/* $Id: Formula.java,v 1.57 2004/10/20 04:59:35 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
@@ -15,7 +15,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.56 $
+ * @version $Revision: 1.57 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -494,12 +494,15 @@ public abstract class Formula extends Container implements Cloneable {
 	//"Java 1.1/1.2 fixes":
 	public final void addKeyListener(KeyListener listener) {
 		super.addKeyListener(listener);
-		keyListener.add(listener);		
+		keyListener.addElement(listener);		
 	}
 
 	public KeyListener[] getKeyListener() {
 		KeyListener[] kl = new KeyListener[keyListener.size()];
-		return (KeyListener[])keyListener.toArray(kl);
+		for(int i=0;i<keyListener.size();i++) {
+			kl[i] = (KeyListener)keyListener.elementAt(i);
+		}
+		return kl;
 	}
 
 	//"Quick-fixes" :)

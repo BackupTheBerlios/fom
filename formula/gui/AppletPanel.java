@@ -1,4 +1,4 @@
-/* $Id: AppletPanel.java,v 1.31 2004/10/19 21:26:05 shadowice Exp $
+/* $Id: AppletPanel.java,v 1.32 2004/10/20 04:59:34 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -15,7 +15,7 @@ import formula.*;
  * Root panel and the main Applet class.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.31 $
+ * @version $Revision: 1.32 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 
@@ -42,10 +42,12 @@ public class AppletPanel extends Applet implements WindowListener {
 	 */
 	public static void main(final String[] args) {
 		AppletPanel aPanel = new AppletPanel();
+		aPanel.init();
 		Frame frame = new Frame(Messages.getString("AppletPanel.Title"));
 		frame.add(aPanel);
 		frame.setSize(650,500);
 		frame.setVisible(true);
+		frame.addWindowListener(aPanel);
 	}
 
 
