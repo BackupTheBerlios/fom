@@ -6,7 +6,7 @@ package gui;
 
 import java.applet.Applet;
 import java.awt.*;
-import formula.*;
+//import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
@@ -38,9 +38,6 @@ public class AppletPanel extends Applet {
 		add(pnlElements,BorderLayout.WEST);
 		add(pnlControls,BorderLayout.SOUTH);
 		add(sPane,BorderLayout.CENTER);
-		
-		Add add = new Add();
-		pnlFormula.add(new Add());
 	}
 
 	public FormulaPanel getFormulaPanel() {

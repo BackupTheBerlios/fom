@@ -87,6 +87,8 @@ public class ElementPanel extends Panel {
 			}
 		}
 		scpElementList.validate();
+		scpElementList.doLayout();
+		scpElementList.repaint();
 	}
 	
 	
