@@ -17,7 +17,7 @@ import formula.*;
 public class FormulaPanel extends Panel {
 
 
-	private static int maxPinDistance = 40;	// distance to a pin (mouseTargetPoint) to be of any interest
+	private static int maxPinDistance = 70;	// distance to a pin (mouseTargetPoint) to be of any interest (should be <100)
 
 	// These lists store all input/output pins.
 	private LinkedList inputPinList 	= new LinkedList();
@@ -45,6 +45,10 @@ public class FormulaPanel extends Panel {
 			addInputPin(pPIn[i]);
 		}
 	}
+	
+	public void addInputPins(LinkedList pPIn) {
+		inputPinList.addAll(pPIn);
+	}
 
 	/**
 	* @param pPIn
@@ -63,6 +67,13 @@ public class FormulaPanel extends Panel {
 		for (int i=0;i<pPOut.length;i++) {
 			addOutputPin(pPOut[i]);
 		}
+	}
+	
+	/**
+	 * @param pPOut
+	 */
+	public void addOutputPins(LinkedList pPOut) {
+		outputPinList.addAll(pPOut);
 	}
 
 	/**
@@ -167,7 +178,7 @@ public class FormulaPanel extends Panel {
 				distance = tmpPP.getDistance(x,y);
 				if (distance < minDistance) {  // if nearer then minDistance:
 				// and if it has no target so far and the pins are not from the same formula-object:
-					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form) && (!tmpPP.getMark())) {  
+					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form)) {  
 						// check for compatibility:
 					 	if (tmpPP.getFormula().getInputCount() > 0) {
 						 	inTypes = tmpPP.getFormula().getInputTypes(tmpPP.getInputNumber());
@@ -180,7 +191,15 @@ public class FormulaPanel extends Panel {
 								}
 				 			}
 					 		if (inTypes[a] == outTypes[b]) {
-						 		nearestPP = tmpPP;
+								if (tmpPP.getBestCandidate() != null) {
+									if (tmpPP.getBestDistance() > distance) {
+										nearestPP = tmpPP;									
+										minDistance = distance;
+									}
+								} else {
+									minDistance = distance;
+									nearestPP = tmpPP;
+								}
 						 	}
 					 	}
 					}					 	
@@ -189,6 +208,9 @@ public class FormulaPanel extends Panel {
 		}catch (FormulaException fe) {
 			fe.printStackTrace();
 		} finally {
+			if (nearestPP != null) {
+				nearestPP.setBestDistance(minDistance);
+			}
 			return nearestPP;			
 		}		
 	}
@@ -198,7 +220,6 @@ public class FormulaPanel extends Panel {
 	 * @param inPin input-pin to test
 	 * @return returns the nearest output-pin or null
 	 */
-	// NOTE: combine with getNearestInputPin?
 	public PinPoint getNearestOutputPin(PinPoint inPin) {
 		if (inPin.getFormula().getInputCount() == 0) {
 			return null;
@@ -220,7 +241,7 @@ public class FormulaPanel extends Panel {
 				distance = tmpPP.getDistance(x,y);
 				if (distance < minDistance) {	// if nearer then minDistance:
 				// and if it has no target so far and the pins are not from the same formula-object:
-					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form) && (!tmpPP.getMark())) {
+					if ((tmpPP.getTarget() == null) && (tmpPP.getFormula() != form)) {
 					// check for compatibility:
 						outTypes = tmpPP.getFormula().getOutputTypes();	
 						int a=0,b=0;
@@ -232,7 +253,16 @@ public class FormulaPanel extends Panel {
 							}
 						}
 						if (inTypes[a] == outTypes[b]) {
-							nearestPP = tmpPP;
+							// check if already temp-connected, but distance is lower:
+							if (tmpPP.getBestCandidate() != null) {
+								if (tmpPP.getBestDistance() > distance) {
+									nearestPP = tmpPP;									
+									minDistance = distance;
+								}
+							} else {
+								minDistance = distance;
+								nearestPP = tmpPP;
+							}
 						}
 					}
 				}
@@ -240,11 +270,12 @@ public class FormulaPanel extends Panel {
 		}catch (FormulaException fe) {
 			fe.printStackTrace();
 		} finally {
+			if (nearestPP != null) {
+				nearestPP.setBestDistance(minDistance);
+			}
 			return nearestPP;			
 		}		
 	}
-
-	
 	
 	
 	/**
@@ -300,8 +331,10 @@ public class FormulaPanel extends Panel {
 			pin.getTarget().getFormula().setOutput(null);
 			pin.getFormula().setInput(null,pin.getInputNumber());
 			pin.getTarget().setTarget(null);
+			pin.getTarget().setBestCandidate(null);
 			pin.setTarget(null);
 		}
+		pin.setBestCandidate(null);
 	}
 	
 	private void detachOutput(PinPoint pin) {
@@ -309,8 +342,10 @@ public class FormulaPanel extends Panel {
 			pin.getTarget().getFormula().setInput(null,pin.getTarget().getInputNumber());
 			pin.getFormula().setOutput(null);
 			pin.getTarget().setTarget(null);
+			pin.getTarget().setBestCandidate(null);
 			pin.setTarget(null);
 		}
+		pin.setBestCandidate(null);
 	}
 
 	/**
@@ -323,7 +358,7 @@ public class FormulaPanel extends Panel {
 			PinPoint pin = getOutputPinForFormula(form);	// O(n)
 			if (pin != null) {
 				detachOutput(pin);
-				//outputPinList.remove(pin);		// why did I write this line?
+				//outputPinList.remove(pin);		// should remove all outputs to prevent connections between not selected elements
 			}
 		}
 	}

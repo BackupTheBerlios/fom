@@ -19,7 +19,7 @@ import formula.*;
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
 
-	public static final int MOUSE_POINT_DISTANCE = 25;
+	public static final int MOUSE_POINT_DISTANCE = 10;
 
 	private static AppletPanel aPanel			= null;				// root panel of everything
 	
@@ -206,37 +206,52 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		int index;
 		// clear marks:
 		for (int i=0;i<tempPPInputs.size();i++) {
-			((PinPoint)tempPPInputs.get(i)).getTarget().setMark(false);
+			((PinPoint)tempPPInputs.get(i)).getTarget().setBestCandidate(null);
 		}
 		tempPPInputs.clear();
 		for (int i=0;i<tempPPOutputs.size();i++) {
-			((PinPoint)tempPPOutputs.get(i)).getTarget().setMark(false);
+			((PinPoint)tempPPOutputs.get(i)).getTarget().setBestCandidate(null);
 		}
 		tempPPOutputs.clear();
 		// Outputs:
-		for (int i=0;i<pPOutputs.size();i++) {
-			targetPP = fp.getNearestInputPin((PinPoint)pPOutputs.get(i));
-			pin = (PinPoint)pPOutputs.get(i);
+		Stack ppStack = new Stack();
+		ppStack.addAll(pPOutputs);
+		while (!ppStack.isEmpty()) {
+			pin = (PinPoint)ppStack.pop();
+			targetPP = fp.getNearestInputPin(pin);
 			if (targetPP != null) {
-				
-				tempPPOutputs.add(pin);
-				
+				if (targetPP.getBestCandidate() != null) {
+					// special case if pin is nearer than another pin
+					tempPPOutputs.remove(targetPP.getBestCandidate());
+					targetPP.getBestCandidate().setTarget(null);
+					ppStack.push(targetPP.getBestCandidate());
+				}
 				pin.setTarget(targetPP);
-				targetPP.setMark(true);
-								
+				targetPP.setBestCandidate(pin);
+				tempPPOutputs.add(pin);
 			} else {
 				pin.setTarget(null);
 			}
 		}
 		// Inputs:
-		for (int i=0;i<pPInputs.size();i++) {
-			targetPP = fp.getNearestOutputPin((PinPoint)pPInputs.get(i));
+		ppStack.addAll(pPInputs);
+		//System.out.println("[pPInputs]"+pPInputs);
+		//for (int i=0;i<pPInputs.size();i++) {
+		while (!ppStack.isEmpty()) {
+			pin = (PinPoint)ppStack.pop();			
+			targetPP = fp.getNearestOutputPin(pin);
 			if (targetPP != null) {
-				((PinPoint)pPInputs.get(i)).setTarget(targetPP);
-				targetPP.setMark(true);
-				tempPPInputs.add(pPInputs.get(i));
+				if (targetPP.getBestCandidate() != null) {
+					// special case if pin is nearer than another pin
+					tempPPInputs.remove(targetPP.getBestCandidate());
+					targetPP.getBestCandidate().setTarget(null);
+					ppStack.push(targetPP.getBestCandidate());
+				}
+				pin.setTarget(targetPP);
+				targetPP.setBestCandidate(pin);
+				tempPPInputs.add(pin);
 			} else {
-				((PinPoint)pPInputs.get(i)).setTarget(null);
+				pin.setTarget(null);
 			}
 		}
 	}

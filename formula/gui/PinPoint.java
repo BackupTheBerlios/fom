@@ -30,7 +30,8 @@ public class PinPoint {
 	private Point pinPoint;				// coordinates of the input/output pin
 	private Point mouseTargetPoint;		// center coordinates used to connect other formulas
 	private PinPoint targetPoint;		// if this pin is connected to another pin, that's the target
-	private boolean mark = false;		// used to mark temporary connected pins
+	private PinPoint bestCandidate;		// best possible connection that is found so far. If there's a better one it'll overwrite this
+	private int bestDistance=0;			// distance to bestCandidate
 
 // constructors:
 	/**
@@ -149,22 +150,6 @@ public class PinPoint {
 	
 	
 	/**
-	 * Sets a mark if the PinPoint is connected to another PinPoint while moving around.
-	 * @param m true = temporary connected
-	 */
-	public void setMark(boolean m) {
-		this.mark = m;
-	}
-	
-	
-	/**
-	 * @return true if pin is temporary connected, otherwise false
-	 */
-	public boolean getMark() {
-		return mark;
-	}
-	
-	/**
 	 * The mouseTargetPoint is used to determine if another Formula is within reach of this PinPoint.
 	 * @param mtp
 	 */
@@ -223,4 +208,32 @@ public class PinPoint {
 		this.pinPoint.translate(x_off,y_off);
 	}
 	
+	/**
+	 * @return
+	 */
+	public PinPoint getBestCandidate() {
+		return bestCandidate;
+	}
+
+	/**
+	 * @return
+	 */
+	public int getBestDistance() {
+		return bestDistance;
+	}
+
+	/**
+	 * @param point
+	 */
+	public void setBestCandidate(PinPoint point) {
+		bestCandidate = point;
+	}
+
+	/**
+	 * @param i
+	 */
+	public void setBestDistance(int dist) {
+		bestDistance = dist;
+	}
+
 }
