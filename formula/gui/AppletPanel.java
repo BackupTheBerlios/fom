@@ -6,7 +6,6 @@ package gui;
 
 import java.applet.Applet;
 import java.awt.*;
-import java.util.*;
 
 import utils.*;
 import formula.*;
@@ -42,25 +41,31 @@ public class AppletPanel extends Applet {
 		return pnlControls;
 	}
 	
+	
 	public DragnDropListener getDragnDropListener() {
 		return dnd;
 	}
+
 
 	public ElementPanel getElementPanel() {
 		return pnlElements;
 	}
 
+
 	public FormulaPanel getFormulaPanel() {
 		return pnlFormula;
 	}
+
 	
 	public HotkeyListener getHotkeyListener() {
 		return hotkey;
 	}
 
+
 	public Selection getSelection() {
 		return dnd.getSelection();
 	}
+
 
 	/**
 	 * @return Returns an array that contains all trees in the formula panel. A tree in this case is a formula element with
@@ -69,6 +74,7 @@ public class AppletPanel extends Applet {
 	public final FormulaList getTreeList() {
 		return treeList;
 	}
+
 
 	/**
 	 * Initializes the applet. Adds all necessary components, etc.
