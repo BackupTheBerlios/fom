@@ -75,16 +75,16 @@ public abstract class Formula extends Container implements Cloneable {
 	public void paint(Graphics g) {
 		super.paint(g);
 		//TODO Grafik verbessern
-		//((Graphics2D)g).scale(scaleX,scaleY);
-		setSize((int)(FORMULAWIDTH+1),(int)(FORMULAHEIGHT+1));
-		g.setColor(Color.BLACK);
-		g.drawRect(0,5,FORMULAWIDTH,30);
-		g.setFont(new Font("Arial",Font.PLAIN,10));
-		g.drawString(formulaName,(FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2,25); // Align: center
-		for(int i=0;i<getInputCount();i++){
-			g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1),35,(i+1)*FORMULAWIDTH/(getInputCount()+1),40);
-		}
-		g.drawLine(FORMULAWIDTH/2 +1,5,FORMULAWIDTH/2 +1,0);
+				//((Graphics2D)g).scale(scaleX,scaleY);
+				setSize((int)(FORMULAWIDTH+1),(int)(FORMULAHEIGHT+1));
+				g.setColor(Color.BLACK);
+				g.drawRect(0,5,FORMULAWIDTH,30);
+				g.setFont(new Font("Arial",Font.PLAIN,10));
+				g.drawString(formulaName,(FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2,25); // Align: center
+				for(int i=0;i<getInputCount();i++){
+					g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1),35,(i+1)*FORMULAWIDTH/(getInputCount()+1),40);
+				}
+				g.drawLine(FORMULAWIDTH/2 +1,5,FORMULAWIDTH/2 +1,0);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public abstract class Formula extends Container implements Cloneable {
 		return input.length;
 	}
 
-// TODO getInputTypes / getOutputTypes
+
 	/**
 	 * @param index number of input (0=left...max-1=right).
 	 * @return Returns an array of all possible classes for input.
@@ -181,37 +181,37 @@ public abstract class Formula extends Container implements Cloneable {
 		}
 		return complete;
 	}
-	/**
-	 * A Formula-Object tries to connect to an input of this Formula-Object.
-	 * @param in Which Formula-Object tries to connect
-	 * @param whichInput To which input
-	 * @return Is Formula-Object allowed to connect 
-	 */
-	public abstract boolean isValidInput(Formula in, int whichInput);
-
-	/**
-	 * A Formula-Object tries to connect to output of this Formula-Object.
-	 * @param in Which Formula-Object tries to connect.
-	 * @param whichInput Which input tries to connect.
-	 * @return Is Formula-Object allowed to connect.
-	 */
-	public abstract boolean isValidOutput(Formula in, int whichInput);
-
-
 //	/**
-//	 * Checks, on which input a specific Formula-Object is.
-//	 * @param toFind Formula-Object, which is searched.
-//	 * @param whereToFind Formula-Object, whose inputs have to be checked.
-//	 * @return Returns value of input index, -1 if it isn't found.
+//	 * A Formula-Object tries to connect to an input of this Formula-Object.
+//	 * @param in Which Formula-Object tries to connect
+//	 * @param whichInput To which input
+//	 * @return Is Formula-Object allowed to connect 
 //	 */
-//	protected int indexOfInput(Formula toFind, Formula whereToFind) {
-//		int index = -1;
-//		for (int i = 0; i < whereToFind.getInputCount() && index != -1; i++) {
-//			if (toFind == whereToFind.input[i])
-//				index = i; 
-//		}
-//		return index;
-//	}
+//	public abstract boolean isValidInput(Formula in, int whichInput);
+//
+//	/**
+//	 * A Formula-Object tries to connect to output of this Formula-Object.
+//	 * @param in Which Formula-Object tries to connect.
+//	 * @param whichInput Which input tries to connect.
+//	 * @return Is Formula-Object allowed to connect.
+//	 */
+//	public abstract boolean isValidOutput(Formula in, int whichInput);
+
+
+	/**
+	 * Checks, on which input a specific Formula-Object is.
+	 * @param toFind Formula-Object, which is searched.
+	 * @param whereToFind Formula-Object, whose inputs have to be checked.
+	 * @return Returns value of input index, -1 if it isn't found.
+	 */
+	protected int indexOfInput(Formula toFind, Formula whereToFind) {
+		int index = -1;
+		for (int i = 0; i < whereToFind.getInputCount() && index != -1; i++) {
+			if (toFind == whereToFind.input[i])
+				index = i; 
+		}
+		return index;
+	}
 
 	public static Formula[] getTreeList() {
 		return treeList;
