@@ -1,5 +1,5 @@
 /*
- * Created on 05.07.2004
+ * Created on 08.07.2004
  *
  */
 package formula;
@@ -32,7 +32,7 @@ public class Rad2deg extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(rad (";
+		String outString = "(deg (";
 		if (input[0] != null)
 			outString += input[0].toString();
 		outString += "))";

@@ -8,18 +8,18 @@ package formula;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
-public class Const_e extends NumberFormula {
+public class ConstPi extends NumberFormula {
 
 	public final void calc() throws FormulaException {
-		result = new Double (Math.E);
+		result = new Double (Math.PI);
 	}
 	
 	/**
-	 * Creates an "e".
+	 * Creates a "pi".
 	 */
-	public Const_e() {
+	public ConstPi() {
 		input = new Formula[0];
-		formulaName = "e";
+		formulaName = "pi";
 	}
 	
 	/**
@@ -27,7 +27,7 @@ public class Const_e extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(e)";
+		String outString = "(pi)";
 		return outString;
 	}
 

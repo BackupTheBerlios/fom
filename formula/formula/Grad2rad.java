@@ -10,21 +10,21 @@ import utils.Messages;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
-public class Deg2rad extends NumberFormula {
+public class Grad2rad extends NumberFormula {
 
 	public final void calc() throws FormulaException {
 		if (input[0] == null)
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-			result = new Double (Math.PI*input[0].getDoubleResult()/180);
+			result = new Double (Math.PI*input[0].getDoubleResult()/200);
 	}
 
 	/**
-	 * Creates a "deg to rad" with 1 input.
+	 * Creates a "grad to rad" with 1 input.
 	 */
-	public Deg2rad() {
+	public Grad2rad() {
 		input = new Formula[1];
-		formulaName = "deg to rad";
+		formulaName = "grad to rad";
 	}
 	
 	/**
