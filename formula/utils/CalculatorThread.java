@@ -48,7 +48,7 @@ public class CalculatorThread extends Thread {
 
 
 	public void run() {
-		System.out.println("DEBUG[run]: start running");
+		System.out.println("DEBUG[CalculatorThread]: start running");
 		Formula form;
 		while (running) {
 			while (animating) {
@@ -74,7 +74,7 @@ public class CalculatorThread extends Thread {
 			}
 			
 		}
-		System.out.println("DEBUG[run]: stop running");
+		System.out.println("DEBUG[CalculatorThread]: stop running");
 	}
 
 

@@ -22,7 +22,7 @@ public class FormulaTextField extends TextField {
 	public FormulaTextField(ControlPanel cp,String string) {
 		super(string);
 		setEditable(false);
-		setColumns(20);
+		//setColumns(20);
 		setBackground(SystemColor.text);
 		this.cPanel = cp;
 	}

@@ -59,25 +59,20 @@ public class ControlPanel extends Panel {
 		setLayout(gbl);
 		
 		//adding the components (in sub-panels) to this panel:
-		Panel plLabel=new Panel();
-		plLabel.setLayout(new FlowLayout(FlowLayout.LEFT,2,2));
-		plLabel.add(tfFormula);
-		GUIToolkit.addComponent(this,gbl,plLabel,0,0,1,2,0.0,1.0,GridBagConstraints.NONE);
+		GUIToolkit.addComponent(this,gbl,tfFormula,0,0,6,1,1.0,0.0,GridBagConstraints.BOTH);
 		
-		Panel plTop=new Panel(new GridLayout(1,4,8,8));
-		plTop.add(btnReset);
-		plTop.add(btnCalcAni);
-		plTop.add(btnCalcStep);
-		plTop.add(btnCalcAll);
-		GUIToolkit.addComponent(this,gbl,plTop,1,0,1,1,1.0,0.0,GridBagConstraints.BOTH);
+		GUIToolkit.addComponent(this,gbl,btnVariables,0,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+		GUIToolkit.addComponent(this,gbl,btnCalcStep,1,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+		GUIToolkit.addComponent(this,gbl,btnCalcAll,2,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+		GUIToolkit.addComponent(this,gbl,btnCalcAni,3,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+				
+		Panel plSpeeds=new Panel(new BorderLayout(8,8));
+		plSpeeds.add(lblSpeed,BorderLayout.WEST);
+		plSpeeds.add(sbSpeed,BorderLayout.CENTER);
 		
-		Panel plBottom=new Panel(new BorderLayout(8,8));
-		plBottom.add(lblSpeed,BorderLayout.WEST);
-		plBottom.add(sbSpeed,BorderLayout.CENTER);
-		GUIToolkit.addComponent(this,gbl,plBottom,1,1,1,1,1.0,0.0,GridBagConstraints.BOTH);
-
-		GUIToolkit.addComponent(this,gbl,btnVariables,2,0,1,1,0.0,0.0,GridBagConstraints.NONE);
-
+		GUIToolkit.addComponent(this,gbl,plSpeeds,4,1,1,1,1.0,0.0,GridBagConstraints.BOTH);
+		GUIToolkit.addComponent(this,gbl,btnReset,5,1,1,1,0.0,0.0,GridBagConstraints.NONE);
+		
 		//adding the listeners:
 		btnCalcAll.addActionListener(cpListener);
 		btnCalcAni.addActionListener(cpListener);
