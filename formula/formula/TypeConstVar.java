@@ -1,4 +1,4 @@
-/* $Id: TypeConstVar.java,v 1.7 2004/09/07 13:40:00 shadowice Exp $
+/* $Id: TypeConstVar.java,v 1.8 2004/09/08 13:05:42 shadowice Exp $
  * Created on 17.07.2004
  */
 package formula;
@@ -13,11 +13,11 @@ import java.util.*;
  * <li>a list of ConstVarFormula objects that use this name</li>
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @see VariableBoolean
  * @see VariableNumber
  */
-public class TypeConstVar {
+public class TypeConstVar{
 
 	private Object value;
 	private String name;

@@ -1,4 +1,4 @@
-/* $Id: ControlPanelListener.java,v 1.15 2004/09/03 14:51:19 shadowice Exp $
+/* $Id: ControlPanelListener.java,v 1.16 2004/09/08 13:05:42 shadowice Exp $
  * Created on 12.05.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public class ControlPanelListener implements ActionListener {
 	
@@ -18,6 +18,8 @@ public class ControlPanelListener implements ActionListener {
 	private AppletPanel aPanel;
 	private ControlPanel cPanel;
 	private CalculatorThread calcThread;
+	private DialogVariables varDialog;
+	
 	
 	/**
 	 * Creates a new ControlPanelListener.
@@ -29,6 +31,7 @@ public class ControlPanelListener implements ActionListener {
 		this.aPanel = ap;
 		this.cPanel = cp;
 		this.calcThread = new CalculatorThread(ap);
+		this.varDialog = new DialogVariables(ap);
 		calcThread.start();
 	}
 	
@@ -63,7 +66,8 @@ public class ControlPanelListener implements ActionListener {
 			aPanel.getTreeList().clearResults();
 			aPanel.getControlPanel().updateTfResult("");
 		} else if (actionCommand.equals(Messages.getString("ControlPanel.BtnVariables"))) {
-			DialogVariables dv = new DialogVariables(aPanel);
+			aPanel.getVariableList().sort();
+			varDialog.show();
 		}
 	}
 

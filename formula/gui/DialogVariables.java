@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.19 2004/09/06 13:08:01 br3001 Exp $
+/* $Id: DialogVariables.java,v 1.20 2004/09/08 13:05:42 shadowice Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -6,26 +6,28 @@ package gui;
 import java.awt.*;
 import java.awt.event.*;
 
+import utils.FOMToolkit;
 import utils.Messages;
 import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
 
-	//private Panel spaceForInputs;
-	private GridBagLayout spaceForInputs;
-	private ScrollPane scrollForInputs;
-	private Button okButton;
-	private TextField[] varName;
-	private TextField[] varValueNumber;
-	private Button[] varValueBoolean;
-	private String[] oldVarName;
+	private GridBagLayout 	gblVariablePanel;
+	private ScrollPane 		scrollForVariables;
+	private Button 			okButton;
+	private TextField[] 		varName;
+	private TextField[] 		varValueNumber;
+	private Button[] 			varValueBoolean;
+	private String[] 			oldVarName;
+	private Panel				variablesPanel;
+	private Label				lblNoVariables;
 	
-	private AppletPanel aPanel;
+	private AppletPanel 		aPanel;
 	
 	
 	/**
@@ -33,65 +35,72 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 */
 	public DialogVariables(AppletPanel parent) {
 		super((Frame)parent.getParent().getParent(), Messages.getString("DialogVariables.Title"), true);
+
 		setLocation(300,100);
+
 		Object value;		
 		this.aPanel = parent;
-		TypeConstVar[] varArray = aPanel.getVariableList().toVarArray();
-		Panel dummyPanel;
-		GridBagConstraints spaceForInputsNameField = new GridBagConstraints();
-		GridBagConstraints spaceForInputsValueField = new GridBagConstraints();		
-		varName = new TextField[varArray.length];
-		varValueNumber = new TextField[varArray.length];
-		varValueBoolean = new Button[varArray.length];
-		oldVarName = new String[varArray.length];
-		spaceForInputs = new GridBagLayout();
-		dummyPanel = new Panel(spaceForInputs);
-		scrollForInputs = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
-		scrollForInputs.add(dummyPanel);
-		spaceForInputsNameField.fill = GridBagConstraints.BOTH;
-		spaceForInputsNameField.weightx = 1.0;
-		spaceForInputsValueField.fill = GridBagConstraints.BOTH;
-		spaceForInputsValueField.weightx = 1.0;
-		spaceForInputsValueField.gridwidth = GridBagConstraints.REMAINDER;
 
-		for (int i=0; i < varArray.length; i++) {
-			//Reading all variables and creating their input fields.
-			varName[i] = new TextField(varArray[i].getName());
-			varName[i].setFont(new Font("Arial", Font.PLAIN, 11));
-			varName[i].setBackground(Color.white);
-			varName[i].addTextListener(this);
-			spaceForInputs.setConstraints(varName[i], spaceForInputsNameField);
-			dummyPanel.add(varName[i]);
-			oldVarName[i] = varArray[i].getName();
-			value = varArray[i].getValue();
-			if (value instanceof Boolean) {
-				//Boolean variable.
-				varValueBoolean[i] = new Button(((Boolean)value).toString());
-				varValueBoolean[i].setFont(new Font("Arial", Font.PLAIN, 11));
-				varValueBoolean[i].addActionListener(this);
-				spaceForInputs.setConstraints(varValueBoolean[i], spaceForInputsValueField);
-				dummyPanel.add(varValueBoolean[i]);
-			} else if (value instanceof Number) {
-				//Number variable.
-				varValueNumber[i] = new TextField(((Number)value).toString());
-				varValueNumber[i].setFont(new Font("Arial", Font.PLAIN, 11));
-				varValueNumber[i].setBackground(Color.white);
-				varValueNumber[i].addTextListener(this);
-				spaceForInputs.setConstraints(varValueNumber[i], spaceForInputsValueField);
-				dummyPanel.add(varValueNumber[i]);
-			}
-		}
+		gblVariablePanel 	= new GridBagLayout();
+		variablesPanel 		= new Panel(gblVariablePanel);
+		scrollForVariables 	= new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
+		lblNoVariables		= new Label(Messages.getString("DialogVariables.NoVariablesLabel"),Label.CENTER);
+
 		//Closing button
 		okButton = new Button("OK");
 		okButton.addActionListener(this);
 		add(okButton, BorderLayout.SOUTH);
 
-		add(scrollForInputs, BorderLayout.CENTER);
-		pack();  //Needed for calculating proper height of dialog.
-		scrollForInputs.setSize(dummyPanel.getPreferredSize().width + scrollForInputs.getInsets().left + scrollForInputs.getInsets().right, dummyPanel.getPreferredSize().height + 5);
-		this.setSize(this.getPreferredSize());
+		scrollForVariables.add(variablesPanel);
+		add(scrollForVariables, BorderLayout.CENTER);
+		
 		addWindowListener(this);
-		show();
+	}
+
+
+	public void show() {
+		variablesPanel.removeAll();
+
+		TypeConstVar[] varArray = aPanel.getVariableList().toVarArray();
+
+		varName 				= new TextField[varArray.length];
+		varValueNumber 	= new TextField[varArray.length];
+		varValueBoolean 	= new Button[varArray.length];
+		oldVarName 			= new String[varArray.length];
+
+		Object value;
+		for (int i=0; i < varArray.length; i++) {
+			//Reading all variables and creating their input fields.
+			varName[i] = new TextField(varArray[i].getName(),10);
+			varName[i].setBackground(Color.white);
+			varName[i].addTextListener(this);
+			FOMToolkit.addComponent(variablesPanel,gblVariablePanel,varName[i],0,i,1,1,0.5,0.0,GridBagConstraints.HORIZONTAL);
+			oldVarName[i] = varArray[i].getName();
+			value = varArray[i].getValue();
+			if (value instanceof Boolean) {
+				//Boolean variable.
+				varValueBoolean[i] = new Button(((Boolean)value).toString());
+				varValueBoolean[i].addActionListener(this);
+				FOMToolkit.addComponent(variablesPanel,gblVariablePanel,varValueBoolean[i],1,i,1,1,0.5,0.0,GridBagConstraints.HORIZONTAL);
+			} else if (value instanceof Number) {
+				//Number variable.
+				varValueNumber[i] = new TextField(((Number)value).toString(),5);
+				varValueNumber[i].setBackground(Color.white);
+				varValueNumber[i].addTextListener(this);
+				FOMToolkit.addComponent(variablesPanel,gblVariablePanel,varValueNumber[i],1,i,1,1,0.0,0.0,GridBagConstraints.HORIZONTAL);
+			}
+		}
+
+		if (varArray.length == 0) {
+			FOMToolkit.addComponent(variablesPanel,gblVariablePanel,lblNoVariables,0,0,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
+		}
+
+		variablesPanel.validate();
+		pack();
+		scrollForVariables.setSize(variablesPanel.getPreferredSize().width+scrollForVariables.getInsets().left + scrollForVariables.getInsets().right,
+											variablesPanel.getPreferredSize().height + scrollForVariables.getInsets().top + scrollForVariables.getInsets().bottom);
+		pack();
+		super.show();
 	}
 
 
@@ -194,10 +203,9 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 */
 	public void actionPerformed(ActionEvent txtEvent) {
 		int index = getArrayPosition(txtEvent.getSource(), varValueBoolean);
-		if (index == -1) {
-			//Closes dialog (OK button pressed).
-			dispose();
-		} else {
+		if (index == -1) {		// OK button pressed:
+			hide();
+		} else {					// boolean variable button pressed:
 			if (isValidName(varName[index].getText())) {
 				//Replaces value, if variable name is valid.
 				if (varValueBoolean[index].getLabel() == "false") {
@@ -214,7 +222,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 
 	// Methods from WindowListener:
 	public void windowClosing(WindowEvent wEvent) {
-		dispose();
+		hide();
 	}
 
 

@@ -1,14 +1,15 @@
-/* $Id: VariableList.java,v 1.3 2004/09/07 13:40:00 shadowice Exp $
+/* $Id: VariableList.java,v 1.4 2004/09/08 13:05:42 shadowice Exp $
  * Created on 24.08.2004
  */
 package formula;
 
-import java.util.Collection;
-import java.util.Vector;
+import java.util.*;
 
 /**
+ * Class to store a list of variables.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class VariableList extends Vector {
 
@@ -21,33 +22,14 @@ public class VariableList extends Vector {
 
 
 	/**
-	 * @param initialCapacity
-	 */
-	public VariableList(int initialCapacity) {
-		super(initialCapacity);
-	}
-
-
-	/**
-	 * @param initialCapacity
-	 * @param capacityIncrement
-	 */
-	public VariableList(int initialCapacity, int capacityIncrement) {
-		super(initialCapacity, capacityIncrement);
-	}
-
-
-	/**
-	 * @param c
+	 * Creates a new variable list from the values of the collection.
+	 * 
+	 * @param c values to copy to the new list
 	 */
 	public VariableList(Collection c) {
 		super(c);
 	}
 
-
-	/* ---------------------------------------------*/
-	/* old methods from ConstVarFormula: 			*/
-	/* ---------------------------------------------*/
 
 	/**
 	 * Searches in this VariableList for a TypeConstVar with a certain variable name.
@@ -222,6 +204,28 @@ public class VariableList extends Vector {
 			}
 		}
 		return valid;
+	}
+	
+
+	/**
+	 * BubbleSort to sort this vector.
+	 */
+	public void sort() {
+		int a=0;
+		TypeConstVar var_a,var_b;
+		while (a < size()) {
+			int b = a + 1;
+			while (b < size()) {
+				var_a = (TypeConstVar)elementAt(a);
+				var_b = (TypeConstVar)elementAt(b);
+				if (var_a.getName().compareTo(var_b.getName()) > 0) {
+					setElementAt(var_a,b);
+					setElementAt(var_b,a);					
+				}
+				b++;
+			}
+			a++;
+		}
 	}
 
 }

@@ -1,18 +1,20 @@
-/* $Id: CalculatorThread.java,v 1.6 2004/09/07 13:40:00 shadowice Exp $
+/* $Id: CalculatorThread.java,v 1.7 2004/09/08 13:05:42 shadowice Exp $
  * Created on 16.08.2004
  *
  */
 package utils;
 
+import java.awt.*;
+import java.util.*;
+
 import gui.*;
 import formula.*;
-import java.util.*;
 
 /**
  * Thread that handles (animated and non-animated) calculation of the formula tree.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class CalculatorThread extends Thread {
 
@@ -56,7 +58,15 @@ public class CalculatorThread extends Thread {
 		Formula form;
 		while (running) {
 			while (animating) {
+				ScrollPane sp = (ScrollPane)aPanel.getFormulaPanel().getParent();
 				calcStep();
+				if (sp.getScrollPosition().x > lastFormula.getLocation().x + lastFormula.getSize().width) {
+					System.out.println("outside left");
+				} else if (sp.getScrollPosition().x + sp.getViewportSize().width < lastFormula.getLocation().x) {
+					System.out.println("outside right");
+				}
+				
+				
 				try {
 					sleep(aPanel.getControlPanel().getSpeed());
 				} catch (InterruptedException ie) {
