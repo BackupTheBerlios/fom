@@ -16,15 +16,15 @@ public class Sqrt extends NumberFormula {
 		if (input[0] == null)
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-			result = new Double(Math.sqrt(input[0].getDoubleResult()));
+			result = new Double (Math.sqrt(input[0].getDoubleResult()));
 	}
 
 	/**
-	 * Creates a "SQRT" with an input.
+	 * Creates a "SQRT" with 1 input.
 	 */
 	public Sqrt() {
-		input=new Formula[1];
-		formulaName="SQRT";
+		input = new Formula[1];
+		formulaName = "SQRT";
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class Sqrt extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "SQRT(";
+		String outString = "(SQRT ";
 		if (input[0] != null)
 			outString += input[0].toString();
 		outString += ")";
