@@ -1,4 +1,4 @@
-/* $Id: CustomFormulaDialog.java,v 1.1 2004/08/26 16:54:38 shadowice Exp $
+/* $Id: CustomFormulaDialog.java,v 1.2 2004/08/29 16:28:52 br3001 Exp $
  * Created on 26.08.2004
  *
  */
@@ -12,7 +12,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class CustomFormulaDialog extends Dialog implements ActionListener, WindowListener {
 
@@ -38,7 +38,7 @@ public class CustomFormulaDialog extends Dialog implements ActionListener, Windo
 		lblName			= new Label(Messages.getString("CustomFormulaDialog.NameLabel"),Label.RIGHT);
 		borderedPanel	= new Panel(new FlowLayout(FlowLayout.CENTER,5,5));
 		
-		borderedPanel.setBackground(Color.WHITE);
+		borderedPanel.setBackground(Color.white);
 		setLayout(gbl);
 		setSize(Formula.FORMULAWIDTH*2,180);
 		
