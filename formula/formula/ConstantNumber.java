@@ -4,6 +4,7 @@
 package formula;
 import java.awt.*;
 import java.awt.event.*;
+import gui.*;
 
 /**
  * Class for constant numbers.
@@ -57,6 +58,9 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 			repaint();
 		} else {
 			inputNumber.setBackground(Color.RED);
+		}
+		if (getParent() instanceof FormulaPanel) {
+			((AppletPanel)getParent().getParent().getParent()).getControlPanel().getLblFormula().updateControlPanelText();
 		}
 	}
 
