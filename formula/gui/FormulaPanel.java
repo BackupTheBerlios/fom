@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.37 2004/09/08 13:41:40 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.38 2004/09/08 14:18:48 shadowice Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -13,7 +13,7 @@ import utils.*;
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.37 $
+ * @version $Revision: 1.38 $
  */
 public class FormulaPanel extends Panel {
 
@@ -41,7 +41,7 @@ public class FormulaPanel extends Panel {
 		this.aPanel = ap;
 		setLayout(new TreeLayout());
 		setBackground(Color.white);
-		setSize(2000,1500);
+		setSize(1500,1200);
 	}
 
 
@@ -148,20 +148,30 @@ public class FormulaPanel extends Panel {
 
 
 	public boolean isDoubleBuffered() {
-		return true;
+		return false;
 	}
 
 
+	// NOTE faster double buffer would work, but this version is too slow!
 	public void update(Graphics g) {
-		if ((bufferImage == null) || (getWidth() > lastBufferWidth) || (getHeight() > lastBufferHeight)) {
+		/*if ((bufferImage == null) || (getWidth() > lastBufferWidth) || (getHeight() > lastBufferHeight)) {
 			lastBufferWidth = getWidth();
 			lastBufferHeight = getHeight();
 			bufferImage = createImage(lastBufferWidth,lastBufferHeight);
 		}
+		
+		ScrollPane sp = (ScrollPane)getParent();
+		int clip_x = sp.getScrollPosition().x;
+		int clip_y = sp.getScrollPosition().y;
+		int width = sp.getViewportSize().width;
+		int height = sp.getViewportSize().height;
+		
 		Graphics bufferGraphics = bufferImage.getGraphics();
 		paint(bufferGraphics);
+		g.setClip(clip_x,clip_y,width,height);
 		g.drawImage(bufferImage,0,0,this);
-		bufferGraphics.dispose();
+		bufferGraphics.dispose();*/
+		paint(g);
 	}
 
 
