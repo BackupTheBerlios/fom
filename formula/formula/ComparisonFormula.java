@@ -29,25 +29,26 @@ public abstract class ComparisonFormula extends Formula {
 	public void clearResult() {
 		result = null;
 	}
-//TODO getInputTypes / getOutputTypes
-	public Class[] getInputTypes(int in) {
-		return new Class[0];
+	public Class[] getInputTypes(int index) throws FormulaException {
+		Class[] classArray = {Number.class};
+		return classArray;
 	}
 
-	public Class[] getOutputTypes() {
-		return new Class[0];
+	public Class[] getOutputTypes() throws FormulaException {
+		Class[] classArray = {Boolean.class};
+		return classArray;
 	}
 
 	public double getDoubleResult() throws FormulaException {
 		throw new FormulaException(Messages.getString("Error.IllegalDforB"));
 	}
 
-	public boolean isValidInput(Formula in, int whichInput) {
-		return false;
-	}
-
-	public boolean isValidOutput(Formula in, int whichInput) {
-		return false;
-	}
+//	public boolean isValidInput(Formula in, int whichInput) {
+//		return false;
+//	}
+//
+//	public boolean isValidOutput(Formula in, int whichInput) {
+//		return false;
+//	}
 
 }

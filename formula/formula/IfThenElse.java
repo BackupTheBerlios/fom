@@ -14,7 +14,6 @@ public class IfThenElse extends MixedFormula {
 // TODO Alles
 	/* (non-Javadoc)
 	 * @see formula.MixedFormula#calc()
-	 * MAURICE Wie kann ich den Typ eine Object abfragen?
 	 */
 	public final Object calc() throws FormulaException {
 		if ((input[0] == null) || (input[1] == null) || (input[2] == null))
@@ -26,12 +25,25 @@ public class IfThenElse extends MixedFormula {
 	 * @see formula.Formula#toString()
 	 */
 	public final String toString() {
-		return null;
+		String outString = "(If(";
+		if (input[0] != null)
+			outString += input[0].toString();
+		outString += ")then(";
+		if (input[1] != null)
+			outString += input[1].toString();
+		outString += ")else(";
+		if (input[2] != null)
+			outString += input[1].toString();
+		outString += ")";
+		return outString;
 	}
 
 
 	public final double getDoubleResult() {
-		return 0;
+		if (result != null && result instanceof Double)
+			return result;
+		else
+			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
 	}
 
 //	public final long getLongResult() {
@@ -39,23 +51,38 @@ public class IfThenElse extends MixedFormula {
 //	}
 
 	public final boolean getBooleanResult() {
-		return false;
+		if (result != null && result instanceof Boolean)
+			return result;
+		else
+			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
 
-	public final Class[] getInputTypes(int in) {
-		return new Class[0];
+	public final Class[] getInputTypes(int index) {
+		Class[] classArray;
+		if (index == 0) {
+			classArray = new Class[1];
+			classArray[0] = Boolean.class; }
+		//TODO Else-Block noch falsch
+		else {
+			if (output == null && input[1] == null && input[2] == null) {
+				classArray = new Class[2];
+				classArray[0] = Boolean.class;
+				classArray[1] = Number.class; }
+			else {
+			}}
+		return classArray;
 	}
 
 	public final Class[] getOutputTypes() {
 		return new Class[0];
 	}
 
-	public final boolean isValidInput(Formula in, int whichInput) {
-		return false;
-	}
-
-	public final boolean isValidOutput(Formula in, int whichInput) {
-		return false;
-	}
+//	public final boolean isValidInput(Formula in, int whichInput) {
+//		return false;
+//	}
+//
+//	public final boolean isValidOutput(Formula in, int whichInput) {
+//		return false;
+//	}
 
 }

@@ -52,21 +52,35 @@ public abstract class KonstVarFormula extends Formula {
 	public void clearResult() {
 		result = null;
 	}
-//TODO getInputTypes / getOutputTypes
-	public Class[] getInputTypes(int in) {
+//TODO getInputTypes
+	public Class[] getInputTypes(int index) throws FormulaException {
 		return new Class[0];
 	}
 
-	public Class[] getOutputTypes() {
-		return new Class[0];
+	public Class[] getOutputTypes() throws FormulaException {
+		Class[] classArray;
+		if (result == null) {
+			classArray = new Class[2];
+			classArray[0] = Boolean.class;
+			classArray[1] = Number.class; }
+		else {
+			classArray = new Class[1];
+			if (result instanceof Boolean)
+				classArray[0] = Boolean.class;
+			else if (result instanceof Number)
+				classArray[0] = Number.class;
+			else
+				throw new FormulaException(Messages.getString("Error.IllegalDataType"));
+		}
+		return classArray;
 	}
 
-	public boolean isValidInput(Formula in, int whichInput) {
-		return false;
-	}
-// TODO isValidOutput
-	public boolean isValidOutput(Formula in, int whichInput) {
-		return false;
-	}
+//	public boolean isValidInput(Formula in, int whichInput) {
+//		return false;
+//	}
+//
+//	public boolean isValidOutput(Formula in, int whichInput) {
+//		return false;
+//	}
 
 }
