@@ -20,7 +20,19 @@ public class AppletPanel extends Applet {
 
 	private ElementPanel pnlElements;
 
+	/**
+	 * Initializes the applet. Adds all necessary components, etc.
+	 */
 	public void init() {
+		setLayout(new BorderLayout());
+		
+		pnlElements=new ElementPanel();
+		pnlControls=new ControlPanel();
+		pnlFormula=new FormulaPanel();
+		
+		add(pnlElements,BorderLayout.WEST);
+		add(pnlControls,BorderLayout.SOUTH);
+		add(pnlFormula,BorderLayout.CENTER);
 	}
 
 	public FormulaPanel getPnlFormula() {
@@ -48,6 +60,7 @@ public class AppletPanel extends Applet {
 	}
 
 	public AppletPanel() {
+		init();
 	}
 
 }
