@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.30 2004/09/03 14:51:19 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.31 2004/09/06 13:08:00 br3001 Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -14,7 +14,7 @@ import utils.*;
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.30 $
+ * @version $Revision: 1.31 $
  */
 public class FormulaPanel extends Panel {
 
@@ -41,7 +41,7 @@ public class FormulaPanel extends Panel {
 	public FormulaPanel(AppletPanel ap) {
 		this.aPanel = ap;
 		setLayout(new TreeLayout());
-		setBackground(SystemColor.text);
+		setBackground(Color.white);
 	}
 
 
@@ -172,7 +172,7 @@ public class FormulaPanel extends Panel {
 		super.paint(g);
 		// paint connections between pins:
 		PinPoint pp;
-		g.setColor(Color.DARK_GRAY);
+		g.setColor(Color.darkGray);
 		for (int i=0;i<outputPinList.size();i++) {
 			pp = (PinPoint)outputPinList.get(i);
 			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
@@ -186,7 +186,7 @@ public class FormulaPanel extends Panel {
 			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5);
 		}*/
 
-		g.setColor(Color.RED);
+		g.setColor(Color.red);
 		for (int i=0;i<tempInPPList.size();i++) {
 			pp = (PinPoint)tempInPPList.get(i);
 			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!

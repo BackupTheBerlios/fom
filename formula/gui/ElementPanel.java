@@ -1,4 +1,4 @@
-/* $Id: ElementPanel.java,v 1.25 2004/09/03 14:51:19 shadowice Exp $
+/* $Id: ElementPanel.java,v 1.26 2004/09/06 13:08:01 br3001 Exp $
  * Created on 26.04.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 public class ElementPanel extends Panel {
 
@@ -56,8 +56,8 @@ public class ElementPanel extends Panel {
 		elementPanel.addMouseListener(dnd);
 		elementPanel.addMouseMotionListener(dnd);
 		//visible settings:
-		scpElementList.setBackground(SystemColor.text);
-		elementPanel.setBackground(SystemColor.text);
+		scpElementList.setBackground(Color.white);
+		elementPanel.setBackground(Color.white);
 		setBackground(SystemColor.activeCaptionBorder);
 		//layouts:
 		setLayout(gbl);

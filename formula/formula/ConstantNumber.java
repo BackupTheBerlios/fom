@@ -1,4 +1,4 @@
-/* $Id: ConstantNumber.java,v 1.30 2004/09/03 14:51:19 shadowice Exp $
+/* $Id: ConstantNumber.java,v 1.31 2004/09/06 13:08:01 br3001 Exp $
  * Created on 27.06.2004
  */
 package formula;
@@ -12,7 +12,7 @@ import gui.*;
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.30 $
+ * @version $Revision: 1.31 $
  */
 public class ConstantNumber extends ConstVarFormula implements TextListener {
 
@@ -44,7 +44,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 			setEnabled(false);
 		}
 		add(inputNumber);
-		inputNumber.setBackground(SystemColor.text);
+		inputNumber.setBackground(Color.white);
 		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
 		inputNumber.setFont(DEFAULT_FONT);
 	}
@@ -62,9 +62,9 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 
 		try {
 			result = new Double(newInput.replace(',','.'));
-			inputNumber.setBackground(SystemColor.text);
+			inputNumber.setBackground(Color.white);
 		} catch (NumberFormatException nfe) {
-			inputNumber.setBackground(Color.RED);
+			inputNumber.setBackground(Color.red);
 		} finally {
 			repaint();
 		}

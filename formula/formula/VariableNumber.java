@@ -38,7 +38,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		result = new Double (0);
 		inputVarName = new TextField();
 		inputVarName.setFont(DEFAULT_FONT);
-		inputVarName.setBackground(SystemColor.text);
+		inputVarName.setBackground(Color.white);
 		inputVarName.setText("number1");
 		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
 		if (elementChooser) {
@@ -88,11 +88,11 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 					varList.deleteVarList(this, oldName);
 				}
 				varList.addVarList(this);
-				inputVarName.setBackground(SystemColor.text);
+				inputVarName.setBackground(Color.white);
 			} else {
 				varList.deleteVarList(this, oldName);
 				result = new Double(0);
-				inputVarName.setBackground(Color.RED);
+				inputVarName.setBackground(Color.red);
 			}
 			oldName = newName;
 			

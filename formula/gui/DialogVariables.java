@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.18 2004/09/02 13:49:08 shadowice Exp $
+/* $Id: DialogVariables.java,v 1.19 2004/09/06 13:08:01 br3001 Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -11,7 +11,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
@@ -58,7 +58,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 			//Reading all variables and creating their input fields.
 			varName[i] = new TextField(varArray[i].getName());
 			varName[i].setFont(new Font("Arial", Font.PLAIN, 11));
-			varName[i].setBackground(SystemColor.text);
+			varName[i].setBackground(Color.white);
 			varName[i].addTextListener(this);
 			spaceForInputs.setConstraints(varName[i], spaceForInputsNameField);
 			dummyPanel.add(varName[i]);
@@ -75,7 +75,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 				//Number variable.
 				varValueNumber[i] = new TextField(((Number)value).toString());
 				varValueNumber[i].setFont(new Font("Arial", Font.PLAIN, 11));
-				varValueNumber[i].setBackground(SystemColor.text);
+				varValueNumber[i].setBackground(Color.white);
 				varValueNumber[i].addTextListener(this);
 				spaceForInputs.setConstraints(varValueNumber[i], spaceForInputsValueField);
 				dummyPanel.add(varValueNumber[i]);
@@ -155,12 +155,12 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 			if (isValidName(varName[index].getText())) {
 				aPanel.getVariableList().setVarNameAll(oldVarName[index], varName[index].getText());
 				oldVarName[index] = varName[index].getText();
-				varName[index].setBackground(SystemColor.text);
+				varName[index].setBackground(Color.white);
 			} else {
 				//Leere oder doppelete Variablennamen müssen verhindert werden.
 				aPanel.getVariableList().setVarNameAll(oldVarName[index], "$$InternTempCounter" + new Integer(index).toString() + "$$");
 				oldVarName[index] = "$$InternTempCounter" + new Integer(index).toString() + "$$";
-				varName[index].setBackground(Color.RED);
+				varName[index].setBackground(Color.red);
 			}
 		} else {
 			if (isValidName(varName[index].getText())) {
@@ -170,16 +170,16 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 					newInput = "0";
 				}
 				/*if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
-					varValueNumber[index].setBackground(SystemColor.text);
+					varValueNumber[index].setBackground(Color.white);
 					ConstVarFormula.setVarValueAll(varName[index].getText(), new Double(newInput.replace(',','.')));
 				} else {
-					varValueNumber[index].setBackground(Color.RED);
+					varValueNumber[index].setBackground(Color.red);
 				}*/
 				try {
 					aPanel.getVariableList().setVarValueAll(varName[index].getText(), new Double(newInput.replace(',','.')));
-					varValueNumber[index].setBackground(SystemColor.text);
+					varValueNumber[index].setBackground(Color.white);
 				} catch (NumberFormatException nfe) {
-					varValueNumber[index].setBackground(Color.RED);
+					varValueNumber[index].setBackground(Color.red);
 				} finally {
 					repaint();
 				}

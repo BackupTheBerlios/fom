@@ -1,4 +1,4 @@
-/* $Id: Formula.java,v 1.50 2004/09/06 13:02:06 shadowice Exp $
+/* $Id: Formula.java,v 1.51 2004/09/06 13:08:01 br3001 Exp $
  * Created on 05.04.2004
  */
 package formula;
@@ -14,7 +14,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.50 $
+ * @version $Revision: 1.51 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -183,7 +183,7 @@ public abstract class Formula extends Container implements Cloneable {
 
 		//Standard
 		if ((paintStatus & PAINTSTATUS_STANDARD) != 0) {
-			g.setColor(Color.BLACK);
+			g.setColor(Color.black);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
 			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
 			for (int i=0; i<getInputCount(); i++){
@@ -192,7 +192,7 @@ public abstract class Formula extends Container implements Cloneable {
 			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
 		//Selected Element
 		} else if ((paintStatus & PAINTSTATUS_SELECTED) != 0) {
-			g.setColor(Color.BLUE);
+			g.setColor(Color.blue);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
 			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
 			for (int i=0; i<getInputCount(); i++){
@@ -201,8 +201,15 @@ public abstract class Formula extends Container implements Cloneable {
 			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
 		//Move Element
 		} else if (((paintStatus & PAINTSTATUS_MOVING) != 0) || ((paintStatus & PAINTSTATUS_INSERTING) != 0)) {
-			g.setColor(Color.GRAY);
-			//Dotted Line
+			g.setColor(Color.lightGray);
+			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
+			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
+			for (int i=0; i<getInputCount(); i++){
+				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
+			}
+			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
+/* 			//Dotted Line
+			g.setColor(Color.gray);
 			for (int i=0; i<FORMULAWIDTH/4+1; i++) {
 				g.drawLine(i*4, CONNECTHEIGHT, i*4+2-1, CONNECTHEIGHT);
 				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2-1, CONNECTHEIGHT+RESULTHEIGHT);
@@ -216,6 +223,7 @@ public abstract class Formula extends Container implements Cloneable {
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
 			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
+*/
 		}
 		String name = getFormulaName();
 		g.drawString(name, (FORMULAWIDTH-g.getFontMetrics().stringWidth(name))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2);
