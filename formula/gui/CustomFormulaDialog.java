@@ -1,4 +1,4 @@
-/* $Id: CustomFormulaDialog.java,v 1.4 2004/09/07 13:40:00 shadowice Exp $
+/* $Id: CustomFormulaDialog.java,v 1.5 2004/09/07 13:54:02 shadowice Exp $
  * Created on 26.08.2004
  *
  */
@@ -11,13 +11,12 @@ import formula.*;
 import utils.*;
 
 /**
+ * Dialog window for adding new CustomFormulas.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class CustomFormulaDialog extends Dialog implements ActionListener, WindowListener, TextListener {
-
-
-	private static final int MAX_VISIBLE_VARIABLES = 4;
 
 	GridBagLayout 	gbl					= new GridBagLayout();
 	CustomFormula currentFormula	= null;
@@ -25,7 +24,6 @@ public class CustomFormulaDialog extends Dialog implements ActionListener, Windo
 	Label 			lblEnterText;
 	TextField 		tfFormulaName;
 	Button 			btnOk;
-	Label			lblName;
 	Panel			borderedPanel;
 	List				lstVariables;
 
@@ -39,7 +37,6 @@ public class CustomFormulaDialog extends Dialog implements ActionListener, Windo
 		lblEnterText			= new Label(Messages.getString("CustomFormulaDialog.EnterNameLabel"),Label.CENTER);
 		tfFormulaName		= new TextField();
 		btnOk 					= new Button(Messages.getString("CustomFormulaDialog.OkButton"));
-		lblName				= new Label(Messages.getString("CustomFormulaDialog.NameLabel"),Label.RIGHT);
 		borderedPanel		= new Panel(new FlowLayout(FlowLayout.CENTER,5,5));
 		lstVariables			= new List(3,false);
 		
@@ -51,12 +48,11 @@ public class CustomFormulaDialog extends Dialog implements ActionListener, Windo
 		btnOk.addActionListener(this);
 		addWindowListener(this);
 
-		FOMToolkit.addComponent(this,gbl,lblEnterText,		0,0,2,1,0.0,0.0,GridBagConstraints.NONE);
-		FOMToolkit.addComponent(this,gbl,lblName,			0,1,1,1,0.0,0.0,GridBagConstraints.HORIZONTAL);
-		FOMToolkit.addComponent(this,gbl,tfFormulaName,1,1,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
-		FOMToolkit.addComponent(this,gbl,borderedPanel,	0,2,2,1,0.0,0.0,GridBagConstraints.NONE);
-		FOMToolkit.addComponent(this,gbl,lstVariables,		0,3,2,1,0.0,0.0,GridBagConstraints.HORIZONTAL);
-		FOMToolkit.addComponent(this,gbl,btnOk,				0,4,2,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,lblEnterText,		0,0,1,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,tfFormulaName,0,1,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
+		FOMToolkit.addComponent(this,gbl,borderedPanel,	0,2,1,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,lstVariables,		0,3,1,1,0.0,0.0,GridBagConstraints.HORIZONTAL);
+		FOMToolkit.addComponent(this,gbl,btnOk,				0,4,1,1,0.0,0.0,GridBagConstraints.NONE);
 	}
 
 	
