@@ -20,7 +20,7 @@ public abstract class Formula extends Container implements Cloneable {
 	public static final int CONNECTHEIGHT = 4;
 	public static final int RESULTHEIGHT = 17; //20
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
-	public static final int FORMULAWIDTH = 125; //108
+	public static final int FORMULAWIDTH = 108; //120
 
 	// Constants for paintStatus
 	public static final int PAINTSTATUS_STANDARD	= 1;
