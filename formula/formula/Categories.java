@@ -7,7 +7,7 @@ package formula;
 import gui.DragnDropListener;
 
 import java.util.*;
-import java.awt.event.*;
+//import java.awt.event.*;
 import gui.*;
 import utils.Messages;
 /**
@@ -100,7 +100,7 @@ public class Categories {
 	}
 	
 	public static void initMouseListener(AppletPanel ap) {
-		for(int i=0;i<categories.length;i++) {
+/*		for(int i=0;i<categories.length;i++) {
 			Formula[] form = (Formula[])categoryElements.get(categories[i]);
 			if (form!=null) {
 				for(int j=0;j<form.length;j++) {
@@ -109,6 +109,6 @@ public class Categories {
 					form[j].addMouseMotionListener(dnd);
 				}
 			}
-		}
+		}*/
 	}
 }
