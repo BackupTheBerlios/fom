@@ -4,6 +4,7 @@
 package formula;
 
 import utils.Messages;
+import java.math.*;
 
 /**
  * This class provides an element that calculates the factorial of a number. 
@@ -16,10 +17,11 @@ public class Factorial extends NumberFormula {
 	/**
 	 * Calculates the factorial.
 	 */
-	private final static long fact(long n) {
-		long result = 1;
-		for (long i = 2; i <= n; i++) {
-			result = result*i;
+	private final static BigInteger fact(long n) {
+		BigInteger result = BigInteger.ONE;
+		for (long i = 2L; i <= n; i++) {
+			BigInteger j = BigInteger.valueOf(i);
+			result = result.multiply(j);
 		}
 		return result;
 	}
@@ -30,7 +32,7 @@ public class Factorial extends NumberFormula {
 		} else if (input[0].getDoubleResult() < 0.0) {
 			result = new Double (Double.NaN);
 		} else {
-			result = new Double (fact((int)input[0].getDoubleResult()));
+			result = new Double (fact((long)input[0].getDoubleResult()).doubleValue());
 		}
 	}
 	

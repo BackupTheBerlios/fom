@@ -51,17 +51,18 @@ public class Categories {
 		categoryElements.put(categories[1], form);
 
 		//Category Arithmetics
-		form = new Formula[10];
+		form = new Formula[11];
 		form[0] = new Sqrt();
 		form[1] = new Pow();
 		form[2] = new Ln();
 		form[3] = new LogTen();
-		form[4] = new LogBase();
-		form[5] = new Euler();
-		form[6] = new Factorial();
-		form[7] = new Modulo();
-		form[8] = new Abs();
-		form[9] = new Exp();				
+		form[4] = new Ld();
+		form[5] = new LogBase();
+		form[6] = new Euler();
+		form[7] = new Factorial();
+		form[8] = new Modulo();
+		form[9] = new Abs();
+		form[10] = new Exp();				
 		categoryElements.put(categories[2], form);
 
 		//Category Trigonometrics:
