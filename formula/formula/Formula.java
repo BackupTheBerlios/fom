@@ -16,8 +16,8 @@ import java.util.*;
 public abstract class Formula extends Container implements Cloneable {
 
 	public static final int BOXHEIGHT = 28;
+	public static final int CONNECTHEIGHT = 5;
 	public static final int RESULTHEIGHT = 20;
-	public static final int CONNECTHEIGHT = 5; 
 	public static final int FORMULAHEIGHT = BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
 	public static final int FORMULAWIDTH = 120;
 
@@ -219,13 +219,18 @@ public abstract class Formula extends Container implements Cloneable {
 	public final void setInput(Formula in, int index) {
 		this.input[index] = in;
 	}
+
 	/**
 	 * @return Validates, that tree is complete and isn't missing some inputs.
 	 */
 	public final boolean completeTree() {
 		boolean complete = true;
-		for (int i = 0; (i < getInputCount()) && complete; i++) {
-			complete = complete && (input[i] == null);
+		for (int i = 0; complete && (i < getInputCount()); i++) {
+			if (input[i] == null) {
+				complete = false;
+			} else {
+				complete = input[i].completeTree();
+			}
 		}
 		return complete;
 	}
@@ -239,13 +244,12 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	protected final int indexOfInput(Formula toFind, Formula whereToFind) {
 		int index = -1;
-		for (int i = 0; i < whereToFind.getInputCount() && index != -1; i++) {
+		for (int i = 0; index == -1 && i < whereToFind.getInputCount(); i++) {
 			if (toFind == whereToFind.input[i])
 				index = i; 
 		}
 		return index;
 	}
-
 
 	public final static Object[] getTreeList() {
 		return treeList.toArray();
