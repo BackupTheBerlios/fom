@@ -14,6 +14,7 @@ import formula.*;
  * for (re)placing formula-elements or whole trees and connecting them.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
+ * @version $Revision: 1.27 $
  *
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
