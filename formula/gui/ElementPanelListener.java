@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.16 2004/09/08 13:05:42 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.17 2004/09/08 13:41:40 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -61,13 +61,18 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 				// TODO Fehlerdialog
 			}
 		} else if (aEvent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
-			aPanel.getFormulaPanel().deleteAll();
+			/*aPanel.getFormulaPanel().deleteAll();
 			aPanel.getControlPanel().updateTfResult("");
 			aPanel.getFormulaPanel().validate();
 			aPanel.getFormulaPanel().doLayout();
 			aPanel.getFormulaPanel().repaint();
 			aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
-			System.gc();
+			System.gc();*/
+			System.out.println("before: "+((ScrollPane)aPanel.getFormulaPanel().getParent()).getScrollPosition().x);
+			System.out.flush();
+			aPanel.getFormulaPanel().validate();
+			System.out.println("after: "+((ScrollPane)aPanel.getFormulaPanel().getParent()).getScrollPosition().x);
+			System.out.flush();
 		}
 	}
 

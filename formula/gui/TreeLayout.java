@@ -1,4 +1,4 @@
-/* $Id: TreeLayout.java,v 1.11 2004/09/07 13:40:00 shadowice Exp $
+/* $Id: TreeLayout.java,v 1.12 2004/09/08 13:41:40 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -10,7 +10,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class TreeLayout implements LayoutManager {
 
@@ -135,11 +135,14 @@ public class TreeLayout implements LayoutManager {
 		}
 		
 		// set new container size if it's bigger:
-		if ((container.getSize().width < max_x) && (max_x != 0)) {
+		System.out.println("container debug: "+container);
+		System.out.println(" size: "+container.getSize());
+		System.out.println(" location: "+container.getLocation());
+		/*if ((container.getSize().width < max_x) && (max_x != 0)) {
 			container.setSize(max_x,container.getSize().height);
 		}
 		if ((container.getSize().height < max_y) && (max_y != 0)) {
 			container.setSize(container.getSize().width,max_y);
-		}
+		}*/
 	}
 }
