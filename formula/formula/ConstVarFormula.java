@@ -18,6 +18,7 @@ public abstract class ConstVarFormula extends Formula {
 	//Contains all VariableBoolean and VariableNumber as well as their names and values
 	protected static LinkedList varList = new LinkedList();
 
+
 	/**
 	 * Defines a Constant/Variable.
 	 * Constants/Variables don't have any inputs.
@@ -27,15 +28,18 @@ public abstract class ConstVarFormula extends Formula {
 		input = new Formula[0];
 	}
 
+
 	/**
 	 * No calculations need to be done for Constants/Variables
 	 */
 	public final void calc() throws FormulaException {		
 	}
 
+
 	public String toString() {
 		return result.toString();
 	}
+
 
 	public final double getDoubleResult() throws FormulaException {
 		if ((result != null) && (result instanceof Double))
@@ -44,6 +48,7 @@ public abstract class ConstVarFormula extends Formula {
 			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
 	}
 
+
 	public final boolean getBooleanResult() throws FormulaException {
 		if ((result != null) && (result instanceof Boolean))
 			return ((Boolean)result).booleanValue();
@@ -51,9 +56,11 @@ public abstract class ConstVarFormula extends Formula {
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
 
+
 	public final boolean isResultCalculated() {
 		return true;
 	}
+
 
 	public final String getStringResult() {
 		if (result != null) {
@@ -68,16 +75,17 @@ public abstract class ConstVarFormula extends Formula {
 			return null;
 	}
 	
+	
 	/**
 	 * Overwrites existing Method, because Constants/Variables aren't calculated
 	 */
-	public final void clearResult() {
-	}
+	public final void clearResult() {	}
 	
 
 	public final Class[] getInputTypes(int index) throws FormulaException {
 		throw new FormulaException(Messages.getString("Error.ConstVarInput"));
 	}
+
 
 	public final Class[] getOutputTypes() throws FormulaException {
 		Class[] classArray;
@@ -90,6 +98,7 @@ public abstract class ConstVarFormula extends Formula {
 			throw new FormulaException(Messages.getString("Error.IllegalDataType"));
 		return classArray;
 	}
+
 
 	/**
 	 * Searches in varList for a TypeConstVar.
@@ -110,6 +119,7 @@ public abstract class ConstVarFormula extends Formula {
 		}
 		return null;
 	}
+
 
 	/**
 	 * Adds a VariableBoolean to varList.
@@ -132,11 +142,11 @@ public abstract class ConstVarFormula extends Formula {
 		}
 	}
 
+
 	/**
 	 * Adds a VariableNumber to varList.
 	 * @param toAdd Which VariableNumber has to be added.
 	 */
-
 	public static final void addVarList(VariableNumber toAdd) {
 		TypeConstVar content = getVarListName(toAdd.getInputVarName());
 		TypeConstVar newVariable;
@@ -154,6 +164,7 @@ public abstract class ConstVarFormula extends Formula {
 		}		
 	}
 
+
 	/**
 	 * Deletes a ConstVarFormula from varList.
 	 * @param toDelete Which has to be deleted.
@@ -169,6 +180,7 @@ public abstract class ConstVarFormula extends Formula {
 		}
 	}
 
+
 	/**
 	 * Resolves content of text field and deletes it from varList.
 	 * @param toDelete Which has to be deleted.
@@ -177,6 +189,7 @@ public abstract class ConstVarFormula extends Formula {
 		deleteVarList(toDelete, toDelete.getInputVarName());
 	}
 
+
 	/**
 	 * Resolves content of text field and deletes it from varList.
 	 * @param toDelete Which has to be deleted.
@@ -184,6 +197,7 @@ public abstract class ConstVarFormula extends Formula {
 	public static final void deleteVarList(VariableNumber toDelete) {
 		deleteVarList(toDelete, toDelete.getInputVarName());
 	}
+
 
 	/**
 	 * Deletes a whole Branch of ConstVarFormula from varList.
@@ -196,6 +210,7 @@ public abstract class ConstVarFormula extends Formula {
 		}		
 	}
 
+
 	/**
 	 * @return Returns contents of varList as an array.
 	 */
@@ -206,6 +221,7 @@ public abstract class ConstVarFormula extends Formula {
 		}
 		return resultArray;
 	}
+
 
 	/**
 	 * Changes all Variable with a specific name to another.
@@ -219,6 +235,7 @@ public abstract class ConstVarFormula extends Formula {
 		}
 	}
 
+
 	/**
 	 * Changes all Variables' value with a specific name.
 	 * @param name Changes Variables with this name
@@ -231,6 +248,7 @@ public abstract class ConstVarFormula extends Formula {
 		}
 	}
 
+
 	/**
 	 * Validates a variable name. Valid names have at least one non-space character and
 	 * don't use an already existing name.
@@ -241,10 +259,6 @@ public abstract class ConstVarFormula extends Formula {
 		boolean valid = true;
 		TypeConstVar content;
 		//name must have at least one non-whitespace character.
-// TODO Auch noch ne auskommentierte Kleinigkeit		
-		/*if (isValid.matches(" *")) {	// matches benötigt Java 1.4
-			valid = false;
-		}*/
 		if (isValid.trim().equals("")) {
 			valid = false;
 		}
@@ -260,4 +274,5 @@ public abstract class ConstVarFormula extends Formula {
 
 
 	public abstract String getInputVarName();
+
 }

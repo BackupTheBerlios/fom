@@ -106,6 +106,7 @@ public abstract class Formula extends Container implements Cloneable {
 	 */
 	public abstract String getStringResult();
 	
+	
 	/**
 	 * @return Name of the formula-element.
 	 */
