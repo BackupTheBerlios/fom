@@ -115,22 +115,27 @@ public class FormulaPanel extends Panel {
 		g.setColor(Color.DARK_GRAY);
 		for (int i=0;i<outputPinList.size();i++) {
 			pp = (PinPoint)outputPinList.get(i);
-			g.drawOval(pp.getCoordinates().x,pp.getCoordinates().y,5,5); // debug!
+			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
-				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
+				g.drawLine(pp.getMouseTargetPoint().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}
 		}
+		for (int i=0;i<inputPinList.size();i++) {
+			pp = (PinPoint)inputPinList.get(i);
+			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
+		}
+		
 		g.setColor(Color.RED);
 		for (int i=0;i<tempInPPList.size();i++) {
 			pp = (PinPoint)tempInPPList.get(i);
-			g.drawOval(pp.getCoordinates().x,pp.getCoordinates().y,5,5); // debug!
+			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}
 		}
 		for (int i=0;i<tempOutPPList.size();i++) {
 			pp = (PinPoint)tempOutPPList.get(i);
-			g.drawOval(pp.getCoordinates().x,pp.getCoordinates().y,5,5); // debug!
+			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}
@@ -318,7 +323,7 @@ public class FormulaPanel extends Panel {
 			PinPoint pin = getOutputPinForFormula(form);	// O(n)
 			if (pin != null) {
 				detachOutput(pin);
-				outputPinList.remove(pin);
+				//outputPinList.remove(pin);		// why did I write this line?
 			}
 		}
 	}
@@ -331,6 +336,7 @@ public class FormulaPanel extends Panel {
 	 * @param inPPList input pins
 	 * @param outPPList output pins
 	 */
+	// NOTE: Slow (if that matters) and not tested yet.
 	public void detach(LinkedList inPPList, LinkedList outPPList) {
 		PinPoint pin;
 		PinPoint targetPin;
@@ -375,14 +381,18 @@ public class FormulaPanel extends Panel {
 			pin.getFormula().setInput(pin.getTarget().getFormula(),pin.getInputNumber());
 			pin.getTarget().getFormula().setOutput(pin.getFormula());
 			pin.getTarget().setTarget(pin);
-			inputPinList.add(pin);
+			if (!inputPinList.contains(pin)) {
+				inputPinList.add(pin);
+			} 
 		}
 		for (int i=0;i<ppOutList.size();i++) {
 			pin = (PinPoint)ppOutList.get(i);
 			pin.getFormula().setOutput(pin.getTarget().getFormula());
 			pin.getTarget().getFormula().setInput(pin.getFormula(),pin.getTarget().getInputNumber());
 			pin.getTarget().setTarget(pin);
-			outputPinList.add(pin);
+			if (!outputPinList.contains(pin)){
+				outputPinList.add(pin);
+			}
 		}
 	}
 

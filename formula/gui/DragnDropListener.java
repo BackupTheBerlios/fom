@@ -21,18 +21,21 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 
 	public static final int MOUSE_POINT_DISTANCE = 25;
 
-	private static boolean dragInProgress		= false;	// true if something is dragged
-	private static boolean insertInProgress		= false;	// true if element is selected from the ElementPanel
-	private static AppletPanel aPanel			= null;		// root panel of everything
-	private static Point selectedStartPoint		= null;		// the starting point of DnD actions
-	private static Point selectedRelativePoint	= null;		// the relative point within the dragged element
-	private static Formula selectedComponentRoot= null;		// component that is dragged or selected (or root of a component)
+	private static AppletPanel aPanel			= null;				// root panel of everything
+	
+	private static boolean dragInProgress		= false;			// true if something is dragged
+	private static boolean insertInProgress		= false;			// true if element is selected from the ElementPanel
+	private static Point selectedStartPoint		= null;				// the starting point of DnD actions
+	private static Point selectedRelativePoint	= null;				// the relative point within the dragged element
+	private static Formula selectedComponentRoot= null;				// component that is dragged or selected (or root of a component)
 	private static LinkedList selectedComponents= new LinkedList(); // list of all selected formula-objects
-	private static Formula newComponentInstance = null;		// new instance of a selected component
+	private static Formula newComponentInstance = null;				// new instance of a selected component
 	private static LinkedList pPInputs			= new LinkedList();	// list of input PinPoints of the selected element(s)
 	private static LinkedList pPOutputs			= new LinkedList();	// list of output PinPoints of the selected element(s)
-	private static LinkedList tempInPPList		= new LinkedList(); // list of temporary connections between input and output
-	private static LinkedList tempOutPPList		= new LinkedList(); // list of temporary connections between output and input
+	private static LinkedList tempPPInputs		= new LinkedList(); // list of temporary connections between input and output
+	private static LinkedList tempPPOutputs		= new LinkedList(); // list of temporary connections between output and input
+	private static LinkedList inactivePPInputs	= new LinkedList(); // list of input pins, already connected to the selection (only move around)
+	private static LinkedList inactivePPOutputs	= new LinkedList(); // list of output pins, already connected to the selection (only move around)
 
 	public DragnDropListener(AppletPanel ap) {
 		aPanel = ap;
@@ -64,6 +67,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				for (int i=0;i<pPOutputs.size();i++) {
 					aPanel.getFormulaPanel().addOutputPin((PinPoint)pPOutputs.get(i));
 				}
+				aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 				deselect();
 			} else if (!(me.getComponent().getComponentAt(me.getPoint()) instanceof Formula)) {
 				deselect();
@@ -113,6 +117,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 			dragInProgress = false;
 			aPanel.setCursor(Cursor.getDefaultCursor());
 			updatePaintStatus(Formula.PAINTSTATUS_SELECTED);
+			aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 		}
 		aPanel.getFormulaPanel().repaint();
 	}
@@ -126,7 +131,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				moveTo(selectedComponentRoot,new Point(selectedRelativePoint.x+p.x,selectedRelativePoint.y+p.y));
 				// update possible connections:
 				refreshPinPointList();
-				aPanel.getFormulaPanel().setTempPinPoints(tempInPPList,tempOutPPList);
+				aPanel.getFormulaPanel().setTempPinPoints(tempPPInputs,tempPPOutputs);
 				aPanel.getFormulaPanel().repaint();
 			}
 		}
@@ -147,7 +152,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				moveTo(newComponentInstance,point);
 				// update possible connections:
 				refreshPinPointList();
-				aPanel.getFormulaPanel().setTempPinPoints(tempInPPList,tempOutPPList);
+				aPanel.getFormulaPanel().setTempPinPoints(tempPPInputs,tempPPOutputs);
 				aPanel.getFormulaPanel().repaint();
 			}
 		}
@@ -170,6 +175,12 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		for (int i=0;i<pPOutputs.size();i++) {
 			((PinPoint)pPOutputs.get(i)).translate(xOffset,yOffset);
 		}
+		for (int i=0;i<inactivePPInputs.size();i++) {
+			((PinPoint)inactivePPInputs.get(i)).translate(xOffset,yOffset); 
+		}
+		for (int i=0;i<inactivePPOutputs.size();i++) {
+			((PinPoint)inactivePPOutputs.get(i)).translate(xOffset,yOffset); 
+		}
 		Formula form;
 		for (int i=0; i<selectedComponents.size();i++) {
 			form = (Formula)selectedComponents.get(i);
@@ -190,24 +201,29 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		FormulaPanel fp = aPanel.getFormulaPanel();
 		PinPoint targetPP;
 		PinPoint pin;
+		int index;
 		// clear marks:
-		for (int i=0;i<tempInPPList.size();i++) {
-			((PinPoint)tempInPPList.get(i)).getTarget().setMark(false);
+		for (int i=0;i<tempPPInputs.size();i++) {
+			((PinPoint)tempPPInputs.get(i)).getTarget().setMark(false);
 		}
-		tempInPPList.clear();
-		for (int i=0;i<tempOutPPList.size();i++) {
-			((PinPoint)tempOutPPList.get(i)).getTarget().setMark(false);
+		tempPPInputs.clear();
+		for (int i=0;i<tempPPOutputs.size();i++) {
+			((PinPoint)tempPPOutputs.get(i)).getTarget().setMark(false);
 		}
-		tempOutPPList.clear();
+		tempPPOutputs.clear();
 		// Outputs:
 		for (int i=0;i<pPOutputs.size();i++) {
 			targetPP = fp.getNearestInputPin((PinPoint)pPOutputs.get(i));
+			pin = (PinPoint)pPOutputs.get(i);
 			if (targetPP != null) {
-				((PinPoint)pPOutputs.get(i)).setTarget(targetPP);
-				//targetPP.setMark(true);
-				tempOutPPList.add(pPOutputs.get(i));				
+				
+				tempPPOutputs.add(pin);
+				
+				pin.setTarget(targetPP);
+				targetPP.setMark(true);
+								
 			} else {
-				((PinPoint)pPOutputs.get(i)).setTarget(null);
+				pin.setTarget(null);
 			}
 		}
 		// Inputs:
@@ -215,7 +231,8 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 			targetPP = fp.getNearestOutputPin((PinPoint)pPInputs.get(i));
 			if (targetPP != null) {
 				((PinPoint)pPInputs.get(i)).setTarget(targetPP);
-				tempInPPList.add(pPInputs.get(i));
+				targetPP.setMark(true);
+				tempPPInputs.add(pPInputs.get(i));
 			} else {
 				((PinPoint)pPInputs.get(i)).setTarget(null);
 			}
@@ -231,17 +248,29 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		selectedComponents.add(form);
 		// get input PinPoints:
 		LinkedList ppList = aPanel.getFormulaPanel().getInputPins();
+		PinPoint pin;
 		for (int i=0; i<ppList.size();i++) {
-			if (((PinPoint)ppList.get(i)).getFormula() == form) {
-				pPInputs.add(ppList.get(i));
+			pin = (PinPoint)ppList.get(i);
+			if (pin.getFormula() == form) {
+				if (pin.getTarget() != null) {
+					inactivePPInputs.add(pin);
+				} else {
+					pPInputs.add(pin);
+				}
 			}
 		}
 
 		// get output PinPoints:
 		ppList = aPanel.getFormulaPanel().getOutputPins();
 		for (int i=0; i<ppList.size();i++) {
-			if (((PinPoint)ppList.get(i)).getFormula() == form) {
-				pPOutputs.add(ppList.get(i));
+			pin = (PinPoint)ppList.get(i);
+			if (pin.getFormula() == form) {
+				if (pin.getTarget() != null) {
+					inactivePPOutputs.add(pin);
+				} else {
+					pPOutputs.add(pin);
+				}
+				
 			}
 		}
 
@@ -274,8 +303,10 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		insertInProgress = false;
 		pPInputs.clear();
 		pPOutputs.clear();
-		tempInPPList.clear();
-		tempOutPPList.clear();
+		tempPPInputs.clear();
+		tempPPOutputs.clear();
+		inactivePPInputs.clear();
+		inactivePPOutputs.clear();
 		if (newComponentInstance != null) {
 			aPanel.getFormulaPanel().remove(newComponentInstance);
 			newComponentInstance = null;
