@@ -1,4 +1,4 @@
-/* $Id: AppletPanel.java,v 1.25 2004/09/01 15:08:32 shadowice Exp $
+/* $Id: AppletPanel.java,v 1.26 2004/09/02 13:49:08 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,21 +13,23 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 
 	private DragnDropListener	dnd;
 	private HotkeyListener		hotkey;
-	private ControlPanel		pnlControls;
+	private ControlPanel			pnlControls;
 	private ElementPanel		pnlElements;
 
 	private FormulaPanel		pnlFormula;
 
 	private FormulaList			treeList;
-	private VariableList		varList;
+	private VariableList			varList;
 
 	private static Formula clipboard;	// root formula of a copied (sub)tree
+	
+	private PopupMenu 			popupMenu;
 
 	/**
 	 * Main method to run this program as application.
@@ -115,13 +117,13 @@ public class AppletPanel extends Applet implements WindowListener {
 	public void init() {
 		debug();
 
-		treeList = new FormulaList();
-		varList = new VariableList();
+		this.treeList = new FormulaList();
+		this.varList = new VariableList();
 
 		this.setLayout(new BorderLayout());
 
 		// NOTE this must be initialized _before_ any other panel is created!
-		dnd = new DragnDropListener(this);
+		this.dnd = new DragnDropListener(this);
 
 		this.pnlFormula = new FormulaPanel(this);
 		this.pnlControls = new ControlPanel(this);
@@ -137,9 +139,24 @@ public class AppletPanel extends Applet implements WindowListener {
 		this.addKeyListener(hotkey);
 		sPane.add(pnlFormula);
 
+		popupMenu = new PopupMenu();
+		MenuItem miCut = new MenuItem(Messages.getString("PopupMenu.Cut"),new MenuShortcut(KeyEvent.VK_X));
+		MenuItem miCopy = new MenuItem(Messages.getString("PopupMenu.Copy"),new MenuShortcut(KeyEvent.VK_C));
+		MenuItem miPaste = new MenuItem(Messages.getString("PopupMenu.Paste"),new MenuShortcut(KeyEvent.VK_V));
+		MenuItem miDelete = new MenuItem(Messages.getString("Popup.Delete"));
+		popupMenu.add(miCut);
+		popupMenu.add(miCopy);
+		popupMenu.add(miPaste);
+		popupMenu.addSeparator();
+		popupMenu.add(miDelete);
+		popupMenu.addActionListener(getHotkeyListener());
+
+		pnlFormula.add(popupMenu);
+
 		this.add(pnlElements, BorderLayout.WEST);
 		this.add(pnlControls, BorderLayout.SOUTH);
 		this.add(sPane, BorderLayout.CENTER);
+		
 	}
 
 
@@ -162,6 +179,10 @@ public class AppletPanel extends Applet implements WindowListener {
 	}
 
 
+	public PopupMenu getPopupMenu() {
+		return popupMenu;
+	}
+
 	/**
 	 * Debug output.
 	 */
@@ -176,11 +197,24 @@ public class AppletPanel extends Applet implements WindowListener {
 		System.exit(0);
 	}
 
-	public void windowActivated(WindowEvent wEvent) { }
-	public void windowClosed(WindowEvent wEvent) { }
-	public void windowDeactivated(WindowEvent wEvent) { }
-	public void windowDeiconified(WindowEvent wEvent) { }
-	public void windowIconified(WindowEvent wEvent) { }
-	public void windowOpened(WindowEvent wEvent) { }
+	public void windowDeiconified(WindowEvent wEvent) {
+		System.out.println("applet deiconified");
+	}
+	public void windowIconified(WindowEvent wEvent) {
+		this.requestFocus();
+		System.out.println("applet iconified");
+	 }
+	public void windowOpened(WindowEvent wEvent) {
+		System.out.println("applet opened");
+	}
+	public void windowActivated(WindowEvent wEvent) {
+		System.out.println("applet activated");
+	}
+	public void windowClosed(WindowEvent wEvent) {
+		System.out.println("applet closed");
+	}
+	public void windowDeactivated(WindowEvent wEvent) {
+		System.out.println("applet deactivated");
+	}
 
 }

@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.17 2004/08/31 12:43:12 br3001 Exp $
+/* $Id: DialogVariables.java,v 1.18 2004/09/02 13:49:08 shadowice Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -11,7 +11,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
@@ -32,7 +32,8 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 * Creates a window for setting and changing variables.
 	 */
 	public DialogVariables(AppletPanel parent) {
-		super(new Frame(), Messages.getString("DialogVariables.Title"), true);
+		super((Frame)parent.getParent().getParent(), Messages.getString("DialogVariables.Title"), true);
+		setLocation(300,100);
 		Object value;		
 		this.aPanel = parent;
 		TypeConstVar[] varArray = aPanel.getVariableList().toVarArray();
@@ -87,8 +88,8 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 
 		add(scrollForInputs, BorderLayout.CENTER);
 		pack();  //Needed for calculating proper height of dialog.
-		scrollForInputs.setSize(dummyPanel.preferredSize().width + scrollForInputs.getInsets().left + scrollForInputs.getInsets().right, dummyPanel.preferredSize().height + 5);
-		this.setSize(this.preferredSize());
+		scrollForInputs.setSize(dummyPanel.getPreferredSize().width + scrollForInputs.getInsets().left + scrollForInputs.getInsets().right, dummyPanel.getPreferredSize().height + 5);
+		this.setSize(this.getPreferredSize());
 		addWindowListener(this);
 		show();
 	}
@@ -212,20 +213,20 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 
 
 	// Methods from WindowListener:
-	public void windowClosing(WindowEvent arg0) {
+	public void windowClosing(WindowEvent wEvent) {
 		dispose();
 	}
 
 
-	public void windowDeactivated(WindowEvent arg0) {
-		this.requestFocus();		
+	public void windowDeactivated(WindowEvent wEvent) {
+		this.requestFocus();
 	}
 
 
-	public void windowDeiconified(WindowEvent arg0) {  }
-	public void windowIconified(WindowEvent arg0) {	 }
-	public void windowOpened(WindowEvent arg0) {  }
-	public void windowActivated(WindowEvent arg0) {  }
-	public void windowClosed(WindowEvent arg0) {  }
+	public void windowDeiconified(WindowEvent wEvent) {	}
+	public void windowIconified(WindowEvent wEvent) {	 }
+	public void windowOpened(WindowEvent wEvent) {	}
+	public void windowActivated(WindowEvent wEvent) {	}
+	public void windowClosed(WindowEvent wEvent) {	}
 
 }

@@ -1,16 +1,18 @@
-/* $Id: ConstantNumber.java,v 1.28 2004/09/02 09:47:28 shadowice Exp $
+/* $Id: ConstantNumber.java,v 1.29 2004/09/02 13:49:08 shadowice Exp $
  * Created on 27.06.2004
  */
 package formula;
+
 import java.awt.*;
 import java.awt.event.*;
+
 import gui.*;
 
 /**
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.28 $
+ * @version $Revision: 1.29 $
  */
 public class ConstantNumber extends ConstVarFormula implements TextListener {
 
@@ -39,9 +41,6 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		formulaName = "                    Constant"; 
 		result = new Double(0);
 		inputNumber = new TextField();
-		inputNumber.setFont(DEFAULT_FONT);
-		inputNumber.setBackground(SystemColor.text);
-		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
 		mfListener = new MouseForwardListener();
 		inputNumber.addMouseListener(mfListener);
 		inputNumber.addMouseMotionListener(mfListener);
@@ -51,6 +50,9 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 			inputNumber.addTextListener(this);
 		}
 		add(inputNumber);
+		inputNumber.setBackground(SystemColor.text);
+		inputNumber.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
+		inputNumber.setFont(DEFAULT_FONT);
 	}
 
 	/**

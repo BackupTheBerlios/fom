@@ -1,4 +1,4 @@
-/* $Id: HotkeyListener.java,v 1.12 2004/09/01 15:08:32 shadowice Exp $
+/* $Id: HotkeyListener.java,v 1.13 2004/09/02 13:49:08 shadowice Exp $
  * Created on 13.08.2004
  *
  */
@@ -10,9 +10,9 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
-public class HotkeyListener implements KeyListener {
+public class HotkeyListener implements KeyListener, ActionListener {
 
 	private AppletPanel aPanel;
 	
@@ -40,9 +40,7 @@ public class HotkeyListener implements KeyListener {
 		int keyCode = kEvent.getKeyCode();
 		switch (keyCode) {
 			case KeyEvent.VK_DELETE:
-				aPanel.getSelection().delete();
-				aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
-				aPanel.getControlPanel().updateTfResult("");
+				delete();
 				break;
 		}
 
@@ -50,26 +48,53 @@ public class HotkeyListener implements KeyListener {
 			char keyChar = kEvent.getKeyChar();
 			switch (keyCode) {
 				case KeyEvent.VK_C:
-					aPanel.getSelection().copyToClipboard();
+					copy();
 					break;
 				case KeyEvent.VK_X:
-					aPanel.getSelection().copyToClipboard();
-					aPanel.getSelection().delete();
-					aPanel.getFormulaPanel().requestFocus();
+					cut();
 					break;
 				case KeyEvent.VK_V:
-					// doesn't paste the clipboard content, pastes a copy of it instead
-					Formula pasteForm = AppletPanel.getClipboard();
-					pasteForm.moveTo(pasteForm.getLocation().x+PASTE_XDISPLACEMENT,pasteForm.getLocation().y+PASTE_YDISPLACEMENT);
-					pasteForm = (Formula)pasteForm.clone();
-					aPanel.getFormulaPanel().addFormulaTree(pasteForm);
-					aPanel.getFormulaPanel().requestFocus();
-					aPanel.getFormulaPanel().doLayout();
-					aPanel.getFormulaPanel().checkBounds();
-					aPanel.getFormulaPanel().repaint();
+					paste();
 					break;
 			}
 		}
+	}
+
+
+	public void actionPerformed(ActionEvent aEvent) {
+		System.out.println(aEvent.getActionCommand());
+	}
+
+
+	private void cut() {
+		aPanel.getSelection().copyToClipboard();
+		aPanel.getSelection().delete();
+		aPanel.getFormulaPanel().requestFocus();
+	}
+
+
+	private void copy() {
+		aPanel.getSelection().copyToClipboard();
+	}
+
+
+	private void paste() {
+		// doesn't paste the clipboard content, pastes a copy of it instead
+		Formula pasteForm = AppletPanel.getClipboard();
+		pasteForm.moveTo(pasteForm.getLocation().x+PASTE_XDISPLACEMENT,pasteForm.getLocation().y+PASTE_YDISPLACEMENT);
+		pasteForm = (Formula)pasteForm.clone();
+		aPanel.getFormulaPanel().addFormulaTree(pasteForm);
+		aPanel.getFormulaPanel().requestFocus();
+		aPanel.getFormulaPanel().doLayout();
+		aPanel.getFormulaPanel().checkBounds();
+		aPanel.getFormulaPanel().repaint();
+	}
+
+
+	private void delete() {
+		aPanel.getSelection().delete();
+		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
+		aPanel.getControlPanel().updateTfResult("");
 	}
 
 }
