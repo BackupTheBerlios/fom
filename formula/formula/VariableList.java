@@ -1,4 +1,4 @@
-/* $Id: VariableList.java,v 1.2 2004/08/30 19:30:52 shadowice Exp $
+/* $Id: VariableList.java,v 1.3 2004/09/07 13:40:00 shadowice Exp $
  * Created on 24.08.2004
  */
 package formula;
@@ -8,7 +8,7 @@ import java.util.Vector;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class VariableList extends Vector {
 
@@ -81,7 +81,7 @@ public class VariableList extends Vector {
 		TypeConstVar newVariable;
 		if (content == null) {
 			//Variablenname existiert noch nicht.
-			newVariable = new TypeConstVar((Boolean)toAdd.result, toAdd.getInputVarName());
+			newVariable = new TypeConstVar(toAdd.getInputVarName(), (Boolean)toAdd.result);
 			newVariable.addVarInnerList(toAdd);
 			addElement(newVariable);
 		} else {
@@ -103,7 +103,7 @@ public class VariableList extends Vector {
 		TypeConstVar content = getVarListName(toAdd.getInputVarName());
 		if (content == null) {
 			//Variablenname existiert noch nicht.
-			content = new TypeConstVar((Double)toAdd.result, toAdd.getInputVarName());
+			content = new TypeConstVar(toAdd.getInputVarName(), (Double)toAdd.result);
 			content.addVarInnerList(toAdd);
 			addElement(content);
 		} else {

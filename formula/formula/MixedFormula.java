@@ -5,7 +5,9 @@ package formula;
 
 import utils.Messages;
 
-/** TODO JavaDoc ergänzen
+/**
+ * Class for formula elements where the inputs and/or output don't have the same type.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
 public abstract class MixedFormula extends Formula {
@@ -18,6 +20,7 @@ public abstract class MixedFormula extends Formula {
 	public void clearResult() {
 		result = null;
 	}
+
 
 	public final double getDoubleResult() throws FormulaException {
 		if ((result != null) && (result instanceof Double))
@@ -34,9 +37,11 @@ public abstract class MixedFormula extends Formula {
 			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
 	}
 
+
 	public final boolean isResultCalculated() {
 		return (result != null);
 	}
+
 
 	public final String getStringResult() {
 		if (result != null) {

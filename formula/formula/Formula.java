@@ -1,4 +1,4 @@
-/* $Id: Formula.java,v 1.51 2004/09/06 13:08:01 br3001 Exp $
+/* $Id: Formula.java,v 1.52 2004/09/07 13:40:00 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
@@ -14,7 +14,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.51 $
+ * @version $Revision: 1.52 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -373,9 +373,8 @@ public abstract class Formula extends Container implements Cloneable {
 	}
 	
 
-	/** TODO Javadoc
-	 * 
-	 * @return
+	/**
+	 * @return returns current paint status (how this formula object is painted)
 	 */
 	public final int getPaintStatus() {
 		return paintStatus;

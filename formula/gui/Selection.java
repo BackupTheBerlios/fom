@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.16 2004/09/06 15:15:24 shadowice Exp $
+/* $Id: Selection.java,v 1.17 2004/09/07 13:40:00 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 public class Selection {
 
@@ -325,7 +325,7 @@ public class Selection {
 		aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 		deselect();
 		aPanel.getFormulaPanel().doLayout();
-		aPanel.getFormulaPanel().checkBounds();
+		aPanel.getFormulaPanel().repaint();
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();		
 	}
 
@@ -366,7 +366,6 @@ public class Selection {
 		updatePaintStatus(Formula.PAINTSTATUS_SELECTED);
 		aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 		aPanel.getFormulaPanel().doLayout();
-		aPanel.getFormulaPanel().checkBounds();
 		aPanel.getFormulaPanel().repaint();
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 	}
@@ -390,7 +389,6 @@ public class Selection {
 			refreshPinPointList();
 			aPanel.getFormulaPanel().setTempPinPoints(tempPPInputs, tempPPOutputs);
 			aPanel.getFormulaPanel().repaint();
-			//aPanel.getFormulaPanel().checkBounds();
 		}
 	}
 
@@ -411,7 +409,6 @@ public class Selection {
 			}
 			aPanel.getFormulaPanel().validate();
 			aPanel.getFormulaPanel().doLayout();
-			aPanel.getFormulaPanel().checkBounds();
 			aPanel.getFormulaPanel().repaint();
 		}
 		System.gc();

@@ -1,4 +1,4 @@
-/* $Id: HotkeyListener.java,v 1.14 2004/09/02 14:35:42 shadowice Exp $
+/* $Id: HotkeyListener.java,v 1.15 2004/09/07 13:40:00 shadowice Exp $
  * Created on 13.08.2004
  *
  */
@@ -13,7 +13,7 @@ import utils.*;
  * Handles shortcuts and popup menus.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public class HotkeyListener implements KeyListener, ActionListener {
 
@@ -105,7 +105,6 @@ public class HotkeyListener implements KeyListener, ActionListener {
 			aPanel.getFormulaPanel().addFormulaTree(pasteForm);
 			aPanel.getFormulaPanel().requestFocus();
 			aPanel.getFormulaPanel().doLayout();
-			aPanel.getFormulaPanel().checkBounds();
 			aPanel.getFormulaPanel().repaint();
 		}
 	}

@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.31 2004/09/06 13:08:00 br3001 Exp $
+/* $Id: FormulaPanel.java,v 1.32 2004/09/07 13:40:00 shadowice Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -14,7 +14,7 @@ import utils.*;
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.31 $
+ * @version $Revision: 1.32 $
  */
 public class FormulaPanel extends Panel {
 
@@ -357,48 +357,6 @@ public class FormulaPanel extends Panel {
 
 
 	/**
-	 * Searches for the input PinPoint representing the inNumber-th input of form.
-	 * 
-	 * @param form formula to search for
-	 * @param inNumber number of the input (from(0) left to right(length-1))
-	 * @return returns the PinPoint if found, otherwise null.
-	 */
-	// TODO IMHO kann man die Methode durch eine einfachere Variante ohne Schleife ersetzen...
-	public PinPoint getInputPinForFormula(Formula form, int inNumber) {
-		PinPoint pin;
-		for (int i=0;i<inputPinList.size();i++) {
-			pin = (PinPoint)inputPinList.get(i);
-			if (pin.getFormula() == form) {
-				if (inNumber == pin.getInputNumber()) {
-					return pin;
-				}
-			}
-		}
-		return null;  // shouldn't happen if everything's all right!
-	}
-
-
-	/**
-	 * Searches for the output PinPoint representing the output of form.
-	 * 
-	 * @param form formula to search for
-	 * @return the PinPoint if found, otherwise null.
-	 */
-	// TODO dito, einfachere Methode ohne Schleife
-	public PinPoint getOutputPinForFormula(Formula form) {
-		PinPoint pin;
-		for (int i=0;i<outputPinList.size();i++) {
-			pin = (PinPoint)outputPinList.get(i);
-			if (pin.getFormula() == form) {
-				return pin;
-			}
-		}
-		return null;  // shouldn't happen if everything's all right!
-	}
-
-
-
-	/**
 	 * Detaches an input pin from it's target if it has one.
 	 * 
 	 * @param pin input pin to detach
@@ -414,8 +372,8 @@ public class FormulaPanel extends Panel {
 		}
 		pin.setBestCandidate(null);
 	}
-	
-	
+
+
 	/**
 	 * Detaches an output pin from it's target if it has one.
 	 * 
@@ -442,7 +400,7 @@ public class FormulaPanel extends Panel {
 	 */
 	public void detach(Formula form) {
 		if (form.getOutput() != null) {
-			PinPoint pin = getOutputPinForFormula(form);	// O(n)
+			PinPoint pin = form.getOutputPin();
 			if (pin != null) {
 				detachOutput(pin);
 			}
@@ -545,57 +503,6 @@ public class FormulaPanel extends Panel {
 		tempInPPList.clear();
 		tempOutPPList.clear();
 	}
-	
-	
-	/**
-	 * Checks the bounds of the FormulaPanel if all components are inside of it.
-	 * If not it will be resized and all components will be moved if some are outside
-	 * the left or upper borders.
-	 */
-	public void checkBounds() {
-		Component comp;
-		int width = getWidth();
-		int height = getHeight();
-		Dimension oldSize = new Dimension(getWidth(),getHeight());
-		Rectangle newBounds = new Rectangle(0,0,0,0);
-		for (int i=0;i<getComponentCount();i++) {
-			comp = getComponent(i);
-			if (comp.isVisible()) {
-				if ((comp.getX()+comp.getWidth()) > newBounds.width) {
-					newBounds.width = comp.getX() + comp.getWidth() + OVERSIZE_WIDTH;
-				}
-				if (comp.getX() < getX()) {
-					newBounds.x = comp.getX();
-				}
-				if ((comp.getY()+comp.getHeight()) > newBounds.height) {
-					newBounds.height = comp.getY() + comp.getHeight() + OVERSIZE_HEIGHT;
-				}
-				if (comp.getY() < getY()) {
-					newBounds.y = comp.getY();
-				}
-			}
-		}
-
-		Formula form;
-		if ((newBounds.x < 0) || (newBounds.y < 0)) {
-			if (newBounds.x < 0) {
-				newBounds.width = newBounds.width - newBounds.x;
-			}
-			if (newBounds.y < 0) {
-				newBounds.height = newBounds.height - newBounds.y;
-			}
-			
-			for (int i=0;i<getComponentCount();i++) {
-				form = (Formula)getComponent(i);
-				form.moveTo(form.getX()-newBounds.x+OVERSIZE_WIDTH,form.getY()-newBounds.y+OVERSIZE_HEIGHT);
-			}
-		}
-		
-		if ((newBounds.width > 0) && (newBounds.height > 0) && !oldSize.equals(newBounds.getSize())) {
-			setSize(newBounds.width,newBounds.height);
-			getParent().validate();
-		}
-	}
 
 
 	/**
@@ -618,7 +525,7 @@ public class FormulaPanel extends Panel {
 		remove(form);
 	}
 
-	
+
 	/**
 	 * Deletes everything in the FormulaPanel.
 	 */
@@ -642,6 +549,11 @@ public class FormulaPanel extends Panel {
 	}
 
 
+	/**
+	 * Recursivly adds a whole tree to the FormulaPanel.
+	 * 
+	 * @param form currrent Formula node to add
+	 */
 	public void addFormulaTree(Formula form) {
 		form.init(aPanel);
 		add(form);

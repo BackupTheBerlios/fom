@@ -1,4 +1,4 @@
-/* $Id: CalculatorThread.java,v 1.5 2004/09/01 15:08:32 shadowice Exp $
+/* $Id: CalculatorThread.java,v 1.6 2004/09/07 13:40:00 shadowice Exp $
  * Created on 16.08.2004
  *
  */
@@ -12,7 +12,7 @@ import java.util.*;
  * Thread that handles (animated and non-animated) calculation of the formula tree.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class CalculatorThread extends Thread {
 
@@ -171,7 +171,7 @@ public class CalculatorThread extends Thread {
 	 * Stops the animation-loop.
 	 */
 	// NOTE: stopAnimation bricht die sleep-Anweisung nicht ab, also könnte gleich darauf
-	// die Animation neu gestartet werden, obwohl sie noch nicht fertig ist.
+	// die Animation neu gestartet werden, obwohl sie noch nicht fertig ist (möglicher Bug?).
 	public void stopAnimation() {
 		animating = false;
 		if (lastFormula != null) {

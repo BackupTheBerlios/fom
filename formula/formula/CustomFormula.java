@@ -1,4 +1,4 @@
-/* $Id: CustomFormula.java,v 1.5 2004/09/06 13:02:06 shadowice Exp $
+/* $Id: CustomFormula.java,v 1.6 2004/09/07 13:40:00 shadowice Exp $
  * Created on 26.08.2004
  */
  
@@ -8,13 +8,14 @@ import java.util.*;
 
 import utils.*;
 
-/** TODO JavaDoc ergänzen
+/**
+ * CustomFormula is a container class for a formula tree. Its inputs are the variables in the tree.
+ * If there are no variables, the CustomFormula won't have any inputs.  
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class CustomFormula extends Formula {
-
-	//protected Object result;
 
 	private Formula root;
 	private VariableList variables;
@@ -25,6 +26,14 @@ public class CustomFormula extends Formula {
 	private Vector treeList;
 
 
+	/**
+	 * Creates a new CustomFormula that is ready to use.
+	 *
+	 * @param name name of the CustomFormula
+	 * @param root root Formula of the tree
+	 * @param variables list of variables
+	 * @throws FormulaException is thrown if the tree is incomplete
+	 */
 	public CustomFormula(String name, Formula root, VariableList variables) throws FormulaException {
 		super();
 		if (root != null) {
@@ -40,16 +49,30 @@ public class CustomFormula extends Formula {
 	}
 
 
+	/**
+	 * Creates a new CustomFormula without a name.
+	 *
+	 * @param root root Formula of the tree
+	 * @param variables list of variables
+	 * @throws FormulaException is thrown if the tree is incomplete
+	 */
 	public CustomFormula(Formula root, VariableList variables) throws FormulaException {
 		this("",root,variables);
 	}
 
 
+	/**
+	 * Creates an empty CustomFormula. This object won't work until it get's a root and a list of variables (can be empty).
+	 */
 	public CustomFormula() {
 		super();
 	}
 
 
+	/**
+	 * Maps the input values to the variables. 
+	 * @throws FormulaException Thrown if the input is null or the data type is unknown.
+	 */
 	private final void mapInputsOnVariables() throws FormulaException {
 		TypeConstVar variable;
 		for (int i=0; i < getInputCount(); i++) {
@@ -196,7 +219,6 @@ public class CustomFormula extends Formula {
 	}
 
 
-	// TODO ausprogrammieren!
 	public Object clone() {
 		CustomFormula clonedCF = (CustomFormula)super.clone();
 		Formula[] inputBackup = clonedCF.input;

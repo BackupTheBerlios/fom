@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.14 2004/09/06 15:17:52 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.15 2004/09/07 13:40:00 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -49,7 +49,7 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 					VariableList clonedVarList = new VariableList();
 					createVariableList(clonedVarList,clonedTree);
 					CustomFormula custForm = new CustomFormula(clonedTree,clonedVarList);
-					custForm.setFormulaName(cfDialog.showDialog(custForm));
+					custForm.setFormulaName(cfDialog.showDialog(custForm,clonedVarList));
 					ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),custForm);
 					ePanel.refreshElementList();
 					ePanel.getCategoryList().select(ePanel.getCategoryList().getItemCount()-1);

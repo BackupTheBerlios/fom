@@ -1,12 +1,21 @@
-/*
+/* $Id: TypeConstVar.java,v 1.7 2004/09/07 13:40:00 shadowice Exp $
  * Created on 17.07.2004
  */
 package formula;
 
 import java.util.*;
 
-/** TODO JavaDoc ergänzen
+/**
+ * This class is used to store all informations regarding variables from ConstVarFormula type objects.
+ * These informations are:
+ * <li>a name</li>
+ * <li>a value belonging to this name</li>
+ * <li>a list of ConstVarFormula objects that use this name</li>
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
+ * @version $Revision: 1.7 $
+ * @see VariableBoolean
+ * @see VariableNumber
  */
 public class TypeConstVar {
 
@@ -15,16 +24,22 @@ public class TypeConstVar {
 	private Vector varInnerList;
 
 
-	public TypeConstVar(Object value, String name) {
+	/**
+	 * Creates a new TypeConstVar object with an empty list.
+	 * 
+	 * @param name name of this variable
+	 * @param value value of this variable
+	 */
+	public TypeConstVar(String name, Object value) {
 		this.value = value;
 		this.name = name;
 		varInnerList = new Vector();
 	}
 
-	public TypeConstVar(String name, Object value) {
-		this(value, name);
-	}
 
+	/**
+	 * @return returns the value of this variable
+	 */
 	public final Object getValue() {
 		return value;
 	}
@@ -42,9 +57,14 @@ public class TypeConstVar {
 		}
 	}
 
+
+	/**
+	 * @return returns the name of this variable
+	 */
 	public final String getName() {
 		return name;
 	}
+
 
 	/**
 	 * @param name Changes the name of all contents of varInnerList to name.
@@ -68,6 +88,7 @@ public class TypeConstVar {
 		}
 	}
 
+
 	/**
 	 * @param toAdd Adds toAdd to list if list doesn't already contains it. 
 	 */
@@ -77,12 +98,14 @@ public class TypeConstVar {
 		}
 	}
 
+
 	/**
 	 * @param toDelete Deletes toDelete from this list.
 	 */
 	public final void deleteVarInnerList(ConstVarFormula toDelete) {
 		varInnerList.removeElement(toDelete);
 	}
+
 
 	/**
 	 * @param contains To be checked.
@@ -92,12 +115,14 @@ public class TypeConstVar {
 		return varInnerList.contains(contains);
 	}
 
+
 	/**
 	 * @return returns size of varInnerList.
 	 */
 	public final int sizeVarInnerList() {
 		return varInnerList.size();
 	}
+
 
 	/**
 	 * @return returns varInnerList.

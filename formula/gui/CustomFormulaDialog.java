@@ -1,4 +1,4 @@
-/* $Id: CustomFormulaDialog.java,v 1.3 2004/09/06 15:15:24 shadowice Exp $
+/* $Id: CustomFormulaDialog.java,v 1.4 2004/09/07 13:40:00 shadowice Exp $
  * Created on 26.08.2004
  *
  */
@@ -12,18 +12,22 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
-public class CustomFormulaDialog extends Dialog implements ActionListener, WindowListener {
+public class CustomFormulaDialog extends Dialog implements ActionListener, WindowListener, TextListener {
 
-	GridBagLayout 	gbl				= new GridBagLayout();
-	Formula 		currentFormula	= null;	// TODO Formula in CustomFormula ändern
-	String 			name				= "";
+
+	private static final int MAX_VISIBLE_VARIABLES = 4;
+
+	GridBagLayout 	gbl					= new GridBagLayout();
+	CustomFormula currentFormula	= null;
+	String 			name					= "";
 	Label 			lblEnterText;
 	TextField 		tfFormulaName;
 	Button 			btnOk;
 	Label			lblName;
 	Panel			borderedPanel;
+	List				lstVariables;
 
 	/**
 	 * Creates a new CustomFormulaDialog (modal=true).
@@ -32,43 +36,61 @@ public class CustomFormulaDialog extends Dialog implements ActionListener, Windo
 	 */
 	public CustomFormulaDialog(Frame owner) {
 		super(owner,Messages.getString("CustomFormulaDialog.Title"),true);
-		lblEnterText	= new Label(Messages.getString("CustomFormulaDialog.EnterNameLabel"),Label.CENTER);
-		tfFormulaName	= new TextField();
-		btnOk 			= new Button(Messages.getString("CustomFormulaDialog.OkButton"));
-		lblName			= new Label(Messages.getString("CustomFormulaDialog.NameLabel"),Label.RIGHT);
-		borderedPanel	= new Panel(new FlowLayout(FlowLayout.CENTER,5,5));
+		lblEnterText			= new Label(Messages.getString("CustomFormulaDialog.EnterNameLabel"),Label.CENTER);
+		tfFormulaName		= new TextField();
+		btnOk 					= new Button(Messages.getString("CustomFormulaDialog.OkButton"));
+		lblName				= new Label(Messages.getString("CustomFormulaDialog.NameLabel"),Label.RIGHT);
+		borderedPanel		= new Panel(new FlowLayout(FlowLayout.CENTER,5,5));
+		lstVariables			= new List(3,false);
 		
 		borderedPanel.setBackground(Color.white);
 		setLayout(gbl);
-		setSize(Formula.FORMULAWIDTH*2,180);
-		
+		setResizable(false);
+		tfFormulaName.addTextListener(this);
 				
 		btnOk.addActionListener(this);
 		addWindowListener(this);
 
-		FOMToolkit.addComponent(this,gbl,lblEnterText,0,0,2,1,0.0,0.0,GridBagConstraints.NONE);
-		FOMToolkit.addComponent(this,gbl,lblName,0,1,1,1,0.0,0.0,GridBagConstraints.HORIZONTAL);
+		FOMToolkit.addComponent(this,gbl,lblEnterText,		0,0,2,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,lblName,			0,1,1,1,0.0,0.0,GridBagConstraints.HORIZONTAL);
 		FOMToolkit.addComponent(this,gbl,tfFormulaName,1,1,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
-		FOMToolkit.addComponent(this,gbl,borderedPanel,0,2,2,1,0.0,0.0,GridBagConstraints.NONE);
-		FOMToolkit.addComponent(this,gbl,btnOk,0,3,2,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,borderedPanel,	0,2,2,1,0.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,lstVariables,		0,3,2,1,0.0,0.0,GridBagConstraints.HORIZONTAL);
+		FOMToolkit.addComponent(this,gbl,btnOk,				0,4,2,1,0.0,0.0,GridBagConstraints.NONE);
 	}
 
 	
 	/**
 	 * Shows the Dialog for a certain CustomFormula
+	 *
 	 * @param form a custom formula
 	 * @return returns the name of the formula
 	 */
-	//	TODO Formula in CustomFormula ändern
-	public String showDialog(Formula form) {
-		name = form.getFormulaName();
+	public String showDialog(CustomFormula form,VariableList varList) {
 		if (currentFormula != null) {
 			borderedPanel.removeAll();
+			lstVariables.removeAll();
 		}
+		name = form.getFormulaName();
+		tfFormulaName.setText(name);
 		currentFormula = form;
 		borderedPanel.add(form);
 		borderedPanel.validate();
+		TypeConstVar cvt;
+		if (varList.isEmpty()) {
+			lstVariables.setVisible(false);
+		} else {
+			lstVariables.setVisible(true);
+			for (int i=0;i<varList.size();i++) {
+				cvt = (TypeConstVar)varList.elementAt(i);
+				lstVariables.add(i+": "+cvt.getName());
+			}
+			lstVariables.validate();
+		}
+
+		pack();
 		show();
+
 		return tfFormulaName.getText();
 	}
 
@@ -89,5 +111,13 @@ public class CustomFormulaDialog extends Dialog implements ActionListener, Windo
 	public void windowOpened(WindowEvent e) { }
 	public void windowActivated(WindowEvent e) { }
 	public void windowClosed(WindowEvent e) { }
+
+
+	public void textValueChanged(TextEvent txtEvent) {
+		if ((currentFormula != null) && (isVisible())) {
+			currentFormula.setFormulaName(tfFormulaName.getText());
+			currentFormula.repaint();
+		}
+	}
 
 }
