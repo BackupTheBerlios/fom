@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.43 2004/09/10 15:38:19 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.44 2004/10/19 21:26:05 shadowice Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -10,27 +10,27 @@ import formula.*;
 import utils.*;
 
 /**
- * The FormulaPanel displays the formula-trees, created by the user.
+ * The FormulaPanel is the workspace where users can create formula trees.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.43 $
+ * @version $Revision: 1.44 $
  */
 public class FormulaPanel extends Panel {
 
-	private static final int MAX_PIN_DISTANCE	= 4900;	// distance to a pin (mouseTargetPoint) to be of any interest (should be <100)
-	private static final int OVERSIZE_WIDTH		= 5;
-	private static final int OVERSIZE_HEIGHT	= 5;
+	private static final int MAX_PIN_DISTANCE	= 4900;	// (distance to a pin)^2 (mouseTargetPoint) to be of any interest (should be <100^2)
+	private static final int OVERSIZE_WIDTH		= 5;	// pixels from left/right border 
+	private static final int OVERSIZE_HEIGHT	= 5;	// pixels from bottom/top border
 
 	// These lists store all input/output pins.
-	private Vector inputPinList 	= new Vector();
-	private Vector outputPinList 	= new Vector();
-	private Vector tempInPPList		= new Vector();
-	private Vector tempOutPPList	= new Vector();
-	
+	private Vector inputPinList 	= new Vector();		// inputs of placed formulas
+	private Vector outputPinList 	= new Vector();		// outputs of placed formulas
+	private Vector tempInPPList		= new Vector();		// inputs of formulas currently selected (for displaying possible connections)
+	private Vector tempOutPPList	= new Vector();		// ditto for outputs
+
 	private AppletPanel aPanel;
 
-	private Image bufferImage;
-	private int lastBufferWidth = 0;
+	private Image bufferImage;							// used for double buffer (currently disabled due to slow speed)
+	private int lastBufferWidth = 0;					// used to check if the buffer must be resized
 	private int lastBufferHeight = 0;
 
 
@@ -155,7 +155,7 @@ public class FormulaPanel extends Panel {
 	}*/
 
 
-	// NOTE faster double buffer would work, but this version is too slow!
+	// NOTE faster double needed, this version is too slow!
 	//public void update(Graphics g) {
 		/*if ((bufferImage == null) || (getSize().width > lastBufferWidth) || (getSize().height > lastBufferHeight)) {
 			lastBufferWidth = getSize().width;
@@ -193,23 +193,16 @@ public class FormulaPanel extends Panel {
 				g.drawLine(pp.getMouseTargetPoint().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}
 		}
-		//debug!:
-		/*for (int i=0;i<inputPinList.size();i++) {
-			pp = (PinPoint)inputPinList.elementAt(i);
-			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5);
-		}*/
 
 		g.setColor(Color.red);
 		for (int i=0;i<tempInPPList.size();i++) {
 			pp = (PinPoint)tempInPPList.elementAt(i);
-			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}
 		}
 		for (int i=0;i<tempOutPPList.size();i++) {
 			pp = (PinPoint)tempOutPPList.elementAt(i);
-			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}

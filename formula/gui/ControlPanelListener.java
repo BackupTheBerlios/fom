@@ -1,4 +1,4 @@
-/* $Id: ControlPanelListener.java,v 1.17 2004/09/11 17:29:58 shadowice Exp $
+/* $Id: ControlPanelListener.java,v 1.18 2004/10/19 21:26:05 shadowice Exp $
  * Created on 12.05.2004
  *
  */
@@ -10,8 +10,10 @@ import java.awt.event.*;
 import utils.*;
 
 /**
+ * Listener for all components in the ControlPanel.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public class ControlPanelListener implements ActionListener {
 	
@@ -35,7 +37,7 @@ public class ControlPanelListener implements ActionListener {
 		this.varDialog = new DialogVariables(new Frame(), ap);
 		calcThread.start();
 	}
-	
+
 
 	public void actionPerformed(ActionEvent event) {
 		String actionCommand=event.getActionCommand();

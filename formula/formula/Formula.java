@@ -1,4 +1,4 @@
-/* $Id: Formula.java,v 1.55 2004/10/15 10:01:29 shadowice Exp $
+/* $Id: Formula.java,v 1.56 2004/10/19 21:26:05 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
@@ -15,21 +15,21 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.55 $
+ * @version $Revision: 1.56 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
 	// Constants for drawing Formula Elements. (BOXHEIGHT + RESULTHEIGHT) and FORMULAWIDHT should be devideable by 4.
 	public static final int BOXHEIGHT 			= 23;
-	public static final int CONNECTHEIGHT 	= 4;
+	public static final int CONNECTHEIGHT 		= 4;
 	public static final int RESULTHEIGHT 		= 16;
-	public static final int FORMULAHEIGHT 	= BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
+	public static final int FORMULAHEIGHT 		= BOXHEIGHT + RESULTHEIGHT +  2*CONNECTHEIGHT;
 	public static final int FORMULAWIDTH 		= 108;
 
 	// Constants for paintStatus
 	public static final int PAINTSTATUS_STANDARD	= 1;
-	public static final int PAINTSTATUS_SELECTED		= 2;
-	public static final int PAINTSTATUS_INSERTING		= 4;
+	public static final int PAINTSTATUS_SELECTED	= 2;
+	public static final int PAINTSTATUS_INSERTING	= 4;
 	public static final int PAINTSTATUS_MOVING		= 8;
 	public static final int PAINTSTATUS_CALCULATING = 16;
 
@@ -39,7 +39,6 @@ public abstract class Formula extends Container implements Cloneable {
 	protected int paintStatus = PAINTSTATUS_STANDARD;
 
 	protected Dimension dimension = new Dimension(FORMULAWIDTH,FORMULAHEIGHT);
-	//protected Vector treeList;
 
 	// Input/Output for Formula Elements
 	protected Formula[] input;
@@ -69,6 +68,10 @@ public abstract class Formula extends Container implements Cloneable {
 	}
 
 	
+	/**
+	 * Creates a new formula object.
+	 * @param ap root AppletPanel
+	 */
 	public Formula(AppletPanel ap) {
 		super();
 		setSize(dimension);
@@ -145,6 +148,7 @@ public abstract class Formula extends Container implements Cloneable {
 	/* (non-Javadoc)
 	 * @see java.awt.Component#isDoubleBuffered()
 	 */
+	/** @return true if doublebuffer is enabled */	
 	public boolean isDoubleBuffered() {
 		return true;
 	}
@@ -212,7 +216,7 @@ public abstract class Formula extends Container implements Cloneable {
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
 			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
-/* 			//Dotted Line
+/* 			//Dotted Line (too slow(?))
 			g.setColor(Color.gray);
 			for (int i=0; i<FORMULAWIDTH/4+1; i++) {
 				g.drawLine(i*4, CONNECTHEIGHT, i*4+2-1, CONNECTHEIGHT);
@@ -477,11 +481,7 @@ public abstract class Formula extends Container implements Cloneable {
 	    	for (int i=0;i<kListener.length;i++) {
 				clonedForm.addKeyListener(kListener[i]);	
 	    	}
-	    	
-	    	
 			return clonedForm;
-//		} catch (CloneNotSupportedException e) {
-//			throw new InternalError(e.toString());
 		} catch (InstantiationException e) {
 			e.printStackTrace(System.err);
 		} catch (IllegalAccessException e) {
@@ -489,35 +489,20 @@ public abstract class Formula extends Container implements Cloneable {
 		}
 		return null;
 	}
-	
-	
-	public void debug() {
-		System.out.println("------------------------------");
-		System.out.println("Formula Debug Output:");
-		System.out.println("formulaName: " + formulaName);
-		System.out.println("InputCount: " + getInputCount());
-		for (int i=0;i<getInputCount();i++) {
-			System.out.println("Input "+i+": "+getInput(i));
-			inputPins[i].debug();
-		}
-		System.out.println("Output: "+getOutput());
-		outputPin.debug();
-		System.out.println("------------------------------");
-	}
 
 
-	//"Java 1.1/1.2 fix":
+	//"Java 1.1/1.2 fixes":
 	public final void addKeyListener(KeyListener listener) {
 		super.addKeyListener(listener);
 		keyListener.add(listener);		
 	}
-	
+
 	public KeyListener[] getKeyListener() {
 		KeyListener[] kl = new KeyListener[keyListener.size()];
 		return (KeyListener[])keyListener.toArray(kl);
 	}
 
-	//"Quick-fix" :)
+	//"Quick-fixes" :)
 	public final Dimension preferredSize() {
 		return dimension;
 	}

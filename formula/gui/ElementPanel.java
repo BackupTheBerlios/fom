@@ -1,4 +1,4 @@
-/* $Id: ElementPanel.java,v 1.28 2004/09/09 20:14:55 shadowice Exp $
+/* $Id: ElementPanel.java,v 1.29 2004/10/19 21:26:05 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -9,8 +9,11 @@ import formula.*;
 import utils.*;
 
 /**
+ * Panel on the left side. Contains a choice component to select a category,
+ * the formulas in the current category and 2 buttons (clear all, add custom formula).
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.28 $
+ * @version $Revision: 1.29 $
  */
 public class ElementPanel extends Panel {
 
@@ -20,13 +23,14 @@ public class ElementPanel extends Panel {
 	private Button btnClearFormulas;
 	private Button btnAddFormula;
 	private ElementPanelListener epListener;
-	
+
 	private GridBagLayout elementPanelLayout;
 	private DragnDropListener dnd;
 	private AppletPanel aPanel;
-	
+
 	private Categories categories;
-	
+
+
 	/**
 	 * Creates the panel for categories and element list.
 	 */
@@ -82,12 +86,9 @@ public class ElementPanel extends Panel {
 	 */
 	public void updateElementList(Formula[] form) {
 		elementPanel.removeAll();
-		if(form == null) {						//no elements in category
-			//elementPanel.add(new Label(""));	// don't remove this!
-		} else {
+		if(form != null) {						//check if category has elements
 			for(int i=0;i<form.length;i++) {
 				FOMToolkit.addComponent(elementPanel,elementPanelLayout,form[i],0,i,1,1,0.0,0.0,GridBagConstraints.NONE);
-				//elementPanel.add(form[i]);
 			}
 			Panel p = new Panel();
 			FOMToolkit.addComponent(elementPanel,elementPanelLayout,p,0,form.length,1,1,0.0,1.0,GridBagConstraints.VERTICAL);
@@ -95,16 +96,16 @@ public class ElementPanel extends Panel {
 		scpElementList.validate();
 		elementPanel.repaint();
 	}
-	
-	
+
+
 	/**
 	 * Refreshs the formula elements of the active category.
 	 */
 	public void refreshElementList() {
 		updateElementList(categories.getCategoryElements(chCategoryList.getSelectedItem()));
 	}
-	
-	
+
+
 	/**
 	 * @return returns the categories
 	 */

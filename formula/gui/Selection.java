@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.26 2004/09/10 15:38:19 shadowice Exp $
+/* $Id: Selection.java,v 1.27 2004/10/19 21:26:05 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  */
 public class Selection {
 
@@ -73,7 +73,7 @@ public class Selection {
 	/**
 	 * Refreshs the list of connections to other formula elements.
 	 */
-	// NOTE: would probably be better in a thread (seem's like the speed is ok without one)
+	// NOTE: would probably be better in a thread (seem's like the speed is ok without one though)
 	public void refreshPinPointList() {
 		PinPoint targetPP;
 		PinPoint pin;
@@ -439,6 +439,10 @@ public class Selection {
 	}
 
 
+	/**
+	 * Sets the dragInProgress attribute
+	 * @param bool true = some formula objects are dragged over the workspace
+	 */
 	public void setDragInProgress(boolean bool) {
 		this.dragInProgress = bool;
 	}

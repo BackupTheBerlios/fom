@@ -1,4 +1,4 @@
-/* $Id: CalculatorThread.java,v 1.9 2004/09/10 15:38:19 shadowice Exp $
+/* $Id: CalculatorThread.java,v 1.10 2004/10/19 21:26:05 shadowice Exp $
  * Created on 16.08.2004
  *
  */
@@ -14,7 +14,7 @@ import formula.*;
  * Thread that handles (animated and non-animated) calculation of the formula tree.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class CalculatorThread extends Thread {
 
@@ -92,7 +92,7 @@ public class CalculatorThread extends Thread {
 
 
 	/**
-	 * Calculates the top-formula on the stack, but skips all formula
+	 * Calculates the top formula on the stack, but skips all formulas
 	 * that already have a result.
 	 */
 	public void calcStep() {

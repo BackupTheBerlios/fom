@@ -1,4 +1,4 @@
-/* $Id: FOMToolkit.java,v 1.6 2004/09/10 15:38:19 shadowice Exp $
+/* $Id: FOMToolkit.java,v 1.7 2004/10/19 21:26:05 shadowice Exp $
  * Created on 16.05.2004
  */
 package utils;
@@ -10,7 +10,7 @@ import java.text.*;
  * Tool class for Formula-o-Matic.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 
@@ -23,7 +23,7 @@ public final class FOMToolkit {
 
 
 	/**
-	 * Helper-method for adding components to the container.
+	 * Helper-method for adding components to a container with GridBagLayout.
 	 *
 	 * @see java.awt.GridBagLayout
 	 *
@@ -80,6 +80,7 @@ public final class FOMToolkit {
 	 * @return a formated string of the double value
 	 * @see java.text.DecimalFormat
 	 */
+	// TODO umschreiben, so dass DecimalFormat nicht verwendet wird. Problem mit alten Java-Versionen.
 	public static String getFormatedString(double value,int maxStrLength) {
 		if (Double.isNaN(value)) {
 			return "NaN";

@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.20 2004/09/10 12:55:23 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.21 2004/10/19 21:26:05 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -11,7 +11,7 @@ import formula.*;
 import utils.*;
 
 /**
- * Listener for the Choice and Button(s) on the left side panel (ElementPanel).
+ * Listener for the choice component and button(s) on the left side panel (ElementPanel).
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
@@ -61,7 +61,7 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 					fe.printStackTrace(System.err);
 				}
 			} else {
-				// TODO Fehlerdialog
+				// TODO: Fehlerdialog
 			}
 		} else if (aEvent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
 			aPanel.getFormulaPanel().deleteAll();
@@ -70,7 +70,7 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 			aPanel.getFormulaPanel().getParent().validate();
 			aPanel.getFormulaPanel().repaint();
 			aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
-			System.gc();
+			System.gc();	// slows everything down a bit
 		}
 	}
 

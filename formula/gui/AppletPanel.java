@@ -1,4 +1,4 @@
-/* $Id: AppletPanel.java,v 1.30 2004/09/10 10:05:30 shadowice Exp $
+/* $Id: AppletPanel.java,v 1.31 2004/10/19 21:26:05 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -12,8 +12,10 @@ import utils.*;
 import formula.*;
 
 /**
+ * Root panel and the main Applet class.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.30 $
+ * @version $Revision: 1.31 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 
@@ -32,6 +34,7 @@ public class AppletPanel extends Applet implements WindowListener {
 	private PopupMenu 			popupMenu;
 	private Dialog				infoDialog;
 
+
 	/**
 	 * Main method to run this program as application.
 	 *
@@ -39,7 +42,6 @@ public class AppletPanel extends Applet implements WindowListener {
 	 */
 	public static void main(final String[] args) {
 		AppletPanel aPanel = new AppletPanel();
-		//ap.init();
 		Frame frame = new Frame(Messages.getString("AppletPanel.Title"));
 		frame.add(aPanel);
 		frame.setSize(650,500);
@@ -184,9 +186,13 @@ public class AppletPanel extends Applet implements WindowListener {
 	}
 
 
+	/**
+	 * @return returns the popup menu with edit-commands
+	 */
 	public PopupMenu getPopupMenu() {
 		return popupMenu;
 	}
+
 
 	/**
 	 * Debug output.

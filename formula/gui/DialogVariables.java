@@ -1,4 +1,4 @@
-/* $Id: DialogVariables.java,v 1.23 2004/09/11 17:29:58 shadowice Exp $
+/* $Id: DialogVariables.java,v 1.24 2004/10/19 21:26:05 shadowice Exp $
  * Created on 23.07.2004
  */
 package gui;
@@ -11,8 +11,10 @@ import utils.Messages;
 import formula.*;
 
 /**
+ * Dialog window for editing variables and their value.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {
@@ -20,17 +22,18 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	private GridBagLayout 	gblVariablePanel;
 	private ScrollPane 		scrollForVariables;
 	private Button 			okButton;
-	private TextField[] 		varName;
-	private TextField[] 		varValueNumber;
-	private Button[] 			varValueBoolean;
-	private String[] 			oldVarName;
-	private Panel				variablesPanel;
-	private Label				lblNoVariables;
-	
-	private AppletPanel 		aPanel;
-	
+	private TextField[]		varName;
+	private TextField[]		varValueNumber;
+	private Button[] 		varValueBoolean;
+	private String[] 		oldVarName;
+	private Panel			variablesPanel;
+	private Label			lblNoVariables;
+
+	private AppletPanel 	aPanel;
+
 	private static final int MAX_HEIGHT = 400;
-	
+
+
 	/**
 	 * Creates a window for setting and changing variables.
 	 */
@@ -159,7 +162,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 
 	
 	/*
-	 * Method implemented from TestListener:
+	 * Method implemented from TextListener:
 	 * Used to change a variable name or it's value if it's a number.
 	 */
 	public void textValueChanged(TextEvent txtEvent) {
@@ -202,7 +205,7 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 			}
 		}
 	}
-	
+
 
 	/*
 	 * Method implemented from ActionListener for buttons:
@@ -234,7 +237,9 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 
 
 	public void windowDeactivated(WindowEvent wEvent) {
-		this.requestFocus();
+		if (this.isVisible()) {
+			this.requestFocus();
+		}
 	}
 
 

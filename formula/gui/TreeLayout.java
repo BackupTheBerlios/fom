@@ -1,4 +1,4 @@
-/* $Id: TreeLayout.java,v 1.18 2004/09/10 15:38:19 shadowice Exp $
+/* $Id: TreeLayout.java,v 1.19 2004/10/19 21:26:05 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -9,8 +9,11 @@ import java.awt.*;
 import formula.*;
 
 /**
+ * LayoutManager for the workspace (FormulaPanel).
+ * It arranges all formula components so that they form a tree.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 public class TreeLayout implements LayoutManager {
 

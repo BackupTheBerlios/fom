@@ -1,4 +1,4 @@
-/* $Id: PinPoint.java,v 1.11 2004/10/15 10:37:00 shadowice Exp $
+/* $Id: PinPoint.java,v 1.12 2004/10/19 21:26:05 shadowice Exp $
  * Created on 02.07.2004
  */
 package gui;
@@ -10,7 +10,7 @@ import formula.*;
  * Class to store the points where a formula can be connected.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 /*
  * How to use this:
@@ -179,7 +179,7 @@ public class PinPoint implements Cloneable {
 
 
 	/**
-	 * @return
+	 * @return returns the mouseTargetPoint
 	 */
 	public Point getMouseTargetPoint() {
 		return this.mouseTargetPoint;
@@ -188,20 +188,19 @@ public class PinPoint implements Cloneable {
 
 	/**
 	 * @param p another point
-	 * @return returns the distance between this PinPoint's mouseTargetPoint and the point p.
+	 * @return returns the distance^2 between this PinPoint's mouseTargetPoint and the point p.
 	 */
 	public int getDistance(Point p) {
 		int x_diff = mouseTargetPoint.x - p.x;
 		int y_diff = mouseTargetPoint.y - p.y;
 		return x_diff * x_diff + y_diff * y_diff;
-		//return (int)this.mouseTargetPoint.distance(p);
 	}
 
 
 	/**
 	 * @param x x coordinates of another point
 	 * @param y y coordinates of another point
-	 * @return Returns the distance between this PinPoint and the point (x,y).
+	 * @return Returns the distance^2 between this PinPoint and the point (x,y).
 	 */
 	public int getDistance(int x, int y) {
 		int x_diff = mouseTargetPoint.x - x;
@@ -282,28 +281,14 @@ public class PinPoint implements Cloneable {
 		try {
 			PinPoint cpp = (PinPoint)super.clone();
 			cpp.bestCandidate = null;
-			//cpp.bestDistance = 0;
 			cpp.formula = null;
 			cpp.mouseTargetPoint = (Point)mouseTargetPoint.clone();
 			cpp.pinPoint = (Point)pinPoint.clone();
 			cpp.targetPoint = null;
-			//cpp.inputNumber = inputNumber;
 			return cpp;
 		} catch (CloneNotSupportedException e) {
 			throw new InternalError(e.toString());
 		}
-	}
-	
-	
-	public void debug() {
-		System.out.println("------------------------------");
-		System.out.println("PinPoint Debug Output:");
-		System.out.println("targetPoint: "+targetPoint);
-		System.out.println("inputNumber: "+inputNumber);
-		System.out.println("formula: "+formula);
-		System.out.println("pinPoint: "+pinPoint);
-		System.out.println("mouseTargetPoint: "+mouseTargetPoint);
-		System.out.println("------------------------------");
 	}
 
 }

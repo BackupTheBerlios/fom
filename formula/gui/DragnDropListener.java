@@ -1,4 +1,4 @@
-/* $Id: DragnDropListener.java,v 1.38 2004/09/10 12:55:23 shadowice Exp $
+/* $Id: DragnDropListener.java,v 1.39 2004/10/19 21:26:05 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -14,14 +14,14 @@ import formula.*;
  * for (re)placing formula-elements or whole trees and connecting them.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.38 $
+ * @version $Revision: 1.39 $
  *
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
 
 	private AppletPanel aPanel		= null;				// root panel of everything
-	
 	private Selection selection		= null;
+
 
 	/**
 	 * Creates a new Drag&Drop-Listener.
@@ -32,9 +32,14 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		selection = new Selection(ap);
 	}
 
+
+	/**
+	 * @return returns the selection object used for storing informations of selected elements
+	 */
 	public Selection getSelection() {
 		return selection;
 	}
+
 
 	public void mouseClicked(MouseEvent me) {
 		if (me.isPopupTrigger()) {
@@ -52,6 +57,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		}
 	}
 
+
 	public void mouseEntered(MouseEvent me) {
 		if (me.getComponent() instanceof FormulaPanel) {
 			if (selection.isInsertInProgress()) {
@@ -60,6 +66,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		}
 		
 	}
+
 
 	public void mouseExited(MouseEvent me) {
 		if (me.getComponent() instanceof FormulaPanel) {
@@ -71,6 +78,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 			}
 		}
 	}
+
 
 	public void mousePressed(MouseEvent me) {
 		if (me.isPopupTrigger() && (me.getComponent() instanceof FormulaPanel)) {

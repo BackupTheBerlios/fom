@@ -8,6 +8,11 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
+ * Tool class for all message strings. There has to be a strings_xx.properties 
+ * in the main directory with all strings (see strings.properties).
+ * xx is the language code, e.g. de or jp.
+ * 
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
 public final class Messages {

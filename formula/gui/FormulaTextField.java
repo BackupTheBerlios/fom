@@ -1,4 +1,4 @@
-/* $Id: FormulaTextField.java,v 1.8 2004/09/10 15:38:19 shadowice Exp $
+/* $Id: FormulaTextField.java,v 1.9 2004/10/19 21:26:05 shadowice Exp $
  * Created on 16.05.2004
  *
  */
@@ -9,8 +9,10 @@ import utils.*;
 import formula.*;
 
 /**
+ * TextField to display the string of a formula tree.
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class FormulaTextField extends TextField {
 
