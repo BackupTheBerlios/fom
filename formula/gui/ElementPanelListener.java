@@ -14,16 +14,18 @@ import utils.*;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
-public class CategoryListListener implements ItemListener, ActionListener {
+public class ElementPanelListener implements ItemListener, ActionListener {
 
 	private ElementPanel ePanel;
+	private AppletPanel aPanel;
 
 	/**
 	 * Creates the listener. This constructor is required, otherwise it won't work.
 	 * @param root the root-panel (ElementPanel) of all components using this listener
 	 */	
-	public CategoryListListener(ElementPanel root) {
-		ePanel = root;
+	public ElementPanelListener(AppletPanel ap,ElementPanel root) {
+		this.ePanel = root;
+		this.aPanel = ap;
 	}
 
 
@@ -36,10 +38,16 @@ public class CategoryListListener implements ItemListener, ActionListener {
 
 	public void actionPerformed(ActionEvent aevent) {
 		if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnAddFormula"))) {
-			// TODO use the formula from FormulaPanel!
+			// TODO use the formula (CustomFormula) from FormulaPanel!
 			Categories.addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),new Add());
 			ePanel.refreshElementList();
+		} else if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
+			aPanel.getFormulaPanel().deleteAll();
+			aPanel.getFormulaPanel().validate();
+			aPanel.getFormulaPanel().doLayout();
+			aPanel.getFormulaPanel().repaint();
 		}
+		aPanel.getControlPanel().getLblFormula().updateControlPanelText();
 	}
 	
 }

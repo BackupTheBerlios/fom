@@ -52,13 +52,23 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		if (newInput.length() == 0) {
 			newInput = "0";
 		}
-		if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
+		/*if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
 			result = new Double(newInput.replace(',','.'));
 			inputNumber.setBackground(SystemColor.text);
 			repaint();
 		} else {
 			inputNumber.setBackground(Color.RED);
+		}*/
+			
+		try {
+			result = new Double(newInput.replace(',','.'));
+			inputNumber.setBackground(SystemColor.text);
+		} catch (NumberFormatException nfe) {
+			inputNumber.setBackground(Color.RED);
+		} finally {
+			repaint();
 		}
+		
 		if (getParent() instanceof FormulaPanel) {
 			((AppletPanel)getParent().getParent().getParent()).getControlPanel().getLblFormula().updateControlPanelText();
 		}
@@ -68,5 +78,10 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		super.setVisible(vis);
 		inputNumber.setVisible(vis);
 	}
+	
+	public String getInputVarName() {
+		return null;
+	}
+
 
 }

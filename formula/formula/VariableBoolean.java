@@ -76,5 +76,10 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 		oldName = newName;
 		repaint();
 	}
+	
+	public void setVisible(boolean vis) {
+		super.setVisible(vis);
+		inputVarName.setVisible(vis);
+	}
 
 }

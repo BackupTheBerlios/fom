@@ -19,7 +19,7 @@ public class ElementPanel extends Panel {
 	private Panel elementPanel;
 	private Button btnClearFormulas;
 	private Button btnAddFormula;
-	private CategoryListListener clListener;
+	private ElementPanelListener epListener;
 	
 	private GridLayout elementPanelLayout;
 	private DragnDropListener dnd;
@@ -38,7 +38,7 @@ public class ElementPanel extends Panel {
 		dnd					= new DragnDropListener(this.aPanel);
 		btnClearFormulas	= new Button(Messages.getString("ElementPanel.BtnClearFormulas"));
 		btnAddFormula		= new Button(Messages.getString("ElementPanel.BtnAddFormula"));
-		clListener			= new CategoryListListener(this);
+		epListener			= new ElementPanelListener(aPanel,this);
 		elementPanelLayout	= new GridLayout();
 		//adding categories:
 		String[] categories=Categories.getCategories();
@@ -46,8 +46,9 @@ public class ElementPanel extends Panel {
 			chCategoryList.add(categories[i]);
 		}
 		//adding listeners:
-		chCategoryList.addItemListener(clListener);
-		btnAddFormula.addActionListener(clListener);
+		chCategoryList.addItemListener(epListener);
+		btnAddFormula.addActionListener(epListener);
+		btnClearFormulas.addActionListener(epListener);
 		elementPanel.addMouseListener(dnd);
 		elementPanel.addMouseMotionListener(dnd);
 		//visible settings:

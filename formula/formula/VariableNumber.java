@@ -31,7 +31,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		formulaName = "                    Number";
 		result = new Double (0);
 		inputVarName = new TextField();
-		inputVarName.setFont(new Font("Arial", Font.PLAIN, 11));
+		inputVarName.setFont(DEFAULT_FONT);
 		inputVarName.setBackground(SystemColor.text);
 		inputVarName.setText("number1");
 		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDHT/2, BOXHEIGHT-6);		
@@ -78,7 +78,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 	}
 	
 	public void setVisible(boolean vis) {
-		this.setVisible(vis);
+		super.setVisible(vis);
 		inputVarName.setVisible(vis);	
 	}
 

@@ -61,7 +61,6 @@ public abstract class NumberFormula extends Formula {
 	 */
 	public final void clearResult() {
 		result = null;
-		repaint();
 	}
 
 	public boolean isValidOutput(Formula in, int whichInput) {

@@ -55,4 +55,14 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		repaint();
 	}
 
+	
+	public void setVisible(boolean vis) {
+		super.setVisible(vis);
+		inputBoolean.setVisible(vis);
+	}
+	
+	public String getInputVarName() {
+		return null;
+	}
+
 }

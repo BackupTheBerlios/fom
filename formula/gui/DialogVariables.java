@@ -104,9 +104,13 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 		boolean valid = true;
 		int count = 0;
 		//name must have at least one non-space character.
-		if (isValid.matches(" *")) {
+		/*if (isValid.matches(" *")) {
+			valid = false;
+		}*/
+		if (isValid.trim().equals("")) {
 			valid = false;
 		}
+		
 		if (valid) {
 			//Double names are not valid.
 			for (int i=0; i < varName.length; i++) {
@@ -147,11 +151,19 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 				if (newInput.length() == 0) {
 					newInput = "0";
 				}
-				if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
+				/*if (newInput.matches("-?[0-9]+[.,]?[0-9]*")) {
 					varValueNumber[index].setBackground(SystemColor.text);
 					ConstVarFormula.setVarValueAll(varName[index].getText(), new Double(newInput.replace(',','.')));
 				} else {
 					varValueNumber[index].setBackground(Color.RED);
+				}*/
+				try {
+					ConstVarFormula.setVarValueAll(varName[index].getText(), new Double(newInput.replace(',','.')));
+					varValueNumber[index].setBackground(SystemColor.text);
+				} catch (NumberFormatException nfe) {
+					varValueNumber[index].setBackground(Color.RED);
+				} finally {
+					repaint();
 				}
 			}
 		}

@@ -30,18 +30,18 @@ public class FormulaLabel extends Label {
 		Formula[] treeArray = Formula.getTreeList();
 		if (treeArray != null) {
 			if (treeArray.length > 1) {
-				cPanel.updateLblFormula(Messages.getString("Error.TooManyTrees"));			
+				setText(Messages.getString("Error.TooManyTrees"));			
 			} else if (treeArray.length == 1) {
 				if (treeArray[0].isCompleteSubTree()) {
-					cPanel.updateLblFormula(treeArray[0].toString());	
+					setText(treeArray[0].toString());	
 				} else {
-					cPanel.updateLblFormula(Messages.getString("Error.IncompleteFormula"));
+					setText(Messages.getString("Error.IncompleteFormula"));
 				}
 			} else {
-				cPanel.updateLblFormula(Messages.getString("Error.NoTrees"));
+				setText(Messages.getString("Error.NoTrees"));
 			}
 		} else {
-			cPanel.updateLblFormula(Messages.getString("Error.NoTrees"));
+			setText(Messages.getString("Error.NoTrees"));
 		}
 	}
 

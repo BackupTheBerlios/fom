@@ -100,8 +100,12 @@ public abstract class ConstVarFormula extends Formula {
 		TypeConstVar content;
 		for (int i = 0; i < varList.size(); i++) {
 			content = (TypeConstVar)varList.get(i);
-			if (name.equals(content.getName())) {
-				return content;
+			if (content != null) {
+				if (name.equals(content.getName())) {
+					return content;
+				}
+			} else {
+				return null;
 			}
 		}
 		return null;
@@ -236,8 +240,11 @@ public abstract class ConstVarFormula extends Formula {
 	protected static final boolean isValidName(String isValid, Object value) {
 		boolean valid = true;
 		TypeConstVar content;
-		//name must have at least one non-space character.
-		if (isValid.matches(" *")) {
+		//name must have at least one non-whitespace character.
+		/*if (isValid.matches(" *")) {	// matches benötigt Java 1.4
+			valid = false;
+		}*/
+		if (isValid.trim().equals("")) {
 			valid = false;
 		}
 		//Double names of wrong data type is not valid.
@@ -250,4 +257,6 @@ public abstract class ConstVarFormula extends Formula {
 		return valid;
 	}
 
+
+	public abstract String getInputVarName();
 }

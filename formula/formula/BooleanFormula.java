@@ -46,7 +46,6 @@ public abstract class BooleanFormula extends Formula {
 	 */
 	public void clearResult() {
 		result = null;
-		repaint();
 	}
 
 	/**

@@ -25,30 +25,11 @@ public class ControlPanel extends Panel {
 	private Button btnCalcAll;
 	private Scrollbar sbSpeed;
 	private FormulaLabel lblFormula;
-	private Choice chZoom;
 	private Label lblSpeed;
+	//private Choice chZoom;
 	private AppletPanel aPanel;
 
-
-	public FormulaLabel getLblFormula() {
-		return lblFormula;
-	}
-
-	public void setLblFormula(FormulaLabel lblFormula) {
-		this.lblFormula = lblFormula;
-	}
-	
-	public void updateLblFormula(String text) {
-		this.lblFormula.setText(text);
-	}
-
-	public Choice getChZoom() {
-		return chZoom;
-	}
-
-	public void setChZoom(Choice chZoom) {
-		this.chZoom = chZoom;
-	}
+	private static final int SPEED_MULTIPLIER = 20;
 
 	/**
 	 * Creates the control panel.
@@ -62,18 +43,18 @@ public class ControlPanel extends Panel {
 		btnReset			= new Button(Messages.getString("ControlPanel.BtnReset"));
 		btnVariables		= new Button(Messages.getString("ControlPanel.BtnVariables"));
 		lblSpeed			= new Label(Messages.getString("ControlPanel.LblSpeed"),Label.RIGHT);
-		lblFormula			= new FormulaLabel(this,"The formula tree is incomplete.");  //Text nur zum testen der Länge :)
-		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 10, 1, 0, 20);
-		chZoom				= new Choice();
+		lblFormula			= new FormulaLabel(this,"");
+		sbSpeed				= new Scrollbar(Scrollbar.HORIZONTAL, 50, 1, 10, 200);
+		//chZoom				= new Choice();
 		GridBagLayout gbl	= new GridBagLayout();
 		ControlPanelListener cpListener = new ControlPanelListener(aPanel,this);
 
-		chZoom.add("25%");
-		chZoom.add("50%");
-		chZoom.add("75%");
-		chZoom.add("100%");
-		chZoom.add("150%");
-		chZoom.add("200%");
+		//chZoom.add("25%");
+		//chZoom.add("50%");
+		//chZoom.add("75%");
+		//chZoom.add("100%");
+		//chZoom.add("150%");
+		//chZoom.add("200%");
 		
 		setLayout(gbl);
 		
@@ -104,10 +85,36 @@ public class ControlPanel extends Panel {
 		btnReset.addActionListener(cpListener);
 		btnVariables.addActionListener(cpListener);
 		sbSpeed.addAdjustmentListener(cpListener);
-		chZoom.addItemListener(cpListener);
+		//chZoom.addItemListener(cpListener);
 
 		setBackground(SystemColor.activeCaptionBorder);		
 	}
+
+
+	public FormulaLabel getLblFormula() {
+		return lblFormula;
+	}
+
+	public void setLblFormula(FormulaLabel lblFormula) {
+		this.lblFormula = lblFormula;
+	}
 	
+	public void updateLblFormula(String text) {
+		this.lblFormula.setText(text);
+	}
+
+
+	public int getSpeed() {
+		return sbSpeed.getValue()*SPEED_MULTIPLIER;		
+	}
+
+
+	public void setAnimating(boolean anim) {
+		if (anim) {
+			btnCalcAni.setLabel(Messages.getString("ControlPanel.BtnCalcAniStop"));
+		} else {
+			btnCalcAni.setLabel(Messages.getString("ControlPanel.BtnCalcAni"));
+		}
+	}
 
 }

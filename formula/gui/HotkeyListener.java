@@ -27,13 +27,13 @@ public class HotkeyListener implements KeyListener {
 		char keyChar = kEvent.getKeyChar();
 		switch (keyChar) {
 			case 'c':
-				// TODO: Copy
+				// TODO Copy
 				break;
 			case 'x':
-				// TODO: Cut
+				// TODO Cut
 				break;
 			case 'v':
-				// TODO: Paste
+				// TODO Paste
 				break;
 		}
 	}
@@ -42,7 +42,7 @@ public class HotkeyListener implements KeyListener {
 		int keyCode = kEvent.getKeyCode();
 		switch (keyCode) {
 			case KeyEvent.VK_DELETE:
-				// TODO: delete
+				aPanel.getSelection().delete();
 				break;
 		}
 		

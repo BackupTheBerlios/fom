@@ -27,8 +27,8 @@ public class FormulaPanel extends Panel {
 	
 	private AppletPanel aPanel;
 
-	private static final int OVERSIZE_WIDTH		= 50;
-	private static final int OVERSIZE_HEIGHT	= 50;
+	private static final int OVERSIZE_WIDTH		= 5;
+	private static final int OVERSIZE_HEIGHT	= 5;
 
 	/**
 	 * Creates a new FormulaPanel.
@@ -332,12 +332,12 @@ public class FormulaPanel extends Panel {
 
 	private void detachInput(PinPoint pin) {
 		if (pin.getTarget() != null) {
+			Formula.addTree(pin.getTarget().getFormula());
 			pin.getTarget().getFormula().setOutput(null);
 			pin.getFormula().setInput(null,pin.getInputNumber());
 			pin.getTarget().setTarget(null);
 			pin.getTarget().setBestCandidate(null);
 			pin.setTarget(null);
-			Formula.addTree(pin.getTarget().getFormula());
 		}
 		pin.setBestCandidate(null);
 	}
@@ -440,44 +440,80 @@ public class FormulaPanel extends Panel {
 	
 	public void checkBounds() {
 		Component comp;
-		Rectangle newBounds = getBounds();
-		newBounds.x = 0;
-		newBounds.y = 0;
+		Rectangle newBounds = new Rectangle(0,0,0,0);
 		for (int i=0;i<getComponentCount();i++) {
 			comp = getComponent(i);
-			if ((comp.getX()+comp.getWidth()) > getWidth()) {
+			if ((comp.getX()+comp.getWidth()) > newBounds.width) {
 				newBounds.width = comp.getX() + comp.getWidth() + OVERSIZE_WIDTH;
 			}
-			if (comp.getX() < getX()) {
-				
-				newBounds.x = comp.getX();
+			if (comp.getX() < (getX()+OVERSIZE_WIDTH)) {
+				newBounds.x = comp.getX()-OVERSIZE_WIDTH;
 			}
-			if ((comp.getY()+comp.getHeight()) > getHeight()) {
+			if ((comp.getY()+comp.getHeight()) > newBounds.height) {
 				newBounds.height = comp.getY() + comp.getHeight() + OVERSIZE_HEIGHT;
 			}
-			if (comp.getY() < getY()) {
-				newBounds.y = comp.getY();
+			if (comp.getY() < (getY()+OVERSIZE_HEIGHT)) {
+				newBounds.y = comp.getY()-OVERSIZE_HEIGHT;
 			}
 		}
-		//setBounds(newBounds);
-		if (newBounds.x < 0) {
-			newBounds.width -= newBounds.x;
-		}
-		if (newBounds.y < 0) {
-			newBounds.height -= newBounds.y;
-		}
+
 		Formula form;
 		if ((newBounds.x < 0) || (newBounds.y < 0)) {
+			if (newBounds.x < 0) {
+				newBounds.width -= newBounds.x;
+			}
+			if (newBounds.y < 0) {
+				newBounds.height -= newBounds.y;
+			}
+			
 			for (int i=0;i<getComponentCount();i++) {
 				form = (Formula)getComponent(i);
-				form.moveTo(form.getX()-newBounds.x,form.getY()-newBounds.y);
+				form.moveTo(form.getX()-newBounds.x+OVERSIZE_WIDTH,form.getY()-newBounds.y+OVERSIZE_HEIGHT);
 			}
 			ScrollPane sPane = (ScrollPane)getParent();
 			//sPane.setScrollPosition(sPane.getScrollPosition().x,0);
 		}
 					
-		setSize(newBounds.width,newBounds.height);
+		setSize(newBounds.width+OVERSIZE_WIDTH,newBounds.height+OVERSIZE_HEIGHT);
 		getParent().validate();
+	}
+
+	public void delete(Formula form) {
+		PinPoint[] pinList = form.getInputPins();
+		for (int i=0;i<pinList.length;i++) {
+			detachInput(pinList[i]);
+			inputPinList.remove(pinList[i]);
+			tempInPPList.remove(pinList[i]);
+		}
+		detachOutput(form.getOutputPin());
+		outputPinList.remove(form.getOutputPin());
+		tempOutPPList.remove(form.getOutputPin());
+		Formula.removeTree(form);
+		remove(form);
+	}
+
+	
+	/**
+	 * Deletes everything in the FormulaPanel.
+	 */
+	public void deleteAll() {
+		System.out.println("deleteAll");
+		ConstVarFormula cvForm;
+		for (int i=0;i<outputPinList.size();i++) {
+			if (((PinPoint)outputPinList.get(i)).getFormula() instanceof ConstVarFormula) {
+				cvForm = (ConstVarFormula)((PinPoint)outputPinList.get(i)).getFormula();
+				ConstVarFormula.deleteVarList(cvForm,cvForm.getInputVarName());
+			}
+		}
+		inputPinList.clear();
+		outputPinList.clear();
+		tempInPPList.clear();
+		tempOutPPList.clear();
+		Formula[] treeList = Formula.getTreeList();
+		for (int i=0;i<treeList.length;i++) {
+			Formula.removeTree(treeList[i]);
+		}
+		removeAll();
 	}
 
 }

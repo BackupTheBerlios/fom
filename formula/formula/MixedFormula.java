@@ -20,7 +20,6 @@ public abstract class MixedFormula extends Formula {
 	 */
 	public void clearResult() {
 		result = null;
-		repaint();
 	}
 
 	public final double getDoubleResult() throws FormulaException {

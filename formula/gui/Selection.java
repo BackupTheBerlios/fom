@@ -67,7 +67,6 @@ public class Selection {
 			location.translate(xOffset,yOffset);
 			newComponentInstance.moveTo(location.x,location.y);
 		}
-		
 	}
 	
 	/**
@@ -136,6 +135,7 @@ public class Selection {
 	public void recursiveSelect(Formula form,Point point) {
 		dragInProgress = true;
 		selectedComponentRoot = form;
+		form.requestFocus();
 		selectedStartPoint = selectedComponentRoot.getLocation();
 		selectedRelativePoint = new Point((int)(selectedStartPoint.getX()-point.getX()),(int)(selectedStartPoint.getY()-point.getY()));
 		fPanel.detach(selectedComponentRoot);
@@ -205,6 +205,10 @@ public class Selection {
 	 */
 	public void deselect() {
 		dragInProgress = false;
+		if (insertInProgress && (newComponentInstance instanceof ConstVarFormula)) {
+			ConstVarFormula cvForm = (ConstVarFormula)newComponentInstance;
+			ConstVarFormula.deleteVarList(cvForm,cvForm.getInputVarName());
+		}
 		insertInProgress = false;
 		pPInputs.clear();
 		pPOutputs.clear();
@@ -225,6 +229,7 @@ public class Selection {
 			selectedComponents.clear();
 		}
 		aPanel.getControlPanel().getLblFormula().updateControlPanelText();
+		aPanel.requestFocus();
 	}
 	
 	/**
@@ -248,6 +253,7 @@ public class Selection {
 			fPanel.add(newComponentInstance);
 			newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_INSERTING);
 			fPanel.repaint();
+			newComponentInstance.addKeyListener(aPanel.getHotkeyListener());
 		} catch (IllegalAccessException iae) {
 			iae.printStackTrace();
 		} catch (InstantiationException ie) {
@@ -362,6 +368,24 @@ public class Selection {
 			fPanel.setTempPinPoints(tempPPInputs,tempPPOutputs);
 			fPanel.repaint();
 			//fPanel.checkBounds();
+		}
+	}
+	
+	public void delete() {
+		if (selectedComponents.size() > 0) {
+			Formula form;
+			for (int i=0;i<selectedComponents.size();i++) {
+				form = (Formula)selectedComponents.get(i);
+				if (form instanceof ConstVarFormula) {
+					ConstVarFormula cvForm = (ConstVarFormula)form;
+					ConstVarFormula.deleteVarList(cvForm,cvForm.getInputVarName());
+				}
+				fPanel.delete(form);
+			}
+			fPanel.validate();
+			fPanel.doLayout();
+			fPanel.checkBounds();
+			fPanel.repaint();
 		}
 	}
 

@@ -18,11 +18,15 @@ import formula.*;
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
 
-	private static AppletPanel aPanel			= null;				// root panel of everything
+	private AppletPanel aPanel			= null;				// root panel of everything
 	
-	private static Selection selection			= null;
+	private static Selection selection	= null;		// TODO rausfinden, wieso das nur statisch funktioniert.
 	
 
+	/**
+	 * Creates a new Drag&Drop-Listener.
+	 * @param ap the AppletPanel where this listener is used
+	 */
 	public DragnDropListener(AppletPanel ap) {
 		aPanel = ap;
 		selection = new Selection(ap);

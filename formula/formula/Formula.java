@@ -24,12 +24,15 @@ public abstract class Formula extends Container implements Cloneable {
 	public static final int FORMULAWIDHT = 108; //120
 
 	// Constants for paintStatus
-	public static final int PAINTSTATUS_STANDARD	= 0;
-	public static final int PAINTSTATUS_SELECTED	= 1;
-	public static final int PAINTSTATUS_INSERTING	= 2;
-	public static final int PAINTSTATUS_MOVING		= 3;
+	public static final int PAINTSTATUS_STANDARD	= 1;
+	public static final int PAINTSTATUS_SELECTED	= 2;
+	public static final int PAINTSTATUS_INSERTING	= 4;
+	public static final int PAINTSTATUS_MOVING		= 8;
+	public static final int PAINTSTATUS_CALCULATING = 16;
 
 	protected int paintStatus = PAINTSTATUS_STANDARD;
+	protected static final Font DEFAULT_FONT		= new Font("Arial", Font.PLAIN, 11);
+	protected static final Font CALC_FONT			= new Font("Arial", Font.BOLD, 	11);
 
 	protected Dimension dimension = new Dimension(FORMULAWIDHT,FORMULAHEIGHT);
 
@@ -103,16 +106,22 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param g Graphics object for painting.
 	 */
 	public void paint(Graphics g) {
-		String resultString;
-		resultString = getStringResult();
-		g.setFont(new Font("Arial", Font.PLAIN, 11));
+		String resultString = getStringResult();
 		super.paint(g);
+
+		// during calculation draw strings bold!
+		if ((paintStatus & PAINTSTATUS_CALCULATING) != 0) {
+			g.setFont(CALC_FONT);
+		} else {
+			g.setFont(DEFAULT_FONT);
+		}
+
 		if (resultString != null) {
 			g.drawString(resultString, (FORMULAWIDHT-g.getFontMetrics().stringWidth(resultString))/2, RESULTHEIGHT/2+CONNECTHEIGHT+g.getFontMetrics().getHeight()/2); // Ergebnis der Rechnung
 		}
-		//((Graphics2D)g).scale(scaleX, scaleY);
+
 		//Standard
-		if (paintStatus == PAINTSTATUS_STANDARD) {
+		if ((paintStatus & PAINTSTATUS_STANDARD) == PAINTSTATUS_STANDARD) {
 			g.setColor(Color.BLACK);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDHT-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
 			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDHT-1, CONNECTHEIGHT+RESULTHEIGHT);
@@ -122,7 +131,7 @@ public abstract class Formula extends Container implements Cloneable {
 			g.drawLine(FORMULAWIDHT/2, CONNECTHEIGHT, FORMULAWIDHT/2, 0);
 			g.drawString(formulaName, (FORMULAWIDHT-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		//Selected Element
-		} else if (paintStatus == PAINTSTATUS_SELECTED) {
+		} else if ((paintStatus & PAINTSTATUS_SELECTED) != 0) {
 			g.setColor(Color.BLUE);
 			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDHT-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
 			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDHT-1, CONNECTHEIGHT+RESULTHEIGHT);
@@ -132,7 +141,7 @@ public abstract class Formula extends Container implements Cloneable {
 			g.drawLine(FORMULAWIDHT/2, CONNECTHEIGHT, FORMULAWIDHT/2, 0);
 			g.drawString(formulaName, (FORMULAWIDHT-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
 		//Move Element
-		} else { //if ((paintStatus == PAINTSTATUS_MOVING) || (paintStauts == PAINTSTATUS_INSERTING)) {
+		} else if (((paintStatus & PAINTSTATUS_MOVING) != 0) || ((paintStatus & PAINTSTATUS_INSERTING) != 0)) {
 			g.setColor(Color.GRAY);
 			//Dotted Line
 			for (int i=0; i<FORMULAWIDHT/4; i++) {
@@ -258,10 +267,9 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * @return Validates, that only one tree exists and isn't missing some inputs.
 	 */
-	// HEIKO: Brauchst du das irgendwo? Ansonsten wird's u.U. nicht benötigt.
-	public final boolean isCompleteGlobalTree() {
+	public static final boolean isCompleteGlobalTree() {
 		boolean complete = false;
-		if (getTreeListSize() != 1) {
+		if (getTreeListSize() == 1) {
 			complete = getTreeList()[0].isCompleteSubTree();
 		}
 		return complete;
@@ -282,6 +290,11 @@ public abstract class Formula extends Container implements Cloneable {
 		return index;
 	}
 
+	/**
+	 * Returns an array of formula objects that don't have anything connected
+	 * to their output-pins.
+	 * @return array of formulas
+	 */
 	public final static Formula[] getTreeList() {
 		Formula[] treeListArray = new Formula[treeList.size()];
 		for (int i=0; i < treeListArray.length; i++) {
@@ -326,33 +339,41 @@ public abstract class Formula extends Container implements Cloneable {
 	}
 	
 	/**
-	 * @return
+	 * @return returns the input-pins for this formula
 	 */
 	public PinPoint[] getInputPins() {
 		return inputPins;
 	}
 
 	/**
-	 * @return
+	 * @return returns the output-pin for this formula
 	 */
 	public PinPoint getOutputPin() {
 		return outputPin;
 	}
 
 	/**
-	 * @param points
+	 * Sets the input pins for this formula.
+	 * @param pins array of input-pins
 	 */
 	public void setInputPins(PinPoint[] pins) {
 		inputPins = pins;
 	}
 
 	/**
-	 * @param point
+	 * Sets the output pin for this formula.
+	 * @param pin output-pin
 	 */
 	public void setOutputPin(PinPoint pin) {
 		outputPin = pin;
 	}
 
+	/**
+	 * Moves a formula to a new position and also moves the input-pins
+	 * of this formula to a relative position.
+	 * @param x x coordinates of new position
+	 * @param y y coordinates of new position
+	 */
 	public void moveTo(int x, int y) {
 		Point oldLocation = getLocation();
 		int xOffset = x - oldLocation.x;

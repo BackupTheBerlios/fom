@@ -29,4 +29,9 @@ public class ConstE extends ConstVarFormula {
 		return "e";
 	}
 
+	public String getInputVarName() {
+		return null;
+	}
+
+
 }

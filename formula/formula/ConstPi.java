@@ -29,4 +29,8 @@ public class ConstPi extends ConstVarFormula {
 		return "Pi";
 	}
 
+	public String getInputVarName() {
+		return null;
+	}
+
 }
