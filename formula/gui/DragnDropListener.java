@@ -28,6 +28,10 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		selection = new Selection(ap);
 	}
 
+	public Selection getSelection() {
+		return selection;
+	}
+
 	public void mouseClicked(MouseEvent me) {
 		// if event happened in the ElementPanel:
 		if (me.getComponent().getParent().getParent() instanceof ElementPanel) {

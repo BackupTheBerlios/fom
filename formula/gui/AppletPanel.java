@@ -6,7 +6,6 @@ package gui;
 
 import java.applet.Applet;
 import java.awt.*;
-//import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
@@ -14,15 +13,17 @@ import java.awt.*;
  */
 public class AppletPanel extends Applet {
 
-	private FormulaPanel pnlFormula;
-	private ControlPanel pnlControls;
-	private ElementPanel pnlElements;
+	private FormulaPanel		pnlFormula;
+	private ControlPanel		pnlControls;
+	private ElementPanel		pnlElements;
+	private DragnDropListener 	dnd;
+	private HotkeyListener		hotkey;
 
 	/**
 	 * Initializes the applet. Adds all necessary components, etc.
 	 */
 	public void init() {
-		setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout());
 		
 		pnlFormula=new FormulaPanel(this);
 		pnlControls=new ControlPanel(this);
@@ -30,15 +31,16 @@ public class AppletPanel extends Applet {
 		
 		ScrollPane sPane = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
 		pnlFormula.setLayout(new TreeLayout());
-		DragnDropListener dnd = new DragnDropListener(this);
+		dnd = new DragnDropListener(this);
+		hotkey = new HotkeyListener(this);
+		this.addKeyListener(hotkey);
 		pnlFormula.addMouseListener(dnd);
 		pnlFormula.addMouseMotionListener(dnd);
 		sPane.add(pnlFormula);
 		
-		
-		add(pnlElements,BorderLayout.WEST);
-		add(pnlControls,BorderLayout.SOUTH);
-		add(sPane,BorderLayout.CENTER);
+		this.add(pnlElements,BorderLayout.WEST);
+		this.add(pnlControls,BorderLayout.SOUTH);
+		this.add(sPane,BorderLayout.CENTER);
 	}
 
 	public FormulaPanel getFormulaPanel() {
@@ -51,6 +53,10 @@ public class AppletPanel extends Applet {
 
 	public ControlPanel getControlPanel() {
 		return pnlControls;
+	}
+
+	public Selection getSelection() {
+		return dnd.getSelection();
 	}
 
 /*	public static void main(String[] args) {
