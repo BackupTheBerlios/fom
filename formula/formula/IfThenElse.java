@@ -90,18 +90,4 @@ public class IfThenElse extends MixedFormula {
 		}
 	}
 
-// TODO Hier kann wohl was gelöscht werden?!
-//	public static void main(String[] args){
-//		IfThenElse ite=new IfThenElse();
-//		ite.setInput(ite,0);
-//		try{
-//			Class[] itypes=ite.getInputTypes(1);
-//			for(int i=0;i<itypes.length;i++){
-//				System.out.println(itypes[i].getName());
-//			}
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-//	}
-
 }

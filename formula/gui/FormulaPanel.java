@@ -497,7 +497,6 @@ public class FormulaPanel extends Panel {
 	 * Deletes everything in the FormulaPanel.
 	 */
 	public void deleteAll() {
-		System.out.println("deleteAll");
 		ConstVarFormula cvForm;
 		for (int i=0;i<outputPinList.size();i++) {
 			if (((PinPoint)outputPinList.get(i)).getFormula() instanceof ConstVarFormula) {
