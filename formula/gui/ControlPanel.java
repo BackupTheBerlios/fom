@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.19 $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import utils.*;
  * how the formula-tree is calculated or what to do with it.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.19 $
  */
 public class ControlPanel extends Panel {
 

@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.4 $
  * Created on 16.05.2004
  *
  */
@@ -10,7 +10,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.4 $
  */
 public class FormulaTextField extends TextField {
 

@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.9 $
  * Created on 05.05.2004
  *
  */
@@ -10,7 +10,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.9 $
  */
 public class TreeLayout implements LayoutManager {
 

@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.13 $
  * Created on 12.05.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.13 $
  */
 public class ControlPanelListener implements ActionListener, ItemListener, AdjustmentListener {
 	

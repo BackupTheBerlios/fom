@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.12 $
  * Created on 23.07.2004
  */
 package gui;
@@ -11,6 +11,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
+ * @version $Revision: 1.12 $
  */
 
 public class DialogVariables extends Dialog implements TextListener, ActionListener, WindowListener {

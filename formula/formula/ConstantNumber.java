@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.23 $
  * Created on 27.06.2004
  */
 package formula;
@@ -10,7 +10,7 @@ import gui.*;
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Id: ConstantNumber.java,v 1.22 2004/08/25 18:12:08 shadowice Exp $
+ * @version $Revision: 1.23 $
  */
 public class ConstantNumber extends ConstVarFormula implements TextListener {
 

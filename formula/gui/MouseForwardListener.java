@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.3 $
  * Created on 25.08.2004
  *
  */

@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.22 $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.22 $
  */
 public class AppletPanel extends Applet implements WindowListener {
 

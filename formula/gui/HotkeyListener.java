@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.6 $
  * Created on 13.08.2004
  *
  */
@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.6 $
  */
 public class HotkeyListener implements KeyListener {
 

@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.8 $
  * Created on 12.08.2004
  *
  */
@@ -10,7 +10,7 @@ import java.awt.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.8 $
  */
 public class Selection {
 

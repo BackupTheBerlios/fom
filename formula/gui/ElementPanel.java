@@ -1,4 +1,4 @@
-/*
+/* $Revision: 1.21 $
  * Created on 26.04.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
+ * @version $Revision: 1.21 $
  */
 public class ElementPanel extends Panel {
 
