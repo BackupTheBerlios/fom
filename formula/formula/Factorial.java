@@ -13,7 +13,7 @@ import utils.Messages;
 public class Factorial extends NumberFormula {
 
 	public final void calc() throws FormulaException {	
-		if ((input[0] == null) || (input[1] == null))
+		if (input[0] == null)
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
 		//MAURICE: Kann ich aus Double eine Int hinkriegen?
@@ -22,10 +22,10 @@ public class Factorial extends NumberFormula {
 	}
 	
 	/**
-	 * Creates a "fact" with 2 inputs.
+	 * Creates a "fact" with 1 input.
 	 */
 	public Factorial() {
-		input = new Formula[2];
+		input = new Formula[1];
 		formulaName = "fact";
 	}
 	
@@ -34,13 +34,10 @@ public class Factorial extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(fact ";
+		String outString = "(";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += ", ";
-		if (input[1] != null)
-			outString += input[1].toString();
-		outString += ")";
+		outString += "!)";
 		return outString;
 	}
 

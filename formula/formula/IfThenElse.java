@@ -12,12 +12,13 @@ import utils.Messages;
  */
 public class IfThenElse extends MixedFormula {
 
-
+	/**
+	 * Creates an "if-then-else" with 3 inputs.
+	 */
 	public IfThenElse() {
 		formulaName = "if-then-else";
 		input = new Formula[3];
 	}
-
 
 	public final void calc() throws FormulaException {
 		if ((input[0] == null) || (input[1] == null) || (input[2] == null))
@@ -33,7 +34,6 @@ public class IfThenElse extends MixedFormula {
 			else
 				result = new Double (input[2].getDoubleResult()); }
 	}
-
 
 	public final String toString() {
 		String outString = "(If(";

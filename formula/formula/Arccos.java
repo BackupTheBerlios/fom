@@ -20,7 +20,7 @@ public class Arccos extends NumberFormula {
 	}
 
 	/**
-	 * Creates a "arccos" with 1 input.
+	 * Creates an "arccos" with 1 input.
 	 */
 	public Arccos() {
 		input = new Formula[1];

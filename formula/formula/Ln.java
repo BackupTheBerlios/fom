@@ -20,7 +20,7 @@ public class Ln extends NumberFormula {
 	}
 
 	/**
-	 * Creates a "Ln" with 1 input.
+	 * Creates a "ln" with 1 input.
 	 */
 	public Ln() {
 		input = new Formula[1];

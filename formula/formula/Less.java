@@ -19,13 +19,16 @@ public class Less extends ComparisonFormula {
 			result = new Boolean (input[0].getDoubleResult() < input[1].getDoubleResult());
 	}
 
+	/**
+	 * Creates a "<" with 2 inputs.
+	 */
 	public Less() {
 		input = new Formula[2];
 		formulaName = "<";
 	}
 
 	/**
-	 * @return Returns the string-equvalent of this formula-object (if inputs not connected)
+	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
 	public final String toString() {

@@ -20,7 +20,7 @@ public class Arcsin extends NumberFormula {
 	}
 
 	/**
-	 * Creates a "Arcsin" with 1 input.
+	 * Creates an "arcsin" with 1 input.
 	 */
 	public Arcsin() {
 		input = new Formula[1];

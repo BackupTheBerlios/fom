@@ -19,6 +19,9 @@ public class Sub extends NumberFormula {
 			result = new Double(input[0].getDoubleResult() - input[1].getDoubleResult());
 	}
 	
+	/**
+	 * Creates a "-" with 2 inputs.
+	 */
 	public Sub() {
 		input = new Formula[2];
 		formulaName = "-";

@@ -19,13 +19,16 @@ public class Impl extends BooleanFormula {
 			result = new Boolean ((! input[0].getBooleanResult()) || input[1].getBooleanResult());
 	}
 
+	/**
+	 * Creates an "IMPL" with 2 inputs.
+	 */
 	public Impl() {
 		input = new Formula[2];
 		formulaName = "IMPL";
 	}
 
 	/**
-	 * @return Returns the string-equvalent of this formula-object (if inputs not connected)
+	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
 	public final String toString() {

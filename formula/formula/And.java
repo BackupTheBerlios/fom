@@ -18,7 +18,10 @@ public class And extends BooleanFormula {
 		else
 			result = new Boolean (input[0].getBooleanResult() && input[1].getBooleanResult());
 	}
-
+	
+	/**
+	 * Creates an "AND" with 2 inputs.
+	 */
 	public And() {
 		input = new Formula[2];
 		formulaName = "AND";

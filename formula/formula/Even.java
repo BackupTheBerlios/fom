@@ -18,14 +18,17 @@ public class Even extends ComparisonFormula {
 		else
 			result = new Boolean ((input[0].getDoubleResult() % 2.0) == 0.0);
 	}
-
+	
+	/**
+	 * Creates an "Evem" with 1 input.
+	 */
 	public Even() {
 		input = new Formula[1];
 		formulaName = "Even";
 	}
 
 	/**
-	 * @return Returns the string-equvalent of this formula-object (if inputs not connected)
+	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
 	public final String toString() {

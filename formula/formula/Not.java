@@ -18,14 +18,17 @@ public class Not extends BooleanFormula {
 		else
 			result = new Boolean (! input[0].getBooleanResult());
 	}
-
+	
+	/**
+	 * Creates a "NOT" with 1 input.
+	 */
 	public Not() {
 		input = new Formula[1];
 		formulaName = "NOT";
 	}
 
 	/**
-	 * @return Returns the string-equvalent of this formula-object (if inputs not connected)
+	 * @return Returns the string-equivalent of this formula-object (if inputs not connected)
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
 	public final String toString() {
