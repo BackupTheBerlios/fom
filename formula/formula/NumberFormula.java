@@ -14,15 +14,11 @@ public abstract class NumberFormula extends Formula {
 
 	protected Number result;
 
-	public boolean isValidInput(Formula in, int index) {
-		if ((input[0] instanceof NumberFormula) && (input[1] instanceof NumberFormula))
-			return true;
-		else
-			return false;
-	}
-
 	public double getDoubleResult() throws FormulaException {
-		return 0.0;
+		if (result != null)
+			return result.doubleValue();
+		else
+			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
 	}
 
 	public boolean getBooleanResult() throws FormulaException {
@@ -35,6 +31,23 @@ public abstract class NumberFormula extends Formula {
 	 */
 	public abstract void calc() throws FormulaException;
 
+	/**
+	 * @param index Number of the input (0=left...max-1=right)
+	 * @return Returns an array of all possible classes for the input.
+	 */
+	public Class[] getInputTypes(int index) throws FormulaException {
+		Class[] classArray = {Number.class}; 
+		return classArray; 
+	}
+
+	public Class[] getOutputTypes() throws FormulaException {
+		Class[] classArray = {Number.class}; 
+		return classArray; 
+	}
+
+	/**
+	 * Clears all results that have been saved by calc-operations.
+	 */
 	public final void clearResult() {
 		result = null;
 	}
@@ -42,16 +55,12 @@ public abstract class NumberFormula extends Formula {
 	public boolean isValidOutput(Formula in, int whichInput) {
 		return false;
 	}
-
-	/**
-	 * @return Returns an array of all possible classes for the output.
-	 */
-	public Class[] getInputTypes(int in) {
-		return null;
-	}
-
-	public Class[] getOutputTypes() {
-		return new Class[0];
+	
+	public boolean isValidInput(Formula in, int index) {
+		if (input[index] instanceof NumberFormula)
+			return true;
+		else
+			return false;
 	}
 
 }
