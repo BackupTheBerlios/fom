@@ -34,7 +34,7 @@ public class Arcsin extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(arcsin ";
+		String outString = "arcsin (";
 		if (input[0] != null)
 			outString += input[0].toString();
 		outString += ")";

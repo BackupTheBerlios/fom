@@ -1,14 +1,15 @@
 /*
  * Created on 27.06.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that compares the equivalent of two booleans. 
+ * f(a,b) = TRUE for a=b, FALSE for a<>b
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Eqv extends BooleanFormula {
 

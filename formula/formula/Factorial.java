@@ -1,14 +1,15 @@
 /*
  * Created on 07.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the factorial of a number. 
+ * f(x) = x!
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Factorial extends NumberFormula {
 
@@ -17,14 +18,11 @@ public class Factorial extends NumberFormula {
 	 */
 	private final static int fact(int n) {
 		int result = 1;
-
 		for (int i = 2; i <= n; i++) {
 			result = result*i;
 		}
-	
 		return result;
 	}
-
 
 	public final void calc() throws FormulaException {	
 		if (input[0] == null)
@@ -50,7 +48,7 @@ public class Factorial extends NumberFormula {
 		String outString = "(";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += "!)";
+		outString += ")!";
 		return outString;
 	}
 

@@ -8,7 +8,6 @@ package formula;
  * f = pi
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class ConstPi extends ConstVarFormula {
 

@@ -1,14 +1,15 @@
 /*
  * Created on 07.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates a multiple of the power with base ten. 
+ * f(x,y) = x * 10^y
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Exp extends NumberFormula {
 
@@ -24,7 +25,7 @@ public class Exp extends NumberFormula {
 	 */
 	public Exp() {
 		super();
-		input = new Formula[1];
+		input = new Formula[2];
 		formulaName = "Exp";
 	}
 	
@@ -38,7 +39,7 @@ public class Exp extends NumberFormula {
 			outString += input[0].toString();
 		outString += " * 10^(";
 		if (input[0] != null)
-			outString += input[0].toString();
+			outString += input[1].toString();
 		outString += "))";
 		return outString;
 	}

@@ -8,7 +8,6 @@ package formula;
  * f = e
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class ConstE extends ConstVarFormula {
 

@@ -5,8 +5,9 @@ package formula;
 
 import utils.Messages;
 import java.util.LinkedList;
+
 /**
- * Abstract Class for all Constants and Variables
+ * Abstract Class for all constants and variables
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
@@ -43,7 +44,6 @@ public abstract class ConstVarFormula extends Formula {
 			throw new FormulaException(Messages.getString("Error.NoDoubleResult"));
 	}
 
-
 	public final boolean getBooleanResult() throws FormulaException {
 		if ((result != null) && (result instanceof Boolean))
 			return ((Boolean)result).booleanValue();
@@ -67,10 +67,6 @@ public abstract class ConstVarFormula extends Formula {
 		else
 			return null;
 	}
-
-//	public long getLongResult() {
-//	 return 0;
-//	}
 	
 	/**
 	 * Overwrites existing Method, because Constants/Variables aren't calculated

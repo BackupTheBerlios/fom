@@ -1,14 +1,15 @@
 /*
  * Created on 15.04.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that returns a number/boolean dependent from a condition. 
+ * f(a,x,y) = x for a is true, y for a is false
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class IfThenElse extends MixedFormula {
 
@@ -89,7 +90,7 @@ public class IfThenElse extends MixedFormula {
 		}
 	}
 
-
+// TODO Hier kann wohl was gelöscht werden?!
 //	public static void main(String[] args){
 //		IfThenElse ite=new IfThenElse();
 //		ite.setInput(ite,0);

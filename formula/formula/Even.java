@@ -3,12 +3,13 @@
  */
 package formula;
 
-
 import utils.Messages;
 
 /**
+ * This class provides an element that checks whether a number is even or not. 
+ * f(x) = TRUE for x is even, FALSE for x is odd
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Even extends ComparisonFormula {
 
@@ -20,12 +21,12 @@ public class Even extends ComparisonFormula {
 	}
 	
 	/**
-	 * Creates an "Evem" with 1 input.
+	 * Creates an "EVEN" with 1 input.
 	 */
 	public Even() {
 		super();
 		input = new Formula[1];
-		formulaName = "Even";
+		formulaName = "EVEN";
 	}
 
 	/**
@@ -33,7 +34,7 @@ public class Even extends ComparisonFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */
 	public final String toString() {
-		String outString = "(Even? ";
+		String outString = "EVEN? (";
 		if (input[1] != null)
 			outString += input[0].toString();
 		outString += ")";

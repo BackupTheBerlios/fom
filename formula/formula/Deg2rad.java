@@ -1,14 +1,15 @@
 /*
  * Created on 08.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that converts degree to rad.
+ * f([degree]) = [rad]
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Deg2rad extends NumberFormula {
 
@@ -33,10 +34,10 @@ public class Deg2rad extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(rad (";
+		String outString = "rad (";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += "))";
+		outString += ")";
 		return outString;
 	}
 

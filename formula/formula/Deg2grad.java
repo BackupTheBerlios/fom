@@ -1,14 +1,15 @@
 /*
  * Created on 08.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that converts degree to grad.
+ * f([degree]) = [grad]
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Deg2grad extends NumberFormula {
 
@@ -33,10 +34,10 @@ public class Deg2grad extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(grad (";
+		String outString = "grad (";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += "))";
+		outString += ")";
 		return outString;
 	}
 

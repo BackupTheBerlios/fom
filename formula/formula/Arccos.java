@@ -26,7 +26,7 @@ public class Arccos extends NumberFormula {
 	public Arccos() {
 		super();
 		input = new Formula[1];
-		formulaName = "arcccos";
+		formulaName = "arccos";
 	}
 	
 	/**
@@ -34,7 +34,7 @@ public class Arccos extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(arccos ";
+		String outString = "arccos (";
 		if (input[0] != null)
 			outString += input[0].toString();
 		outString += ")";

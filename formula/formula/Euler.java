@@ -1,14 +1,15 @@
 /*
  * Created on 07.07.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the power with base 'e'. 
+ * f(x) = e^x
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Euler extends NumberFormula {
 
@@ -33,10 +34,10 @@ public class Euler extends NumberFormula {
 	 * or the resulting formula as string for a (sub)tree with this object as root.
 	 */	
 	public final String toString() {
-		String outString = "(e^(";
+		String outString = "e^(";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += "))";
+		outString += ")";
 		return outString;
 	}
 

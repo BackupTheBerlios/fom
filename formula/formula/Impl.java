@@ -1,14 +1,15 @@
 /*
  * Created on 27.06.2004
- *
  */
 package formula;
 
 import utils.Messages;
 
 /**
+ * This class provides an element that calculates the logical implication. 
+ * f(a,b) = a => b
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- *
  */
 public class Impl extends BooleanFormula {
 
