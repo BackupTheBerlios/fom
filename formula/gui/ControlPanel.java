@@ -1,4 +1,4 @@
-/* $Id: ControlPanel.java,v 1.23 2004/09/02 13:20:40 br3001 Exp $
+/* $Id: ControlPanel.java,v 1.24 2004/09/03 14:51:19 shadowice Exp $
  * Created on 22.04.2004
  *
  */
@@ -13,7 +13,7 @@ import utils.*;
  * how the formula-tree is calculated or what to do with it.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  */
 public class ControlPanel extends Panel {
 
@@ -90,7 +90,6 @@ public class ControlPanel extends Panel {
 		btnCalcStep.addActionListener(cpListener);
 		btnReset.addActionListener(cpListener);
 		btnVariables.addActionListener(cpListener);
-		sbSpeed.addAdjustmentListener(cpListener);
 		//chZoom.addItemListener(cpListener);
 
 		setBackground(SystemColor.activeCaptionBorder);		

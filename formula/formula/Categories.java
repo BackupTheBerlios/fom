@@ -34,7 +34,7 @@ public class Categories {
 		form[1] = new Sub();
 		form[2] = new Mult();
 		form[3] = new Div();
-		form[4] = new ConstantNumber(true);
+		form[4] = new ConstantNumber(false);
 		form[5] = new Sign();
 		form[6] = new Square();
 		form[7] = new Reciprocal();
@@ -42,10 +42,10 @@ public class Categories {
 
 		//Category Variables:
 		form = new Formula[6];
-		form[0] = new ConstantNumber(true);
-		form[1] = new ConstantBoolean(true);
-		form[2] = new VariableNumber(true);
-		form[3] = new VariableBoolean(true);
+		form[0] = new ConstantNumber(false);
+		form[1] = new ConstantBoolean(false);
+		form[2] = new VariableNumber(false);
+		form[3] = new VariableBoolean(false);
 		form[4] = new ConstE();
 		form[5] = new ConstPi();
 		categoryElements.put(categories[1], form);

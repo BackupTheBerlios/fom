@@ -22,7 +22,7 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 	 * Creates a constant boolean.
 	 */
 	public ConstantBoolean() {
-		this(false);
+		this(true);
 	}
 
 
@@ -38,9 +38,9 @@ public class ConstantBoolean extends ConstVarFormula implements ActionListener {
 		inputBoolean.setFont(DEFAULT_FONT);
 		inputBoolean.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
 		if (elementChooser) {
-			inputBoolean.setEnabled(false);
-		} else {
 			inputBoolean.addActionListener(this);
+		} else {
+			inputBoolean.setEnabled(false);
 		}
 		add(inputBoolean);		
 	}

@@ -1,4 +1,4 @@
-/* $Id: ElementPanel.java,v 1.24 2004/09/02 15:00:44 shadowice Exp $
+/* $Id: ElementPanel.java,v 1.25 2004/09/03 14:51:19 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.24 $
+ * @version $Revision: 1.25 $
  */
 public class ElementPanel extends Panel {
 
@@ -108,4 +108,13 @@ public class ElementPanel extends Panel {
 	public Categories getCategories() {
 		return categories;
 	}
+
+
+	/**
+	 * @return returns the category list of this ElementPanel
+	 */
+	public Choice getCategoryList() {
+		return chCategoryList;
+	}
+
 }

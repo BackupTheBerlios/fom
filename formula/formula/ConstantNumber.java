@@ -1,4 +1,4 @@
-/* $Id: ConstantNumber.java,v 1.29 2004/09/02 13:49:08 shadowice Exp $
+/* $Id: ConstantNumber.java,v 1.30 2004/09/03 14:51:19 shadowice Exp $
  * Created on 27.06.2004
  */
 package formula;
@@ -12,7 +12,7 @@ import gui.*;
  * Class for constant numbers.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.29 $
+ * @version $Revision: 1.30 $
  */
 public class ConstantNumber extends ConstVarFormula implements TextListener {
 
@@ -23,7 +23,7 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 	 * Creates a constant number.
 	 */
 	public ConstantNumber() {
-		this(false);
+		this(true);
 	}
 
 	/**
@@ -32,12 +32,6 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 	 */
 	public ConstantNumber(boolean elementChooser) {
 		super();
-		/* HEIKO:
-		 * Das mit den Leerzeichen hier ist eine sehr schlechte Idee, da du nicht wissen kannst,
-		 * wieviel Platz ein Leerzeichen einnehmen wird. Selbst wenn wir als Font überall Arial
-		 * verwenden würden, diesen Font kann man auch beliebig mit anderen ersetzen über die 
-		 * Java/Betriebssystem Einstellungen (fonts.properties (Java), font.aliases(?) (Linux und MacOS), Font löschen (Windoof))
-		 */
 		formulaName = "                    Constant"; 
 		result = new Double(0);
 		inputNumber = new TextField();
@@ -45,9 +39,9 @@ public class ConstantNumber extends ConstVarFormula implements TextListener {
 		inputNumber.addMouseListener(mfListener);
 		inputNumber.addMouseMotionListener(mfListener);
 		if (elementChooser) {
-			setEnabled(false);
-		} else {
 			inputNumber.addTextListener(this);
+		} else {
+			setEnabled(false);
 		}
 		add(inputNumber);
 		inputNumber.setBackground(SystemColor.text);

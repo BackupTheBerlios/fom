@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.10 2004/08/30 19:30:52 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.11 2004/09/03 14:51:19 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -44,10 +44,20 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 		if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnAddFormula"))) {
 			// TODO CustomFormula statt Add verwenden.
 			if (aPanel.getTreeList().isCompleteGlobalTree()) {
-				Add add=new Add();
-				add.setName(cfDialog.showDialog(add));	// TODO setFormulaName wenn mit CustomFormula
-				ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),add);
-				ePanel.refreshElementList();
+				try {
+					Formula clonedTree = (Formula)((Formula)aPanel.getTreeList().elementAt(0)).clone();
+					VariableList clonedVarList = new VariableList();
+					createVariableList(clonedVarList,clonedTree);
+					CustomFormula custForm = new CustomFormula(clonedTree,clonedVarList);
+					custForm.setFormulaName(cfDialog.showDialog(custForm));
+					ePanel.getCategories().addCategoryElement(Messages.getString("Elements.Category_"+(Integer.parseInt(Messages.getString("Elements.Categories"))-1)),custForm);
+					ePanel.refreshElementList();
+					ePanel.getCategoryList().select(ePanel.getCategoryList().getItemCount()-1);
+				} catch (FormulaException fe) {
+					fe.printStackTrace(System.err);
+				}
+			} else {
+				// TODO Fehlerdialog
 			}
 		} else if (aevent.getActionCommand().equals(Messages.getString("ElementPanel.BtnClearFormulas"))) {
 			aPanel.getFormulaPanel().deleteAll();
@@ -58,5 +68,24 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 		}
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 	}
-	
+
+
+	/**
+	 * Recursive function to add all variables in a formula tree into a VariableList.
+	 * 
+	 * @param varList VariableList to write to
+	 * @param form current formula element
+	 */
+	// BUG NullPointerException :(
+	private void createVariableList(VariableList varList, Formula form) {
+		if (form instanceof VariableBoolean) {
+			varList.addVarList((VariableBoolean)form);
+		} else if (form instanceof VariableNumber) {
+			varList.addVarList((VariableNumber)form);
+		}
+		for (int i=0;i<form.getInputCount();i++) {
+			createVariableList(varList,form.getInput(i));
+		}
+	}
+
 }

@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.14 2004/09/01 15:08:32 shadowice Exp $
+/* $Id: Selection.java,v 1.15 2004/09/03 14:51:19 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public class Selection {
 
@@ -252,11 +252,19 @@ public class Selection {
 		//create new instance:
 		try {
 			newComponentInstance = (Formula)selectedComponentRoot.getClass().newInstance();
+			newComponentInstance.init(aPanel);
+			if (newComponentInstance instanceof CustomFormula) {
+				CustomFormula newCustomFormula = (CustomFormula)newComponentInstance;
+				CustomFormula selectedCustomFormula = (CustomFormula)selectedComponentRoot;
+				newCustomFormula.setRoot(selectedCustomFormula.getRoot());
+				newCustomFormula.setVariables(selectedCustomFormula.getVariables());
+				newCustomFormula.setFormulaName(selectedCustomFormula.getFormulaName());				
+			}
 			newComponentInstance.setVisible(false);	//not visible as long as mouse outside of formula-panel
-			aPanel.getFormulaPanel().add(newComponentInstance);
 			newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_INSERTING);
 			newComponentInstance.setEnabled(false);
-			aPanel.getFormulaPanel().repaint();
+			aPanel.getFormulaPanel().add(newComponentInstance);
+			//aPanel.getFormulaPanel().repaint();
 			newComponentInstance.addKeyListener(aPanel.getHotkeyListener());
 		} catch (IllegalAccessException iae) {
 			iae.printStackTrace(System.err);
@@ -303,7 +311,6 @@ public class Selection {
 		newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 		newComponentInstance.setVisible(true);
 		newComponentInstance.setEnabled(true);
-		newComponentInstance.init(aPanel);
 		aPanel.getTreeList().addElement(newComponentInstance);
 		newComponentInstance = null;
 		aPanel.getFormulaPanel().setCursor(Cursor.getDefaultCursor());

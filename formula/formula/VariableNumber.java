@@ -24,13 +24,13 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 	 * Creates a variable number.
 	 */
 	public VariableNumber() {
-		this(false);
+		this(true);
 	}
 
 
 	/**
 	 * Creates a variable boolean.
-	 * @param enabled Enables inputVarName for input.
+	 * @param enabled Enables inputVarName for input (true = enabled).
 	 */
 	public VariableNumber(boolean elementChooser) {
 		super();
@@ -41,13 +41,13 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 		inputVarName.setBackground(SystemColor.text);
 		inputVarName.setText("number1");
 		inputVarName.setBounds(3, RESULTHEIGHT+CONNECTHEIGHT+4, FORMULAWIDTH/2, BOXHEIGHT-6);
-		MouseForwardListener mfl = new MouseForwardListener();
-		inputVarName.addMouseListener(mfl);
-		inputVarName.addMouseMotionListener(mfl);		
 		if (elementChooser) {
-			inputVarName.setEnabled(false);
+			inputVarName.addTextListener(this);			
 		} else {
-			inputVarName.addTextListener(this);
+			inputVarName.setEnabled(false);
+			MouseForwardListener mfl = new MouseForwardListener();
+			inputVarName.addMouseListener(mfl);
+			inputVarName.addMouseMotionListener(mfl);	
 		}
 		oldName = new String("number1");
 		add(inputVarName);
@@ -80,28 +80,35 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 
 
 	public void textValueChanged(TextEvent arg) {
-		String newName = inputVarName.getText();
-		VariableList varList = aPanel.getVariableList();
-		if (varList.isValidName(newName, result)) {
-			if (varList.isValidName(oldName, result)) {
+		if (aPanel != null) {
+			String newName = inputVarName.getText();
+			VariableList varList = aPanel.getVariableList();
+			if (varList.isValidName(newName, result)) {
+				if (varList.isValidName(oldName, result)) {
+					varList.deleteVarList(this, oldName);
+				}
+				varList.addVarList(this);
+				inputVarName.setBackground(SystemColor.text);
+			} else {
 				varList.deleteVarList(this, oldName);
+				result = new Double(0);
+				inputVarName.setBackground(Color.RED);
 			}
-			varList.addVarList(this);
-			inputVarName.setBackground(SystemColor.text);
-		} else {
-			varList.deleteVarList(this, oldName);
-			result = new Double(0);
-			inputVarName.setBackground(Color.RED);
+			oldName = newName;
+			
+			if (getParent() instanceof FormulaPanel) {
+				((AppletPanel)getParent().getParent().getParent()).getControlPanel().getFormulaTextField().updateControlPanelText();
+			}
+			
+			repaint();
 		}
-		oldName = newName;
-		
-		if (getParent() instanceof FormulaPanel) {
-			((AppletPanel)getParent().getParent().getParent()).getControlPanel().getFormulaTextField().updateControlPanelText();
-		}
-		
-		repaint();
 	}
 	
+
+	/**
+	 * This method must be called if the VariableBoolean is added to the FormulaPanel!
+	 * @param ap root AppletPanel
+	 */
 
 	public void init(AppletPanel ap) {
 		aPanel = ap;
@@ -128,6 +135,14 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 
 	public boolean hasDoubleResult() {
 		return true;
+	}
+
+
+	public Object clone() {
+		VariableNumber clonedVN = (VariableNumber)super.clone();
+		clonedVN.inputVarName.setText(inputVarName.getText());
+		clonedVN.result = new Double(((Double)result).doubleValue());
+		return clonedVN;
 	}
 
 }

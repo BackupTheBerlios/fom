@@ -1,4 +1,4 @@
-/* $Id: Formula.java,v 1.48 2004/09/01 15:08:32 shadowice Exp $
+/* $Id: Formula.java,v 1.49 2004/09/03 14:51:19 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
@@ -14,7 +14,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.48 $
+ * @version $Revision: 1.49 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -128,7 +128,16 @@ public abstract class Formula extends Container implements Cloneable {
 		return formulaName;
 	}
 
-	
+
+	/**
+	 * Sets the name of this formula to a new value.
+	 * @param name new name
+	 */
+	public final void setFormulaName(String name) {
+		this.formulaName = name;
+	}
+
+
 	/* (non-Javadoc)
 	 * @see java.awt.Component#isDoubleBuffered()
 	 */
@@ -208,7 +217,7 @@ public abstract class Formula extends Container implements Cloneable {
 			}
 			g.drawLine(FORMULAWIDTH/2, CONNECTHEIGHT, FORMULAWIDTH/2, 0);
 		}
-		g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2);
+		g.drawString(getFormulaName(), (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2);
 		if (resultString != null) {
 			if ((paintStatus & PAINTSTATUS_CALCULATING) != 0) {
 				g.setFont(CALC_FONT);
@@ -222,7 +231,7 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * @return Returns the number of inputs a formula element has.
 	 */
-	public final int getInputCount() {
+	public int getInputCount() {
 		return input.length;
 	}
 

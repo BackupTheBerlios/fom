@@ -1,4 +1,4 @@
-/* $Id: VariableBoolean.java,v 1.17 2004/08/30 19:30:52 shadowice Exp $
+/* $Id: VariableBoolean.java,v 1.18 2004/09/03 14:51:19 shadowice Exp $
  * Created on 27.06.2004
  */
 package formula;
@@ -11,7 +11,7 @@ import gui.*;
  * Class for variable booleans.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public class VariableBoolean extends ConstVarFormula implements TextListener {
 
@@ -24,7 +24,7 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 	 * Creates a variable boolean.
 	 */
 	public VariableBoolean() {
-		this(false);
+		this(true);
 	}
 
 
@@ -45,9 +45,9 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 		inputVarName.addMouseListener(mfl);
 		inputVarName.addMouseMotionListener(mfl);		
 		if (elementChooser) {
-			inputVarName.setEnabled(false);
-		} else {
 			inputVarName.addTextListener(this);
+		} else {
+			inputVarName.setEnabled(false);
 		}
 		oldName = new String("boolean1");
 		add(inputVarName);
@@ -103,6 +103,10 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 	}
 
 
+	/**
+	 * This method must be called if the VariableBoolean is added to the FormulaPanel!
+	 * @param ap root AppletPanel
+	 */
 	public void init(AppletPanel ap) {
 		this.aPanel = ap;
 		aPanel.getVariableList().addVarList(this);	
@@ -130,5 +134,12 @@ public class VariableBoolean extends ConstVarFormula implements TextListener {
 		return false;
 	}
 
+
+	public Object clone() {
+		VariableBoolean clonedVB = (VariableBoolean)super.clone();
+		clonedVB.inputVarName.setText(inputVarName.getText());
+		clonedVB.result = new Boolean(result.toString());
+		return clonedVB;
+	}
 
 }

@@ -1,4 +1,4 @@
-/* $Id: ControlPanelListener.java,v 1.14 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: ControlPanelListener.java,v 1.15 2004/09/03 14:51:19 shadowice Exp $
  * Created on 12.05.2004
  *
  */
@@ -10,9 +10,9 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
-public class ControlPanelListener implements ActionListener, ItemListener, AdjustmentListener {
+public class ControlPanelListener implements ActionListener {
 	
 	
 	private AppletPanel aPanel;
@@ -67,8 +67,4 @@ public class ControlPanelListener implements ActionListener, ItemListener, Adjus
 		}
 	}
 
-
-	public void itemStateChanged(ItemEvent event) { }
-	public void adjustmentValueChanged(AdjustmentEvent event) { }
-	
 }
