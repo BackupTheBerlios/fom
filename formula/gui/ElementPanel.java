@@ -1,4 +1,4 @@
-/* $Id: ElementPanel.java,v 1.23 2004/09/02 14:47:39 shadowice Exp $
+/* $Id: ElementPanel.java,v 1.24 2004/09/02 15:00:44 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -10,7 +10,7 @@ import utils.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  */
 public class ElementPanel extends Panel {
 
@@ -65,7 +65,7 @@ public class ElementPanel extends Panel {
 		//adding all together:
 		scpElementList.add(elementPanel);
 		FOMToolkit.addComponent(this,gbl,btnClearFormulas,0,0,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
-		FOMToolkit.addComponent(this,gbl,btnAddFormula,0,1,1,1,1.0,0.0,GridBagConstraints.NONE);
+		FOMToolkit.addComponent(this,gbl,btnAddFormula,0,1,1,1,1.0,0.0,GridBagConstraints.HORIZONTAL);
 		FOMToolkit.addComponent(this,gbl,chCategoryList,0,2,1,1,0.5,0.0,GridBagConstraints.NONE);
 		FOMToolkit.addComponent(this,gbl,scpElementList,0,3,1,1,1.0,1.0,GridBagConstraints.BOTH);
 
