@@ -5,6 +5,8 @@ package formula;
 
 import utils.Messages;
 /**
+ * Abstract Class for all Constants and Variables
+ * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  */
 public abstract class ConstVarFormula extends Formula {
@@ -32,7 +34,7 @@ public abstract class ConstVarFormula extends Formula {
 	}
 
 
-	public void calc() throws FormulaException {		
+	public final void calc() throws FormulaException {		
 	}
 
 	public final double getDoubleResult() throws FormulaException {
@@ -74,25 +76,19 @@ public abstract class ConstVarFormula extends Formula {
 	}
 	
 
-	public Class[] getInputTypes(int index) throws FormulaException {
+	public final Class[] getInputTypes(int index) throws FormulaException {
 		throw new FormulaException(Messages.getString("Error.ConstVarInput"));
 	}
 
-	public Class[] getOutputTypes() throws FormulaException {
+	public final Class[] getOutputTypes() throws FormulaException {
 		Class[] classArray;
-		if (result == null) {
-			classArray = new Class[2];
+		classArray = new Class[1];
+		if (result instanceof Boolean)
 			classArray[0] = Boolean.class;
-			classArray[1] = Number.class; }
-		else {
-			classArray = new Class[1];
-			if (result instanceof Boolean)
-				classArray[0] = Boolean.class;
-			else if (result instanceof Number)
-				classArray[0] = Number.class;
-			else
-				throw new FormulaException(Messages.getString("Error.IllegalDataType"));
-		}
+		else if (result instanceof Number)
+			classArray[0] = Number.class;
+		else
+			throw new FormulaException(Messages.getString("Error.IllegalDataType"));
 		return classArray;
 	}
 

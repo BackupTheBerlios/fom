@@ -63,7 +63,7 @@ public abstract class Formula extends Container implements Cloneable {
 	/**
 	 * Will return a string-value as a result, if possible. If not, a FormulaException
 	 * will be thrown.
-	 * @return The result of all calc-operations up to this formula-element,casted into a string.
+	 * @return The result of all calc-operations up to this formula-element, casted into a string.
 	 * @throws FormulaException Normally this shouldn't happen. ;)
 	 */
 	public abstract String getStringResult() throws FormulaException;

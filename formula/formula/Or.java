@@ -1,5 +1,5 @@
 /*
- * Created on 15.04.2004
+ * Created on 27.06.2004
  *
  */
 package formula;
@@ -10,18 +10,18 @@ import utils.Messages;
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
  *
  */
-public class And extends BooleanFormula {
+public class Or extends BooleanFormula {
 
 	public final void calc() throws FormulaException {
 		if ((input[0] == null) || (input[1] == null))
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-			result = new Boolean (input[0].getBooleanResult() && input[1].getBooleanResult());
+			result = new Boolean (input[0].getBooleanResult() || input[1].getBooleanResult());
 	}
 
-	public And() {
+	public Or() {
 		input = new Formula[2];
-		formulaName = "AND";
+		formulaName = "OR";
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class And extends BooleanFormula {
 		String outString = "(";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += " AND ";
+		outString += " OR ";
 		if (input[1] != null)
 			outString += input[1].toString();
 		outString += ")";

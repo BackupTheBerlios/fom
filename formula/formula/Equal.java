@@ -16,7 +16,7 @@ public class Equal extends ComparisonFormula {
 		if ((input[0] == null) || (input[1] == null))
 			throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 		else
-			result = new Boolean (input[0].getBooleanResult() == input[1].getBooleanResult());
+			result = new Boolean (input[0].getDoubleResult() == input[1].getDoubleResult());
 	}
 
 	public Equal() {
@@ -32,7 +32,7 @@ public class Equal extends ComparisonFormula {
 		String outString = "(";
 		if (input[0] != null)
 			outString += input[0].toString();
-		outString += "=";
+		outString += " = ";
 		if (input[1] != null)
 			outString += input[1].toString();
 		outString += ")";

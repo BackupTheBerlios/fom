@@ -30,38 +30,63 @@ public class Categories {
 		for(int i=0;i<categories.length;i++) {
 			categories[i] = Messages.getString("Elements.Category_"+Integer.toString(i));
 		}
-		
+
 		//TODO Liste fertig machen, wenn mal alle Operatoren fertig sind.
 		//Category Default:
-		Formula[] form = new Formula[4];
+		Formula[] form = new Formula[5];
 		form[0] = new Add();
 		form[1] = new Sub();
 		form[2] = new Mult();
 		form[3] = new Div();
-		categoryElements.put(categories[0],form);
-		
-		//Category Constants:
+		form[4] = new ConstantNumber();
+		categoryElements.put(categories[0], form);
+
+		//Category Variables:
+		form = new Formula[2];
+		form[0] = new ConstantNumber();
+		form[1] = new ConstantBoolean();
+		categoryElements.put(categories[1], form);
+
+		//Category Arithmetics
 		form = new Formula[0];
-		
-		
+
 		//Category Trigonometrics:
 		form = new Formula[0];
-		
+
 		//Category Hyperbola:
 		form = new Formula[0];
-		
-		//Category Boolean:
-		form = new Formula[0];
-		
+
+		//Category Comparison:
+		form = new Formula[8];
+		form[0] = new Equal();
+		form[1] = new Unequal();
+		form[2] = new Less();
+		form[3] = new LessEqual();
+		form[4] = new Greater();
+		form[5] = new GreaterEqual();		
+		form[6] = new Even();
+		form[7] = new Odd();		
+		categoryElements.put(categories[5], form);
+
 		//Category Logical Operators:
-		form = new Formula[0];
-		
+		form = new Formula[6];
+		form[0] = new Not();
+		form[1] = new And();
+		form[2] = new Or();
+		form[3] = new Xor();
+		form[4] = new Eqv();
+		form[5] = new Impl();		
+		categoryElements.put(categories[6], form);
+
 		//Category Others:
-		form = new Formula[0];
-		
+		form = new Formula[1];
+		form[0] = new IfThenElse();
+		categoryElements.put(categories[7], form);
+
+
 		//Category Custom:
 		form = new Formula[0];
-		
+
 	}
 
 	/**
