@@ -17,9 +17,9 @@ import formula.*;
 public class DragnDropListener implements MouseListener, MouseMotionListener {
 
 	private static boolean dragInProgress		= false;
-	private static AppletPanel aPanel					= null;
-	private static Point selectedStartPoint			= null;
-	private static Point selectedRelativePoint		= null;
+	private static AppletPanel aPanel			= null;
+	private static Point selectedStartPoint		= null;
+	private static Point selectedRelativePoint	= null;
 	private static Formula selectedComponent	= null;
 	
 	public DragnDropListener(AppletPanel ap) {
@@ -27,16 +27,25 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent me) {
-		if (me.getComponent() instanceof ElementPanel) {
+		if (me.getComponent().getParent().getParent() instanceof ElementPanel) {
 			Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
 			if (targetComponent != null) {
-				if (targetComponent instanceof Formula) {
-
-				}
+				selectedComponent = (Formula)me.getComponent().getComponentAt(me.getPoint());
 			}
 		} else if (me.getComponent() instanceof FormulaPanel){
 			if (selectedComponent != null) {
-				((FormulaPanel)me.getComponent()).add(selectedComponent);						
+				try {
+					Formula newFormula = (Formula)(selectedComponent.getClass().newInstance());
+					((FormulaPanel)me.getComponent()).add(newFormula);
+					newFormula.setBounds((int)me.getPoint().getX()-newFormula.getWidth(),(int)me.getPoint().getY()+newFormula.getHeight(),newFormula.getWidth(),newFormula.getHeight());
+					aPanel.getFormulaPanel().doLayout();
+				} catch (IllegalAccessException iae) {
+					iae.printStackTrace();
+				} catch (InstantiationException ie) {
+					ie.printStackTrace();
+				} finally {
+					selectedComponent = null;										
+				}
 			}
 		}
 	}
@@ -60,8 +69,11 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseReleased(MouseEvent me) {
-		dragInProgress=false;
-		aPanel.setCursor(Cursor.getDefaultCursor());
+		if (dragInProgress) {
+			dragInProgress = false;
+			aPanel.setCursor(Cursor.getDefaultCursor());
+			selectedComponent = null;
+		}
 	}
 
 	public void mouseDragged(MouseEvent me) {

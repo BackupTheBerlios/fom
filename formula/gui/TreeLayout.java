@@ -30,8 +30,6 @@ public class TreeLayout implements LayoutManager {
 		for (int i=0;i<count;i++) {
 			component = container.getComponent(i);
 			bounds = component.getBounds();
-			bounds.x=0;
-			bounds.y=0;
 			bounds.height = component.getSize().height;
 			bounds.width = component.getSize().width;
 			component.setBounds(bounds);

@@ -39,6 +39,7 @@ public class AppletPanel extends Applet {
 		add(pnlControls,BorderLayout.SOUTH);
 		add(sPane,BorderLayout.CENTER);
 		
+		Add add = new Add();
 		pnlFormula.add(new Add());
 	}
 
