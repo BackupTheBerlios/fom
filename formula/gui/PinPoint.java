@@ -195,4 +195,15 @@ public class PinPoint {
 		return this.formula;
 	}
 	
+	
+	/**
+	 * Moves the mouseTargetPoint and pinPoint to (x+x_off,y+y_off). 
+	 * @param x_off x offset
+	 * @param y_off y offset
+	 */
+	public void translate(int x_off, int y_off) {
+		this.mouseTargetPoint.translate(x_off,y_off);
+		this.pinPoint.translate(x_off,y_off);
+	}
+	
 }

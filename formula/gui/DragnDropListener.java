@@ -35,11 +35,18 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 			Component targetComponent = me.getComponent().getComponentAt(me.getPoint());
 			if (targetComponent != null) { // if clicked on a Formula-object
 				selectedComponent = (Formula)targetComponent;
+				selectedComponent.setPaintStatus(Formula.PAINTSTATUS_SELECTED);
+				me.getComponent().repaint();
+				int xPos = selectedComponent.getX();
+				int yPos = selectedComponent.getY();
+				int width = selectedComponent.getWidth();
+				int height = selectedComponent.getHeight();
 				int inCount = selectedComponent.getInputCount();
 				pPInputs = new PinPoint[inCount];
 				pPOutputs = new PinPoint[1];
 				for (int i=0;i<inCount;i++) {
-					pPInputs[i] = new PinPoint();
+					pPInputs[i] = new PinPoint(selectedComponent,xPos+(i+1)*width/(inCount+1),yPos+height,i);
+					pPInputs[i].setMouseTargetPoint(xPos+(i+1)*2*width/(inCount+1)-width,yPos+height+25);
 				}
 			}
 		// if event happened in the FormulaPanel:
@@ -58,6 +65,8 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				} catch (InstantiationException ie) {
 					ie.printStackTrace();
 				} finally {
+					selectedComponent.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
+					selectedComponent.repaint();
 					selectedComponent = null;										
 				}
 			}
@@ -74,10 +83,16 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 
 	public void mousePressed(MouseEvent me) {
 		if (me.getComponent().getComponentAt(me.getPoint()) instanceof Formula) {
+			if (selectedComponent != null) {
+				selectedComponent.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
+				selectedComponent.repaint();
+			}
 			dragInProgress = true;
 			selectedComponent = (Formula)me.getComponent().getComponentAt(me.getPoint());
+			selectedComponent.setPaintStatus(Formula.PAINTSTATUS_MOVING);
 			selectedStartPoint = selectedComponent.getLocation();
 			selectedRelativePoint = new Point((int)(selectedStartPoint.getX()-me.getPoint().getX()),(int)(selectedStartPoint.getY()-me.getPoint().getY()));
+			selectedComponent.repaint();
 			aPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 	}
@@ -86,6 +101,8 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		if (dragInProgress) {
 			dragInProgress = false;
 			aPanel.setCursor(Cursor.getDefaultCursor());
+			selectedComponent.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
+			selectedComponent.repaint();
 			selectedComponent = null;
 		}
 	}
