@@ -19,7 +19,7 @@ import formula.*;
  */
 public class DragnDropListener implements MouseListener, MouseMotionListener {
 
-	public static final int MOUSE_POINT_DISTANCE = 10;
+	public static final int MOUSE_POINT_DISTANCE = 15;
 
 	private static AppletPanel aPanel			= null;				// root panel of everything
 	
@@ -59,7 +59,6 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 				newComponentInstance = null;
 				aPanel.getFormulaPanel().setCursor(Cursor.getDefaultCursor());
-				aPanel.getFormulaPanel().doLayout();
 				// add PinPoints to FormulaPanel:
 				for (int i=0;i<pPInputs.size();i++) {
 					aPanel.getFormulaPanel().addInputPin((PinPoint)pPInputs.get(i));
@@ -69,6 +68,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				}
 				aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 				deselect();
+				aPanel.getFormulaPanel().doLayout();
 			} else if (!(me.getComponent().getComponentAt(me.getPoint()) instanceof Formula)) {
 				deselect();
 			}
@@ -120,6 +120,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 			aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 		}
 		aPanel.getFormulaPanel().repaint();
+		aPanel.getFormulaPanel().doLayout();
 	}
 
 	public void mouseDragged(MouseEvent me) {
@@ -165,6 +166,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	 * @param formula the formula to move
 	 * @param point target point to move to
 	 */
+	// TODO: rewrite to use Formula.moveTo(x,y)
 	private void moveTo(Formula formula, Point point) {
 		Point oldLocation = formula.getLocation();
 		int xOffset = point.x - oldLocation.x;
@@ -197,8 +199,6 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	 * Refreshs the list of connections to other formula elements.
 	 */
 	// NOTE: would probably be better in a thread
-	// BUG: Wenn 2 Input-Pins der selektierten Elemente in Reichweite eines Output-Pins sind,
-	// dann wird der erste in der Liste verbunden, und der 2. nicht....egal wie weit sie entfernt sind! 	
 	private void refreshPinPointList() {
 		FormulaPanel fp = aPanel.getFormulaPanel();
 		PinPoint targetPP;
@@ -374,14 +374,18 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		pPInputs.clear();
 		pPOutputs.clear();
 		PinPoint pp;
+		PinPoint[] ppArray = new PinPoint[inCount];
 		for (int i=0;i<inCount;i++) {
 			pp = new PinPoint(newComponentInstance,xPos+(i+1)*width/(inCount+1),yPos+height,i);
 			pp.setMouseTargetPoint(xPos-width/2+(i+1)*width*2/(inCount+1),yPos+height+MOUSE_POINT_DISTANCE);
 			pPInputs.add(pp);
+			ppArray[i] = pp;
 		}
+		newComponentInstance.setInputPins(ppArray);
 		pp = new PinPoint(newComponentInstance,xPos+width/2,yPos);
 		pp.setMouseTargetPoint(xPos+width/2,yPos-MOUSE_POINT_DISTANCE);
 		pPOutputs.add(pp);
+		newComponentInstance.setOutputPin(pp);
 		aPanel.getFormulaPanel().setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 		aPanel.getFormulaPanel().validate();
 	}

@@ -126,27 +126,28 @@ public class FormulaPanel extends Panel {
 		g.setColor(Color.DARK_GRAY);
 		for (int i=0;i<outputPinList.size();i++) {
 			pp = (PinPoint)outputPinList.get(i);
-			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
+			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getMouseTargetPoint().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}
 		}
-		for (int i=0;i<inputPinList.size();i++) {
+		//debug!:
+		/*for (int i=0;i<inputPinList.size();i++) {
 			pp = (PinPoint)inputPinList.get(i);
-			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
-		}
+			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5);
+		}*/
 		
 		g.setColor(Color.RED);
 		for (int i=0;i<tempInPPList.size();i++) {
 			pp = (PinPoint)tempInPPList.get(i);
-			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
+			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}
 		}
 		for (int i=0;i<tempOutPPList.size();i++) {
 			pp = (PinPoint)tempOutPPList.get(i);
-			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
+			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}

@@ -6,6 +6,7 @@ package formula;
 
 import java.awt.*;
 import java.util.*;
+import gui.*;
 
 /**
  * This is the top-level class for all formula-elements. It's not usable in itself as it is abstract.
@@ -30,7 +31,7 @@ public abstract class Formula extends Container implements Cloneable {
 
 	protected int paintStatus = PAINTSTATUS_STANDARD;
 
-	protected Dimension dimension = new Dimension(FORMULAWIDTH+1,FORMULAHEIGHT+1);
+	protected Dimension dimension = new Dimension(FORMULAWIDTH,FORMULAHEIGHT);
 
 	// Input/Output for Formula Elements
 	protected Formula[] input;
@@ -41,6 +42,10 @@ public abstract class Formula extends Container implements Cloneable {
 
 	// Stores all unlinked Formula Elements
 	protected static LinkedList treeList;
+	
+	// Input and output pins:
+	protected PinPoint[] inputPins;
+	protected PinPoint outputPin;
 
 	/**
 	 * Creates a new formula object.
@@ -104,8 +109,8 @@ public abstract class Formula extends Container implements Cloneable {
 		//Standard
 		if (paintStatus == PAINTSTATUS_STANDARD) {
 			g.setColor(Color.BLACK);
-			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
-			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
+			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
+			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
 			for (int i=0; i<getInputCount(); i++){
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
@@ -114,8 +119,8 @@ public abstract class Formula extends Container implements Cloneable {
 		//Selected Element
 		} else if (paintStatus == PAINTSTATUS_SELECTED) {
 			g.setColor(Color.BLUE);
-			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
-			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
+			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH-1, FORMULAHEIGHT-2*CONNECTHEIGHT);
+			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH-1, CONNECTHEIGHT+RESULTHEIGHT);
 			for (int i=0; i<getInputCount(); i++){
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
 			}
@@ -126,13 +131,13 @@ public abstract class Formula extends Container implements Cloneable {
 			g.setColor(Color.GRAY);
 			//Dotted Line
 			for (int i=0; i<FORMULAWIDTH/4; i++) {
-				g.drawLine(i*4, CONNECTHEIGHT, i*4+2, CONNECTHEIGHT);
-				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2, CONNECTHEIGHT+RESULTHEIGHT);
-				g.drawLine(i*4, FORMULAHEIGHT-CONNECTHEIGHT, i*4+2, FORMULAHEIGHT-CONNECTHEIGHT);
+				g.drawLine(i*4, CONNECTHEIGHT, i*4+2-1, CONNECTHEIGHT);
+				g.drawLine(i*4, CONNECTHEIGHT+RESULTHEIGHT, i*4+2-1, CONNECTHEIGHT+RESULTHEIGHT);
+				g.drawLine(i*4, FORMULAHEIGHT-CONNECTHEIGHT, i*4+2-1, FORMULAHEIGHT-CONNECTHEIGHT);
 			}
 			for (int i=0; i<(BOXHEIGHT+RESULTHEIGHT)/4; i++) {
 				g.drawLine(0, i*4+CONNECTHEIGHT, 0, i*4+2+CONNECTHEIGHT);
-				g.drawLine(FORMULAWIDTH, i*4+CONNECTHEIGHT, FORMULAWIDTH, i*4+2+CONNECTHEIGHT);
+				g.drawLine(FORMULAWIDTH-1, i*4+CONNECTHEIGHT, FORMULAWIDTH-1, i*4+2+CONNECTHEIGHT);
 			}
 			for (int i=0; i<getInputCount(); i++){
 				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
@@ -196,8 +201,12 @@ public abstract class Formula extends Container implements Cloneable {
 			widthOfTree = 1;
 		else {
 			for (int i = 0; i < getInputCount(); i++) {
-				if (input[i] != null)
-					widthOfTree += input[i].getWidthOfTree();		
+				if (input[i] != null) {
+					widthOfTree += input[i].getWidthOfTree();
+				} else {
+					widthOfTree++;
+				}
+							
 		}}
 		return widthOfTree;
 	}
@@ -291,4 +300,43 @@ public abstract class Formula extends Container implements Cloneable {
 		return dimension;
 	}
 	
+	/**
+	 * @return
+	 */
+	public PinPoint[] getInputPins() {
+		return inputPins;
+	}
+
+	/**
+	 * @return
+	 */
+	public PinPoint getOutputPin() {
+		return outputPin;
+	}
+
+	/**
+	 * @param points
+	 */
+	public void setInputPins(PinPoint[] pins) {
+		inputPins = pins;
+	}
+
+	/**
+	 * @param point
+	 */
+	public void setOutputPin(PinPoint pin) {
+		outputPin = pin;
+	}
+
+	public void moveTo(int x, int y) {
+		Point oldLocation = getLocation();
+		int xOffset = x - oldLocation.x;
+		int yOffset = y - oldLocation.y;
+		for (int i=0;i<inputPins.length;i++) {
+			inputPins[i].translate(xOffset,yOffset);
+		}
+		outputPin.translate(xOffset,yOffset);
+		setLocation(oldLocation.x+xOffset,oldLocation.y+yOffset);
+	}
+
 }
