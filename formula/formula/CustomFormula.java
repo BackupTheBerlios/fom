@@ -1,4 +1,4 @@
-/* $Id: CustomFormula.java,v 1.6 2004/09/07 13:40:00 shadowice Exp $
+/* $Id: CustomFormula.java,v 1.7 2004/09/10 15:38:19 shadowice Exp $
  * Created on 26.08.2004
  */
  
@@ -13,7 +13,7 @@ import utils.*;
  * If there are no variables, the CustomFormula won't have any inputs.  
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class CustomFormula extends Formula {
 
@@ -79,7 +79,7 @@ public class CustomFormula extends Formula {
 			if (getInput(i) == null) {
 				throw new FormulaException(Messages.getString("Error.IncompleteFormula"));
 			} else {
-				variable = (TypeConstVar)variables.get(i);
+				variable = (TypeConstVar)variables.elementAt(i);
 				if (getInput(i).hasBooleanResult()) {
 					variable.setValue(new Boolean(getInput(i).getBooleanResult()));
 				} else if (getInput(i).hasDoubleResult()) {
@@ -172,7 +172,7 @@ public class CustomFormula extends Formula {
 
 
 	public final Class[] getInputTypes(int index) throws FormulaException {
-		TypeConstVar variable = (TypeConstVar)variables.get(index);
+		TypeConstVar variable = (TypeConstVar)variables.elementAt(index);
 		if (variable.getValue() instanceof Double) {
 			return new Class[]{Number.class};
 		} else if (variable.getValue() instanceof Boolean) {

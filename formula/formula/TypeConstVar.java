@@ -1,4 +1,4 @@
-/* $Id: TypeConstVar.java,v 1.8 2004/09/08 13:05:42 shadowice Exp $
+/* $Id: TypeConstVar.java,v 1.9 2004/09/10 15:38:19 shadowice Exp $
  * Created on 17.07.2004
  */
 package formula;
@@ -13,7 +13,7 @@ import java.util.*;
  * <li>a list of ConstVarFormula objects that use this name</li>
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @see VariableBoolean
  * @see VariableNumber
  */
@@ -51,7 +51,7 @@ public class TypeConstVar{
 		ConstVarFormula content;
 		this.value = value;
 		for (int i = 0; i < varInnerList.size(); i++) {
-			content = (ConstVarFormula)varInnerList.get(i);
+			content = (ConstVarFormula)varInnerList.elementAt(i);
 			content.result = value;
 			content.repaint();
 		}
@@ -75,7 +75,7 @@ public class TypeConstVar{
 		Object content;
 		this.name = name;
 		for (int i = 0; i < varInnerList.size(); i++) {
-			content = varInnerList.get(i);
+			content = varInnerList.elementAt(i);
 			if (content instanceof VariableBoolean) {
 				bool = (VariableBoolean)content;
 				bool.setInputVarName(name);

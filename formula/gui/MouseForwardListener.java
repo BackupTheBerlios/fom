@@ -1,4 +1,4 @@
-/* $Id: MouseForwardListener.java,v 1.4 2004/08/25 18:21:54 shadowice Exp $
+/* $Id: MouseForwardListener.java,v 1.5 2004/09/10 15:38:19 shadowice Exp $
  * Created on 25.08.2004
  *
  */
@@ -37,8 +37,8 @@ public class MouseForwardListener implements MouseListener, MouseMotionListener 
 											mEvent.getID(),
 											mEvent.getWhen(),
 											mEvent.getModifiers(),
-											parent.getX()+comp.getX() + mEvent.getPoint().x,
-											parent.getY()+comp.getY() + mEvent.getPoint().y,
+											parent.getLocation().x+comp.getLocation().x + mEvent.getPoint().x,
+											parent.getLocation().y+comp.getLocation().y + mEvent.getPoint().y,
 											mEvent.getClickCount(),
 											mEvent.isPopupTrigger());
 				parent.getParent().dispatchEvent(newEvent);
@@ -64,8 +64,8 @@ public class MouseForwardListener implements MouseListener, MouseMotionListener 
 											mEvent.getID(),
 											mEvent.getWhen(),
 											mEvent.getModifiers(),
-											parent.getX()+comp.getX() + mEvent.getPoint().x,
-											parent.getY()+comp.getY() + mEvent.getPoint().y,
+											parent.getLocation().x + comp.getLocation().x + mEvent.getPoint().x,
+											parent.getLocation().y + comp.getLocation().y + mEvent.getPoint().y,
 											mEvent.getClickCount(),
 											mEvent.isPopupTrigger());
 				parent.getParent().dispatchEvent(newEvent);
@@ -83,8 +83,8 @@ public class MouseForwardListener implements MouseListener, MouseMotionListener 
 											mEvent.getID(),
 											mEvent.getWhen(),
 											mEvent.getModifiers(),
-											parent.getX()+comp.getX() + mEvent.getPoint().x,
-											parent.getY()+comp.getY() + mEvent.getPoint().y,
+											parent.getLocation().x + comp.getLocation().x + mEvent.getPoint().x,
+											parent.getLocation().y + comp.getLocation().y + mEvent.getPoint().y,
 											mEvent.getClickCount(),
 											mEvent.isPopupTrigger());
 				parent.getParent().dispatchEvent(newEvent);
@@ -102,8 +102,8 @@ public class MouseForwardListener implements MouseListener, MouseMotionListener 
 											mEvent.getID(),
 											mEvent.getWhen(),
 											mEvent.getModifiers(),
-											parent.getX()+comp.getX() + mEvent.getPoint().x,
-											parent.getY()+comp.getY() + mEvent.getPoint().y,
+											parent.getLocation().x + comp.getLocation().x + mEvent.getPoint().x,
+											parent.getLocation().y + comp.getLocation().y + mEvent.getPoint().y,
 											mEvent.getClickCount(),
 											mEvent.isPopupTrigger());
 				parent.getParent().dispatchEvent(newEvent);
@@ -121,8 +121,8 @@ public class MouseForwardListener implements MouseListener, MouseMotionListener 
 											mEvent.getID(),
 											mEvent.getWhen(),
 											mEvent.getModifiers(),
-											parent.getX()+comp.getX() + mEvent.getPoint().x,
-											parent.getY()+comp.getY() + mEvent.getPoint().y,
+											parent.getLocation().x + comp.getLocation().x + mEvent.getPoint().x,
+											parent.getLocation().y + comp.getLocation().y + mEvent.getPoint().y,
 											mEvent.getClickCount(),
 											mEvent.isPopupTrigger());
 				parent.getParent().dispatchEvent(newEvent);

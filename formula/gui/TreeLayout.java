@@ -1,4 +1,4 @@
-/* $Id: TreeLayout.java,v 1.17 2004/09/10 10:55:33 shadowice Exp $
+/* $Id: TreeLayout.java,v 1.18 2004/09/10 15:38:19 shadowice Exp $
  * Created on 05.05.2004
  *
  */
@@ -10,7 +10,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public class TreeLayout implements LayoutManager {
 
@@ -63,23 +63,23 @@ public class TreeLayout implements LayoutManager {
 
 	private void layoutTree(Formula form) {
 		int width = form.getWidthOfTree();		// recursive function within a recursive function (not really good)
-		int width_px = width*form.getWidth()+(width-1)*FORMULA_HGAP;
+		int width_px = width*form.getSize().width+(width-1)*FORMULA_HGAP;
 		int in_width;
 		int in_width_px;
-		int xPos = form.getX() - width_px/2;
-		int yPos = form.getY() + form.getHeight() + FORMULA_VGAP;
+		int xPos = form.getLocation().x - width_px/2;
+		int yPos = form.getLocation().y + form.getSize().height + FORMULA_VGAP;
 		Formula inputForm;
 		for (int i=0;i<form.getInputCount();i++) {
 			inputForm = form.getInput(i);
 			if (inputForm != null) {
 				in_width = inputForm.getWidthOfTree();	// if getWidthOfTree is too slow, alternative would be to return an array
-				in_width_px = (in_width*form.getWidth())+(in_width-1)*FORMULA_HGAP;
+				in_width_px = (in_width*form.getSize().width)+(in_width-1)*FORMULA_HGAP;
 				xPos += in_width_px/2;
 				inputForm.moveTo(xPos,yPos);
 				xPos += in_width_px/2 + FORMULA_HGAP;
 				layoutTree(inputForm);
 			} else {
-				xPos += form.getWidth()+FORMULA_HGAP; 
+				xPos += form.getSize().width + FORMULA_HGAP; 
 			}
 		}		
 	}

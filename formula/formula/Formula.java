@@ -1,4 +1,4 @@
-/* $Id: Formula.java,v 1.53 2004/09/08 14:18:48 shadowice Exp $
+/* $Id: Formula.java,v 1.54 2004/09/10 15:38:19 shadowice Exp $
  * Created on 05.04.2004
  */
 package formula;
@@ -14,7 +14,7 @@ import utils.*;
  * It only provides a general set of methods that apply to all other formula-classes that extend this class.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.53 $
+ * @version $Revision: 1.54 $
  */
 public abstract class Formula extends Container implements Cloneable {
 
@@ -148,9 +148,9 @@ public abstract class Formula extends Container implements Cloneable {
 	
 	
 	public void update(Graphics g) {
-		if ((bufferImage == null) || (getWidth() > lastBufferWidth) || (getHeight() > lastBufferHeight)) {
-			lastBufferWidth = getWidth();
-			lastBufferHeight = getHeight();
+		if ((bufferImage == null) || (getSize().width > lastBufferWidth) || (getSize().height > lastBufferHeight)) {
+			lastBufferWidth = getSize().width;
+			lastBufferHeight = getSize().height;
 			bufferImage = createImage(lastBufferWidth,lastBufferHeight);
 		}
 		Graphics bufferGraphics = bufferImage.getGraphics();

@@ -1,4 +1,4 @@
-/* $Id: FormulaTextField.java,v 1.7 2004/09/06 13:08:01 br3001 Exp $
+/* $Id: FormulaTextField.java,v 1.8 2004/09/10 15:38:19 shadowice Exp $
  * Created on 16.05.2004
  *
  */
@@ -10,7 +10,7 @@ import formula.*;
 
 /**
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class FormulaTextField extends TextField {
 
@@ -25,7 +25,6 @@ public class FormulaTextField extends TextField {
 	public FormulaTextField(ControlPanel cp,String string) {
 		super(string);
 		setEditable(false);
-		setBackground(Color.white);
 		this.cPanel = cp;
 	}
 

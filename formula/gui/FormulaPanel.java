@@ -1,4 +1,4 @@
-/* $Id: FormulaPanel.java,v 1.42 2004/09/10 10:55:33 shadowice Exp $
+/* $Id: FormulaPanel.java,v 1.43 2004/09/10 15:38:19 shadowice Exp $
  * Created on 22.04.2004
  */
 package gui;
@@ -13,17 +13,17 @@ import utils.*;
  * The FormulaPanel displays the formula-trees, created by the user.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.42 $
+ * @version $Revision: 1.43 $
  */
 public class FormulaPanel extends Panel {
 
-	private static final int MAX_PIN_DISTANCE	= 70;	// distance to a pin (mouseTargetPoint) to be of any interest (should be <100)
+	private static final int MAX_PIN_DISTANCE	= 4900;	// distance to a pin (mouseTargetPoint) to be of any interest (should be <100)
 	private static final int OVERSIZE_WIDTH		= 5;
 	private static final int OVERSIZE_HEIGHT	= 5;
 
 	// These lists store all input/output pins.
-	private Vector inputPinList 		= new Vector();
-	private Vector outputPinList 		= new Vector();
+	private Vector inputPinList 	= new Vector();
+	private Vector outputPinList 	= new Vector();
 	private Vector tempInPPList		= new Vector();
 	private Vector tempOutPPList	= new Vector();
 	
@@ -60,7 +60,9 @@ public class FormulaPanel extends Panel {
 	 * @param pPIn list of input pins
 	 */
 	public void addInputPins(Vector pPIn) {
-		inputPinList.addAll(pPIn);
+		for (int i=0;i<pPIn.size();i++) {
+			inputPinList.addElement(pPIn.elementAt(i));
+		}
 	}
 
 
@@ -92,7 +94,9 @@ public class FormulaPanel extends Panel {
 	 * @param pPOut list of output pins
 	 */
 	public void addOutputPins(Vector pPOut) {
-		outputPinList.addAll(pPOut);
+		for (int i=0;i<pPOut.size();i++) {
+			outputPinList.addElement(pPOut.elementAt(i));
+		}
 	}
 
 
@@ -153,9 +157,9 @@ public class FormulaPanel extends Panel {
 
 	// NOTE faster double buffer would work, but this version is too slow!
 	//public void update(Graphics g) {
-		/*if ((bufferImage == null) || (getWidth() > lastBufferWidth) || (getHeight() > lastBufferHeight)) {
-			lastBufferWidth = getWidth();
-			lastBufferHeight = getHeight();
+		/*if ((bufferImage == null) || (getSize().width > lastBufferWidth) || (getSize().height > lastBufferHeight)) {
+			lastBufferWidth = getSize().width;
+			lastBufferHeight = getSize().height;
 			bufferImage = createImage(lastBufferWidth,lastBufferHeight);
 		}
 		
@@ -176,14 +180,14 @@ public class FormulaPanel extends Panel {
 
 	public void paint(Graphics g) {
 		// clear graphics:
-		//g.clearRect(0,0,getWidth(),getHeight());
+		//g.clearRect(0,0,getSize().width,getSize().height);
 		// paint components in this container:
 		super.paint(g);
 		// paint connections between pins:
 		PinPoint pp;
 		g.setColor(Color.darkGray);
 		for (int i=0;i<outputPinList.size();i++) {
-			pp = (PinPoint)outputPinList.get(i);
+			pp = (PinPoint)outputPinList.elementAt(i);
 			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getMouseTargetPoint().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
@@ -191,20 +195,20 @@ public class FormulaPanel extends Panel {
 		}
 		//debug!:
 		/*for (int i=0;i<inputPinList.size();i++) {
-			pp = (PinPoint)inputPinList.get(i);
+			pp = (PinPoint)inputPinList.elementAt(i);
 			g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5);
 		}*/
 
 		g.setColor(Color.red);
 		for (int i=0;i<tempInPPList.size();i++) {
-			pp = (PinPoint)tempInPPList.get(i);
+			pp = (PinPoint)tempInPPList.elementAt(i);
 			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
 			}
 		}
 		for (int i=0;i<tempOutPPList.size();i++) {
-			pp = (PinPoint)tempOutPPList.get(i);
+			pp = (PinPoint)tempOutPPList.elementAt(i);
 			//g.drawOval(pp.getMouseTargetPoint().x,pp.getMouseTargetPoint().y,5,5); // debug!
 			if (pp.getTarget() != null) {
 				g.drawLine(pp.getCoordinates().x,pp.getCoordinates().y,pp.getTarget().getCoordinates().x,pp.getTarget().getCoordinates().y);
@@ -247,7 +251,7 @@ public class FormulaPanel extends Panel {
 			Class[] inTypes;
 			Class[] outTypes = outPin.getFormula().getOutputTypes();
 			for (int i=0;i<size;i++) {
-				tmpPP = (PinPoint)inputPinList.get(i);
+				tmpPP = (PinPoint)inputPinList.elementAt(i);
 				distance = tmpPP.getDistance(x,y);
 				if (distance < minDistance) {  // if nearer then minDistance:
 				// and if it has no target so far and the pins are not from the same formula-object:
@@ -319,7 +323,7 @@ public class FormulaPanel extends Panel {
 			Class[] inTypes = inPin.getFormula().getInputTypes(inPin.getInputNumber());
 			Class[] outTypes;
 			for (int i=0;i<size;i++) {
-				tmpPP = (PinPoint)outputPinList.get(i);
+				tmpPP = (PinPoint)outputPinList.elementAt(i);
 				distance = tmpPP.getDistance(x,y);
 				if (distance < minDistance) {	// if nearer then minDistance:
 				// and if it has no target so far and the pins are not from the same formula-object:
@@ -432,14 +436,14 @@ public class FormulaPanel extends Panel {
 		boolean notfound;
 		// detach all input-pins from inPPList, that are not connected to pins from outPPList
 		for (int i=0;i<inPPList.size();i++) {
-			pin = (PinPoint)inPPList.get(i);
+			pin = (PinPoint)inPPList.elementAt(i);
 			targetPin = pin.getTarget();
 			if (targetPin != null) {
 				// is this pin in the outPPList?
 				j = 0;
 				notfound = true;
 				while ((j<outPPList.size()) && notfound) {
-					if ((PinPoint)outPPList.get(i) == targetPin) {
+					if ((PinPoint)outPPList.elementAt(i) == targetPin) {
 						notfound = false;
 					}
 					j++;
@@ -453,7 +457,7 @@ public class FormulaPanel extends Panel {
 		}
 		// detach all output that remain in outPPList:
 		for (int i=0;i<outPPList.size();i++) {
-			detachOutput((PinPoint)outPPList.get(i));
+			detachOutput((PinPoint)outPPList.elementAt(i));
 		}
 	}
 	
@@ -468,7 +472,7 @@ public class FormulaPanel extends Panel {
 	public void attach(Vector ppInList, Vector ppOutList) {
 		PinPoint pin;
 		for (int i=0;i<ppInList.size();i++) {
-			pin = (PinPoint)ppInList.get(i);
+			pin = (PinPoint)ppInList.elementAt(i);
 			try {
 				if (FOMToolkit.hasPartialMatches(pin.getFormula().getInputTypes(pin.getInputNumber()),pin.getTarget().getFormula().getOutputTypes())) {
 					pin.getFormula().setInput(pin.getTarget().getFormula(),pin.getInputNumber());
@@ -489,7 +493,7 @@ public class FormulaPanel extends Panel {
 			}
 		}
 		for (int i=0;i<ppOutList.size();i++) {
-			pin = (PinPoint)ppOutList.get(i);
+			pin = (PinPoint)ppOutList.elementAt(i);
 			try {
 				if (FOMToolkit.hasPartialMatches(pin.getFormula().getOutputTypes(),pin.getTarget().getFormula().getInputTypes(pin.getTarget().getInputNumber()))) {
 					pin.getFormula().setOutput(pin.getTarget().getFormula());
@@ -509,8 +513,8 @@ public class FormulaPanel extends Panel {
 				fe.printStackTrace(System.err);
 			}
 		}
-		tempInPPList.clear();
-		tempOutPPList.clear();
+		tempInPPList.removeAllElements();
+		tempOutPPList.removeAllElements();
 	}
 
 
@@ -541,15 +545,15 @@ public class FormulaPanel extends Panel {
 	public void deleteAll() {
 		ConstVarFormula cvForm;
 		for (int i=0;i<outputPinList.size();i++) {
-			if (((PinPoint)outputPinList.get(i)).getFormula() instanceof ConstVarFormula) {
-				cvForm = (ConstVarFormula)((PinPoint)outputPinList.get(i)).getFormula();
+			if (((PinPoint)outputPinList.elementAt(i)).getFormula() instanceof ConstVarFormula) {
+				cvForm = (ConstVarFormula)((PinPoint)outputPinList.elementAt(i)).getFormula();
 				aPanel.getVariableList().deleteVarList(cvForm,cvForm.getInputVarName());
 			}
 		}
-		inputPinList.clear();
-		outputPinList.clear();
-		tempInPPList.clear();
-		tempOutPPList.clear();
+		inputPinList.removeAllElements();
+		outputPinList.removeAllElements();
+		tempInPPList.removeAllElements();
+		tempOutPPList.removeAllElements();
 		Formula[] treeList = aPanel.getTreeList().getTreeArray();
 		for (int i=0;i<treeList.length;i++) {
 			aPanel.getTreeList().removeElement(treeList[i]);

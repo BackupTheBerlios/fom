@@ -1,4 +1,4 @@
-/* $Id: PinPoint.java,v 1.9 2004/09/01 15:08:32 shadowice Exp $
+/* $Id: PinPoint.java,v 1.10 2004/09/10 15:38:19 shadowice Exp $
  * Created on 02.07.2004
  */
 package gui;
@@ -10,7 +10,7 @@ import formula.*;
  * Class to store the points where a formula can be connected.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 /*
  * How to use this:
@@ -191,7 +191,10 @@ public class PinPoint implements Cloneable {
 	 * @return returns the distance between this PinPoint's mouseTargetPoint and the point p.
 	 */
 	public int getDistance(Point p) {
-		return (int)this.mouseTargetPoint.distance(p);
+		int x_diff = mouseTargetPoint.x - p.x;
+		int y_diff = mouseTargetPoint.y - p.y;
+		return x_diff * x_diff + y_diff * y_diff;
+		//return (int)this.mouseTargetPoint.distance(p);
 	}
 
 
@@ -201,7 +204,9 @@ public class PinPoint implements Cloneable {
 	 * @return Returns the distance between this PinPoint and the point (x,y).
 	 */
 	public int getDistance(int x, int y) {
-		return (int)this.mouseTargetPoint.distance(x,y);
+		int x_diff = mouseTargetPoint.x - x;
+		int y_diff = mouseTargetPoint.y - y;
+		return x_diff * x_diff + y_diff * y_diff;
 	}
 
 

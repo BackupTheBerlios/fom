@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.25 2004/09/10 12:55:23 shadowice Exp $
+/* $Id: Selection.java,v 1.26 2004/09/10 15:38:19 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 public class Selection {
 
@@ -57,7 +57,7 @@ public class Selection {
 		int yOffset = point.y - location.y;
 		Formula form;
 		for (int i=0;i<selectedComponents.size();i++) {
-			form = (Formula)selectedComponents.get(i);
+			form = (Formula)selectedComponents.elementAt(i);
 			location = form.getLocation();
 			location.translate(xOffset,yOffset);
 			form.moveTo(location.x,location.y);
@@ -80,16 +80,18 @@ public class Selection {
 		int index;
 		// clear marks:
 		for (int i=0;i<tempPPInputs.size();i++) {
-			((PinPoint)tempPPInputs.get(i)).getTarget().setBestCandidate(null);
+			((PinPoint)tempPPInputs.elementAt(i)).getTarget().setBestCandidate(null);
 		}
-		tempPPInputs.clear();
+		tempPPInputs.removeAllElements();
 		for (int i=0;i<tempPPOutputs.size();i++) {
-			((PinPoint)tempPPOutputs.get(i)).getTarget().setBestCandidate(null);
+			((PinPoint)tempPPOutputs.elementAt(i)).getTarget().setBestCandidate(null);
 		}
-		tempPPOutputs.clear();
+		tempPPOutputs.removeAllElements();
 		// Outputs:
 		Stack ppStack = new Stack();
-		ppStack.addAll(pPOutputs);
+		for (int i=0;i<pPOutputs.size();i++) {
+			ppStack.addElement(pPOutputs.elementAt(i));
+		}
 		while (!ppStack.isEmpty()) {
 			pin = (PinPoint)ppStack.pop();
 			targetPP = aPanel.getFormulaPanel().getNearestInputPin(pin);
@@ -108,7 +110,9 @@ public class Selection {
 			}
 		}
 		// Inputs:
-		ppStack.addAll(pPInputs);
+		for (int i=0;i<pPInputs.size();i++) {
+			ppStack.addElement(pPInputs.elementAt(i));
+		}
 		while (!ppStack.isEmpty()) {
 			pin = (PinPoint)ppStack.pop();			
 			targetPP = aPanel.getFormulaPanel().getNearestOutputPin(pin);
@@ -138,7 +142,7 @@ public class Selection {
 		selectedComponentRoot = form;
 		form.requestFocus();
 		selectedStartPoint = selectedComponentRoot.getLocation();
-		selectedRelativePoint = new Point((int)(selectedStartPoint.getX()-point.getX()),(int)(selectedStartPoint.getY()-point.getY()));
+		selectedRelativePoint = new Point((int)(selectedStartPoint.x - point.x),(int)(selectedStartPoint.y - point.y));
 		aPanel.getFormulaPanel().detach(selectedComponentRoot);
 		recursiveSelectRec(form);
 		aPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -155,7 +159,7 @@ public class Selection {
 		Vector ppList = aPanel.getFormulaPanel().getInputPins();
 		PinPoint pin;
 		for (int i=0; i<ppList.size();i++) {
-			pin = (PinPoint)ppList.get(i);
+			pin = (PinPoint)ppList.elementAt(i);
 			if (pin.getFormula() == form) {
 				if (pin.getTarget() != null) {
 					inactivePPInputs.addElement(pin);
@@ -168,7 +172,7 @@ public class Selection {
 		// get output PinPoints:
 		ppList = aPanel.getFormulaPanel().getOutputPins();
 		for (int i=0; i<ppList.size();i++) {
-			pin = (PinPoint)ppList.get(i);
+			pin = (PinPoint)ppList.elementAt(i);
 			if (pin.getFormula() == form) {
 				if (pin.getTarget() != null) {
 					inactivePPOutputs.addElement(pin);
@@ -195,7 +199,7 @@ public class Selection {
 	public void updatePaintStatus(int status) {
 		Formula form;
 		for (int i=0;i<selectedComponents.size();i++) {
-			form = (Formula)selectedComponents.get(i);
+			form = (Formula)selectedComponents.elementAt(i);
 			form.setPaintStatus(status);
 		}
 	}
@@ -211,12 +215,12 @@ public class Selection {
 			aPanel.getVariableList().deleteVarList(cvForm, cvForm.getInputVarName());
 		}
 		insertInProgress = false;
-		pPInputs.clear();
-		pPOutputs.clear();
-		tempPPInputs.clear();
-		tempPPOutputs.clear();
-		inactivePPInputs.clear();
-		inactivePPOutputs.clear();
+		pPInputs.removeAllElements();
+		pPOutputs.removeAllElements();
+		tempPPInputs.removeAllElements();
+		tempPPOutputs.removeAllElements();
+		inactivePPInputs.removeAllElements();
+		inactivePPOutputs.removeAllElements();
 		if (newComponentInstance != null) {
 			aPanel.getFormulaPanel().remove(newComponentInstance);
 			newComponentInstance = null;
@@ -227,7 +231,7 @@ public class Selection {
 		}
 		if (!selectedComponents.isEmpty()) {
 			updatePaintStatus(Formula.PAINTSTATUS_STANDARD);
-			selectedComponents.clear();
+			selectedComponents.removeAllElements();
 		}
 		aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 		aPanel.getFormulaPanel().setCursor(Cursor.getDefaultCursor());
@@ -273,13 +277,13 @@ public class Selection {
 		}
 		//create PinPoint lists for inputs & output
 		//newComponentInstance may be null if newInstance was unsuccessful
-		int xPos = newComponentInstance.getX();
-		int yPos = newComponentInstance.getY();
-		int width = newComponentInstance.getWidth();
-		int height = newComponentInstance.getHeight();
+		int xPos = newComponentInstance.getLocation().x;
+		int yPos = newComponentInstance.getLocation().y;
+		int width = newComponentInstance.getSize().width;
+		int height = newComponentInstance.getSize().height;
 		int inCount = newComponentInstance.getInputCount();
-		pPInputs.clear();
-		pPOutputs.clear();
+		pPInputs.removeAllElements();
+		pPOutputs.removeAllElements();
 		PinPoint pp;
 		PinPoint[] ppArray = new PinPoint[inCount];
 		for (int i=0;i<inCount;i++) {
@@ -306,7 +310,7 @@ public class Selection {
 	 */
 	public void placeElement(Point point) {
 		insertInProgress = false;
-		newComponentInstance.moveTo((int)point.getX()-newComponentInstance.getWidth()/2,(int)point.getY()-newComponentInstance.getHeight()/2);
+		newComponentInstance.moveTo((int)point.x - newComponentInstance.getSize().width/2,(int)point.y - newComponentInstance.getSize().height/2);
 		selectedComponentRoot.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 		newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 		newComponentInstance.setVisible(true);
@@ -316,10 +320,10 @@ public class Selection {
 		aPanel.getFormulaPanel().setCursor(Cursor.getDefaultCursor());
 		// add PinPoints to FormulaPanel:
 		for (int i=0;i<pPInputs.size();i++) {
-			aPanel.getFormulaPanel().addInputPin((PinPoint)pPInputs.get(i));
+			aPanel.getFormulaPanel().addInputPin((PinPoint)pPInputs.elementAt(i));
 		}
 		for (int i=0;i<pPOutputs.size();i++) {
-			aPanel.getFormulaPanel().addOutputPin((PinPoint)pPOutputs.get(i));
+			aPanel.getFormulaPanel().addOutputPin((PinPoint)pPOutputs.elementAt(i));
 		}
 		aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 		deselect();
@@ -380,7 +384,7 @@ public class Selection {
 			aPanel.getFormulaPanel().setTempPinPoints(tempPPInputs,tempPPOutputs);
 			aPanel.getFormulaPanel().repaint();
 		} else if (insertInProgress) {
-			point.translate(-newComponentInstance.getWidth()/2,-newComponentInstance.getHeight()/2);
+			point.translate(-newComponentInstance.getSize().width/2,-newComponentInstance.getSize().height/2);
 			moveTo(newComponentInstance,point);
 			// update possible connections:
 			refreshPinPointList();
@@ -397,7 +401,7 @@ public class Selection {
 		if (selectedComponents.size() > 0) {
 			Formula form;
 			for (int i=0;i<selectedComponents.size();i++) {
-				form = (Formula)selectedComponents.get(i);
+				form = (Formula)selectedComponents.elementAt(i);
 				if (form instanceof ConstVarFormula) {
 					ConstVarFormula cvForm = (ConstVarFormula)form;
 					aPanel.getVariableList().deleteVarList(cvForm, cvForm.getInputVarName());

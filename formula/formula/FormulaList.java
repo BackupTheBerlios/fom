@@ -33,14 +33,14 @@ public class FormulaList extends Vector {
 	public final Formula[] getTreeArray() {
 		Formula[] treeListArray = new Formula[size()];
 		for (int i=0; i < treeListArray.length; i++) {
-			treeListArray[i] = (Formula)get(i);
+			treeListArray[i] = (Formula)elementAt(i);
 		}
 		return treeListArray;
 	}
 	
 	
 	public final Formula getFormula(int i) {
-		return (Formula)get(i);
+		return (Formula)elementAt(i);
 	}
 	
 	

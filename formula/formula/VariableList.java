@@ -1,4 +1,4 @@
-/* $Id: VariableList.java,v 1.4 2004/09/08 13:05:42 shadowice Exp $
+/* $Id: VariableList.java,v 1.5 2004/09/10 15:38:19 shadowice Exp $
  * Created on 24.08.2004
  */
 package formula;
@@ -9,7 +9,7 @@ import java.util.*;
  * Class to store a list of variables.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class VariableList extends Vector {
 
@@ -18,16 +18,6 @@ public class VariableList extends Vector {
 	 */
 	public VariableList() {
 		super();
-	}
-
-
-	/**
-	 * Creates a new variable list from the values of the collection.
-	 * 
-	 * @param c values to copy to the new list
-	 */
-	public VariableList(Collection c) {
-		super(c);
 	}
 
 
