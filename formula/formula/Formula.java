@@ -269,10 +269,6 @@ public abstract class Formula extends Container implements Cloneable {
 	}
 
 	//"Quick-fix" :)
-	public final Dimension getSize() {
-		return dimension;
-	}
-
 	public final Dimension preferredSize() {
 		return dimension;
 	}
@@ -285,20 +281,4 @@ public abstract class Formula extends Container implements Cloneable {
 		return dimension;
 	}
 	
-	public final void setSize(int x,int y) {
-		dimension = new Dimension(x,y);
-	}
-	
-	public final void setSize(Dimension dim) {
-		dimension = dim;
-	}
-	
-	public final int getWidth() {
-		return dimension.width;
-	}
-	
-	public final int getHeight() {
-		return dimension.height;
-	}
-
 }
