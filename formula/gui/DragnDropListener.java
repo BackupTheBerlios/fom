@@ -81,7 +81,6 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 			// if a component is selected from the ElementPanel (newComponentInstance != null),
 			// a mouseClicked event within the FormulaPanel will place it there.
 			if (insertInProgress) {
-				// TODO: rewrite to FormulaPanel.addFormula(Formula,Coordinates);
 				newComponentInstance.setLocation((int)me.getPoint().getX()-newComponentInstance.getWidth()/2,(int)me.getPoint().getY()-newComponentInstance.getHeight()/2);
 				selectedComponent.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 				selectedComponent.repaint();
