@@ -28,6 +28,8 @@ public abstract class Formula extends Container implements Cloneable {
 
 	protected String formulaName;
 
+	protected int drawStatus;
+
 	public static LinkedList treeList;
 
 	/**
@@ -36,6 +38,7 @@ public abstract class Formula extends Container implements Cloneable {
 	public Formula() {
 		super();
 		setSize(dimension);
+		drawStatus = 0;
 	}
 
 	/**
@@ -90,19 +93,39 @@ public abstract class Formula extends Container implements Cloneable {
 	 * @param g Graphics object for painting.
 	 */
 	public void paint(Graphics g) {
+		String resultString;
+//		try {
+//			resultString = getStringResult();
+//		} catch (FormulaException) { 
+//		}
 		super.paint(g);
 		//TODO Grafik verbessern
 		//((Graphics2D)g).scale(scaleX, scaleY);
-		g.setColor(Color.BLACK);
-		g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
-		g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
-		for (int i=0; i<getInputCount(); i++){
-			g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
+		if (drawStatus == 0) {
+			g.setColor(Color.BLACK);
+			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
+			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
+			for (int i=0; i<getInputCount(); i++){
+				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
+			}
+			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
+			g.setFont(new Font("Arial", Font.PLAIN, 10));		
+			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Name des Elements
+//			if (resultString != null) {
+//				
+//			}
+		//TODO Andere Grafiktypen verwenden
+		} else {
+			g.setColor(Color.BLACK);
+			g.drawRect(0, CONNECTHEIGHT, FORMULAWIDTH, FORMULAHEIGHT-2*CONNECTHEIGHT);
+			g.drawLine(0, CONNECTHEIGHT+RESULTHEIGHT, FORMULAWIDTH, CONNECTHEIGHT+RESULTHEIGHT);
+			for (int i=0; i<getInputCount(); i++){
+				g.drawLine((i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT-CONNECTHEIGHT, (i+1)*FORMULAWIDTH/(getInputCount()+1), FORMULAHEIGHT);
+			}
+			g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
+			g.setFont(new Font("Arial", Font.PLAIN, 10));		
+			g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Align: center
 		}
-		g.drawLine(FORMULAWIDTH/2 +1, CONNECTHEIGHT, FORMULAWIDTH/2 +1, 0);
-		g.setFont(new Font("Arial", Font.PLAIN, 10));		
-		g.drawString(formulaName, (FORMULAWIDTH-g.getFontMetrics().stringWidth(formulaName))/2, RESULTHEIGHT+CONNECTHEIGHT+BOXHEIGHT/2+g.getFontMetrics().getHeight()/2); // Align: center
-		
 	}
 
 	/**
@@ -244,4 +267,5 @@ public abstract class Formula extends Container implements Cloneable {
 	public void setSize(Dimension dim) {
 		dimension = dim;
 	}
+
 }

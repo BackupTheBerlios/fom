@@ -35,7 +35,7 @@ public abstract class BooleanFormula extends Formula {
 		if (result != null)
 			return result.toString();
 		else
-			throw new FormulaException(Messages.getString("Error.NoBooleanResult"));
+			return null;
 	}
 	
 	/**

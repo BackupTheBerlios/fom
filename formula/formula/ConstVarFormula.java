@@ -62,7 +62,7 @@ public abstract class ConstVarFormula extends Formula {
 				throw new FormulaException(Messages.getString("Error.IllegalDataType"));
 		}
 		else
-			throw new FormulaException(Messages.getString("Error.IllegalDataType"));
+			return null;
 	}
 
 //	public long getLongResult() {
