@@ -1,4 +1,4 @@
-/* $Id: ElementPanelListener.java,v 1.17 2004/09/08 13:41:40 shadowice Exp $
+/* $Id: ElementPanelListener.java,v 1.18 2004/09/09 15:09:17 shadowice Exp $
  * Created on 26.04.2004
  *
  */
@@ -68,10 +68,14 @@ public class ElementPanelListener implements ItemListener, ActionListener {
 			aPanel.getFormulaPanel().repaint();
 			aPanel.getControlPanel().getFormulaTextField().updateControlPanelText();
 			System.gc();*/
-			System.out.println("before: "+((ScrollPane)aPanel.getFormulaPanel().getParent()).getScrollPosition().x);
+			System.out.println("before:\n "+((ScrollPane)aPanel.getFormulaPanel().getParent()).getScrollPosition());
+			if (aPanel.getTreeList().elementAt(0) != null)
+				System.out.println(((Component)aPanel.getTreeList().elementAt(0)).getLocation());
 			System.out.flush();
-			aPanel.getFormulaPanel().validate();
-			System.out.println("after: "+((ScrollPane)aPanel.getFormulaPanel().getParent()).getScrollPosition().x);
+			aPanel.getFormulaPanel().getParent().validate();
+			System.out.println("after:\n "+((ScrollPane)aPanel.getFormulaPanel().getParent()).getScrollPosition());
+			if (aPanel.getTreeList().elementAt(0) != null)
+				System.out.println(((Component)aPanel.getTreeList().elementAt(0)).getLocation());
 			System.out.flush();
 		}
 	}
