@@ -183,63 +183,24 @@ public class DialogVariables extends Dialog implements TextListener, ActionListe
 	 * und man dann dem Formula-O-Matic-Fenster über die Taskleiste den Fokus gibt,
 	 * wird das Variablenfenster nicht neu dargestellt.
 	 */
+	 // HEIKO: Behoben mit requestFocus?
+	 // Wenn nicht müsste ich einen WindowListener in AppletPanel einbauen
 
 	// Quick-Fix, damit der WindowListener funktioner. Um die Variablen x-en zu können.
 
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.WindowListener#windowActivated(java.awt.event.WindowEvent)
-	 */
-	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.WindowListener#windowClosed(java.awt.event.WindowEvent)
-	 */
-	public void windowClosed(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.WindowListener#windowClosing(java.awt.event.WindowEvent)
-	 */
 	public void windowClosing(WindowEvent arg0) {
 		dispose();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.WindowListener#windowDeactivated(java.awt.event.WindowEvent)
-	 */
 	public void windowDeactivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		this.requestFocus();		
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.WindowListener#windowDeiconified(java.awt.event.WindowEvent)
-	 */
-	public void windowDeiconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.WindowListener#windowIconified(java.awt.event.WindowEvent)
-	 */
-	public void windowIconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.WindowListener#windowOpened(java.awt.event.WindowEvent)
-	 */
-	public void windowOpened(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowDeiconified(WindowEvent arg0) {  }
+	public void windowIconified(WindowEvent arg0) {	 }
+	public void windowOpened(WindowEvent arg0) {  }
+	public void windowActivated(WindowEvent arg0) {  }
+	public void windowClosed(WindowEvent arg0) {  }
 
 }
