@@ -6,7 +6,6 @@ package gui;
 
 import java.util.*;
 import formula.*;
-import java.lang.reflect.*;
 import java.awt.*;
 
 /**
