@@ -33,17 +33,12 @@ public class TreeLayout implements LayoutManager {
 		int count = container.getComponentCount();
 		for (int i=0;i<count;i++) {
 			component = container.getComponent(i);
-			bounds = component.getBounds();
 			if (component instanceof Formula) {
 				form = (Formula)component;
 				if (form.getOutput() == null) {
 					layoutTree(form);
 				}
 			}
-			
-			bounds.height = component.getSize().height;
-			bounds.width = component.getSize().width;
-			component.setBounds(bounds);
 		}
 	}
 
@@ -70,7 +65,7 @@ public class TreeLayout implements LayoutManager {
 
 	private void layoutTree(Formula form) {
 		int width = form.getWidthOfTree();		// recursive function within a recursive function (not really good)
-		int width_px = width*form.getWidth()+(width+1)*FORMULA_HGAP;
+		int width_px = width*form.getWidth()+(width-1)*FORMULA_HGAP;
 		int in_width;
 		int in_width_px;
 		int xPos = form.getX() - width_px/2;
@@ -80,13 +75,13 @@ public class TreeLayout implements LayoutManager {
 			inputForm = form.getInput(i);
 			if (inputForm != null) {
 				in_width = inputForm.getWidthOfTree();	// if getWidthOfTree is too slow, alternative would be to return an array
-				in_width_px = (in_width*form.getWidth())+(in_width)*FORMULA_HGAP+FORMULA_HGAP/2;
+				in_width_px = (in_width*form.getWidth())+(in_width-1)*FORMULA_HGAP;
 				xPos += in_width_px/2;
 				inputForm.moveTo(xPos,yPos);
-				xPos += in_width_px/2;
+				xPos += in_width_px/2 + FORMULA_HGAP;
 				layoutTree(inputForm);
 			} else {
-				xPos += form.getWidth()+1.5*FORMULA_HGAP; 
+				xPos += form.getWidth()+FORMULA_HGAP; 
 			}
 		}
 		

@@ -57,6 +57,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				newComponentInstance.setLocation((int)me.getPoint().getX()-newComponentInstance.getWidth()/2,(int)me.getPoint().getY()-newComponentInstance.getHeight()/2);
 				selectedComponentRoot.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
 				newComponentInstance.setPaintStatus(Formula.PAINTSTATUS_STANDARD);
+				newComponentInstance.setVisible(true);
 				newComponentInstance = null;
 				aPanel.getFormulaPanel().setCursor(Cursor.getDefaultCursor());
 				// add PinPoints to FormulaPanel:
@@ -69,6 +70,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				aPanel.getFormulaPanel().attach(tempPPInputs,tempPPOutputs);
 				deselect();
 				aPanel.getFormulaPanel().doLayout();
+				aPanel.getFormulaPanel().checkBounds();
 			} else if (!(me.getComponent().getComponentAt(me.getPoint()) instanceof Formula)) {
 				deselect();
 			}
@@ -107,7 +109,6 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				recursiveSelect(selectedComponentRoot);
 				updatePaintStatus(Formula.PAINTSTATUS_MOVING);
 				aPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
 			}
 		}
 	}
@@ -121,6 +122,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		}
 		aPanel.getFormulaPanel().repaint();
 		aPanel.getFormulaPanel().doLayout();
+		aPanel.getFormulaPanel().checkBounds();
 	}
 
 	public void mouseDragged(MouseEvent me) {
@@ -134,6 +136,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				refreshPinPointList();
 				aPanel.getFormulaPanel().setTempPinPoints(tempPPInputs,tempPPOutputs);
 				aPanel.getFormulaPanel().repaint();
+				//aPanel.getFormulaPanel().checkBounds();
 			}
 		}
 	}
@@ -155,6 +158,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 				refreshPinPointList();
 				aPanel.getFormulaPanel().setTempPinPoints(tempPPInputs,tempPPOutputs);
 				aPanel.getFormulaPanel().repaint();
+				//aPanel.getFormulaPanel().checkBounds();
 			}
 		}
 	}
@@ -166,33 +170,23 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 	 * @param formula the formula to move
 	 * @param point target point to move to
 	 */
-	// TODO: rewrite to use Formula.moveTo(x,y)
 	private void moveTo(Formula formula, Point point) {
-		Point oldLocation = formula.getLocation();
-		int xOffset = point.x - oldLocation.x;
-		int yOffset = point.y - oldLocation.y;
-		for (int i=0;i<pPInputs.size();i++) {
-			((PinPoint)pPInputs.get(i)).translate(xOffset,yOffset); 
-		}
-		for (int i=0;i<pPOutputs.size();i++) {
-			((PinPoint)pPOutputs.get(i)).translate(xOffset,yOffset);
-		}
-		for (int i=0;i<inactivePPInputs.size();i++) {
-			((PinPoint)inactivePPInputs.get(i)).translate(xOffset,yOffset); 
-		}
-		for (int i=0;i<inactivePPOutputs.size();i++) {
-			((PinPoint)inactivePPOutputs.get(i)).translate(xOffset,yOffset); 
-		}
+		Point location = formula.getLocation();
+		int xOffset = point.x - location.x;
+		int yOffset = point.y - location.y;
 		Formula form;
-		for (int i=0; i<selectedComponents.size();i++) {
+		for (int i=0;i<selectedComponents.size();i++) {
 			form = (Formula)selectedComponents.get(i);
-			oldLocation = form.getLocation();
-			form.setLocation(oldLocation.x+xOffset,oldLocation.y+yOffset);
+			location = form.getLocation();
+			location.translate(xOffset,yOffset);
+			form.moveTo(location.x,location.y);
 		}
 		if (newComponentInstance != null) {
-			oldLocation = newComponentInstance.getLocation();
-			newComponentInstance.setLocation(oldLocation.x+xOffset,oldLocation.y+yOffset);
+			location = newComponentInstance.getLocation();
+			location.translate(xOffset,yOffset);
+			newComponentInstance.moveTo(location.x,location.y);
 		}
+		
 	}
 	
 	/**
@@ -386,6 +380,7 @@ public class DragnDropListener implements MouseListener, MouseMotionListener {
 		pp.setMouseTargetPoint(xPos+width/2,yPos-MOUSE_POINT_DISTANCE);
 		pPOutputs.add(pp);
 		newComponentInstance.setOutputPin(pp);
+		newComponentInstance.setLocation(xPos,yPos); // bugfix, newComponentInstance may be at another position
 		aPanel.getFormulaPanel().setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 		aPanel.getFormulaPanel().validate();
 	}

@@ -35,6 +35,7 @@ public class AppletPanel extends Applet {
 		pnlFormula.addMouseMotionListener(dnd);
 		sPane.add(pnlFormula);
 		
+		
 		add(pnlElements,BorderLayout.WEST);
 		add(pnlControls,BorderLayout.SOUTH);
 		add(sPane,BorderLayout.CENTER);

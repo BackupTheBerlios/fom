@@ -27,6 +27,9 @@ public class FormulaPanel extends Panel {
 	
 	private AppletPanel aPanel;
 
+	private static final int OVERSIZE_WIDTH		= 50;
+	private static final int OVERSIZE_HEIGHT	= 50;
+
 	/**
 	 * Creates a new FormulaPanel.
 	 */
@@ -430,6 +433,49 @@ public class FormulaPanel extends Panel {
 				outputPinList.add(pin);
 			}
 		}
+	}
+	
+	public void checkBounds() {
+		Component comp;
+		Rectangle newBounds = getBounds();
+		newBounds.x = 0;
+		newBounds.y = 0;
+		for (int i=0;i<getComponentCount();i++) {
+			comp = getComponent(i);
+			if ((comp.getX()+comp.getWidth()) > getWidth()) {
+				newBounds.width = comp.getX() + comp.getWidth() + OVERSIZE_WIDTH;
+			}
+			if (comp.getX() < getX()) {
+				
+				newBounds.x = comp.getX();
+			}
+			if ((comp.getY()+comp.getHeight()) > getHeight()) {
+				newBounds.height = comp.getY() + comp.getHeight() + OVERSIZE_HEIGHT;
+			}
+			if (comp.getY() < getY()) {
+				newBounds.y = comp.getY();
+			}
+		}
+		//setBounds(newBounds);
+		System.out.println("DEBUG: "+newBounds);
+		if (newBounds.x < 0) {
+			newBounds.width -= newBounds.x;
+		}
+		if (newBounds.y < 0) {
+			newBounds.height -= newBounds.y;
+		}
+		Formula form;
+		if ((newBounds.x < 0) || (newBounds.y < 0)) {
+			for (int i=0;i<getComponentCount();i++) {
+				form = (Formula)getComponent(i);
+				form.moveTo(form.getX()-newBounds.x,form.getY()-newBounds.y);
+			}
+			ScrollPane sPane = (ScrollPane)getParent();
+			//sPane.setScrollPosition(sPane.getScrollPosition().x,0);
+		}
+					
+		setSize(newBounds.width,newBounds.height);
+		getParent().validate();
 	}
 
 }

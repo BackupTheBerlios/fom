@@ -38,7 +38,7 @@ public class Categories {
 		form[1] = new Sub();
 		form[2] = new Mult();
 		form[3] = new Div();
-		form[4] = new ConstantNumber();
+		form[4] = new ConstantNumber(true);
 		form[5] = new Sign();
 		form[6] = new Square();
 		form[7] = new Reciprocal();
@@ -46,10 +46,10 @@ public class Categories {
 
 		//Category Variables:
 		form = new Formula[6];
-		form[0] = new ConstantNumber();
-		form[1] = new ConstantBoolean();
-		form[2] = new VariableNumber();
-		form[3] = new VariableBoolean();
+		form[0] = new ConstantNumber(true);
+		form[1] = new ConstantBoolean(true);
+		form[2] = new VariableNumber(true);
+		form[3] = new VariableBoolean(true);
 		form[4] = new ConstE();
 		form[5] = new ConstPi();
 		categoryElements.put(categories[1], form);
@@ -122,7 +122,6 @@ public class Categories {
 		form[8] = new Rad2deg();
 		form[9] = new Rad2grad();	
 		categoryElements.put(categories[7], form);
-
 
 		//Category Custom:
 		form = new Formula[0];

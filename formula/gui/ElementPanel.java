@@ -22,19 +22,19 @@ public class ElementPanel extends Panel {
 	
 	private GridLayout elementPanelLayout;
 	private DragnDropListener dnd;
-	private AppletPanel parent;
+	private AppletPanel aPanel;
 	
 	/**
 	 * Creates the panel for categories and element list.
 	 */
 	public ElementPanel(AppletPanel parent) {
-		this.parent = (AppletPanel)parent;
+		this.aPanel = (AppletPanel)parent;
 		//create objects for element panel:
 		Panel topPanel		= new Panel(new GridLayout(2,1));
 		chCategoryList		= new Choice();
 		scpElementList		= new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
 		elementPanel		= new Panel();
-		dnd					= new DragnDropListener(this.parent);
+		dnd					= new DragnDropListener(this.aPanel);
 		btnAddFormula		= new Button(Messages.getString("ElementPanel.BtnAddFormula"));
 		clListener			= new CategoryListListener(this);
 		elementPanelLayout	= new GridLayout();
@@ -86,8 +86,8 @@ public class ElementPanel extends Panel {
 			}
 		}
 		scpElementList.validate();
-		scpElementList.doLayout();
-		scpElementList.repaint();
+//		scpElementList.doLayout();
+//		scpElementList.repaint();
 	}
 	
 	
