@@ -15,7 +15,7 @@ import formula.*;
 public class TreeLayout implements LayoutManager {
 
 	private static final int FORMULA_HGAP = 5;		// horizontal distance between 2 formula components 
-	private static final int FORMULA_VGAP = 40;		// vertical distance between 2 formula components
+	private static final int FORMULA_VGAP = 20;		// vertical distance between 2 formula components
 
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
