@@ -1,4 +1,4 @@
-/* $Id: Selection.java,v 1.27 2004/10/19 21:26:05 shadowice Exp $
+/* $Id: Selection.java,v 1.28 2004/10/20 15:18:24 shadowice Exp $
  * Created on 12.08.2004
  */
 package gui;
@@ -12,7 +12,7 @@ import java.awt.*;
  * the FormulaPanel as well as new elements that can be placed on the FormulaPanel.
  * 
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  */
 public class Selection {
 
@@ -244,7 +244,7 @@ public class Selection {
 	 * and adds it to the FormulaPanel (invisible until mouse enters FormulaPanel).
 	 * Also creates the PinPoints for this formula element.
 	 * 
-	 * @param targetComponent the target formula element
+	 * @param targetFormula the target formula element
 	 */
 	public void selectNewElement(Formula targetFormula) {
 		// remove previously selected element if there is one:

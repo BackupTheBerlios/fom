@@ -1,16 +1,17 @@
-/* $Id: PinPoint.java,v 1.12 2004/10/19 21:26:05 shadowice Exp $
+/* $Id: PinPoint.java,v 1.13 2004/10/20 15:18:24 shadowice Exp $
  * Created on 02.07.2004
  */
 package gui;
 
-import java.awt.Point;
+//import java.awt.Point;
 import formula.*;
+import utils.SimplePoint;
 
 /**
  * Class to store the points where a formula can be connected.
  *
  * @author Maurice Gilden, Heiko Mattes, Benjamin Riehle
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 /*
  * How to use this:
@@ -27,8 +28,8 @@ public class PinPoint implements Cloneable {
 // local attributes:
 	private Formula formula;			// formula of this point
 	private int inputNumber = -1;		// number of this input-pin (if it's an output, number is -1)
-	private Point pinPoint;				// coordinates of the input/output pin
-	private Point mouseTargetPoint;		// center coordinates used to connect other formulas
+	private SimplePoint pinPoint;		// coordinates of the input/output pin
+	private SimplePoint mouseTargetPoint;	// center coordinates used to connect other formulas
 	private PinPoint targetPoint;		// if this pin is connected to another pin, that's the target
 	private PinPoint bestCandidate;		// best possible connection that is found so far. If there's a better one it'll overwrite this
 	private int bestDistance=0;			// distance to bestCandidate
@@ -42,7 +43,7 @@ public class PinPoint implements Cloneable {
 	 */
 	public PinPoint(Formula form, int x, int y) {
 		this.formula = form;
-		this.pinPoint = new Point(x,y);
+		this.pinPoint = new SimplePoint(x,y);
 	}
 
 
@@ -51,7 +52,7 @@ public class PinPoint implements Cloneable {
 	 * @param form Formula element of this pin
 	 * @param p coordinates
 	 */
-	public PinPoint(Formula form, Point p) {
+	public PinPoint(Formula form, SimplePoint p) {
 		this.formula = form;
 		this.pinPoint = p;
 	}
@@ -63,7 +64,7 @@ public class PinPoint implements Cloneable {
 	 */
 	public PinPoint(Formula form) {
 		this.formula = form;
-		this.pinPoint = new Point();
+		this.pinPoint = new SimplePoint();
 	}
 
 
@@ -76,7 +77,7 @@ public class PinPoint implements Cloneable {
 	 */
 	public PinPoint(Formula form, int x, int y, int inNumber) {
 		this.formula = form;
-		this.pinPoint = new Point(x,y);
+		this.pinPoint = new SimplePoint(x,y);
 		this.inputNumber = inNumber;
 	}
 
@@ -87,7 +88,7 @@ public class PinPoint implements Cloneable {
 	 * @param p coordinates
 	 * @param inNumber number of this input (0=1st, 1=2nd, 2=3rd,...)
 	 */
-	public PinPoint(Formula form, Point p, int inNumber) {
+	public PinPoint(Formula form, SimplePoint p, int inNumber) {
 		this.formula = form;
 		this.pinPoint = p;
 		this.inputNumber = inNumber;
@@ -101,7 +102,7 @@ public class PinPoint implements Cloneable {
 	 */
 	public PinPoint(Formula form, int inNumber) {
 		this.formula = form;
-		this.pinPoint = new Point();
+		this.pinPoint = new SimplePoint();
 		this.inputNumber = inNumber;
 	}
 
@@ -120,7 +121,7 @@ public class PinPoint implements Cloneable {
 	/**
 	 * @return Returns the x,y-coordinates of this PinPoint.
 	 */
-	public Point getCoordinates() {
+	public SimplePoint getCoordinates() {
 		return this.pinPoint;
 	}
 
@@ -163,7 +164,7 @@ public class PinPoint implements Cloneable {
 	 * The mouseTargetPoint is used to determine if another Formula is within reach of this PinPoint.
 	 * @param mtp
 	 */
-	public void setMouseTargetPoint(Point mtp) {
+	public void setMouseTargetPoint(SimplePoint mtp) {
 		this.mouseTargetPoint = mtp;
 	}
 
@@ -174,14 +175,14 @@ public class PinPoint implements Cloneable {
 	 * @param y y coordinates
 	 */
 	public void setMouseTargetPoint(int x, int y) {
-		this.mouseTargetPoint = new Point(x,y);
+		this.mouseTargetPoint = new SimplePoint(x,y);
 	}
 
 
 	/**
 	 * @return returns the mouseTargetPoint
 	 */
-	public Point getMouseTargetPoint() {
+	public SimplePoint getMouseTargetPoint() {
 		return this.mouseTargetPoint;
 	}
 
@@ -190,7 +191,7 @@ public class PinPoint implements Cloneable {
 	 * @param p another point
 	 * @return returns the distance^2 between this PinPoint's mouseTargetPoint and the point p.
 	 */
-	public int getDistance(Point p) {
+	public int getDistance(SimplePoint p) {
 		int x_diff = mouseTargetPoint.x - p.x;
 		int y_diff = mouseTargetPoint.y - p.y;
 		return x_diff * x_diff + y_diff * y_diff;
@@ -282,8 +283,8 @@ public class PinPoint implements Cloneable {
 			PinPoint cpp = (PinPoint)super.clone();
 			cpp.bestCandidate = null;
 			cpp.formula = null;
-			cpp.mouseTargetPoint = (Point)mouseTargetPoint.clone();
-			cpp.pinPoint = (Point)pinPoint.clone();
+			cpp.mouseTargetPoint = (SimplePoint)mouseTargetPoint.clone();
+			cpp.pinPoint = (SimplePoint)pinPoint.clone();
 			cpp.targetPoint = null;
 			return cpp;
 		} catch (CloneNotSupportedException e) {

@@ -31,7 +31,7 @@ public class VariableNumber extends ConstVarFormula implements TextListener {
 
 	/**
 	 * Creates a variable boolean.
-	 * @param enabled Enables inputVarName for input (true = enabled).
+	 * @param elementChooser Enables inputVarName for input (true = enabled).
 	 */
 	public VariableNumber(boolean elementChooser) {
 		super();
