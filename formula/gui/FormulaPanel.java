@@ -20,6 +20,7 @@ public class FormulaPanel extends Panel {
 	 */
 	public FormulaPanel() {
 		setLayout(new TreeLayout());
+		setBackground(SystemColor.text);
 	}
 
 }

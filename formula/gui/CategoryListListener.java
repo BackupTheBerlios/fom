@@ -18,7 +18,7 @@ public class CategoryListListener implements ItemListener {
 	 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
 	 */
 	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO: get new list
 
 	}
 

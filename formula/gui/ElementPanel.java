@@ -14,10 +14,21 @@ import java.awt.*;
 public class ElementPanel extends Panel {
 
 	private Choice chCategoryList;
-
 	private ScrollPane scpElementList;
 
 	public ElementPanel() {
+		setLayout(new BorderLayout());
+		chCategoryList=new Choice();
+		scpElementList=new ScrollPane();
+		// TODO: get elements and categories from formula.Formula
+		chCategoryList.add("Default");
+		chCategoryList.add("Boolean");
+		chCategoryList.addItemListener(new CategoryListListener());
+		scpElementList.setBackground(SystemColor.text);
+		add(chCategoryList,BorderLayout.NORTH);
+		add(scpElementList,BorderLayout.CENTER);
+		
+		setBackground(SystemColor.activeCaptionBorder);
 	}
 
 	public ScrollPane getScpElementList() {

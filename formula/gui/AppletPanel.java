@@ -30,9 +30,12 @@ public class AppletPanel extends Applet {
 		pnlControls=new ControlPanel();
 		pnlFormula=new FormulaPanel();
 		
+		ScrollPane sPane = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
+		sPane.add(pnlFormula);
+		
 		add(pnlElements,BorderLayout.WEST);
 		add(pnlControls,BorderLayout.SOUTH);
-		add(pnlFormula,BorderLayout.CENTER);
+		add(sPane,BorderLayout.CENTER);
 	}
 
 	public FormulaPanel getPnlFormula() {

@@ -43,17 +43,15 @@ public class TreeLayout implements LayoutManager {
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
 	 */
-	public Dimension minimumLayoutSize(Container arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public Dimension minimumLayoutSize(Container container) {
+		return container.getSize();
 	}
 
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
 	 */
-	public Dimension preferredLayoutSize(Container arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public Dimension preferredLayoutSize(Container container) {
+		return container.getSize();
 	}
 
 }
